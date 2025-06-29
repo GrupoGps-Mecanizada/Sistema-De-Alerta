@@ -1,66 +1,72 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import terser from '@rollup/plugin-terser';
+import copy from 'rollup-plugin-copy';
 
-# Build outputs
-dist/
-build/
-.cache/
+const isProduction = process.env.NODE_ENV === 'production';
 
-# Development
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE/Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Logs
-logs/
-*.log
-
-# Runtime data
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-.nyc_output/
-
-# Temporary folders
-tmp/
-temp/
-.tmp/
-
-# Security - NEVER commit tokens or secrets
-config/secrets.json
-.env.production
-**/github-token.txt
-**/api-keys.txt
-
-# GrupoGPS specific
-data/alerts-generated.json
-data/active-states.json
-backup/
-archive/
+export default [
+  // Browser UMD bundle
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/grupogps-alert-system.js',
+      format: 'umd',
+      name: 'GrupoGpsAlertSystem',
+      sourcemap: !isProduction
+    },
+    plugins: [
+      resolve({
+        browser: true
+      }),
+      commonjs(),
+      copy({
+        targets: [
+          { src: 'public/*', dest: 'dist/standalone' },
+          { src: 'data-templates/*', dest: 'dist/data-templates' },
+          { src: 'docs/*', dest: 'dist/docs' }
+        ]
+      })
+    ]
+  },
+  
+  // Browser UMD minified bundle
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/grupogps-alert-system.min.js',
+      format: 'umd',
+      name: 'GrupoGpsAlertSystem',
+      sourcemap: true
+    },
+    plugins: [
+      resolve({
+        browser: true
+      }),
+      commonjs(),
+      terser({
+        compress: {
+          drop_console: isProduction,
+          drop_debugger: isProduction
+        },
+        format: {
+          comments: false
+        }
+      })
+    ]
+  },
+  
+  // ES module bundle
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/grupogps-alert-system.esm.js',
+      format: 'esm',
+      sourcemap: !isProduction
+    },
+    plugins: [
+      resolve(),
+      commonjs()
+    ]
+  }
+];
