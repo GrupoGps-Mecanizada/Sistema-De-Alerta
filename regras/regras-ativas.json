@@ -1,7 +1,41 @@
 {
-  "timestamp": 1752145628544,
-  "date": "2025-07-10T11:07:08.544Z",
+  "timestamp": 1752145755854,
+  "date": "2025-07-10T11:09:15.855Z",
   "version": "4.0",
-  "total": 0,
-  "rules": []
+  "total": 3,
+  "rules": [
+    {
+      "id": 1,
+      "name": "Refeição Prolongada",
+      "type": "apontamento",
+      "identifier": "Refeição Motorista",
+      "timeOperator": ">",
+      "timeValue": 60,
+      "severity": "medio",
+      "message": "{equipamento} - Refeição há {tempo}",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Motor Ligado Prolongado",
+      "type": "status",
+      "identifier": "on",
+      "timeOperator": ">",
+      "timeValue": 90,
+      "severity": "alto",
+      "message": "{equipamento} - Motor ligado há {tempo}",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Documentação Demorada",
+      "type": "apontamento",
+      "identifier": "Documentação",
+      "timeOperator": ">",
+      "timeValue": 45,
+      "severity": "medio",
+      "message": "{equipamento} - Documentação há {tempo}",
+      "active": true
+    }
+  ]
 }
