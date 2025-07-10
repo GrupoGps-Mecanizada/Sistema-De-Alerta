@@ -1,37 +1,10 @@
 {
-  "timestamp": 1752172277768,
-  "date": "2025-07-10T18:31:17.768Z",
+  "timestamp": 1752172386721,
+  "date": "2025-07-10T18:33:06.721Z",
   "version": "4.0",
   "type": "operational",
-  "total": 236,
+  "total": 235,
   "alerts": [
-    {
-      "id": 1752172196812.8154,
-      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 10",
-      "tipo": "Status",
-      "identificador": "off",
-      "ruleId": 1752152405852,
-      "ruleName": "Motor Desligado",
-      "severity": "alto",
-      "duration": "44min",
-      "durationMinutes": 44.016666666666666,
-      "startTime": "2025-07-10T15:05:58.000Z",
-      "endTime": "2025-07-10T15:49:59.000Z",
-      "timeRange": "12:05 - 12:49",
-      "consolidated": true,
-      "originalCount": 5,
-      "timestamp": 1752172196812,
-      "date": "10/07/2025",
-      "time": "15:29:56",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
-      "observacoes": "",
-      "acoes": "",
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 44min"
-    },
     {
       "id": 1752172082044.68,
       "equipamento": "CAMINHÃO HIPER VÁCUO - GPS - 01",
@@ -6379,7 +6352,7 @@
     }
   ],
   "metadata": {
-    "lastUpdate": "2025-07-10T18:31:17.768Z",
+    "lastUpdate": "2025-07-10T18:33:06.721Z",
     "sourceSystem": "AlertSystem v4.0",
     "dataType": "current_operational"
   }
