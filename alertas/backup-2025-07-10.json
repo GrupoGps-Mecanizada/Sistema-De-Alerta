@@ -1,6 +1,6 @@
 {
-  "timestamp": 1752150255124,
-  "date": "2025-07-10T12:24:15.124Z",
+  "timestamp": 1752150555907,
+  "date": "2025-07-10T12:29:15.907Z",
   "type": "daily_backup",
   "canBeDeleted": true,
   "description": "Backup diário - pode ser apagado sem afetar o sistema",
@@ -33,7 +33,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - Documentação há 50min",
       "backedUp": true,
-      "backupDate": "2025-07-10T12:24:15.124Z"
+      "backupDate": "2025-07-10T12:29:15.907Z"
     },
     {
       "id": 1752145749332.813,
@@ -62,7 +62,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - Refeição há 1h 15min",
       "backedUp": true,
-      "backupDate": "2025-07-10T12:24:15.124Z"
+      "backupDate": "2025-07-10T12:29:15.907Z"
     }
   ]
 }
