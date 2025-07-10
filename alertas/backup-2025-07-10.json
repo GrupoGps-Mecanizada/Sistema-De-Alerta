@@ -1,6 +1,6 @@
 {
-  "timestamp": 1752108727118,
-  "date": "2025-07-10T00:52:07.118Z",
+  "timestamp": 1752109027308,
+  "date": "2025-07-10T00:57:07.308Z",
   "type": "daily_backup",
   "canBeDeleted": true,
   "description": "Backup diário - pode ser apagado sem afetar o sistema",
@@ -33,7 +33,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - Motor ligado há 2h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-10T00:52:07.118Z"
+      "backupDate": "2025-07-10T00:57:07.308Z"
     },
     {
       "id": 1752107123299.5305,
@@ -62,7 +62,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - Motor ligado há 1h 55min",
       "backedUp": true,
-      "backupDate": "2025-07-10T00:52:07.118Z"
+      "backupDate": "2025-07-10T00:57:07.308Z"
     },
     {
       "id": 1752107123296.0503,
@@ -91,7 +91,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - Motor ligado há 4h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-10T00:52:07.118Z"
+      "backupDate": "2025-07-10T00:57:07.308Z"
     },
     {
       "id": 1752107123294.769,
@@ -120,7 +120,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - Motor ligado há 1h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-10T00:52:07.118Z"
+      "backupDate": "2025-07-10T00:57:07.308Z"
     },
     {
       "id": 1752107121206.9214,
@@ -149,7 +149,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - Documentação há 50min",
       "backedUp": true,
-      "backupDate": "2025-07-10T00:52:07.118Z"
+      "backupDate": "2025-07-10T00:57:07.308Z"
     },
     {
       "id": 1752107121178.321,
@@ -178,7 +178,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - Refeição há 1h 15min",
       "backedUp": true,
-      "backupDate": "2025-07-10T00:52:07.118Z"
+      "backupDate": "2025-07-10T00:57:07.308Z"
     }
   ]
 }
