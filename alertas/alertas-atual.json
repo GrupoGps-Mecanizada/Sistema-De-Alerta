@@ -1,10 +1,37 @@
 {
-  "timestamp": 1752173345830,
-  "date": "2025-07-10T18:49:05.830Z",
+  "timestamp": 1752173646840,
+  "date": "2025-07-10T18:54:06.840Z",
   "version": "4.0",
   "type": "operational",
-  "total": 347,
+  "total": 348,
   "alerts": [
+    {
+      "id": 1752173641478.0093,
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
+      "tipo": "Status",
+      "identificador": "stopped",
+      "ruleId": 1752152405852,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "1h 25min",
+      "durationMinutes": 85.2,
+      "startTime": "2025-07-10T17:18:49.000Z",
+      "endTime": "2025-07-10T18:44:01.000Z",
+      "timeRange": "14:18 - 15:44",
+      "consolidated": true,
+      "originalCount": 8,
+      "timestamp": 1752173641478,
+      "date": "10/07/2025",
+      "time": "15:54:01",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 25min"
+    },
     {
       "id": 1752173040919.7202,
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
@@ -9376,7 +9403,7 @@
     }
   ],
   "metadata": {
-    "lastUpdate": "2025-07-10T18:49:05.830Z",
+    "lastUpdate": "2025-07-10T18:54:06.840Z",
     "sourceSystem": "AlertSystem v4.0",
     "dataType": "current_operational"
   }
