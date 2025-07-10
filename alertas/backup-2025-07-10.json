@@ -1,6 +1,6 @@
 {
-  "timestamp": 1752145327108,
-  "date": "2025-07-10T11:02:07.108Z",
+  "timestamp": 1752145629349,
+  "date": "2025-07-10T11:07:09.349Z",
   "type": "daily_backup",
   "canBeDeleted": true,
   "description": "Backup diário - pode ser apagado sem afetar o sistema",
