@@ -675,16 +675,16 @@
         <nav class="nav-tabs">
             <div class="nav-tabs-container">
                 <div class="nav-tab active" onclick="switchTab('history')">
-                    <span>📋 Histórico de Alertas</span>
+                    <span>Histórico de Alertas</span>
                 </div>
                 <div class="nav-tab" onclick="switchTab('rules')">
-                    <span>⚙️ Configurar Regras</span>
+                    <span>Configurar Regras</span>
                 </div>
                 <div class="nav-tab" onclick="switchTab('reports')">
-                    <span>📊 Relatórios</span>
+                    <span>Relatórios</span>
                 </div>
                 <div class="nav-tab" onclick="switchTab('config')">
-                    <span>🔧 Configurações</span>
+                    <span>Configurações</span>
                 </div>
             </div>
         </nav>
@@ -763,15 +763,13 @@
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                            <h3 style="color: #2c3e50;">📋 Histórico de Alertas</h3>
+                            <h3 style="color: #2c3e50;">Histórico de Alertas</h3>
                             <div style="display: flex; gap: 1rem;">
                                 <button class="btn warning" onclick="forceSync()">
-                                    <span>🔄</span>
-                                    Atualizar
+                                    <span>Atualizar</span>
                                 </button>
                                 <button class="btn secondary" onclick="clearAllAlerts()">
-                                    <span>🗑️</span>
-                                    Limpar Histórico
+                                    <span>Limpar Histórico</span>
                                 </button>
                             </div>
                         </div>
@@ -791,15 +789,13 @@
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                            <h3 style="color: #2c3e50;">⚙️ Configurar Regras de Alerta</h3>
+                            <h3 style="color: #2c3e50;">Configurar Regras de Alerta</h3>
                             <div style="display: flex; gap: 1rem;">
                                 <button class="btn secondary" onclick="syncRulesFromGitHub()">
-                                    <span>🔄</span>
-                                    Sincronizar
+                                    <span>Sincronizar</span>
                                 </button>
                                 <button class="btn" onclick="openRuleModal()">
-                                    <span>➕</span>
-                                    Nova Regra
+                                    <span>Nova Regra</span>
                                 </button>
                             </div>
                         </div>
@@ -818,7 +814,7 @@
             <div id="reports-tab" class="tab-content">
                 <!-- Filtros de Relatório -->
                 <div class="filters-panel">
-                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">🔍 Filtros do Relatório</h4>
+                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">Filtros do Relatório</h4>
                     <div class="filters-grid">
                         <div class="form-group">
                             <label>Data Inicial:</label>
@@ -847,12 +843,10 @@
                     </div>
                     <div style="margin-top: 1rem; display: flex; gap: 1rem;">
                         <button class="btn" onclick="generateReport()">
-                            <span>📊</span>
-                            Gerar Relatório
+                            <span>Gerar Relatório</span>
                         </button>
                         <button class="btn success" onclick="exportToExcel()">
-                            <span>📥</span>
-                            Exportar Excel
+                            <span>Exportar Excel</span>
                         </button>
                     </div>
                 </div>
@@ -860,7 +854,7 @@
                 <!-- Tabela de Relatório -->
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
-                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">📋 Dados Detalhados</h3>
+                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">Dados Detalhados</h3>
                         <div id="reportTable" style="overflow-x: auto;">
                             <div class="loading-state">
                                 <div>Gere um relatório para ver os dados</div>
@@ -874,19 +868,19 @@
             <div id="config-tab" class="tab-content">
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
-                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">🔧 Configurações do Sistema</h3>
+                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">Configurações do Sistema</h3>
                         
                         <!-- Configurações GitHub -->
                         <div class="filters-panel">
-                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">📁 Repositório GitHub</h4>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Integração GitHub</h4>
                             <div class="filters-grid">
                                 <div class="form-group">
                                     <label>Repositório:</label>
                                     <input type="text" id="configRepo" value="GrupoGps-Mecanizada/Sistema-De-Alerta" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label>Token GitHub:</label>
-                                    <input type="password" id="configToken" placeholder="Seu token GitHub">
+                                    <label>Token GitHub (Personal Access Token):</label>
+                                    <input type="password" id="configToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
                                 </div>
                                 <div class="form-group">
                                     <label>Intervalo de Sync (min):</label>
@@ -894,17 +888,36 @@
                                 </div>
                                 <div class="form-group">
                                     <label>&nbsp;</label>
-                                    <button class="btn" onclick="saveConfig()">
-                                        <span>💾</span>
-                                        Salvar
-                                    </button>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn" onclick="saveConfig()">
+                                            <span>Salvar</span>
+                                        </button>
+                                        <button class="btn info" onclick="alertSystem.testGitHubConnection()">
+                                            <span>Testar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Instruções de Token -->
+                            <div style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px; border-left: 4px solid #3498db;">
+                                <strong>Como criar um Personal Access Token:</strong>
+                                <ol style="margin: 0.5rem 0; padding-left: 1.5rem; line-height: 1.6;">
+                                    <li>Acesse GitHub → Settings → Developer settings → Personal access tokens</li>
+                                    <li>Clique em "Generate new token" → "Generate new token (classic)"</li>
+                                    <li>Nome: "Sistema Alertas GrupoGPS"</li>
+                                    <li><strong>Permissões necessárias:</strong> repo, read:user</li>
+                                    <li>Copie o token e cole no campo acima</li>
+                                </ol>
+                                <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #2980b9;">
+                                    <strong>O sistema criará automaticamente:</strong> pastas /alertas, /regras, /config, /relatorios
                                 </div>
                             </div>
                         </div>
 
                         <!-- Status do Sistema -->
                         <div class="filters-panel">
-                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">📊 Status do Sistema</h4>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Status do Sistema</h4>
                             <div id="systemStatus">
                                 <div class="loading-state" style="height: 150px;">
                                     <div>Verificando configurações...</div>
@@ -1003,12 +1016,10 @@
 
                 <div style="display: flex; gap: 1rem; margin-top: 2rem;">
                     <button type="submit" class="btn success">
-                        <span>💾</span>
-                        Salvar Regra
+                        <span>Salvar Regra</span>
                     </button>
                     <button type="button" class="btn secondary" onclick="closeRuleModal()">
-                        <span>❌</span>
-                        Cancelar
+                        <span>Cancelar</span>
                     </button>
                 </div>
             </form>
@@ -1082,23 +1093,19 @@
                         Preencha os dados acima para gerar o texto
                     </div>
                     <button type="button" class="btn info" onclick="copyToWhatsApp()">
-                        <span>📱</span>
-                        Copiar Texto WhatsApp
+                        <span>Copiar Texto WhatsApp</span>
                     </button>
                 </div>
                 
                 <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
                     <button type="button" class="btn danger" onclick="deleteAlert()">
-                        <span>🗑️</span>
-                        Excluir Alerta
+                        <span>Excluir Alerta</span>
                     </button>
                     <button type="button" class="btn secondary" onclick="closeInvestigationModal()">
-                        <span>❌</span>
-                        Cancelar
+                        <span>Cancelar</span>
                     </button>
                     <button type="button" class="btn success" onclick="saveInvestigation()">
-                        <span>💾</span>
-                        Salvar
+                        <span>Salvar</span>
                     </button>
                 </div>
             </div>
@@ -1106,10 +1113,8 @@
     </div>
 
     <script>
-        // =============================================================================
-        // SISTEMA DE ALERTAS OTIMIZADO v3.0 - GRUPOGPS
-        // Anti-duplicação + Consolidação + Investigação + WhatsApp
-        // =============================================================================
+        // Sistema de Alertas Otimizado v4.0 - GrupoGPS
+        // Gestão Inteligente de Dados - Separação de Operacional vs Backup
 
         class AlertSystem {
             constructor() {
@@ -1117,8 +1122,8 @@
                 this.jsonData = [];
                 this.rules = [];
                 this.alerts = [];
-                this.processedRecords = new Set(); // IDs dos registros já processados
-                this.alertHashes = new Set(); // Hashes dos alertas criados
+                this.processedRecords = new Set();
+                this.alertHashes = new Set();
                 this.isProcessing = false;
                 this.editingRuleId = null;
                 this.currentInvestigation = null;
@@ -1126,14 +1131,15 @@
                     repo: 'GrupoGps-Mecanizada/Sistema-De-Alerta',
                     token: '',
                     interval: 5,
-                    lastSync: null
+                    lastSync: null,
+                    githubEnabled: false
                 };
                 
                 this.init();
             }
 
             async init() {
-                console.log('🚀 Iniciando Sistema de Alertas v3.0');
+                console.log('Sistema de Alertas v4.0 - Iniciando...');
                 this.updateSyncStatus('loading', 'Iniciando...');
                 
                 try {
@@ -1142,7 +1148,6 @@
                     this.setupEventListeners();
                     this.initDates();
                     
-                    // Carregar dados de exemplo se necessário
                     if (this.alerts.length === 0) {
                         this.loadExampleData();
                     }
@@ -1151,21 +1156,15 @@
                     this.startPeriodicSync();
                     
                     this.updateSyncStatus('success', 'Sistema ativo');
-                    console.log('✅ Sistema inicializado com sucesso');
+                    console.log('Sistema inicializado com sucesso');
                     
                 } catch (error) {
-                    console.error('❌ Erro na inicialização:', error);
+                    console.error('Erro na inicialização:', error);
                     this.updateSyncStatus('error', 'Erro na inicialização');
                 }
             }
 
-            // =============================================================================
-            // SISTEMA ANTI-DUPLICAÇÃO ROBUSTO
-            // =============================================================================
-
-            /**
-             * Gera um hash único para um registro baseado no conteúdo e tempo
-             */
+            // Sistema Anti-Duplicação
             generateRecordHash(record, type = 'status') {
                 const components = [];
                 
@@ -1188,9 +1187,6 @@
                 return this.simpleHash(components.join('|'));
             }
 
-            /**
-             * Gera um hash único para um alerta
-             */
             generateAlertHash(alert) {
                 const components = [
                     alert.equipamento,
@@ -1204,64 +1200,42 @@
                 return this.simpleHash(components.join('|'));
             }
 
-            /**
-             * Hash simples mas eficaz
-             */
             simpleHash(str) {
                 let hash = 0;
                 for (let i = 0; i < str.length; i++) {
                     const char = str.charCodeAt(i);
                     hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash; // Converter para 32-bit
+                    hash = hash & hash;
                 }
                 return Math.abs(hash).toString(36);
             }
 
-            /**
-             * Verifica se um registro já foi processado
-             */
             isRecordProcessed(record, type = 'status') {
                 const hash = this.generateRecordHash(record, type);
                 return this.processedRecords.has(hash);
             }
 
-            /**
-             * Marca um registro como processado
-             */
             markRecordAsProcessed(record, type = 'status') {
                 const hash = this.generateRecordHash(record, type);
                 this.processedRecords.add(hash);
             }
 
-            /**
-             * Verifica se um alerta já foi criado
-             */
             isAlertDuplicate(alert) {
                 const hash = this.generateAlertHash(alert);
                 return this.alertHashes.has(hash);
             }
 
-            /**
-             * Marca um alerta como criado
-             */
             markAlertAsCreated(alert) {
                 const hash = this.generateAlertHash(alert);
                 this.alertHashes.add(hash);
             }
 
-            // =============================================================================
-            // SISTEMA DE CONSOLIDAÇÃO DE REGISTROS FRAGMENTADOS
-            // =============================================================================
-
-            /**
-             * Consolida registros contínuos/fragmentados do mesmo equipamento
-             */
+            // Sistema de Consolidação
             consolidateRecords(records, type = 'status') {
                 if (!records || records.length === 0) return [];
 
-                console.log(`🔄 Consolidando ${records.length} registros de ${type}`);
+                console.log(`Consolidando ${records.length} registros de ${type}`);
                 
-                // Agrupar por equipamento
                 const groupedByEquipment = this.groupRecordsByEquipment(records, type);
                 const consolidated = [];
 
@@ -1270,13 +1244,10 @@
                     consolidated.push(...consolidatedForEquip);
                 }
 
-                console.log(`✅ Consolidação concluída: ${records.length} → ${consolidated.length} registros`);
+                console.log(`Consolidação concluída: ${records.length} → ${consolidated.length} registros`);
                 return consolidated;
             }
 
-            /**
-             * Agrupa registros por equipamento
-             */
             groupRecordsByEquipment(records, type) {
                 const groups = new Map();
                 
@@ -1294,13 +1265,9 @@
                 return groups;
             }
 
-            /**
-             * Consolida registros de um equipamento específico
-             */
             consolidateEquipmentRecords(records, type) {
                 if (records.length <= 1) return records;
 
-                // Ordenar por tempo
                 const sorted = [...records].sort((a, b) => {
                     const timeA = this.parseDateTime(type === 'status' ? a.start : a['Data Inicial']);
                     const timeB = this.parseDateTime(type === 'status' ? b.start : b['Data Inicial']);
@@ -1321,12 +1288,10 @@
                         currentGroup.identifier !== identifier ||
                         this.hasLargeGap(currentGroup.endTime, startTime)) {
                         
-                        // Finalizar grupo anterior
                         if (currentGroup) {
                             consolidated.push(this.createConsolidatedRecord(currentGroup, type));
                         }
                         
-                        // Iniciar novo grupo
                         currentGroup = {
                             identifier: identifier,
                             startTime: startTime,
@@ -1337,13 +1302,11 @@
                                 this.normalizeEquipmentName(record.Vaga)
                         };
                     } else {
-                        // Estender grupo atual
                         currentGroup.endTime = new Date(Math.max(currentGroup.endTime.getTime(), endTime.getTime()));
                         currentGroup.records.push(record);
                     }
                 }
 
-                // Finalizar último grupo
                 if (currentGroup) {
                     consolidated.push(this.createConsolidatedRecord(currentGroup, type));
                 }
@@ -1351,22 +1314,16 @@
                 return consolidated;
             }
 
-            /**
-             * Verifica se há um gap muito grande entre registros (>15 minutos)
-             */
             hasLargeGap(endTime, startTime) {
                 const gapMinutes = (startTime.getTime() - endTime.getTime()) / (1000 * 60);
-                return gapMinutes > 15; // 15 minutos de tolerância
+                return gapMinutes > 15;
             }
 
-            /**
-             * Cria um registro consolidado
-             */
             createConsolidatedRecord(group, type) {
                 const duration = (group.endTime.getTime() - group.startTime.getTime()) / (1000 * 60);
                 
                 const consolidated = {
-                    ...group.records[0], // Base no primeiro registro
+                    ...group.records[0],
                     consolidatedId: this.simpleHash(`${group.equipamento}_${group.identifier}_${group.startTime.getTime()}`),
                     consolidated: group.records.length > 1,
                     originalCount: group.records.length,
@@ -1375,11 +1332,10 @@
                     consolidatedEnd: group.endTime.toISOString()
                 };
 
-                // Ajustar campos específicos
                 if (type === 'status') {
                     consolidated.start = group.startTime.toISOString();
                     consolidated.end = group.endTime.toISOString();
-                    consolidated.total_time = (duration / 60).toFixed(2); // em horas
+                    consolidated.total_time = (duration / 60).toFixed(2);
                 } else {
                     consolidated['Data Inicial'] = this.formatDateTime(group.startTime);
                     consolidated['Data Final'] = this.formatDateTime(group.endTime);
@@ -1389,27 +1345,19 @@
                 return consolidated;
             }
 
-            // =============================================================================
-            // PROCESSAMENTO DE ALERTAS
-            // =============================================================================
-
-            /**
-             * Processa dados e gera alertas
-             */
+            // Processamento de Alertas
             async processAlerts() {
                 if (this.isProcessing || this.rules.length === 0) return;
                 
                 this.isProcessing = true;
-                console.log('🔄 Processando alertas...');
+                console.log('Processando alertas...');
 
                 try {
-                    // Consolidar registros primeiro
                     const consolidatedStatus = this.consolidateRecords(this.jsonData, 'status');
                     const consolidatedApontamentos = this.consolidateRecords(this.csvData, 'apontamento');
 
                     let newAlertsCount = 0;
 
-                    // Processar status consolidados
                     for (const record of consolidatedStatus) {
                         if (!this.isRecordProcessed(record, 'status')) {
                             const alerts = this.checkRulesForRecord(record, 'status');
@@ -1424,7 +1372,6 @@
                         }
                     }
 
-                    // Processar apontamentos consolidados
                     for (const record of consolidatedApontamentos) {
                         if (!this.isRecordProcessed(record, 'apontamento')) {
                             const alerts = this.checkRulesForRecord(record, 'apontamento');
@@ -1440,22 +1387,19 @@
                     }
 
                     if (newAlertsCount > 0) {
-                        console.log(`✅ ${newAlertsCount} novos alertas gerados`);
+                        console.log(`${newAlertsCount} novos alertas gerados`);
                         this.saveLocalData();
                         this.updateInterface();
                         this.showNotification(`${newAlertsCount} novos alertas detectados`, 'info');
                     }
 
                 } catch (error) {
-                    console.error('❌ Erro no processamento:', error);
+                    console.error('Erro no processamento:', error);
                 } finally {
                     this.isProcessing = false;
                 }
             }
 
-            /**
-             * Verifica regras para um registro específico
-             */
             checkRulesForRecord(record, type) {
                 const alerts = [];
                 const activeRules = this.rules.filter(r => r.active && r.type === type);
@@ -1470,24 +1414,16 @@
                 return alerts;
             }
 
-            /**
-             * Verifica se um registro atende a uma regra
-             */
             recordMatchesRule(record, rule, type) {
-                // Verificar identificador (status ou apontamento)
                 const identifier = type === 'status' ? record.status : record['Categoria Demora'];
                 if (rule.identifier && rule.identifier !== identifier) {
                     return false;
                 }
 
-                // Verificar duração
                 const duration = this.getRecordDuration(record, type);
                 return this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
             }
 
-            /**
-             * Obtém a duração de um registro em minutos
-             */
             getRecordDuration(record, type) {
                 if (record.consolidatedDuration) {
                     return record.consolidatedDuration;
@@ -1506,9 +1442,6 @@
                 }
             }
 
-            /**
-             * Verifica condição de tempo
-             */
             checkTimeCondition(duration, operator, threshold) {
                 switch (operator) {
                     case '>': return duration > threshold;
@@ -1518,9 +1451,6 @@
                 }
             }
 
-            /**
-             * Cria um alerta
-             */
             createAlert(record, rule, type) {
                 const equipamento = type === 'status' ? 
                     this.normalizeEquipmentName(record.vacancy_name) :
@@ -1558,7 +1488,6 @@
                     acoes: ''
                 };
 
-                // Personalizar mensagem
                 alert.message = rule.message
                     .replace('{equipamento}', this.getDisplayName(equipamento))
                     .replace('{tipo}', identifier)
@@ -1567,14 +1496,10 @@
                 return alert;
             }
 
-            // =============================================================================
-            // DADOS DE EXEMPLO E SINCRONIZAÇÃO
-            // =============================================================================
-
+            // Dados de Exemplo
             loadExampleData() {
-                console.log('📝 Carregando dados de exemplo...');
+                console.log('Carregando dados de exemplo...');
                 
-                // Dados de status de exemplo
                 this.jsonData = [
                     {
                         vacancy_code: "404",
@@ -1596,7 +1521,6 @@
                     }
                 ];
 
-                // Dados de apontamentos de exemplo
                 this.csvData = [
                     {
                         'Placa': 'EGC2983',
@@ -1616,7 +1540,6 @@
                     }
                 ];
 
-                // Regras de exemplo
                 this.rules = [
                     {
                         id: 1,
@@ -1656,15 +1579,15 @@
                 this.processAlerts();
             }
 
+            // Sistema de Sincronização GitHub Otimizado
             async syncData() {
                 try {
                     this.updateSyncStatus('loading', 'Sincronizando dados...');
 
-                    // URLs corretas para os novos diretórios
                     const statusUrl = 'https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json';
                     const apontamentosUrl = 'https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv';
                     
-                    console.log('🔗 Conectando aos endpoints:', { statusUrl, apontamentosUrl });
+                    console.log('Conectando aos endpoints:', { statusUrl, apontamentosUrl });
 
                     const [statusData, csvText] = await Promise.all([
                         this.fetchData(statusUrl, true),
@@ -1677,14 +1600,18 @@
                     this.config.lastSync = Date.now();
                     this.saveConfig();
 
-                    console.log(`✅ Dados sincronizados: ${this.jsonData.length} status + ${this.csvData.length} apontamentos`);
+                    console.log(`Dados sincronizados: ${this.jsonData.length} status + ${this.csvData.length} apontamentos`);
                     this.updateSyncStatus('success', 'Dados atualizados');
 
-                    // Processar novos alertas
                     await this.processAlerts();
 
+                    // Sincronizar para GitHub apenas se configurado
+                    if (this.config.githubEnabled && this.config.token && this.config.token.length > 10) {
+                        await this.syncToGitHub();
+                    }
+
                 } catch (error) {
-                    console.warn('⚠️ Erro na sincronização:', error);
+                    console.warn('Erro na sincronização:', error);
                     this.updateSyncStatus('warning', 'Usando dados locais');
                 }
             }
@@ -1697,17 +1624,270 @@
                 return isJson ? JSON.parse(text) : text;
             }
 
-            // =============================================================================
-            // SISTEMA DE INVESTIGAÇÃO
-            // =============================================================================
+            // Sistema GitHub Completo - OPERACIONAL vs BACKUP
+            async syncToGitHub() {
+                if (!this.config.token) return;
 
+                try {
+                    console.log('Sincronizando com GitHub...');
+                    
+                    await this.ensureRepositoryStructure();
+                    
+                    // Arquivo OPERACIONAL - usado pelo sistema
+                    await this.saveOperationalDataToGitHub();
+                    
+                    // Arquivo BACKUP - histórico (pode ser apagado)
+                    await this.createDailyBackup();
+                    
+                    console.log('Sincronização GitHub concluída');
+                    this.showNotification('Dados salvos no GitHub', 'success');
+                    
+                } catch (error) {
+                    console.error('Erro na sincronização GitHub:', error);
+                    this.showNotification('Erro ao salvar no GitHub: ' + error.message, 'error');
+                }
+            }
+
+            async ensureRepositoryStructure() {
+                const requiredPaths = [
+                    'alertas/',
+                    'regras/',
+                    'config/',
+                    'relatorios/'
+                ];
+
+                for (const path of requiredPaths) {
+                    await this.createGitHubPath(path);
+                }
+            }
+
+            async createGitHubPath(path) {
+                try {
+                    const readmePath = `${path}README.md`;
+                    const readmeContent = this.generateReadmeForPath(path);
+                    
+                    await this.createOrUpdateGitHubFile(readmePath, readmeContent, 
+                        `Criação automática da estrutura: ${path}`);
+                        
+                } catch (error) {
+                    if (!error.message.includes('422')) {
+                        throw error;
+                    }
+                }
+            }
+
+            generateReadmeForPath(path) {
+                const descriptions = {
+                    'alertas/': '# Alertas do Sistema\n\n- `alertas-atual.json`: Dados operacionais (NÃO APAGAR)\n- `backup-YYYY-MM-DD.json`: Backups diários (podem ser apagados)',
+                    'regras/': '# Regras de Alerta\n\nConfiguração das regras ativas no sistema.',
+                    'config/': '# Configurações\n\nParâmetros e configurações do sistema.',
+                    'relatorios/': '# Relatórios\n\nRelatórios automáticos gerados pelo sistema.'
+                };
+                
+                return descriptions[path] || `# ${path}\n\nDiretório criado automaticamente pelo Sistema de Alertas.`;
+            }
+
+            // ARQUIVOS OPERACIONAIS - Fonte primária do sistema
+            async saveOperationalDataToGitHub() {
+                const operationalData = {
+                    timestamp: Date.now(),
+                    date: new Date().toISOString(),
+                    version: '4.0',
+                    type: 'operational',
+                    total: this.alerts.length,
+                    alerts: this.alerts,
+                    metadata: {
+                        lastUpdate: new Date().toISOString(),
+                        sourceSystem: 'AlertSystem v4.0',
+                        dataType: 'current_operational'
+                    }
+                };
+
+                // Arquivo principal operacional
+                await this.createOrUpdateGitHubFile(
+                    'alertas/alertas-atual.json',
+                    JSON.stringify(operationalData, null, 2),
+                    'Atualização operacional automática'
+                );
+
+                // Regras ativas
+                const rulesData = {
+                    timestamp: Date.now(),
+                    date: new Date().toISOString(),
+                    version: '4.0',
+                    total: this.rules.length,
+                    rules: this.rules
+                };
+
+                await this.createOrUpdateGitHubFile(
+                    'regras/regras-ativas.json',
+                    JSON.stringify(rulesData, null, 2),
+                    'Atualização automática das regras ativas'
+                );
+            }
+
+            // BACKUPS DIÁRIOS - Podem ser apagados sem afetar o sistema
+            async createDailyBackup() {
+                const timestamp = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+                const filename = `alertas/backup-${timestamp}.json`;
+                
+                const backupData = {
+                    timestamp: Date.now(),
+                    date: new Date().toISOString(),
+                    type: 'daily_backup',
+                    canBeDeleted: true,
+                    description: 'Backup diário - pode ser apagado sem afetar o sistema',
+                    total: this.alerts.length,
+                    alerts: this.alerts.map(alert => ({
+                        ...alert,
+                        backedUp: true,
+                        backupDate: new Date().toISOString()
+                    }))
+                };
+
+                await this.createOrUpdateGitHubFile(
+                    filename,
+                    JSON.stringify(backupData, null, 2),
+                    `Backup diário automático - ${timestamp}`
+                );
+            }
+
+            // Carregar dados APENAS do arquivo operacional
+            async loadOperationalDataFromGitHub() {
+                try {
+                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/alertas/alertas-atual.json`;
+                    const response = await fetch(url);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.alerts && Array.isArray(data.alerts) && data.type === 'operational') {
+                            // Verificar se os dados são mais recentes que os locais
+                            const githubTimestamp = data.timestamp || 0;
+                            const localTimestamp = this.config.lastDataLoad || 0;
+                            
+                            if (githubTimestamp > localTimestamp) {
+                                this.alerts = data.alerts;
+                                this.config.lastDataLoad = githubTimestamp;
+                                this.saveLocalData();
+                                this.saveConfig();
+                                this.updateInterface();
+                                this.showNotification('Dados atualizados do GitHub', 'success');
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Não foi possível carregar dados operacionais do GitHub:', error);
+                }
+            }
+
+            async loadRulesFromGitHub() {
+                try {
+                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/regras/regras-ativas.json`;
+                    const response = await fetch(url);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.rules && Array.isArray(data.rules)) {
+                            this.rules = data.rules;
+                            this.saveLocalData();
+                            this.updateRulesList();
+                            this.showNotification(`${data.rules.length} regras carregadas do GitHub`, 'success');
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Não foi possível carregar regras do GitHub:', error);
+                }
+            }
+
+            async createOrUpdateGitHubFile(path, content, commitMessage) {
+                const url = `https://api.github.com/repos/${this.config.repo}/contents/${path}`;
+                
+                let sha = null;
+                try {
+                    const response = await fetch(url, {
+                        headers: {
+                            'Authorization': `token ${this.config.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        sha = data.sha;
+                    }
+                } catch (error) {
+                    console.log(`Arquivo ${path} não existe, será criado`);
+                }
+
+                const body = {
+                    message: commitMessage,
+                    content: btoa(unescape(encodeURIComponent(content)))
+                };
+
+                if (sha) {
+                    body.sha = sha;
+                }
+
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${this.config.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`GitHub API Error: ${response.status} - ${errorData.message}`);
+                }
+
+                return await response.json();
+            }
+
+            async validateGitHubConnection() {
+                if (!this.config.token) {
+                    return { valid: false, error: 'Token não configurado' };
+                }
+
+                try {
+                    const response = await fetch(`https://api.github.com/repos/${this.config.repo}`, {
+                        headers: {
+                            'Authorization': `token ${this.config.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const repoData = await response.json();
+                        return { 
+                            valid: true, 
+                            repo: repoData.name,
+                            permissions: repoData.permissions
+                        };
+                    } else {
+                        const errorData = await response.json();
+                        return { 
+                            valid: false, 
+                            error: `${response.status}: ${errorData.message}` 
+                        };
+                    }
+                } catch (error) {
+                    return { 
+                        valid: false, 
+                        error: error.message 
+                    };
+                }
+            }
+
+            // Sistema de Investigação
             openInvestigation(alertId) {
                 const alert = this.alerts.find(a => a.id === alertId);
                 if (!alert) return;
 
                 this.currentInvestigation = alert;
                 
-                // Preencher campos
                 document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
                 document.getElementById('invPlaca').value = alert.placa || '';
                 document.getElementById('invMotorista').value = alert.motorista || '';
@@ -1733,7 +1913,6 @@
 
                 const alert = this.currentInvestigation;
                 
-                // Atualizar dados
                 alert.placa = document.getElementById('invPlaca').value;
                 alert.motorista = document.getElementById('invMotorista').value;
                 alert.area = document.getElementById('invArea').value;
@@ -1774,7 +1953,7 @@
                 const supervisor = document.getElementById('invSupervisor').value || 'N/I';
 
                 const text = `---
-🚨 ALERTA OPERACIONAL 🚨
+ALERTA OPERACIONAL
 
 Regra: ${alert.ruleName}.
 Tempo Total: ${alert.duration}
@@ -1803,10 +1982,7 @@ Situação: ${this.getStatusText(alert.status)}
                 });
             }
 
-            // =============================================================================
-            // INTERFACE E UTILIDADES
-            // =============================================================================
-
+            // Interface e Atualização
             updateInterface() {
                 this.updateStats();
                 this.updateAlertsList();
@@ -1818,7 +1994,7 @@ Situação: ${this.getStatusText(alert.status)}
             updateStats() {
                 const today = new Date().toLocaleDateString('pt-BR');
                 const todayAlerts = this.alerts.filter(a => a.date === today);
-                const criticalAlerts = this.alerts.filter(a => a.severity === 'critical');
+                const criticalAlerts = this.alerts.filter(a => a.severity === 'critico');
                 const pendingAlerts = this.alerts.filter(a => a.status === 'pendente');
 
                 document.getElementById('totalAlerts').textContent = this.alerts.length;
@@ -1844,7 +2020,6 @@ Situação: ${this.getStatusText(alert.status)}
                 const filteredAlerts = this.getFilteredAlerts();
                 
                 container.innerHTML = filteredAlerts.map(alert => {
-                    // Normalizar gravidade para garantir compatibilidade
                     let normalizedSeverity = alert.severity;
                     if (alert.severity === 'critical') normalizedSeverity = 'critico';
                     else if (alert.severity === 'high') normalizedSeverity = 'alto';
@@ -1857,8 +2032,7 @@ Situação: ${this.getStatusText(alert.status)}
                             <div class="alert-title">${alert.message}</div>
                             <div class="alert-actions">
                                 <button class="btn small info" onclick="alertSystem.openInvestigation(${alert.id})">
-                                    <span>🔍</span>
-                                    Investigar
+                                    <span>Investigar</span>
                                 </button>
                             </div>
                         </div>
@@ -1924,16 +2098,13 @@ Situação: ${this.getStatusText(alert.status)}
                             <div class="rule-actions">
                                 <button class="btn small ${rule.active ? 'warning' : 'success'}" 
                                         onclick="alertSystem.toggleRule(${rule.id})">
-                                    <span>${rule.active ? '⏸️' : '▶️'}</span>
-                                    ${rule.active ? 'Desativar' : 'Ativar'}
+                                    <span>${rule.active ? 'Desativar' : 'Ativar'}</span>
                                 </button>
                                 <button class="btn small secondary" onclick="alertSystem.editRule(${rule.id})">
-                                    <span>✏️</span>
-                                    Editar
+                                    <span>Editar</span>
                                 </button>
                                 <button class="btn small danger" onclick="alertSystem.deleteRule(${rule.id})">
-                                    <span>🗑️</span>
-                                    Excluir
+                                    <span>Excluir</span>
                                 </button>
                             </div>
                         </div>
@@ -1970,7 +2141,6 @@ Situação: ${this.getStatusText(alert.status)}
                     filtered = filtered.filter(a => a.status === status);
                 }
 
-                // Filtro de período
                 if (period !== 'all') {
                     const now = new Date();
                     let startDate;
@@ -2000,10 +2170,7 @@ Situação: ${this.getStatusText(alert.status)}
                 return filtered;
             }
 
-            // =============================================================================
-            // GERENCIAMENTO DE REGRAS
-            // =============================================================================
-
+            // Gerenciamento de Regras
             openRuleModal(ruleId = null) {
                 this.editingRuleId = ruleId;
                 const modal = document.getElementById('ruleModal');
@@ -2114,10 +2281,7 @@ Situação: ${this.getStatusText(alert.status)}
                 }
             }
 
-            // =============================================================================
-            // RELATÓRIOS
-            // =============================================================================
-
+            // Relatórios
             generateReport() {
                 const startDate = document.getElementById('reportDateStart')?.value;
                 const endDate = document.getElementById('reportDateEnd')?.value;
@@ -2211,16 +2375,12 @@ Situação: ${this.getStatusText(alert.status)}
                     return;
                 }
 
-                // Implementar exportação Excel aqui
                 this.showNotification('Funcionalidade em desenvolvimento', 'info');
             }
 
-            // =============================================================================
-            // ARMAZENAMENTO E CONFIGURAÇÃO
-            // =============================================================================
-
+            // Armazenamento e Configuração
             loadConfig() {
-                const saved = localStorage.getItem('alertSystem_config_v3');
+                const saved = localStorage.getItem('alertSystem_config_v4');
                 if (saved) {
                     this.config = { ...this.config, ...JSON.parse(saved) };
                 }
@@ -2228,15 +2388,15 @@ Situação: ${this.getStatusText(alert.status)}
             }
 
             saveConfig() {
-                localStorage.setItem('alertSystem_config_v3', JSON.stringify(this.config));
+                localStorage.setItem('alertSystem_config_v4', JSON.stringify(this.config));
             }
 
             loadLocalData() {
                 try {
-                    const alertsData = localStorage.getItem('alertSystem_alerts_v3');
-                    const rulesData = localStorage.getItem('alertSystem_rules_v3');
-                    const processedData = localStorage.getItem('alertSystem_processed_v3');
-                    const hashesData = localStorage.getItem('alertSystem_hashes_v3');
+                    const alertsData = localStorage.getItem('alertSystem_alerts_v4');
+                    const rulesData = localStorage.getItem('alertSystem_rules_v4');
+                    const processedData = localStorage.getItem('alertSystem_processed_v4');
+                    const hashesData = localStorage.getItem('alertSystem_hashes_v4');
 
                     if (alertsData) {
                         this.alerts = JSON.parse(alertsData);
@@ -2254,27 +2414,24 @@ Situação: ${this.getStatusText(alert.status)}
                         this.alertHashes = new Set(JSON.parse(hashesData));
                     }
 
-                    console.log(`📦 Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
+                    console.log(`Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
                 } catch (error) {
-                    console.error('❌ Erro ao carregar dados locais:', error);
+                    console.error('Erro ao carregar dados locais:', error);
                 }
             }
 
             saveLocalData() {
                 try {
-                    localStorage.setItem('alertSystem_alerts_v3', JSON.stringify(this.alerts));
-                    localStorage.setItem('alertSystem_rules_v3', JSON.stringify(this.rules));
-                    localStorage.setItem('alertSystem_processed_v3', JSON.stringify(Array.from(this.processedRecords)));
-                    localStorage.setItem('alertSystem_hashes_v3', JSON.stringify(Array.from(this.alertHashes)));
+                    localStorage.setItem('alertSystem_alerts_v4', JSON.stringify(this.alerts));
+                    localStorage.setItem('alertSystem_rules_v4', JSON.stringify(this.rules));
+                    localStorage.setItem('alertSystem_processed_v4', JSON.stringify(Array.from(this.processedRecords)));
+                    localStorage.setItem('alertSystem_hashes_v4', JSON.stringify(Array.from(this.alertHashes)));
                 } catch (error) {
-                    console.error('❌ Erro ao salvar dados locais:', error);
+                    console.error('Erro ao salvar dados locais:', error);
                 }
             }
 
-            // =============================================================================
-            // UTILIDADES E HELPERS
-            // =============================================================================
-
+            // Utilidades
             normalizeEquipmentName(name) {
                 if (!name) return 'Equipamento Desconhecido';
                 return name.toString().toUpperCase().trim();
@@ -2291,12 +2448,10 @@ Situação: ${this.getStatusText(alert.status)}
                 if (!dateStr) return null;
 
                 try {
-                    // Formato ISO
                     if (dateStr.includes('T')) {
                         return new Date(dateStr);
                     }
                     
-                    // Formato brasileiro dd/mm/yyyy hh:mm:ss
                     if (dateStr.includes('/')) {
                         const [datePart, timePart = '00:00:00'] = dateStr.split(' ');
                         const [day, month, year] = datePart.split('/');
@@ -2380,18 +2535,12 @@ Situação: ${this.getStatusText(alert.status)}
                 return data;
             }
 
-            // =============================================================================
-            // INTERFACE E EVENTOS
-            // =============================================================================
-
             setupEventListeners() {
-                // Form de regras
                 document.getElementById('ruleForm').addEventListener('submit', (e) => {
                     e.preventDefault();
                     this.saveRule();
                 });
 
-                // Modal clicks
                 document.getElementById('ruleModal').addEventListener('click', (e) => {
                     if (e.target.id === 'ruleModal') this.closeRuleModal();
                 });
@@ -2400,7 +2549,6 @@ Situação: ${this.getStatusText(alert.status)}
                     if (e.target.id === 'investigationModal') this.closeInvestigationModal();
                 });
 
-                // Filtros com debounce
                 const updateFilters = this.debounce(() => this.updateAlertsList(), 300);
                 
                 ['filterEquipment', 'filterSeverity', 'filterStatus', 'filterPeriod'].forEach(id => {
@@ -2410,7 +2558,6 @@ Situação: ${this.getStatusText(alert.status)}
                     }
                 });
 
-                // Preview WhatsApp
                 ['invPlaca', 'invMotorista', 'invArea', 'invSupervisor'].forEach(id => {
                     const element = document.getElementById(id);
                     if (element) {
@@ -2432,7 +2579,6 @@ Situação: ${this.getStatusText(alert.status)}
             }
 
             updateFilters() {
-                // Atualizar filtros de equipamento
                 const equipmentSelects = ['filterEquipment', 'reportEquipment'];
                 const uniqueEquipments = [...new Set(this.alerts.map(a => a.equipamento))].sort();
                 
@@ -2467,39 +2613,62 @@ Situação: ${this.getStatusText(alert.status)}
                 const container = document.getElementById('systemStatus');
                 if (!container) return;
 
-                const tokenConfigured = this.config.token && this.config.token.length > 0;
-                const lastSync = this.config.lastSync ? 
-                    new Date(this.config.lastSync).toLocaleString('pt-BR') : 'Nunca';
+                this.validateGitHubConnection().then(githubStatus => {
+                    const tokenConfigured = this.config.token && this.config.token.length > 0;
+                    const lastSync = this.config.lastSync ? 
+                        new Date(this.config.lastSync).toLocaleString('pt-BR') : 'Nunca';
 
-                const status = `
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
-                            <div style="font-size: 2rem; color: #27ae60;">✅</div>
-                            <div>Sistema Ativo</div>
+                    const status = `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #27ae60;">✅</div>
+                                <div>Sistema Ativo</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
+                                <div>GitHub ${githubStatus.valid ? 'Conectado' : 'Desconectado'}</div>
+                                ${!githubStatus.valid && githubStatus.error ? `<div style="font-size: 0.8rem; color: #e74c3c; margin-top: 0.5rem;">${githubStatus.error}</div>` : ''}
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #3498db;">🔄</div>
+                                <div>Última Sync: ${lastSync}</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #9b59b6;">🚀</div>
+                                <div>v4.0 Operacional</div>
+                            </div>
                         </div>
-                        <div style="text-align: center; padding: 1rem; background: rgba(${tokenConfigured ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
-                            <div style="font-size: 2rem; color: ${tokenConfigured ? '#27ae60' : '#e74c3c'};">${tokenConfigured ? '🔐' : '🔒'}</div>
-                            <div>Token ${tokenConfigured ? 'Configurado' : 'Não Configurado'}</div>
+                        
+                        ${githubStatus.valid ? `
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
+                            <strong>GitHub Operacional:</strong>
+                            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                                <li>Arquivo operacional: alertas-atual.json (NÃO APAGAR)</li>
+                                <li>Backups diários: backup-YYYY-MM-DD.json (podem ser apagados)</li>
+                                <li>Sistema independente de backups históricos</li>
+                                <li>Recuperação automática de dados</li>
+                            </ul>
                         </div>
-                        <div style="text-align: center; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px;">
-                            <div style="font-size: 2rem; color: #3498db;">🔄</div>
-                            <div>Última Sync: ${lastSync}</div>
+                        ` : `
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(243, 156, 18, 0.1); border-radius: 12px; border-left: 4px solid #f39c12;">
+                            <strong>Configure o Token GitHub para:</strong>
+                            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                                <li>Gestão automática de arquivos operacionais</li>
+                                <li>Backups diários independentes</li>
+                                <li>Sincronização entre equipes</li>
+                                <li>Histórico versionado de configurações</li>
+                            </ul>
                         </div>
-                        <div style="text-align: center; padding: 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 12px;">
-                            <div style="font-size: 2rem; color: #9b59b6;">🚀</div>
-                            <div>v3.0 Anti-Duplicação</div>
-                        </div>
-                    </div>
-                `;
+                        `}
+                    `;
 
-                container.innerHTML = status;
+                    container.innerHTML = status;
+                });
             }
 
             startPeriodicSync() {
-                // Sync inicial
                 setTimeout(() => this.syncData(), 2000);
                 
-                // Sync periódico
                 setInterval(() => {
                     if (!this.isProcessing) {
                         this.syncData();
@@ -2540,10 +2709,7 @@ Situação: ${this.getStatusText(alert.status)}
                 };
             }
 
-            // =============================================================================
-            // MÉTODOS PÚBLICOS
-            // =============================================================================
-
+            // Métodos Públicos
             async forceSync() {
                 await this.syncData();
             }
@@ -2562,22 +2728,39 @@ Situação: ${this.getStatusText(alert.status)}
             saveConfigFromForm() {
                 this.config.token = document.getElementById('configToken').value;
                 this.config.interval = parseInt(document.getElementById('configInterval').value);
+                this.config.githubEnabled = this.config.token && this.config.token.length > 10;
                 this.saveConfig();
                 this.showNotification('Configurações salvas', 'success');
+                this.updateSystemStatus();
             }
 
             async syncRulesFromGitHub() {
-                this.showNotification('Funcionalidade em desenvolvimento', 'info');
+                this.showNotification('Carregando regras do GitHub...', 'info');
+                await this.loadRulesFromGitHub();
+            }
+
+            async testGitHubConnection() {
+                const result = await this.validateGitHubConnection();
+                
+                if (result.valid) {
+                    this.showNotification('Conexão GitHub válida!', 'success');
+                    this.config.githubEnabled = true;
+                    this.saveConfig();
+                    await this.ensureRepositoryStructure();
+                    await this.loadOperationalDataFromGitHub();
+                } else {
+                    this.showNotification(`Erro GitHub: ${result.error}`, 'error');
+                    this.config.githubEnabled = false;
+                    this.saveConfig();
+                }
+                
+                this.updateSystemStatus();
             }
         }
 
-        // =============================================================================
-        // FUNÇÕES GLOBAIS E INICIALIZAÇÃO
-        // =============================================================================
-
+        // Funções Globais
         let alertSystem = null;
 
-        // Funções globais
         function switchTab(tabName) {
             document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -2663,11 +2846,14 @@ Situação: ${this.getStatusText(alert.status)}
             },
             forceProcess: () => {
                 if (alertSystem) alertSystem.processAlerts();
+            },
+            testGitHub: () => {
+                if (alertSystem) alertSystem.testGitHubConnection();
             }
         };
 
-        console.log('🚀 Sistema de Alertas v3.0 carregado');
-        console.log('🔧 Use window.alertSystemDebug para debug');
+        console.log('Sistema de Alertas v4.0 carregado');
+        console.log('Use window.alertSystemDebug para debug');
     </script>
 </body>
 </html>
