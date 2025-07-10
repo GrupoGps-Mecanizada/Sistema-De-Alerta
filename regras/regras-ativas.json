@@ -1,6 +1,6 @@
 {
-  "timestamp": 1752175826736,
-  "date": "2025-07-10T19:30:26.736Z",
+  "timestamp": 1752175843412,
+  "date": "2025-07-10T19:30:43.412Z",
   "version": "5.1",
   "total": 1,
   "rules": [
@@ -8,14 +8,12 @@
       "id": 1752152405852,
       "name": "Motor Desligado",
       "type": "status",
-      "identifier": "off",
+      "identifier": "",
       "timeOperator": ">",
       "timeValue": 40,
       "severity": "alto",
       "message": "{equipamento} - com motor desligado a {tempo}",
-      "active": true,
-      "created": "2025-07-10T19:30:19.815Z",
-      "version": "5.1"
+      "active": true
     }
   ]
 }
