@@ -1,6 +1,6 @@
 {
-  "timestamp": 1752229445802,
-  "date": "2025-07-11T10:24:05.802Z",
+  "timestamp": 1752229745795,
+  "date": "2025-07-11T10:29:05.795Z",
   "version": "4.0",
   "type": "operational",
   "total": 469,
@@ -12670,7 +12670,7 @@
     }
   ],
   "metadata": {
-    "lastUpdate": "2025-07-11T10:24:05.802Z",
+    "lastUpdate": "2025-07-11T10:29:05.795Z",
     "sourceSystem": "AlertSystem v4.0",
     "dataType": "current_operational"
   }
