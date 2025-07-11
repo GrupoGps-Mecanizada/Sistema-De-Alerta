@@ -1,6 +1,6 @@
 {
-  "timestamp": 1752230649280,
-  "date": "2025-07-11T10:44:09.280Z",
+  "timestamp": 1752230948912,
+  "date": "2025-07-11T10:49:08.912Z",
   "type": "daily_backup",
   "canBeDeleted": true,
   "description": "Backup diário - pode ser apagado sem afetar o sistema",
@@ -33,7 +33,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640697.7966,
@@ -62,7 +62,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640696.4412,
@@ -91,7 +91,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 1h 14min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640694.5532,
@@ -120,7 +120,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640693.5432,
@@ -149,7 +149,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 7h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640693.22,
@@ -178,7 +178,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640692.086,
@@ -207,7 +207,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640692.7336,
@@ -236,7 +236,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640691.0876,
@@ -265,7 +265,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640690.028,
@@ -294,7 +294,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640689.323,
@@ -323,7 +323,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640688.32,
@@ -352,7 +352,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640688.3237,
@@ -381,7 +381,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640687.559,
@@ -410,7 +410,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230640686.54,
@@ -439,7 +439,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040935.5627,
@@ -468,7 +468,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040934.4207,
@@ -497,7 +497,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040933.6782,
@@ -526,7 +526,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040931.9297,
@@ -555,7 +555,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040930.4192,
@@ -584,7 +584,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 7h 25min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040930.2114,
@@ -613,7 +613,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040929.822,
@@ -642,7 +642,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040929.7441,
@@ -671,7 +671,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040928.9023,
@@ -700,7 +700,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040927.4724,
@@ -729,7 +729,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040926.0078,
@@ -758,7 +758,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040925.7837,
@@ -787,7 +787,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040924.096,
@@ -816,7 +816,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040924.629,
@@ -845,7 +845,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752230040923.0374,
@@ -874,7 +874,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440904.2285,
@@ -903,7 +903,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440903.7517,
@@ -932,7 +932,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440902.2058,
@@ -961,7 +961,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 7h 3min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440902.2742,
@@ -990,7 +990,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440901.5525,
@@ -1019,7 +1019,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 2h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440900.789,
@@ -1048,7 +1048,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 57min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440899.244,
@@ -1077,7 +1077,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 1h 28min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440896.0544,
@@ -1106,7 +1106,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440895.224,
@@ -1135,7 +1135,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440892.9812,
@@ -1164,7 +1164,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 2h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440891.5327,
@@ -1193,7 +1193,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 7h 14min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440890.8408,
@@ -1222,7 +1222,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 7h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440889.2773,
@@ -1251,7 +1251,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440886.6787,
@@ -1280,7 +1280,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440885.57,
@@ -1309,7 +1309,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 2h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440885.295,
@@ -1338,7 +1338,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440884.7598,
@@ -1367,7 +1367,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 7h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440883.3625,
@@ -1396,7 +1396,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440883.5874,
@@ -1425,7 +1425,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440882.068,
@@ -1454,7 +1454,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440881.8003,
@@ -1483,7 +1483,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 7h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440880.9695,
@@ -1512,7 +1512,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440880.4915,
@@ -1541,7 +1541,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440878.8596,
@@ -1570,7 +1570,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 1h 53min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440876.9612,
@@ -1599,7 +1599,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 1h 3min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440875.8477,
@@ -1628,7 +1628,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 3h 56min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440874.8188,
@@ -1657,7 +1657,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440872.5693,
@@ -1686,7 +1686,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440871.5896,
@@ -1715,7 +1715,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440870.3638,
@@ -1744,7 +1744,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440869.142,
@@ -1773,7 +1773,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440868.6619,
@@ -1802,7 +1802,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 6h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440867.8147,
@@ -1831,7 +1831,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440867.5454,
@@ -1860,7 +1860,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440866.5554,
@@ -1889,7 +1889,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 6h 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440866.501,
@@ -1918,7 +1918,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752229440865.189,
@@ -1947,7 +1947,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646814.315,
@@ -1976,7 +1976,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646813.679,
@@ -2005,7 +2005,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646812.5283,
@@ -2034,7 +2034,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 1h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646807.454,
@@ -2063,7 +2063,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 1h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646806.1348,
@@ -2092,7 +2092,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 1h 28min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646805.388,
@@ -2121,7 +2121,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 3h 29min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646804.5815,
@@ -2150,7 +2150,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646803.3032,
@@ -2179,7 +2179,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 1h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646802.187,
@@ -2208,7 +2208,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 1h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646797.489,
@@ -2237,7 +2237,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 1h 32min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646796.8738,
@@ -2266,7 +2266,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 34min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646795.1526,
@@ -2295,7 +2295,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646793.711,
@@ -2324,7 +2324,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 1h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646791.9702,
@@ -2353,7 +2353,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 58min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646791.5125,
@@ -2382,7 +2382,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 32min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646790.8013,
@@ -2411,7 +2411,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 11h 3min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646789.8013,
@@ -2440,7 +2440,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 1h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646788.37,
@@ -2469,7 +2469,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 33min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.280Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646788.3945,
@@ -2498,7 +2498,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 33min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646787.7915,
@@ -2527,7 +2527,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 33min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646786.0876,
@@ -2556,7 +2556,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.913Z"
     },
     {
       "id": 1752227646785.7336,
@@ -2585,7 +2585,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 2h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752227646784.584,
@@ -2614,7 +2614,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 48min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649998.2974,
@@ -2643,7 +2643,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649996.639,
@@ -2672,7 +2672,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 53min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649995.5671,
@@ -2701,7 +2701,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649992.3564,
@@ -2730,7 +2730,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649989.778,
@@ -2759,7 +2759,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 2h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649985.1194,
@@ -2788,7 +2788,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 1h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649982.8696,
@@ -2817,7 +2817,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649980.6821,
@@ -2846,7 +2846,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649979.1418,
@@ -2875,7 +2875,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649978.039,
@@ -2904,7 +2904,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 1h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649976.717,
@@ -2933,7 +2933,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 9h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649972.0334,
@@ -2962,7 +2962,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649969.1028,
@@ -2991,7 +2991,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649969.8894,
@@ -3020,7 +3020,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176649967.3684,
@@ -3049,7 +3049,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 53min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040474.0852,
@@ -3078,7 +3078,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 58min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040473.6704,
@@ -3107,7 +3107,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 55min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040472.2808,
@@ -3136,7 +3136,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 2h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040469.1506,
@@ -3165,7 +3165,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040464.1636,
@@ -3194,7 +3194,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 56min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040464.5771,
@@ -3223,7 +3223,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040463.78,
@@ -3252,7 +3252,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040462.02,
@@ -3281,7 +3281,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040461.9817,
@@ -3310,7 +3310,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 9h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040460.9639,
@@ -3339,7 +3339,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 2h 20min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752176040459.09,
@@ -3368,7 +3368,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 33min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440387.8413,
@@ -3397,7 +3397,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440387.0957,
@@ -3426,7 +3426,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440386.6143,
@@ -3455,7 +3455,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 57min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440385.1377,
@@ -3484,7 +3484,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440384.1223,
@@ -3513,7 +3513,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440382.201,
@@ -3542,7 +3542,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440382.9387,
@@ -3571,7 +3571,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440381.839,
@@ -3600,7 +3600,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440381.5854,
@@ -3629,7 +3629,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440379.526,
@@ -3658,7 +3658,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440377.32,
@@ -3687,7 +3687,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440375.6313,
@@ -3716,7 +3716,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 9h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440374.3801,
@@ -3745,7 +3745,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 2h 15min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440373.7078,
@@ -3774,7 +3774,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752175440373.4321,
@@ -3803,7 +3803,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 2h 18min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840415.669,
@@ -3832,7 +3832,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840413.5452,
@@ -3861,7 +3861,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840409.716,
@@ -3890,7 +3890,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 48min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840405.1267,
@@ -3919,7 +3919,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840403.5098,
@@ -3948,7 +3948,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 58min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840402.084,
@@ -3977,7 +3977,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 9h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840401.5442,
@@ -4006,7 +4006,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 2h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840401.5925,
@@ -4035,7 +4035,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 2h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840400.6978,
@@ -4064,7 +4064,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840400.0256,
@@ -4093,7 +4093,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 20min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174840399.3994,
@@ -4122,7 +4122,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 2h 14min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240610.8755,
@@ -4151,7 +4151,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 36min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240607.6387,
@@ -4180,7 +4180,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240606.4521,
@@ -4209,7 +4209,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240605.5928,
@@ -4238,7 +4238,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 8h 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240604.1465,
@@ -4267,7 +4267,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240603.7986,
@@ -4296,7 +4296,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 2h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240603.214,
@@ -4325,7 +4325,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240603.1433,
@@ -4354,7 +4354,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752174240602.5142,
@@ -4383,7 +4383,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 2h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173641478.0093,
@@ -4412,7 +4412,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 25min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040919.7202,
@@ -4441,7 +4441,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 8h 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040916.5566,
@@ -4470,7 +4470,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040914.101,
@@ -4499,7 +4499,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 8h 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040913.9326,
@@ -4528,7 +4528,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040912.3584,
@@ -4557,7 +4557,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040911.1655,
@@ -4586,7 +4586,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040911.1167,
@@ -4615,7 +4615,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752173040910.8325,
@@ -4644,7 +4644,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 53min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735749.108,
@@ -4673,7 +4673,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735749.0046,
@@ -4702,7 +4702,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735746.918,
@@ -4731,7 +4731,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735744.8862,
@@ -4760,7 +4760,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735740.8567,
@@ -4789,7 +4789,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 7h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735737.545,
@@ -4818,7 +4818,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735736.9783,
@@ -4847,7 +4847,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735734.2832,
@@ -4876,7 +4876,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735732.5012,
@@ -4905,7 +4905,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735730.714,
@@ -4934,7 +4934,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 7h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735729.1672,
@@ -4963,7 +4963,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 15min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735727.4717,
@@ -4992,7 +4992,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735725.4849,
@@ -5021,7 +5021,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735724.5999,
@@ -5050,7 +5050,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735723.318,
@@ -5079,7 +5079,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735719.8352,
@@ -5108,7 +5108,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735717.4812,
@@ -5137,7 +5137,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 3h 20min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735716.0396,
@@ -5166,7 +5166,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735714.5757,
@@ -5195,7 +5195,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735710.903,
@@ -5224,7 +5224,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.914Z"
     },
     {
       "id": 1752172735704.498,
@@ -5253,7 +5253,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 7h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735700.1494,
@@ -5282,7 +5282,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735699.8743,
@@ -5311,7 +5311,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 2h 19min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735698.6802,
@@ -5340,7 +5340,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735697.2212,
@@ -5369,7 +5369,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735696.0632,
@@ -5398,7 +5398,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 7h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735695.3591,
@@ -5427,7 +5427,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735693.5056,
@@ -5456,7 +5456,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735691.1946,
@@ -5485,7 +5485,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735689.6055,
@@ -5514,7 +5514,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735686.2053,
@@ -5543,7 +5543,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 8h 33min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735682.655,
@@ -5572,7 +5572,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 2h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735677.4019,
@@ -5601,7 +5601,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735675.442,
@@ -5630,7 +5630,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 2h 28min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735673.9697,
@@ -5659,7 +5659,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 7h 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735672.4397,
@@ -5688,7 +5688,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735671.3564,
@@ -5717,7 +5717,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735670.4683,
@@ -5746,7 +5746,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735667.2031,
@@ -5775,7 +5775,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 7h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735667.279,
@@ -5804,7 +5804,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735667.7585,
@@ -5833,7 +5833,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735664.0322,
@@ -5862,7 +5862,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 7h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735663.1736,
@@ -5891,7 +5891,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735663.5393,
@@ -5920,7 +5920,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735662.5916,
@@ -5949,7 +5949,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735661.1086,
@@ -5978,7 +5978,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 2h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735660.852,
@@ -6007,7 +6007,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 7h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735658.5298,
@@ -6036,7 +6036,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735658.438,
@@ -6065,7 +6065,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735656.3542,
@@ -6094,7 +6094,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735654.6975,
@@ -6123,7 +6123,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735653.1643,
@@ -6152,7 +6152,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 3h 3min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735652.2615,
@@ -6181,7 +6181,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735650.0024,
@@ -6210,7 +6210,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735648.6094,
@@ -6239,7 +6239,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735647.9236,
@@ -6268,7 +6268,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735645.8384,
@@ -6297,7 +6297,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735644.5889,
@@ -6326,7 +6326,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 25min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735641.7515,
@@ -6355,7 +6355,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 2h 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735640.427,
@@ -6384,7 +6384,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735637.923,
@@ -6413,7 +6413,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735636.13,
@@ -6442,7 +6442,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 14h 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735633.4915,
@@ -6471,7 +6471,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735631.74,
@@ -6500,7 +6500,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735630.2927,
@@ -6529,7 +6529,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735629.0657,
@@ -6558,7 +6558,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 0min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735627.093,
@@ -6587,7 +6587,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 30min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735625.6128,
@@ -6616,7 +6616,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735623.1963,
@@ -6645,7 +6645,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735622.1836,
@@ -6674,7 +6674,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 14h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735620.3508,
@@ -6703,7 +6703,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735619.3848,
@@ -6732,7 +6732,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 4h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735618.0906,
@@ -6761,7 +6761,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735616.2932,
@@ -6790,7 +6790,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 8h 33min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735615.1382,
@@ -6819,7 +6819,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735613.7756,
@@ -6848,7 +6848,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 3h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735611.9739,
@@ -6877,7 +6877,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 1h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735609.5417,
@@ -6906,7 +6906,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735607.2383,
@@ -6935,7 +6935,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735606.2563,
@@ -6964,7 +6964,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 2h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735604.1267,
@@ -6993,7 +6993,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735601.2104,
@@ -7022,7 +7022,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 6h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735596.7393,
@@ -7051,7 +7051,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735593.9653,
@@ -7080,7 +7080,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 23min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735588.0505,
@@ -7109,7 +7109,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735587.6235,
@@ -7138,7 +7138,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 7h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735586.837,
@@ -7167,7 +7167,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 32min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735584.3208,
@@ -7196,7 +7196,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735582.7788,
@@ -7225,7 +7225,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 13h 48min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735581.03,
@@ -7254,7 +7254,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 28min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735579.0364,
@@ -7283,7 +7283,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735576.3035,
@@ -7312,7 +7312,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 2h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735573.4285,
@@ -7341,7 +7341,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 7h 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735571.5327,
@@ -7370,7 +7370,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 48min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735569.602,
@@ -7399,7 +7399,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735567.1248,
@@ -7428,7 +7428,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735564.8518,
@@ -7457,7 +7457,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735561.519,
@@ -7486,7 +7486,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 6h 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735558.121,
@@ -7515,7 +7515,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735555.9758,
@@ -7544,7 +7544,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735552.0215,
@@ -7573,7 +7573,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735550.7595,
@@ -7602,7 +7602,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172735544.5088,
@@ -7631,7 +7631,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 6h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172196812.8154,
@@ -7660,7 +7660,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082044.68,
@@ -7689,7 +7689,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082043.6545,
@@ -7718,7 +7718,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082041.241,
@@ -7747,7 +7747,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 8h 23min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082036.6897,
@@ -7776,7 +7776,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 8h 23min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082034.3918,
@@ -7805,7 +7805,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 22min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082033.1816,
@@ -7834,7 +7834,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 34min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082033.9614,
@@ -7863,7 +7863,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752172082031.2476,
@@ -7892,7 +7892,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 32min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752171562920.8179,
@@ -7921,7 +7921,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752171562920.8308,
@@ -7950,7 +7950,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752171562919.7039,
@@ -7979,7 +7979,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.915Z"
     },
     {
       "id": 1752171562919.7986,
@@ -8008,7 +8008,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562918.781,
@@ -8037,7 +8037,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 7h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562917.353,
@@ -8066,7 +8066,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562916.787,
@@ -8095,7 +8095,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562916.8762,
@@ -8124,7 +8124,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562916.0671,
@@ -8153,7 +8153,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562915.1604,
@@ -8182,7 +8182,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 7h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562914.1738,
@@ -8211,7 +8211,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 53min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562914.1436,
@@ -8240,7 +8240,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562913.0752,
@@ -8269,7 +8269,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562913.7253,
@@ -8298,7 +8298,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 2h 24min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562912.1887,
@@ -8327,7 +8327,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562912.444,
@@ -8356,7 +8356,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 3h 20min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562911.801,
@@ -8385,7 +8385,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562911.8328,
@@ -8414,7 +8414,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562910.1426,
@@ -8443,7 +8443,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562908.627,
@@ -8472,7 +8472,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 7h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562907.5613,
@@ -8501,7 +8501,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562907.408,
@@ -8530,7 +8530,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 2h 19min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562906.754,
@@ -8559,7 +8559,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562905.3198,
@@ -8588,7 +8588,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562904.6511,
@@ -8617,7 +8617,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 7h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562904.4133,
@@ -8646,7 +8646,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562903.5952,
@@ -8675,7 +8675,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562902.0342,
@@ -8704,7 +8704,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562902.3933,
@@ -8733,7 +8733,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562901.8606,
@@ -8762,7 +8762,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 8h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562901.489,
@@ -8791,7 +8791,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 2h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562900.5476,
@@ -8820,7 +8820,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562898.089,
@@ -8849,7 +8849,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 2h 28min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562897.6035,
@@ -8878,7 +8878,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 7h 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562897.8616,
@@ -8907,7 +8907,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562896.4912,
@@ -8936,7 +8936,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562895.241,
@@ -8965,7 +8965,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562894.88,
@@ -8994,7 +8994,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 7h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562894.884,
@@ -9023,7 +9023,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562893.9583,
@@ -9052,7 +9052,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562889.363,
@@ -9081,7 +9081,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 7h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562889.8713,
@@ -9110,7 +9110,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 2h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562889.1033,
@@ -9139,7 +9139,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562888.454,
@@ -9168,7 +9168,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 2h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562888.9978,
@@ -9197,7 +9197,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 7h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562887.266,
@@ -9226,7 +9226,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562887.2085,
@@ -9255,7 +9255,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562887.9937,
@@ -9284,7 +9284,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562886.9326,
@@ -9313,7 +9313,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562886.351,
@@ -9342,7 +9342,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 3h 3min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562885.148,
@@ -9371,7 +9371,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562885.482,
@@ -9400,7 +9400,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562885.7153,
@@ -9429,7 +9429,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562884.2007,
@@ -9458,7 +9458,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562883.4517,
@@ -9487,7 +9487,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562883.2637,
@@ -9516,7 +9516,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 25min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562882.7532,
@@ -9545,7 +9545,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 2h 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562882.3508,
@@ -9574,7 +9574,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562882.296,
@@ -9603,7 +9603,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 7h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562881.616,
@@ -9632,7 +9632,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 14h 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562881.7913,
@@ -9661,7 +9661,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562880.148,
@@ -9690,7 +9690,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562880.3926,
@@ -9719,7 +9719,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562880.7551,
@@ -9748,7 +9748,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 0min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562879.2402,
@@ -9777,7 +9777,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 30min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562878.1091,
@@ -9806,7 +9806,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 7h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562878.7876,
@@ -9835,7 +9835,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562878.5813,
@@ -9864,7 +9864,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 14h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562877.9485,
@@ -9893,7 +9893,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562877.3906,
@@ -9922,7 +9922,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 4h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562876.4846,
@@ -9951,7 +9951,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 7h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562876.4282,
@@ -9980,7 +9980,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 8h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562875.484,
@@ -10009,7 +10009,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562875.923,
@@ -10038,7 +10038,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 3h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562874.9207,
@@ -10067,7 +10067,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 1h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562873.7715,
@@ -10096,7 +10096,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562873.038,
@@ -10125,7 +10125,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562872.1921,
@@ -10154,7 +10154,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 2h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562872.3894,
@@ -10183,7 +10183,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562871.4475,
@@ -10212,7 +10212,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 6h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.281Z"
+      "backupDate": "2025-07-11T10:49:08.916Z"
     },
     {
       "id": 1752171562871.7266,
@@ -10241,7 +10241,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562870.845,
@@ -10270,7 +10270,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 23min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562869.2288,
@@ -10299,7 +10299,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562869.862,
@@ -10328,7 +10328,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 7h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562868.054,
@@ -10357,7 +10357,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 11min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562868.7603,
@@ -10386,7 +10386,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 22min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562868.8962,
@@ -10415,7 +10415,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 13h 48min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562868.6882,
@@ -10444,7 +10444,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562867.741,
@@ -10473,7 +10473,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562866.0022,
@@ -10502,7 +10502,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 2h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562865.18,
@@ -10531,7 +10531,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 7h 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562864.8438,
@@ -10560,7 +10560,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562864.4158,
@@ -10589,7 +10589,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562863.956,
@@ -10618,7 +10618,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562863.7126,
@@ -10647,7 +10647,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 6h 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562862.7048,
@@ -10676,7 +10676,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562861.1665,
@@ -10705,7 +10705,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562861.4868,
@@ -10734,7 +10734,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562860.5947,
@@ -10763,7 +10763,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752171562859.6301,
@@ -10792,7 +10792,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 6h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315165.5828,
@@ -10821,7 +10821,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315164.069,
@@ -10850,7 +10850,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 7h 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315164.2844,
@@ -10879,7 +10879,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315164.366,
@@ -10908,7 +10908,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 14h 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315164.154,
@@ -10937,7 +10937,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315164.0952,
@@ -10966,7 +10966,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 7h 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315163.0896,
@@ -10995,7 +10995,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315163.046,
@@ -11024,7 +11024,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315163.791,
@@ -11053,7 +11053,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752170315163.9456,
@@ -11082,7 +11082,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 0min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717164.8806,
@@ -11111,7 +11111,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717164.73,
@@ -11140,7 +11140,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717163.766,
@@ -11169,7 +11169,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717163.1707,
@@ -11198,7 +11198,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717163.4102,
@@ -11227,7 +11227,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717163.9253,
@@ -11256,7 +11256,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717163.7832,
@@ -11285,7 +11285,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717163.4546,
@@ -11314,7 +11314,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717162.8347,
@@ -11343,7 +11343,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717162.2495,
@@ -11372,7 +11372,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717162.7336,
@@ -11401,7 +11401,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 46min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717162.5776,
@@ -11430,7 +11430,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 2h 19min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717161.138,
@@ -11459,7 +11459,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717161.4412,
@@ -11488,7 +11488,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 1h 12min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717161.9595,
@@ -11517,7 +11517,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 7h 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717161.6711,
@@ -11546,7 +11546,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 2h 28min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717160.3733,
@@ -11575,7 +11575,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717160.3877,
@@ -11604,7 +11604,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 03 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717157.6116,
@@ -11633,7 +11633,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717157.3699,
@@ -11662,7 +11662,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717156.4727,
@@ -11691,7 +11691,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717156.7578,
@@ -11720,7 +11720,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 5min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717156.9954,
@@ -11749,7 +11749,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 52min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717156.1611,
@@ -11778,7 +11778,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 54min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717155.982,
@@ -11807,7 +11807,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717155.0327,
@@ -11836,7 +11836,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.282Z"
+      "backupDate": "2025-07-11T10:49:08.918Z"
     },
     {
       "id": 1752169717155.225,
@@ -11865,7 +11865,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 1h 25min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717155.8623,
@@ -11894,7 +11894,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 2h 59min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717154.2852,
@@ -11923,7 +11923,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 14h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717154.8535,
@@ -11952,7 +11952,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717154.0154,
@@ -11981,7 +11981,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 39min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717153.0083,
@@ -12010,7 +12010,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717153.4358,
@@ -12039,7 +12039,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 0min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717153.6387,
@@ -12068,7 +12068,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 14h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717152.111,
@@ -12097,7 +12097,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717152.9592,
@@ -12126,7 +12126,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 4h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717152.8135,
@@ -12155,7 +12155,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 7h 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717152.6592,
@@ -12184,7 +12184,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 26min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717152.3652,
@@ -12213,7 +12213,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717151.3508,
@@ -12242,7 +12242,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 2h 2min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717151.556,
@@ -12271,7 +12271,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 43min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717151.4211,
@@ -12300,7 +12300,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 1h 23min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717150.2466,
@@ -12329,7 +12329,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717150.1672,
@@ -12358,7 +12358,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 13h 48min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717149.043,
@@ -12387,7 +12387,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 13min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717149.9565,
@@ -12416,7 +12416,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 2h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717149.763,
@@ -12445,7 +12445,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 49min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717148.3203,
@@ -12474,7 +12474,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 1h 38min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717148.9854,
@@ -12503,7 +12503,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717148.8206,
@@ -12532,7 +12532,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752169717147.531,
@@ -12561,7 +12561,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163761.3645,
@@ -12590,7 +12590,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 07 - com motor desligado a 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.0464,
@@ -12619,7 +12619,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 47min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.2046,
@@ -12648,7 +12648,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 3h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.9885,
@@ -12677,7 +12677,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 10h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.4797,
@@ -12706,7 +12706,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 10h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.7065,
@@ -12735,7 +12735,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 2h 17min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.7683,
@@ -12764,7 +12764,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 3h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163760.7456,
@@ -12793,7 +12793,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 55min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163759.7583,
@@ -12822,7 +12822,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 56min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163759.661,
@@ -12851,7 +12851,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 10h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163759.841,
@@ -12880,7 +12880,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 37min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752155163759.4373,
@@ -12909,7 +12909,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564042.19,
@@ -12938,7 +12938,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 42min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.4277,
@@ -12967,7 +12967,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 2h 9min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.1626,
@@ -12996,7 +12996,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.2422,
@@ -13025,7 +13025,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 3h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.5808,
@@ -13054,7 +13054,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 10h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.4758,
@@ -13083,7 +13083,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 10h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.424,
@@ -13112,7 +13112,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 2h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564041.4268,
@@ -13141,7 +13141,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 3h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564040.7585,
@@ -13170,7 +13170,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564040.4504,
@@ -13199,7 +13199,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 10 - com motor desligado a 44min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564040.2664,
@@ -13228,7 +13228,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 10h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564040.8767,
@@ -13257,7 +13257,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 27min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752154564040.0117,
@@ -13286,7 +13286,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 41min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963856.79,
@@ -13315,7 +13315,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 31min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963855.0671,
@@ -13344,7 +13344,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 2h 1min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963855.3875,
@@ -13373,7 +13373,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 29min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963855.8948,
@@ -13402,7 +13402,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 3h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963855.2944,
@@ -13431,7 +13431,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 10h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963854.5017,
@@ -13460,7 +13460,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 10h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.919Z"
     },
     {
       "id": 1752153963854.5562,
@@ -13489,7 +13489,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 1h 56min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.920Z"
     },
     {
       "id": 1752153963854.5168,
@@ -13518,7 +13518,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 3h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.920Z"
     },
     {
       "id": 1752153963854.0522,
@@ -13547,7 +13547,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 10h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.920Z"
     },
     {
       "id": 1752153963853.6758,
@@ -13576,7 +13576,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 16min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.920Z"
     },
     {
       "id": 1752153963852.5642,
@@ -13605,7 +13605,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 30min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146373.2163,
@@ -13634,7 +13634,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 7min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146373.2288,
@@ -13663,7 +13663,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 21min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146373.845,
@@ -13692,7 +13692,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 51min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.2524,
@@ -13721,7 +13721,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.2673,
@@ -13750,7 +13750,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 19min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.3418,
@@ -13779,7 +13779,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 3h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.8474,
@@ -13808,7 +13808,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 10h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.398,
@@ -13837,7 +13837,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 10h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.254,
@@ -13866,7 +13866,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 1h 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146372.1714,
@@ -13895,7 +13895,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 3h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146371.9531,
@@ -13924,7 +13924,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146371.889,
@@ -13953,7 +13953,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 10h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146371.874,
@@ -13982,7 +13982,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 1h 6min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752153146370.477,
@@ -14011,7 +14011,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 20min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684263.7788,
@@ -14040,7 +14040,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 02 - com motor desligado a 1h 4min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684263.6482,
@@ -14069,7 +14069,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684263.8657,
@@ -14098,7 +14098,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 09 - com motor desligado a 1h 40min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684262.072,
@@ -14127,7 +14127,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 10 - com motor desligado a 45min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684262.7966,
@@ -14156,7 +14156,7 @@
       "acoes": "",
       "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 1h 8min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684262.5925,
@@ -14185,7 +14185,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 2h 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684262.1772,
@@ -14214,7 +14214,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 9h 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684261.8958,
@@ -14243,7 +14243,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - com motor desligado a 9h 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684261.518,
@@ -14272,7 +14272,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 1h 35min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684260.0696,
@@ -14301,7 +14301,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 2h 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684260.7036,
@@ -14330,7 +14330,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 12 - com motor desligado a 1h 30min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684260.9717,
@@ -14359,7 +14359,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 9h 60min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684260.2268,
@@ -14388,7 +14388,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 55min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752152684259.866,
@@ -14417,7 +14417,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 1h 10min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752145749333.756,
@@ -14446,7 +14446,7 @@
       "acoes": "",
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - Documentação há 50min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     },
     {
       "id": 1752145749332.813,
@@ -14475,7 +14475,7 @@
       "acoes": "",
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 11 - Refeição há 1h 15min",
       "backedUp": true,
-      "backupDate": "2025-07-11T10:44:09.283Z"
+      "backupDate": "2025-07-11T10:49:08.921Z"
     }
   ]
 }
