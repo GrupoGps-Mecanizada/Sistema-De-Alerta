@@ -1271,13 +1271,22 @@
                 return this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
             }
 
-            // CORREÇÃO: IDs determinísticos
+            // CORREÇÃO: IDs determinísticos com validação robusta
             generateAlertId(record, rule) {
                 const startTime = record.consolidated ? record.consolidatedStart : (record.start || record['Data Inicial']);
+                
+                // VALIDAÇÃO ROBUSTA: Garantir que sempre temos um timestamp válido
+                let parsedDate = this.parseDateTime(startTime);
+                if (!parsedDate || isNaN(parsedDate.getTime())) {
+                    // Fallback para timestamp atual se data inválida
+                    parsedDate = new Date();
+                    console.warn(`Data inválida detectada: ${startTime}, usando timestamp atual`);
+                }
+                
                 const components = [
                     this.normalizeEquipmentName(record.vacancy_name || record.Vaga),
                     rule.id,
-                    this.parseDateTime(startTime).getTime()
+                    parsedDate.getTime()
                 ];
                 return this.simpleHash(components.join('|'));
             }
@@ -1292,7 +1301,7 @@
                 return Math.abs(hash).toString(36);
             }
 
-            // CORREÇÃO: Processamento de alertas com atualização
+            // CORREÇÃO: Processamento de alertas com validação robusta
             async processAlerts() {
                 if (this.isProcessing) return;
                 
@@ -1300,35 +1309,54 @@
                 console.log('🔄 Processando alertas...');
 
                 try {
+                    // VALIDAÇÃO: Verificar se há dados para processar
+                    if (!this.telemetryData || this.telemetryData.length === 0) {
+                        console.log('⚠️ Nenhum dado de telemetria disponível para processamento');
+                        return;
+                    }
+
                     const consolidatedStatus = this.consolidateRecords(this.telemetryData, 'status');
                     
                     let newAlertsCount = 0;
                     let updatedAlertsCount = 0;
 
                     for (const record of consolidatedStatus) {
+                        // VALIDAÇÃO: Verificar estrutura do registro
+                        if (!record || !record.vacancy_name || !record.status) {
+                            console.warn('Registro inválido ignorado:', record);
+                            continue;
+                        }
+
                         const activeRules = this.rules.filter(r => r.active && r.type === 'status');
                         
                         for (const rule of activeRules) {
-                            if (this.recordMatchesRule(record, rule, 'status')) {
-                                const alertId = this.generateAlertId(record, rule);
-                                const existingAlert = this.alerts.find(a => a.id === alertId);
-                                
-                                if (existingAlert) {
-                                    // Atualizar alerta existente
-                                    const newDuration = this.getRecordDuration(record, 'status');
-                                    if (newDuration > existingAlert.durationMinutes) {
-                                        existingAlert.duration = this.formatDuration(newDuration);
-                                        existingAlert.durationMinutes = newDuration;
-                                        existingAlert.endTime = record.end;
-                                        existingAlert.timeRange = this.formatTimeRange(existingAlert.startTime, record.end);
-                                        updatedAlertsCount++;
+                            try {
+                                if (this.recordMatchesRule(record, rule, 'status')) {
+                                    const alertId = this.generateAlertId(record, rule);
+                                    const existingAlert = this.alerts.find(a => a.id === alertId);
+                                    
+                                    if (existingAlert) {
+                                        // Atualizar alerta existente
+                                        const newDuration = this.getRecordDuration(record, 'status');
+                                        if (newDuration > existingAlert.durationMinutes) {
+                                            existingAlert.duration = this.formatDuration(newDuration);
+                                            existingAlert.durationMinutes = newDuration;
+                                            existingAlert.endTime = record.end;
+                                            existingAlert.timeRange = this.formatTimeRange(existingAlert.startTime, record.end);
+                                            updatedAlertsCount++;
+                                        }
+                                    } else {
+                                        // Criar novo alerta
+                                        const newAlert = this.createAlert(record, rule, 'status');
+                                        if (newAlert) {
+                                            this.alerts.unshift(newAlert);
+                                            newAlertsCount++;
+                                        }
                                     }
-                                } else {
-                                    // Criar novo alerta
-                                    const newAlert = this.createAlert(record, rule, 'status');
-                                    this.alerts.unshift(newAlert);
-                                    newAlertsCount++;
                                 }
+                            } catch (ruleError) {
+                                console.error(`Erro ao processar regra ${rule.name}:`, ruleError);
+                                continue;
                             }
                         }
                     }
@@ -1344,6 +1372,8 @@
                         if (newAlertsCount > 0) {
                             this.showNotification(`${newAlertsCount} novos alertas detectados`, 'info');
                         }
+                    } else {
+                        console.log('ℹ️ Nenhum novo alerta gerado no processamento');
                     }
 
                 } catch (error) {
@@ -2284,18 +2314,33 @@ Situação: ${this.getStatusText(alert.status)}
                 if (!dateStr) return null;
 
                 try {
-                    if (dateStr.includes('T')) {
-                        return new Date(dateStr);
+                    // Formato ISO com T
+                    if (typeof dateStr === 'string' && dateStr.includes('T')) {
+                        const date = new Date(dateStr);
+                        return isNaN(date.getTime()) ? null : date;
                     }
                     
-                    if (dateStr.includes('/')) {
+                    // Formato brasileiro DD/MM/YYYY HH:MM:SS
+                    if (typeof dateStr === 'string' && dateStr.includes('/')) {
                         const [datePart, timePart = '00:00:00'] = dateStr.split(' ');
                         const [day, month, year] = datePart.split('/');
-                        return new Date(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${timePart}`);
+                        const isoString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${timePart}`;
+                        const date = new Date(isoString);
+                        return isNaN(date.getTime()) ? null : date;
                     }
 
-                    return new Date(dateStr);
-                } catch {
+                    // Timestamp numérico
+                    if (typeof dateStr === 'number') {
+                        const date = new Date(dateStr);
+                        return isNaN(date.getTime()) ? null : date;
+                    }
+
+                    // Tentativa direta de conversão
+                    const date = new Date(dateStr);
+                    return isNaN(date.getTime()) ? null : date;
+                    
+                } catch (error) {
+                    console.warn(`Erro ao processar data: ${dateStr}`, error);
                     return null;
                 }
             }
