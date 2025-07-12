@@ -1,6 +1,18 @@
 {
-  "timestamp": 1752331228387,
+  "timestamp": 1752331267114,
   "version": "4.1",
-  "total": 0,
-  "rules": []
+  "total": 1,
+  "rules": [
+    {
+      "id": 1752331246436,
+      "name": "Motor Desligado",
+      "type": "status",
+      "identifier": "off",
+      "timeOperator": ">",
+      "timeValue": 60,
+      "severity": "baixo",
+      "message": "{equipamento} - {apontamento} há {tempo}",
+      "active": true
+    }
+  ]
 }
