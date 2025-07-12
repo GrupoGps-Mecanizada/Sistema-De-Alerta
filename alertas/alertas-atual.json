@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752340603296,
+  "timestamp": 1752340695385,
   "version": "4.2",
   "type": "operational",
   "total": 13,
   "alerts": [
     {
-      "id": "12z9e",
+      "id": "fu5hd",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS",
       "tipo": "Status",
       "identificador": "off",
@@ -19,10 +19,10 @@
       "timeRange": "13:03 - 14:08",
       "consolidated": true,
       "originalCount": 7,
-      "timestamp": 1752340599609,
-      "fullDateTime": "12/07/2025 14:16",
+      "timestamp": 1752340692507,
+      "fullDateTime": "12/07/2025 14:18",
       "date": "12/07/2025",
-      "time": "14:16:39",
+      "time": "14:18:12",
       "status": "pendente",
       "placa": "",
       "motorista": "",
