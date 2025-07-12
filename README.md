@@ -1,5 +1,3 @@
-Claro, analisei a estrutura e o funcionamento do seu projeto. Aqui está uma sugestão de README em formato Markdown que você pode usar em seu repositório do GitHub.
-
 -----
 
 # Sistema de Alertas GrupoGPS v4.2
