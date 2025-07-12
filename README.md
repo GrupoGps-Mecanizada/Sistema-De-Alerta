@@ -1,6 +1,6 @@
 -----
 
-# Sistema de Alertas GrupoGPS v4.2
+# Sistema de Alertas GrupoGPS
 
 Um sistema web robusto para monitoramento e gestão de alertas operacionais baseados em dados de telemetria. A aplicação permite a criação de regras customizadas, visualização de histórico, investigação de alertas e geração de relatórios.
 
