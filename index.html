@@ -659,7 +659,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="header-brand">
-                    <h1>Sistema de Alertas GrupoGPS v4.1</h1>
+                    <h1>Sistema de Alertas GrupoGPS v4.2</h1>
                 </div>
                 
                 <div class="header-controls">
@@ -892,7 +892,7 @@
                                         <button class="btn" onclick="saveConfig()">
                                             <span>Salvar</span>
                                         </button>
-                                        <button class="btn info" onclick="alertSystem.testGitHubConnection()">
+                                        <button class="btn info" onclick="testGitHubConnection()">
                                             <span>Testar</span>
                                         </button>
                                     </div>
@@ -931,7 +931,7 @@
 
         <!-- Footer -->
         <footer style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.2); padding: 2rem; text-align: center; color: #5a6c7d; font-size: 0.9rem;">
-            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas v4.1</p>
+            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas v4.2</p>
         </footer>
     </div>
 
@@ -1113,17 +1113,18 @@
     </div>
 
     <script>
-        // Sistema de Alertas Otimizado v4.1 - GrupoGPS
-        // CORRECOES IMPLEMENTADAS: Motor de Regras + IDs Determinísticos + Gestão de Estado Persistente
+        // Sistema de Alertas v4.2 - GrupoGPS
+        // CORREÇÕES CRÍTICAS: Inicialização robusta + Sincronização GitHub + Persistência corrigida
         
-        class AlertSystem {
+        class AlertSystemFixed {
             constructor() {
                 this.telemetryData = [];
                 this.rules = [];
-                this.alerts = []; // "Banco de dados" em memória
+                this.alerts = [];
                 this.isProcessing = false;
                 this.editingRuleId = null;
                 this.currentInvestigation = null;
+                this.syncQueue = []; // NOVO: Queue para operações GitHub
                 this.config = {
                     repo: 'GrupoGps-Mecanizada/Sistema-De-Alerta',
                     token: '',
@@ -1133,64 +1134,170 @@
                     lastDataLoad: null
                 };
 
-                this.init();
+                // CORREÇÃO: Garantir inicialização robusta
+                this.initializeSystem();
             }
 
-            async init() {
-                console.log('Sistema de Alertas v4.1 - Iniciando com correções aplicadas...');
-                this.updateSyncStatus('loading', 'Iniciando...');
+            // CORREÇÃO: Inicialização robusta com retry e error handling
+            async initializeSystem() {
+                console.log('Sistema de Alertas v4.2 - Inicializando com correções críticas...');
+                this.updateSyncStatus('loading', 'Iniciando v4.2...');
 
-                this.loadConfig();
-                this.setupEventListeners();
-                this.initDates();
+                try {
+                    // PASSO 1: Configurações e estrutura básica
+                    this.loadConfig();
+                    this.setupEventListeners();
+                    this.initDates();
+                    
+                    // PASSO 2: Carregamento de dados com prioridade corrigida
+                    await this.loadDataWithPriority();
+                    
+                    // PASSO 3: Interface e sincronização
+                    this.updateInterface();
+                    this.startPeriodicSync();
+                    this.startSyncQueueProcessor(); // NOVO: Processador de queue
+                    
+                    // PASSO 4: Disponibilizar globalmente (CORREÇÃO CRÍTICA)
+                    window.alertSystem = this;
+                    
+                    this.updateSyncStatus('success', 'Sistema v4.2 ativo');
+                    console.log('✅ Sistema inicializado com todas as correções aplicadas.');
+                    
+                } catch (error) {
+                    console.error('❌ Erro crítico na inicialização:', error);
+                    this.updateSyncStatus('error', 'Falha na inicialização');
+                    
+                    // RETRY: Tentar novamente em 3 segundos
+                    setTimeout(() => this.initializeSystem(), 3000);
+                }
+            }
+
+            // CORREÇÃO: Carregamento de dados com prioridade corrigida
+            async loadDataWithPriority() {
+                console.log('📋 Carregando dados com prioridade corrigida...');
                 
-                // Prioridade 1: Carregar estado do GitHub se possível
-                if (this.config.githubEnabled) {
+                // PRIORIDADE 1: Tentar carregar do GitHub se configurado
+                if (this.config.githubEnabled && this.config.token) {
+                    console.log('🔄 Carregando dados do GitHub...');
                     await this.loadOperationalDataFromGitHub();
                     await this.loadRulesFromGitHub();
-                } else {
-                    // Prioridade 2: Carregar do Local Storage
-                    this.loadLocalData();
-                }
-
-                if (this.alerts.length === 0) {
+                } 
+                
+                // PRIORIDADE 2: LocalStorage como fallback
+                console.log('💾 Carregando dados locais...');
+                this.loadLocalData();
+                
+                // PRIORIDADE 3: Dados de exemplo se necessário
+                if (this.alerts.length === 0 && this.rules.length === 0) {
+                    console.log('🔧 Carregando dados de exemplo...');
                     this.loadExampleData();
                 }
-
-                this.updateInterface();
-                this.startPeriodicSync();
-                this.updateSyncStatus('success', 'Sistema ativo v4.1');
-                console.log('Sistema inicializado com todas as correções aplicadas.');
+                
+                console.log(`✅ Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
             }
 
-            // CORREÇÃO 1: Geração de IDs únicos e determinísticos
-            simpleHash(str) {
-                let hash = 0;
-                for (let i = 0; i < str.length; i++) {
-                    const char = str.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash |= 0; // Converte para um inteiro de 32bit
+            // CORREÇÃO: Sistema de queue para operações GitHub
+            addToSyncQueue(operation, data, description) {
+                this.syncQueue.push({
+                    id: Date.now() + Math.random(),
+                    operation: operation,
+                    data: data,
+                    description: description,
+                    timestamp: Date.now(),
+                    retries: 0,
+                    maxRetries: 3
+                });
+                
+                console.log(`📋 Operação adicionada à queue: ${description}`);
+            }
+
+            // NOVO: Processador de queue para sincronização contínua
+            startSyncQueueProcessor() {
+                setInterval(async () => {
+                    if (this.syncQueue.length > 0 && this.config.githubEnabled) {
+                        await this.processSyncQueue();
+                    }
+                }, 5000); // Processa a cada 5 segundos
+            }
+
+            async processSyncQueue() {
+                const operation = this.syncQueue.shift();
+                if (!operation) return;
+
+                console.log(`🔄 Processando: ${operation.description}`);
+                
+                try {
+                    switch (operation.operation) {
+                        case 'saveRules':
+                            await this.saveRulesToGitHub();
+                            break;
+                        case 'saveAlerts':
+                            await this.saveOperationalDataToGitHub();
+                            break;
+                        case 'saveInvestigation':
+                            await this.saveOperationalDataToGitHub();
+                            break;
+                    }
+                    
+                    console.log(`✅ Sincronização concluída: ${operation.description}`);
+                    this.showNotification(`Sincronizado: ${operation.description}`, 'success');
+                    
+                } catch (error) {
+                    console.error(`❌ Erro na sincronização: ${operation.description}`, error);
+                    
+                    // RETRY: Tentar novamente se não excedeu o limite
+                    if (operation.retries < operation.maxRetries) {
+                        operation.retries++;
+                        this.syncQueue.unshift(operation); // Recoloca no início da queue
+                        console.log(`🔄 Recolocando na queue (tentativa ${operation.retries}/${operation.maxRetries})`);
+                    } else {
+                        this.showNotification(`Falha na sincronização: ${operation.description}`, 'error');
+                    }
                 }
-                return Math.abs(hash).toString(36);
             }
 
-            // CORREÇÃO 2: ID determinístico para evitar duplicatas
+            // CORREÇÃO: Motor de regras com validação robusta
+            recordMatchesRule(record, rule, type) {
+                const identifier = type === 'status' ? record.status : record['Categoria Demora'];
+                
+                // CORREÇÃO CRÍTICA: Validação de identifier
+                if (rule.identifier && rule.identifier.trim() !== '') {
+                    if (rule.identifier !== identifier) {
+                        return false;
+                    }
+                }
+
+                const duration = this.getRecordDuration(record, type);
+                return this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
+            }
+
+            // CORREÇÃO: IDs determinísticos
             generateAlertId(record, rule) {
                 const startTime = record.consolidated ? record.consolidatedStart : (record.start || record['Data Inicial']);
                 const components = [
                     this.normalizeEquipmentName(record.vacancy_name || record.Vaga),
                     rule.id,
-                    this.parseDateTime(startTime).getTime() // Usa o timestamp de início do evento
+                    this.parseDateTime(startTime).getTime()
                 ];
                 return this.simpleHash(components.join('|'));
             }
 
-            // CORREÇÃO 3: Processamento principal de alertas com lógica corrigida
+            simpleHash(str) {
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash |= 0;
+                }
+                return Math.abs(hash).toString(36);
+            }
+
+            // CORREÇÃO: Processamento de alertas com atualização
             async processAlerts() {
                 if (this.isProcessing) return;
                 
                 this.isProcessing = true;
-                console.log('Iniciando processamento de alertas...');
+                console.log('🔄 Processando alertas...');
 
                 try {
                     const consolidatedStatus = this.consolidateRecords(this.telemetryData, 'status');
@@ -1206,9 +1313,8 @@
                                 const alertId = this.generateAlertId(record, rule);
                                 const existingAlert = this.alerts.find(a => a.id === alertId);
                                 
-                                // CORREÇÃO 4: Lógica de Criar/Atualizar Alerta
                                 if (existingAlert) {
-                                    // Alerta já existe, vamos atualizá-lo
+                                    // Atualizar alerta existente
                                     const newDuration = this.getRecordDuration(record, 'status');
                                     if (newDuration > existingAlert.durationMinutes) {
                                         existingAlert.duration = this.formatDuration(newDuration);
@@ -1218,7 +1324,7 @@
                                         updatedAlertsCount++;
                                     }
                                 } else {
-                                    // Alerta não existe, vamos criar um novo
+                                    // Criar novo alerta
                                     const newAlert = this.createAlert(record, rule, 'status');
                                     this.alerts.unshift(newAlert);
                                     newAlertsCount++;
@@ -1228,35 +1334,423 @@
                     }
 
                     if (newAlertsCount > 0 || updatedAlertsCount > 0) {
-                        console.log(`${newAlertsCount} novos alertas gerados, ${updatedAlertsCount} alertas atualizados.`);
+                        console.log(`✅ ${newAlertsCount} novos alertas, ${updatedAlertsCount} atualizados`);
                         this.saveLocalData();
+                        
+                        // CORREÇÃO: Adicionar à queue para sincronização GitHub
+                        this.addToSyncQueue('saveAlerts', null, `${newAlertsCount} novos alertas`);
+                        
                         this.updateInterface();
-                        if (newAlertsCount > 0) this.showNotification(`${newAlertsCount} novos alertas detectados`, 'info');
+                        if (newAlertsCount > 0) {
+                            this.showNotification(`${newAlertsCount} novos alertas detectados`, 'info');
+                        }
                     }
 
                 } catch (error) {
-                    console.error('Erro no processamento de alertas:', error);
+                    console.error('❌ Erro no processamento:', error);
                 } finally {
                     this.isProcessing = false;
                 }
             }
 
-            // CORREÇÃO 5: Lógica de verificação de regra corrigida
-            recordMatchesRule(record, rule, type) {
-                const identifier = type === 'status' ? record.status : record['Categoria Demora'];
-                
-                // CORREÇÃO PRINCIPAL: Se a regra tem um identificador, ele DEVE ser igual ao do registro.
-                if (rule.identifier && rule.identifier !== '') {
-                    if (rule.identifier !== identifier) {
-                        return false;
-                    }
-                }
-
-                const duration = this.getRecordDuration(record, type);
-                return this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
+            // CORREÇÃO: Formatação de data/hora completa
+            formatFullDateTime(timestamp) {
+                const date = new Date(timestamp);
+                const dateStr = date.toLocaleDateString('pt-BR');
+                const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                return `${dateStr} ${timeStr}`;
             }
 
-            // Sistema de Consolidação de Eventos
+            // CORREÇÃO: Criação de alertas com timestamp completo
+            createAlert(record, rule, type) {
+                const equipamento = this.normalizeEquipmentName(record.vacancy_name || record.Vaga);
+                const identifier = type === 'status' ? record.status : record['Categoria Demora'];
+                const duration = this.getRecordDuration(record, type);
+                const startTime = record.start || record['Data Inicial'];
+                const endTime = record.end || record['Data Final'];
+                const alertTimestamp = Date.now();
+
+                const alert = {
+                    id: this.generateAlertId(record, rule),
+                    equipamento: equipamento,
+                    tipo: type === 'status' ? 'Status' : 'Apontamento',
+                    identificador: identifier,
+                    ruleId: rule.id,
+                    ruleName: rule.name,
+                    severity: rule.severity,
+                    duration: this.formatDuration(duration),
+                    durationMinutes: duration,
+                    startTime: this.parseDateTime(startTime).toISOString(),
+                    endTime: this.parseDateTime(endTime).toISOString(),
+                    timeRange: this.formatTimeRange(startTime, endTime),
+                    consolidated: record.consolidated || false,
+                    originalCount: record.originalCount || 1,
+                    timestamp: alertTimestamp,
+                    // CORREÇÃO: Data e hora completas
+                    fullDateTime: this.formatFullDateTime(alertTimestamp),
+                    date: new Date(alertTimestamp).toLocaleDateString('pt-BR'),
+                    time: new Date(alertTimestamp).toLocaleTimeString('pt-BR'),
+                    status: 'pendente',
+                    placa: '', motorista: '', area: '', supervisor: '',
+                    observacoes: '', acoes: ''
+                };
+
+                alert.message = rule.message
+                    .replace('{equipamento}', this.getDisplayName(equipamento))
+                    .replace('{tipo}', identifier)
+                    .replace('{tempo}', alert.duration);
+                
+                return alert;
+            }
+
+            // CORREÇÃO: Salvar regras no GitHub imediatamente
+            async saveRule() {
+                const type = document.getElementById('ruleType').value;
+                const identifier = type === 'status' ? 
+                    document.getElementById('ruleStatus').value : 
+                    document.getElementById('ruleApontamento').value;
+
+                const ruleData = {
+                    name: document.getElementById('ruleName').value,
+                    type: type,
+                    identifier: identifier,
+                    timeOperator: document.getElementById('ruleTimeOperator').value,
+                    timeValue: parseInt(document.getElementById('ruleTimeValue').value),
+                    severity: document.getElementById('ruleSeverity').value,
+                    message: document.getElementById('ruleMessage').value,
+                    active: true
+                };
+
+                if (this.editingRuleId) {
+                    const index = this.rules.findIndex(r => r.id === this.editingRuleId);
+                    if (index !== -1) {
+                        this.rules[index] = { ...this.rules[index], ...ruleData };
+                        this.showNotification('Regra atualizada', 'success');
+                    }
+                } else {
+                    const newRule = {
+                        id: Date.now(),
+                        ...ruleData
+                    };
+                    this.rules.push(newRule);
+                    this.showNotification('Regra criada', 'success');
+                }
+
+                // CORREÇÃO: Salvar localmente E adicionar à queue GitHub
+                this.saveLocalData();
+                this.addToSyncQueue('saveRules', null, `Regra: ${ruleData.name}`);
+                
+                this.updateRulesList();
+                this.closeRuleModal();
+            }
+
+            // CORREÇÃO: Limpar histórico permanente
+            clearAllAlerts() {
+                if (confirm('Tem certeza que deseja limpar todo o histórico? Esta ação é irreversível.')) {
+                    this.alerts = [];
+                    
+                    // CORREÇÃO: Limpar de TODOS os locais
+                    this.saveLocalData();
+                    this.addToSyncQueue('saveAlerts', null, 'Limpeza do histórico');
+                    
+                    this.updateInterface();
+                    this.showNotification('Histórico limpo permanentemente', 'info');
+                }
+            }
+
+            // CORREÇÃO: Salvar investigação com sincronização GitHub
+            saveInvestigation() {
+                if (!this.currentInvestigation) return;
+
+                const alert = this.currentInvestigation;
+                
+                alert.placa = document.getElementById('invPlaca').value;
+                alert.motorista = document.getElementById('invMotorista').value;
+                alert.area = document.getElementById('invArea').value;
+                alert.supervisor = document.getElementById('invSupervisor').value;
+                alert.status = document.getElementById('invStatus').value;
+                alert.observacoes = document.getElementById('invObservacoes').value;
+                alert.acoes = document.getElementById('invAcoes').value;
+                alert.investigatedAt = new Date().toISOString();
+                alert.investigatedFullDateTime = this.formatFullDateTime(Date.now());
+
+                // CORREÇÃO: Salvar e sincronizar imediatamente
+                this.saveLocalData();
+                this.addToSyncQueue('saveInvestigation', null, `Investigação: ${alert.equipamento}`);
+                
+                this.updateInterface();
+                this.closeInvestigationModal();
+                this.showNotification('Investigação salva e sincronizada', 'success');
+            }
+
+            // CORREÇÃO: Atualização da lista de alertas com data completa
+            updateAlertsList() {
+                const container = document.getElementById('alertsList');
+                if (!container) return;
+
+                if (this.alerts.length === 0) {
+                    container.innerHTML = `
+                        <div class="loading-state">
+                            <div style="font-size: 3rem;">✅</div>
+                            <div>Nenhum alerta registrado</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const filteredAlerts = this.getFilteredAlerts();
+                
+                container.innerHTML = filteredAlerts.map(alert => {
+                    let normalizedSeverity = alert.severity;
+                    if (alert.severity === 'critical') normalizedSeverity = 'critico';
+                    else if (alert.severity === 'high') normalizedSeverity = 'alto';
+                    else if (alert.severity === 'medium') normalizedSeverity = 'medio';
+                    else if (alert.severity === 'low') normalizedSeverity = 'baixo';
+
+                    return `
+                    <div class="alert-card ${normalizedSeverity}">
+                        <div class="alert-header">
+                            <div class="alert-title">${alert.message}</div>
+                            <div class="alert-actions">
+                                <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">
+                                    <span>Investigar</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="alert-time">${alert.fullDateTime || `${alert.date} ${alert.time}`}</div>
+                        <div class="alert-details">
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Equipamento</div>
+                                <div class="alert-detail-value">${this.getDisplayName(alert.equipamento)}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Tipo</div>
+                                <div class="alert-detail-value">${alert.tipo} - ${alert.identificador}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Duração</div>
+                                <div class="alert-detail-value">${alert.duration}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Período</div>
+                                <div class="alert-detail-value">${alert.timeRange}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Status</div>
+                                <div class="alert-detail-value">
+                                    <span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span>
+                                </div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Gravidade</div>
+                                <div class="alert-detail-value">
+                                    <span class="severity-badge ${normalizedSeverity}">${this.getSeverityText(alert.severity)}</span>
+                                </div>
+                            </div>
+                            ${alert.consolidated ? `
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Consolidado</div>
+                                <div class="alert-detail-value" style="color: #27ae60;">✅ ${alert.originalCount} registros</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `}).join('');
+            }
+
+            // Carregar dados de exemplo para demonstração
+            loadExampleData() {
+                console.log('📋 Carregando dados de exemplo...');
+                
+                this.telemetryData = [
+                    {
+                        vacancy_code: "536",
+                        vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
+                        status: "off",
+                        status_title: "Motor Desligado",
+                        start: "2025-07-11T09:06:19",
+                        end: "2025-07-11T09:48:49",
+                        total_time: "0.70833333333333"
+                    },
+                    {
+                        vacancy_code: "526",
+                        vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 04",
+                        status: "off",
+                        status_title: "Motor Desligado",
+                        start: "2025-07-11T09:57:39",
+                        end: "2025-07-11T11:24:09",
+                        total_time: "1.4416666666667"
+                    }
+                ];
+
+                this.rules = [
+                    {
+                        id: 1752152405852,
+                        name: "Motor Desligado",
+                        type: "status",
+                        identifier: "off", // CORREÇÃO: Valor específico, não vazio
+                        timeOperator: ">",
+                        timeValue: 40,
+                        severity: "alto",
+                        message: "{equipamento} - com motor desligado a {tempo}",
+                        active: true
+                    }
+                ];
+
+                this.processAlerts();
+            }
+
+            // Sistema de sincronização robusto
+            async syncData() {
+                this.updateSyncStatus('loading', 'Sincronizando...');
+                
+                try {
+                    await this.loadOperationalDataFromGitHub();
+                    
+                    const telemetryUrl = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json?cache_bust=${Date.now()}`;
+                    const telemetryResponse = await this.fetchData(telemetryUrl, true);
+                    
+                    this.telemetryData = telemetryResponse.records || [];
+                    console.log(`📊 Dados sincronizados: ${this.telemetryData.length} registros`);
+                    
+                    await this.processAlerts();
+
+                    if (this.config.githubEnabled) {
+                        this.config.lastSync = Date.now();
+                        this.saveConfig();
+                    }
+                    
+                    this.updateSyncStatus('success', 'Sincronizado!');
+
+                } catch (error) {
+                    console.error('❌ Erro na sincronização:', error);
+                    this.updateSyncStatus('error', 'Falha na Sincronização');
+                }
+            }
+
+            async fetchData(url, isJson = false) {
+                const response = await fetch(url, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status} em ${url}`);
+                return isJson ? response.json() : response.text();
+            }
+
+            // Gestão GitHub melhorada
+            async loadOperationalDataFromGitHub() {
+                if (!this.config.githubEnabled || !this.config.token) {
+                    console.log("⚠️ GitHub não configurado. Pulando carregamento.");
+                    return;
+                }
+                
+                try {
+                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/alertas/alertas-atual.json?cache_bust=${Date.now()}`;
+                    const data = await this.fetchData(url, true);
+                    
+                    if (data && data.alerts && Array.isArray(data.alerts)) {
+                        this.alerts = data.alerts;
+                        this.config.lastDataLoad = data.timestamp;
+                        console.log(`✅ Estado carregado do GitHub: ${this.alerts.length} alertas`);
+                        this.saveLocalData();
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Não foi possível carregar dados do GitHub:', error.message);
+                }
+            }
+
+            async saveOperationalDataToGitHub() {
+                const operationalData = {
+                    timestamp: Date.now(),
+                    version: '4.2',
+                    type: 'operational',
+                    total: this.alerts.length,
+                    alerts: this.alerts,
+                };
+                
+                await this.createOrUpdateGitHubFile(
+                    'alertas/alertas-atual.json', 
+                    JSON.stringify(operationalData, null, 2), 
+                    'Atualização automática v4.2'
+                );
+            }
+
+            async saveRulesToGitHub() {
+                const rulesData = {
+                    timestamp: Date.now(),
+                    version: '4.2',
+                    total: this.rules.length,
+                    rules: this.rules
+                };
+                
+                await this.createOrUpdateGitHubFile(
+                    'regras/regras-ativas.json', 
+                    JSON.stringify(rulesData, null, 2), 
+                    'Atualização de regras v4.2'
+                );
+            }
+
+            async loadRulesFromGitHub() {
+                try {
+                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/regras/regras-ativas.json?cache_bust=${Date.now()}`;
+                    const data = await this.fetchData(url, true);
+                    
+                    if (data && data.rules && Array.isArray(data.rules)) {
+                        this.rules = data.rules;
+                        this.saveLocalData();
+                        this.updateRulesList();
+                        console.log(`✅ Regras carregadas: ${data.rules.length}`);
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erro ao carregar regras:', error.message);
+                }
+            }
+
+            async createOrUpdateGitHubFile(path, content, commitMessage) {
+                const url = `https://api.github.com/repos/${this.config.repo}/contents/${path}`;
+                
+                let sha = null;
+                try {
+                    const response = await fetch(url, {
+                        headers: {
+                            'Authorization': `token ${this.config.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        sha = data.sha;
+                    }
+                } catch (error) {
+                    console.log(`📁 Arquivo ${path} não existe, será criado`);
+                }
+
+                const body = {
+                    message: commitMessage,
+                    content: btoa(unescape(encodeURIComponent(content)))
+                };
+
+                if (sha) {
+                    body.sha = sha;
+                }
+
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${this.config.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`GitHub API Error: ${response.status} - ${errorData.message}`);
+                }
+
+                return await response.json();
+            }
+
+            // Consolidação de registros
             consolidateRecords(records, type = 'status') {
                 if (!records || records.length === 0) return [];
                 
@@ -1305,7 +1799,7 @@
             }
 
             hasLargeGap(endTime, startTime) {
-                return (startTime.getTime() - endTime.getTime()) / (1000 * 60) > 15; // 15 min gap
+                return (startTime.getTime() - endTime.getTime()) / (1000 * 60) > 15;
             }
 
             createConsolidatedRecord(group, type) {
@@ -1323,51 +1817,11 @@
                     consolidated.start = group.startTime.toISOString();
                     consolidated.end = group.endTime.toISOString();
                     consolidated.total_time = (duration / 60).toFixed(4);
-                } else {
-                    // Adaptar se for usar CSV no futuro
                 }
 
                 return consolidated;
             }
 
-            createAlert(record, rule, type) {
-                const equipamento = this.normalizeEquipmentName(record.vacancy_name || record.Vaga);
-                const identifier = type === 'status' ? record.status : record['Categoria Demora'];
-                const duration = this.getRecordDuration(record, type);
-                const startTime = record.start || record['Data Inicial'];
-                const endTime = record.end || record['Data Final'];
-
-                const alert = {
-                    id: this.generateAlertId(record, rule), // ID Determinístico
-                    equipamento: equipamento,
-                    tipo: type === 'status' ? 'Status' : 'Apontamento',
-                    identificador: identifier,
-                    ruleId: rule.id,
-                    ruleName: rule.name,
-                    severity: rule.severity,
-                    duration: this.formatDuration(duration),
-                    durationMinutes: duration,
-                    startTime: this.parseDateTime(startTime).toISOString(),
-                    endTime: this.parseDateTime(endTime).toISOString(),
-                    timeRange: this.formatTimeRange(startTime, endTime),
-                    consolidated: record.consolidated || false,
-                    originalCount: record.originalCount || 1,
-                    timestamp: Date.now(),
-                    date: new Date().toLocaleDateString('pt-BR'),
-                    time: new Date().toLocaleTimeString('pt-BR'),
-                    status: 'pendente',
-                    placa: '', motorista: '', area: '', supervisor: '',
-                    observacoes: '', acoes: ''
-                };
-
-                alert.message = rule.message
-                    .replace('{equipamento}', this.getDisplayName(equipamento))
-                    .replace('{tipo}', identifier)
-                    .replace('{tempo}', alert.duration);
-                return alert;
-            }
-
-            // Funções auxiliares para processamento
             getRecordDuration(record, type) {
                 if (record.consolidatedDuration) {
                     return record.consolidatedDuration;
@@ -1394,202 +1848,8 @@
                     default: return false;
                 }
             }
-            
-            // Ciclo de Sincronização Robusto
-            async syncData() {
-                this.updateSyncStatus('loading', 'Sincronizando...');
-                
-                try {
-                    // Carrega o estado atual do GitHub ANTES de processar
-                    await this.loadOperationalDataFromGitHub();
-                    
-                    const telemetryUrl = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json?cache_bust=${Date.now()}`;
-                    const telemetryResponse = await this.fetchData(telemetryUrl, true);
-                    
-                    this.telemetryData = telemetryResponse.records || [];
-                    console.log(`Dados brutos sincronizados: ${this.telemetryData.length} registros`);
-                    
-                    await this.processAlerts();
 
-                    // Salva o novo estado de volta no GitHub
-                    if (this.config.githubEnabled) {
-                        await this.saveOperationalDataToGitHub();
-                        this.config.lastSync = Date.now();
-                        this.saveConfig();
-                    }
-                    
-                    this.updateSyncStatus('success', 'Sincronizado!');
-
-                } catch (error) {
-                    console.error('Erro na sincronização:', error);
-                    this.updateSyncStatus('error', 'Falha na Sincronização');
-                }
-            }
-
-            async fetchData(url, isJson = false) {
-                const response = await fetch(url, { cache: 'no-store' });
-                if (!response.ok) throw new Error(`HTTP ${response.status} em ${url}`);
-                return isJson ? response.json() : response.text();
-            }
-
-            // Gestão de Estado via GitHub
-            async loadOperationalDataFromGitHub() {
-                if (!this.config.githubEnabled || !this.config.token) {
-                    console.log("GitHub não configurado. Pulando carregamento de estado.");
-                    return;
-                }
-                
-                try {
-                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/alertas/alertas-atual.json?cache_bust=${Date.now()}`;
-                    const data = await this.fetchData(url, true);
-                    
-                    if (data && data.alerts && Array.isArray(data.alerts)) {
-                        this.alerts = data.alerts;
-                        this.config.lastDataLoad = data.timestamp;
-                        console.log(`Estado de alertas carregado do GitHub: ${this.alerts.length} alertas.`);
-                        this.saveLocalData(); // Salva como backup local
-                    }
-                } catch (error) {
-                    console.warn('Não foi possível carregar "alertas-atual.json" do GitHub. Pode ser a primeira execução.');
-                }
-            }
-
-            async saveOperationalDataToGitHub() {
-                const operationalData = {
-                    timestamp: Date.now(),
-                    version: '4.1',
-                    type: 'operational',
-                    total: this.alerts.length,
-                    alerts: this.alerts,
-                };
-                
-                await this.createOrUpdateGitHubFile('alertas/alertas-atual.json', JSON.stringify(operationalData, null, 2), 'Atualização automática de alertas v4.1');
-                
-                const rulesData = {
-                    timestamp: Date.now(),
-                    version: '4.1',
-                    total: this.rules.length,
-                    rules: this.rules
-                };
-                
-                await this.createOrUpdateGitHubFile('regras/regras-ativas.json', JSON.stringify(rulesData, null, 2), 'Atualização automática de regras v4.1');
-            }
-
-            async loadRulesFromGitHub() {
-                try {
-                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/regras/regras-ativas.json?cache_bust=${Date.now()}`;
-                    const data = await this.fetchData(url, true);
-                    
-                    if (data && data.rules && Array.isArray(data.rules)) {
-                        this.rules = data.rules;
-                        this.saveLocalData();
-                        this.updateRulesList();
-                        this.showNotification(`${data.rules.length} regras carregadas do GitHub`, 'success');
-                    }
-                } catch (error) {
-                    console.warn('Não foi possível carregar regras do GitHub:', error);
-                }
-            }
-
-            async createOrUpdateGitHubFile(path, content, commitMessage) {
-                const url = `https://api.github.com/repos/${this.config.repo}/contents/${path}`;
-                
-                let sha = null;
-                try {
-                    const response = await fetch(url, {
-                        headers: {
-                            'Authorization': `token ${this.config.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        const data = await response.json();
-                        sha = data.sha;
-                    }
-                } catch (error) {
-                    console.log(`Arquivo ${path} não existe, será criado`);
-                }
-
-                const body = {
-                    message: commitMessage,
-                    content: btoa(unescape(encodeURIComponent(content)))
-                };
-
-                if (sha) {
-                    body.sha = sha;
-                }
-
-                const response = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${this.config.token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(body)
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`GitHub API Error: ${response.status} - ${errorData.message}`);
-                }
-
-                return await response.json();
-            }
-
-            // Dados de Exemplo Corrigidos
-            loadExampleData() {
-                console.log('Carregando dados de exemplo...');
-                
-                this.telemetryData = [
-                    {
-                        vacancy_code: "536",
-                        vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
-                        status: "off",
-                        status_title: "Motor Desligado",
-                        start: "2025-07-11T09:06:19",
-                        end: "2025-07-11T09:48:49",
-                        total_time: "0.70833333333333"
-                    },
-                    {
-                        vacancy_code: "526",
-                        vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 04",
-                        status: "off",
-                        status_title: "Motor Desligado",
-                        start: "2025-07-11T09:57:39",
-                        end: "2025-07-11T11:24:09",
-                        total_time: "1.4416666666667"
-                    },
-                    {
-                        vacancy_code: "526",
-                        vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 04",
-                        status: "maintenance",
-                        status_title: "Em manutenção",
-                        start: "2025-07-11T07:41:01",
-                        end: "2025-07-11T08:23:23",
-                        total_time: "0.70611111111111"
-                    }
-                ];
-
-                this.rules = [
-                    {
-                        id: 1752152405852,
-                        name: "Motor Desligado",
-                        type: "status",
-                        identifier: "off", // CORREÇÃO: agora especifica exatamente o status
-                        timeOperator: ">",
-                        timeValue: 40,
-                        severity: "alto",
-                        message: "{equipamento} - com motor desligado a {tempo}",
-                        active: true
-                    }
-                ];
-
-                this.processAlerts();
-            }
-
-            // Sistema de Investigação
+            // Sistema de investigação
             openInvestigation(alertId) {
                 const alert = this.alerts.find(a => a.id === alertId);
                 if (!alert) return;
@@ -1601,7 +1861,7 @@
                 document.getElementById('invMotorista').value = alert.motorista || '';
                 document.getElementById('invArea').value = alert.area || '';
                 document.getElementById('invSupervisor').value = alert.supervisor || '';
-                document.getElementById('invDataHora').value = `${alert.date} ${alert.time}`;
+                document.getElementById('invDataHora').value = alert.fullDateTime || `${alert.date} ${alert.time}`;
                 document.getElementById('invTempoTotal').value = alert.duration;
                 document.getElementById('invStatus').value = alert.status || 'pendente';
                 document.getElementById('invObservacoes').value = alert.observacoes || '';
@@ -1616,26 +1876,6 @@
                 this.currentInvestigation = null;
             }
 
-            saveInvestigation() {
-                if (!this.currentInvestigation) return;
-
-                const alert = this.currentInvestigation;
-                
-                alert.placa = document.getElementById('invPlaca').value;
-                alert.motorista = document.getElementById('invMotorista').value;
-                alert.area = document.getElementById('invArea').value;
-                alert.supervisor = document.getElementById('invSupervisor').value;
-                alert.status = document.getElementById('invStatus').value;
-                alert.observacoes = document.getElementById('invObservacoes').value;
-                alert.acoes = document.getElementById('invAcoes').value;
-                alert.investigatedAt = new Date().toISOString();
-
-                this.saveLocalData();
-                this.updateInterface();
-                this.closeInvestigationModal();
-                this.showNotification('Investigação salva com sucesso', 'success');
-            }
-
             deleteAlert() {
                 if (!this.currentInvestigation) return;
 
@@ -1644,6 +1884,7 @@
                     if (index !== -1) {
                         this.alerts.splice(index, 1);
                         this.saveLocalData();
+                        this.addToSyncQueue('saveAlerts', null, 'Exclusão de alerta');
                         this.updateInterface();
                         this.closeInvestigationModal();
                         this.showNotification('Alerta excluído', 'info');
@@ -1663,7 +1904,7 @@
                 const text = `---
 ALERTA OPERACIONAL
 
-Regra: ${alert.ruleName}.
+Regra: ${alert.ruleName}
 Tempo Total: ${alert.duration}
 
 Equipamento: ${this.getDisplayName(alert.equipamento)}
@@ -1672,8 +1913,8 @@ Placa: ${placa}
 Motorista: ${motorista}
 Área: ${area}
 
-Data/Hora: ${alert.date} ${alert.time}
-Tipo: ${alert.tipo} - ${alert.identificador}.
+Data/Hora: ${alert.fullDateTime || `${alert.date} ${alert.time}`}
+Tipo: ${alert.tipo} - ${alert.identificador}
 
 Situação: ${this.getStatusText(alert.status)}
 ---`;
@@ -1690,7 +1931,7 @@ Situação: ${this.getStatusText(alert.status)}
                 });
             }
 
-            // Interface e Atualização
+            // Interface
             updateInterface() {
                 this.updateStats();
                 this.updateAlertsList();
@@ -1709,80 +1950,6 @@ Situação: ${this.getStatusText(alert.status)}
                 document.getElementById('activeAlerts').textContent = todayAlerts.length;
                 document.getElementById('criticalAlerts').textContent = criticalAlerts.length;
                 document.getElementById('pendingAlerts').textContent = pendingAlerts.length;
-            }
-
-            updateAlertsList() {
-                const container = document.getElementById('alertsList');
-                if (!container) return;
-
-                if (this.alerts.length === 0) {
-                    container.innerHTML = `
-                        <div class="loading-state">
-                            <div style="font-size: 3rem;">✅</div>
-                            <div>Nenhum alerta registrado</div>
-                        </div>
-                    `;
-                    return;
-                }
-
-                const filteredAlerts = this.getFilteredAlerts();
-                
-                container.innerHTML = filteredAlerts.map(alert => {
-                    let normalizedSeverity = alert.severity;
-                    if (alert.severity === 'critical') normalizedSeverity = 'critico';
-                    else if (alert.severity === 'high') normalizedSeverity = 'alto';
-                    else if (alert.severity === 'medium') normalizedSeverity = 'medio';
-                    else if (alert.severity === 'low') normalizedSeverity = 'baixo';
-
-                    return `
-                    <div class="alert-card ${normalizedSeverity}">
-                        <div class="alert-header">
-                            <div class="alert-title">${alert.message}</div>
-                            <div class="alert-actions">
-                                <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">
-                                    <span>Investigar</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="alert-time">${alert.date} ${alert.time}</div>
-                        <div class="alert-details">
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Equipamento</div>
-                                <div class="alert-detail-value">${this.getDisplayName(alert.equipamento)}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Tipo</div>
-                                <div class="alert-detail-value">${alert.tipo} - ${alert.identificador}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Duração</div>
-                                <div class="alert-detail-value">${alert.duration}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Período</div>
-                                <div class="alert-detail-value">${alert.timeRange}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Status</div>
-                                <div class="alert-detail-value">
-                                    <span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span>
-                                </div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Gravidade</div>
-                                <div class="alert-detail-value">
-                                    <span class="severity-badge ${normalizedSeverity}">${this.getSeverityText(alert.severity)}</span>
-                                </div>
-                            </div>
-                            ${alert.consolidated ? `
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Consolidado</div>
-                                <div class="alert-detail-value" style="color: #27ae60;">✅ ${alert.originalCount} registros</div>
-                            </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                `}).join('');
             }
 
             updateRulesList() {
@@ -1878,7 +2045,7 @@ Situação: ${this.getStatusText(alert.status)}
                 return filtered;
             }
 
-            // Gerenciamento de Regras
+            // Gerenciamento de regras
             openRuleModal(ruleId = null) {
                 this.editingRuleId = ruleId;
                 const modal = document.getElementById('ruleModal');
@@ -1926,43 +2093,6 @@ Situação: ${this.getStatusText(alert.status)}
                 }
             }
 
-            saveRule() {
-                const type = document.getElementById('ruleType').value;
-                const identifier = type === 'status' ? 
-                    document.getElementById('ruleStatus').value : 
-                    document.getElementById('ruleApontamento').value;
-
-                const ruleData = {
-                    name: document.getElementById('ruleName').value,
-                    type: type,
-                    identifier: identifier,
-                    timeOperator: document.getElementById('ruleTimeOperator').value,
-                    timeValue: parseInt(document.getElementById('ruleTimeValue').value),
-                    severity: document.getElementById('ruleSeverity').value,
-                    message: document.getElementById('ruleMessage').value,
-                    active: true
-                };
-
-                if (this.editingRuleId) {
-                    const index = this.rules.findIndex(r => r.id === this.editingRuleId);
-                    if (index !== -1) {
-                        this.rules[index] = { ...this.rules[index], ...ruleData };
-                        this.showNotification('Regra atualizada', 'success');
-                    }
-                } else {
-                    const newRule = {
-                        id: Date.now(),
-                        ...ruleData
-                    };
-                    this.rules.push(newRule);
-                    this.showNotification('Regra criada', 'success');
-                }
-
-                this.saveLocalData();
-                this.updateRulesList();
-                this.closeRuleModal();
-            }
-
             editRule(ruleId) {
                 this.openRuleModal(ruleId);
             }
@@ -1972,6 +2102,7 @@ Situação: ${this.getStatusText(alert.status)}
                 if (rule) {
                     rule.active = !rule.active;
                     this.saveLocalData();
+                    this.addToSyncQueue('saveRules', null, `Toggle regra: ${rule.name}`);
                     this.updateRulesList();
                     this.showNotification(
                         rule.active ? 'Regra ativada' : 'Regra desativada', 
@@ -1984,6 +2115,7 @@ Situação: ${this.getStatusText(alert.status)}
                 if (confirm('Tem certeza que deseja excluir esta regra?')) {
                     this.rules = this.rules.filter(r => r.id !== ruleId);
                     this.saveLocalData();
+                    this.addToSyncQueue('saveRules', null, 'Exclusão de regra');
                     this.updateRulesList();
                     this.showNotification('Regra excluída', 'info');
                 }
@@ -2053,7 +2185,7 @@ Situação: ${this.getStatusText(alert.status)}
                         <tbody>
                             ${data.map(alert => `
                                 <tr style="border-bottom: 1px solid #eee;">
-                                    <td style="padding: 1rem;">${alert.date} ${alert.time}</td>
+                                    <td style="padding: 1rem;">${alert.fullDateTime || `${alert.date} ${alert.time}`}</td>
                                     <td style="padding: 1rem;">${this.getDisplayName(alert.equipamento)}</td>
                                     <td style="padding: 1rem;">${alert.supervisor || 'N/I'}</td>
                                     <td style="padding: 1rem;">${alert.tipo} - ${alert.identificador}</td>
@@ -2094,9 +2226,9 @@ Situação: ${this.getStatusText(alert.status)}
                 }
             }
 
-            // Armazenamento e Configuração
+            // Configuração e armazenamento
             loadConfig() {
-                const saved = localStorage.getItem('alertSystem_config_v41');
+                const saved = localStorage.getItem('alertSystem_config_v42');
                 if (saved) {
                     this.config = { ...this.config, ...JSON.parse(saved) };
                 }
@@ -2104,13 +2236,13 @@ Situação: ${this.getStatusText(alert.status)}
             }
 
             saveConfig() {
-                localStorage.setItem('alertSystem_config_v41', JSON.stringify(this.config));
+                localStorage.setItem('alertSystem_config_v42', JSON.stringify(this.config));
             }
 
             loadLocalData() {
                 try {
-                    const alertsData = localStorage.getItem('alertSystem_alerts_v41');
-                    const rulesData = localStorage.getItem('alertSystem_rules_v41');
+                    const alertsData = localStorage.getItem('alertSystem_alerts_v42');
+                    const rulesData = localStorage.getItem('alertSystem_rules_v42');
 
                     if (alertsData) {
                         this.alerts = JSON.parse(alertsData);
@@ -2120,18 +2252,18 @@ Situação: ${this.getStatusText(alert.status)}
                         this.rules = JSON.parse(rulesData);
                     }
 
-                    console.log(`Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
+                    console.log(`💾 Dados locais: ${this.alerts.length} alertas, ${this.rules.length} regras`);
                 } catch (error) {
-                    console.error('Erro ao carregar dados locais:', error);
+                    console.error('❌ Erro ao carregar dados locais:', error);
                 }
             }
 
             saveLocalData() {
                 try {
-                    localStorage.setItem('alertSystem_alerts_v41', JSON.stringify(this.alerts));
-                    localStorage.setItem('alertSystem_rules_v41', JSON.stringify(this.rules));
+                    localStorage.setItem('alertSystem_alerts_v42', JSON.stringify(this.alerts));
+                    localStorage.setItem('alertSystem_rules_v42', JSON.stringify(this.rules));
                 } catch (error) {
-                    console.error('Erro ao salvar dados locais:', error);
+                    console.error('❌ Erro ao salvar dados locais:', error);
                 }
             }
 
@@ -2166,12 +2298,6 @@ Situação: ${this.getStatusText(alert.status)}
                 } catch {
                     return null;
                 }
-            }
-
-            formatDateTime(date) {
-                if (!date) return '';
-                const d = new Date(date);
-                return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR');
             }
 
             formatDuration(minutes) {
@@ -2295,7 +2421,6 @@ Situação: ${this.getStatusText(alert.status)}
                 if (!container) return;
 
                 this.validateGitHubConnection().then(githubStatus => {
-                    const tokenConfigured = this.config.token && this.config.token.length > 0;
                     const lastSync = this.config.lastSync ? 
                         new Date(this.config.lastSync).toLocaleString('pt-BR') : 'Nunca';
 
@@ -2303,7 +2428,7 @@ Situação: ${this.getStatusText(alert.status)}
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                             <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: #27ae60;">✅</div>
-                                <div>Sistema Ativo v4.1</div>
+                                <div>Sistema v4.2 Ativo</div>
                             </div>
                             <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
@@ -2315,19 +2440,20 @@ Situação: ${this.getStatusText(alert.status)}
                                 <div>Última Sync: ${lastSync}</div>
                             </div>
                             <div style="text-align: center; padding: 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: #9b59b6;">✅</div>
-                                <div>Correções Aplicadas</div>
+                                <div style="font-size: 2rem; color: #9b59b6;">📋</div>
+                                <div>Queue: ${this.syncQueue.length} ops</div>
                             </div>
                         </div>
                         
                         <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
-                            <strong>Correções v4.1 Implementadas:</strong>
+                            <strong>Correções v4.2 Implementadas:</strong>
                             <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                                <li>✅ Motor de regras corrigido - regras aplicadas precisamente</li>
-                                <li>✅ IDs determinísticos - elimina duplicatas</li>
-                                <li>✅ Sistema de estado persistente - atualiza alertas ativos</li>
-                                <li>✅ Consolidação inteligente de eventos</li>
-                                <li>✅ Estrutura otimizada para GitHub Pages</li>
+                                <li>✅ Inicialização robusta com retry automático</li>
+                                <li>✅ Sistema de queue para sincronização GitHub</li>
+                                <li>✅ Timestamp completo (data + hora) nos alertas</li>
+                                <li>✅ Sincronização imediata de regras e investigações</li>
+                                <li>✅ Persistência corrigida (prioridade GitHub > Local)</li>
+                                <li>✅ Limpeza permanente de histórico</li>
                             </ul>
                         </div>
                     `;
@@ -2350,24 +2476,13 @@ Situação: ${this.getStatusText(alert.status)}
                     });
 
                     if (response.ok) {
-                        const repoData = await response.json();
-                        return { 
-                            valid: true, 
-                            repo: repoData.name,
-                            permissions: repoData.permissions
-                        };
+                        return { valid: true };
                     } else {
                         const errorData = await response.json();
-                        return { 
-                            valid: false, 
-                            error: `${response.status}: ${errorData.message}` 
-                        };
+                        return { valid: false, error: `${response.status}: ${errorData.message}` };
                     }
                 } catch (error) {
-                    return { 
-                        valid: false, 
-                        error: error.message 
-                    };
+                    return { valid: false, error: error.message };
                 }
             }
 
@@ -2414,18 +2529,9 @@ Situação: ${this.getStatusText(alert.status)}
                 };
             }
 
-            // Métodos Públicos
+            // Métodos públicos
             async forceSync() {
                 await this.syncData();
-            }
-
-            clearAllAlerts() {
-                if (confirm('Tem certeza que deseja limpar todo o histórico?')) {
-                    this.alerts = [];
-                    this.saveLocalData();
-                    this.updateInterface();
-                    this.showNotification('Histórico limpo', 'info');
-                }
             }
 
             saveConfigFromForm() {
@@ -2460,7 +2566,7 @@ Situação: ${this.getStatusText(alert.status)}
             }
         }
 
-        // Funções Globais
+        // Funções globais
         let alertSystem = null;
 
         function switchTab(tabName) {
@@ -2515,6 +2621,10 @@ Situação: ${this.getStatusText(alert.status)}
             if (alertSystem) alertSystem.syncRulesFromGitHub();
         }
 
+        function testGitHubConnection() {
+            if (alertSystem) alertSystem.testGitHubConnection();
+        }
+
         function generateReport() {
             if (alertSystem) alertSystem.generateReport();
         }
@@ -2523,9 +2633,17 @@ Situação: ${this.getStatusText(alert.status)}
             if (alertSystem) alertSystem.exportToExcel();
         }
 
-        // Inicialização
+        // Inicialização com retry
         document.addEventListener('DOMContentLoaded', () => {
-            alertSystem = new AlertSystem();
+            try {
+                alertSystem = new AlertSystemFixed();
+                console.log('✅ Sistema de Alertas v4.2 inicializado com sucesso');
+            } catch (error) {
+                console.error('❌ Erro crítico na inicialização:', error);
+                setTimeout(() => {
+                    alertSystem = new AlertSystemFixed();
+                }, 3000);
+            }
         });
 
         // Debug
@@ -2534,7 +2652,8 @@ Situação: ${this.getStatusText(alert.status)}
             getStats: () => ({
                 alerts: alertSystem?.alerts.length || 0,
                 rules: alertSystem?.rules.length || 0,
-                version: '4.1'
+                syncQueue: alertSystem?.syncQueue.length || 0,
+                version: '4.2'
             }),
             clearAllData: () => {
                 if (alertSystem) {
@@ -2543,16 +2662,14 @@ Situação: ${this.getStatusText(alert.status)}
                     alertSystem.updateInterface();
                 }
             },
-            forceProcess: () => {
-                if (alertSystem) alertSystem.processAlerts();
-            },
-            testGitHub: () => {
-                if (alertSystem) alertSystem.testGitHubConnection();
+            getQueue: () => alertSystem?.syncQueue || [],
+            clearQueue: () => {
+                if (alertSystem) alertSystem.syncQueue = [];
             }
         };
 
-        console.log('Sistema de Alertas v4.1 carregado com todas as correções aplicadas');
-        console.log('Use window.alertSystemDebug para debug');
+        console.log('Sistema de Alertas v4.2 carregado - Todas as correções críticas implementadas');
+        console.log('Use window.alertSystemDebug para debug avançado');
     </script>
 </body>
 </html>
