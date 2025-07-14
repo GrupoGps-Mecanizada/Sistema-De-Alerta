@@ -21,11 +21,12 @@ window.SISTEMA_ALERTAS_CONFIG = {
     // ==============================================
     
     // URLs onde o sistema tentará buscar os apontamentos
+    // No seu config.js existente, altere para:
     APONTAMENTOS_URLS: [
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json",
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos/dados-apontamentos.json",
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.json",
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos.json"
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/csv/apontamentos.csv",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.csv",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos.csv"
     ],
     
     // URLs onde o sistema tentará buscar a telemetria
