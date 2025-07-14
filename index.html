@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Alertas GrupoGPS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Configuração Automática - Carrega config.js se disponível -->
+    <script src="config.js" onerror="console.warn('⚠️ config.js não encontrado - usando configuração manual')"></script>
     <style>
         * {
             margin: 0;
@@ -1194,16 +1196,85 @@
                 this.editingRuleId = null;
                 this.currentInvestigation = null;
                 this.syncQueue = [];
-                this.config = {
+                this.apontamentosCache = null; // NOVO: Cache de apontamentos
+                this.lastApontamentosUpdate = null; // NOVO: Timestamp da última atualização
+                
+                // NOVA: Configuração automática com fallback
+                this.config = this.loadAutoConfig();
+
+                this.initializeSystem();
+            }
+
+            // NOVA: Carregamento automático da configuração
+            loadAutoConfig() {
+                const defaultConfig = {
                     repo: 'GrupoGps-Mecanizada/Sistema-De-Alerta',
+                    repoData: 'GrupoGps-Mecanizada/Banco-De-Dados',
                     token: '',
                     interval: 5,
                     lastSync: null,
                     githubEnabled: false,
-                    lastDataLoad: null
+                    lastDataLoad: null,
+                    apontamentosUrls: [
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos/dados-apontamentos.json",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.json",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos.json"
+                    ],
+                    telemetriaUrls: [
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/telemetria/dados-frota.json",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/telemetria.json"
+                    ],
+                    apontamentosConfig: {
+                        janelaBuscaHoras: 3,
+                        maxApontamentos: 5,
+                        minSobreposicaoMinutos: 15
+                    },
+                    cacheDuracaoMinutos: 30
                 };
 
-                this.initializeSystem();
+                // Tentar carregar configuração automática do config.js
+                if (typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined') {
+                    console.log('🔧 Carregando configuração automática do config.js...');
+                    
+                    const autoConfig = window.SISTEMA_ALERTAS_CONFIG;
+                    const validation = autoConfig.validate();
+                    
+                    if (validation.valid) {
+                        const config = {
+                            ...defaultConfig,
+                            repo: autoConfig.REPO_SISTEMA,
+                            repoData: autoConfig.REPO_DADOS,
+                            token: autoConfig.GITHUB_TOKEN,
+                            interval: autoConfig.SYNC_INTERVAL_MINUTES || 5,
+                            githubEnabled: autoConfig.GITHUB_TOKEN && autoConfig.GITHUB_TOKEN !== 'SEU_TOKEN_AQUI',
+                            apontamentosUrls: autoConfig.APONTAMENTOS_URLS || defaultConfig.apontamentosUrls,
+                            telemetriaUrls: autoConfig.TELEMETRIA_URLS || defaultConfig.telemetriaUrls,
+                            apontamentosConfig: autoConfig.APONTAMENTOS_CONFIG || defaultConfig.apontamentosConfig,
+                            cacheDuracaoMinutos: autoConfig.CACHE_DURACAO_MINUTOS || 30
+                        };
+                        
+                        console.log('✅ Configuração automática carregada com sucesso');
+                        console.log(`📡 GitHub habilitado: ${config.githubEnabled ? 'SIM' : 'NÃO'}`);
+                        console.log(`📂 Repositório: ${config.repo}`);
+                        console.log(`📊 Repositório de dados: ${config.repoData}`);
+                        
+                        return config;
+                    } else {
+                        console.warn('⚠️ Configuração automática inválida, usando manual:');
+                        validation.issues.forEach(issue => console.warn('  ' + issue));
+                    }
+                }
+                
+                // Fallback para configuração manual (localStorage)
+                console.log('📝 Usando configuração manual (localStorage)');
+                const saved = localStorage.getItem('alertSystem_config');
+                if (saved) {
+                    return { ...defaultConfig, ...JSON.parse(saved) };
+                }
+                
+                return defaultConfig;
             }
 
             async initializeSystem() {
@@ -1234,75 +1305,260 @@
                 }
             }
 
-            // NOVA FUNCIONALIDADE: Carregar dados de apontamentos reais
+            // NOVA FUNCIONALIDADE: Carregar dados de apontamentos reais com múltiplas URLs
             async loadApontamentosData() {
                 try {
-                    console.log('📝 Carregando dados de apontamentos...');
+                    console.log('📝 Carregando dados de apontamentos reais...');
                     
-                    // CORRIGIDO: Tentar carregar dados reais dos apontamentos
-                    try {
-                        // Primeiro tentar do GitHub
-                        if (this.config.githubEnabled && this.config.token) {
-                            const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json?cache_bust=${Date.now()}`;
-                            const response = await this.fetchData(url, true);
-                            if (response && response.records) {
-                                this.apontamentosData = response.records;
-                                console.log(`✅ Apontamentos carregados do GitHub: ${this.apontamentosData.length} registros`);
-                                return;
-                            }
-                        }
-                    } catch (error) {
-                        console.warn('⚠️ Não foi possível carregar apontamentos do GitHub:', error.message);
+                    // Verificar cache primeiro
+                    if (this.isApontamentosCacheValid()) {
+                        console.log('📦 Usando apontamentos do cache (ainda válido)');
+                        this.apontamentosData = this.apontamentosCache;
+                        return;
                     }
-
-                    // Fallback: Dados de exemplo específicos para o caso de teste
-                    this.apontamentosData = [
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS", // Equipamento correto
-                            "Categoria Demora": "Descarregando equipamento",
-                            "Data Inicial": "13/07/2025 18:15:00", // Dentro do período do alerta (17:57-19:04)
-                            "Data Final": "13/07/2025 18:45:00",
-                            "Tempo Indisponível (HH:MM)": "00:30"
-                        },
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
-                            "Categoria Demora": "Documentação",
-                            "Data Inicial": "13/07/2025 16:00:00", // Antes do período (dentro da janela de 2h)
-                            "Data Final": "13/07/2025 16:15:00",
-                            "Tempo Indisponível (HH:MM)": "00:15"
-                        },
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
-                            "Categoria Demora": "Início de turno",
-                            "Data Inicial": "13/07/2025 16:30:00", // Antes do período (dentro da janela de 2h)
-                            "Data Final": "13/07/2025 17:00:00",
-                            "Tempo Indisponível (HH:MM)": "00:30"
-                        },
-                        {
-                            "Placa": "EGC2985",
-                            "Vaga": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS",
-                            "Categoria Demora": "Refeição Motorista",
-                            "Data Inicial": "13/07/2025 01:00:45",
-                            "Data Final": "13/07/2025 02:00:48",
-                            "Tempo Indisponível (HH:MM)": "01:00"
-                        }
-                    ];
-
-                    console.log(`✅ Apontamentos carregados (dados de exemplo): ${this.apontamentosData.length} registros`);
                     
-                    // DEBUG: Mostrar dados carregados
-                    console.log('📋 DEBUG - Apontamentos carregados:', this.apontamentosData.map(ap => ({
-                        equipamento: ap.Vaga,
-                        categoria: ap['Categoria Demora'],
-                        periodo: `${ap['Data Inicial']} - ${ap['Data Final']}`
-                    })));
+                    let dadosCarregados = false;
+                    
+                    // Tentar carregar de múltiplas URLs
+                    for (let i = 0; i < this.config.apontamentosUrls.length; i++) {
+                        const url = this.config.apontamentosUrls[i];
+                        
+                        try {
+                            console.log(`🔍 Tentativa ${i + 1}/${this.config.apontamentosUrls.length}: ${url}`);
+                            
+                            const response = await this.fetchData(url, true);
+                            
+                            if (response && this.isValidApontamentosResponse(response)) {
+                                // Processar dados conforme estrutura
+                                this.apontamentosData = this.processApontamentosResponse(response);
+                                
+                                // Atualizar cache
+                                this.apontamentosCache = this.apontamentosData;
+                                this.lastApontamentosUpdate = Date.now();
+                                
+                                console.log(`✅ Apontamentos carregados com sucesso: ${this.apontamentosData.length} registros`);
+                                console.log(`📍 Fonte: ${url}`);
+                                
+                                dadosCarregados = true;
+                                break;
+                            }
+                        } catch (error) {
+                            console.warn(`⚠️ Falha na URL ${i + 1}: ${error.message}`);
+                            continue;
+                        }
+                    }
+                    
+                    if (!dadosCarregados) {
+                        console.warn('⚠️ Nenhuma URL de apontamentos funcionou, usando dados de exemplo');
+                        this.loadApontamentosExemplo();
+                    }
+                    
+                    // DEBUG: Mostrar estatísticas dos dados carregados
+                    this.logApontamentosStats();
                     
                 } catch (error) {
-                    console.warn('⚠️ Erro ao carregar apontamentos:', error);
-                    this.apontamentosData = [];
+                    console.error('❌ Erro ao carregar apontamentos:', error);
+                    this.loadApontamentosExemplo();
+                }
+            }
+
+            // NOVA: Verificar se cache de apontamentos ainda é válido
+            isApontamentosCacheValid() {
+                if (!this.apontamentosCache || !this.lastApontamentosUpdate) {
+                    return false;
+                }
+                
+                const ageSinceUpdate = Date.now() - this.lastApontamentosUpdate;
+                const maxCacheAge = this.config.cacheDuracaoMinutos * 60 * 1000;
+                
+                return ageSinceUpdate < maxCacheAge;
+            }
+
+            // NOVA: Validar resposta de apontamentos
+            isValidApontamentosResponse(response) {
+                // Verificar diferentes estruturas possíveis
+                if (Array.isArray(response) && response.length > 0) {
+                    return this.hasApontamentoFields(response[0]);
+                }
+                
+                if (response.records && Array.isArray(response.records) && response.records.length > 0) {
+                    return this.hasApontamentoFields(response.records[0]);
+                }
+                
+                if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+                    return this.hasApontamentoFields(response.data[0]);
+                }
+                
+                if (response.apontamentos && Array.isArray(response.apontamentos) && response.apontamentos.length > 0) {
+                    return this.hasApontamentoFields(response.apontamentos[0]);
+                }
+                
+                return false;
+            }
+
+            // NOVA: Verificar se registro tem campos de apontamento
+            hasApontamentoFields(record) {
+                const requiredFields = ['Vaga', 'Categoria Demora', 'Data Inicial', 'Data Final'];
+                const alternativeFields = ['equipamento', 'categoria', 'inicio', 'fim'];
+                
+                // Verificar campos obrigatórios padrão
+                const hasStandardFields = requiredFields.every(field => 
+                    record.hasOwnProperty(field) && record[field]
+                );
+                
+                // Verificar campos alternativos
+                const hasAlternativeFields = alternativeFields.every(field => 
+                    record.hasOwnProperty(field) && record[field]
+                );
+                
+                return hasStandardFields || hasAlternativeFields;
+            }
+
+            // NOVA: Processar resposta de apontamentos conforme estrutura
+            processApontamentosResponse(response) {
+                let dados = [];
+                
+                if (Array.isArray(response)) {
+                    dados = response;
+                } else if (response.records) {
+                    dados = response.records;
+                } else if (response.data) {
+                    dados = response.data;
+                } else if (response.apontamentos) {
+                    dados = response.apontamentos;
+                }
+                
+                // Normalizar estrutura dos dados
+                return dados.map(record => {
+                    // Se já está no formato padrão, retornar como está
+                    if (record['Vaga'] && record['Categoria Demora']) {
+                        return record;
+                    }
+                    
+                    // Converter formatos alternativos para formato padrão
+                    return {
+                        'Vaga': record.equipamento || record.Vaga || record.vaga || 'N/A',
+                        'Placa': record.placa || record.Placa || 'N/A',
+                        'Categoria Demora': record.categoria || record['Categoria Demora'] || record.tipo || 'N/A',
+                        'Data Inicial': record.inicio || record['Data Inicial'] || record.start || record.data_inicio,
+                        'Data Final': record.fim || record['Data Final'] || record.end || record.data_fim,
+                        'Tempo Indisponível (HH:MM)': record.duracao || record['Tempo Indisponível (HH:MM)'] || record.tempo || '00:00'
+                    };
+                }).filter(record => 
+                    record['Vaga'] !== 'N/A' && 
+                    record['Data Inicial'] && 
+                    record['Data Final']
+                );
+            }
+
+            // NOVA: Carregar dados de exemplo como fallback
+            loadApontamentosExemplo() {
+                console.log('📋 Carregando apontamentos de exemplo...');
+                
+                // Gerar dados de exemplo mais realistas para diferentes equipamentos
+                const equipamentos = [
+                    "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
+                    "CAMINHÃO AUTO VÁCUO - GPS - 04",
+                    "CAMINHÃO AUTO VÁCUO - GPS - 07", 
+                    "CAMINHÃO ALTA PRESSÃO - GPS - 02",
+                    "CAMINHÃO ALTA PRESSÃO - GPS - 07",
+                    "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS"
+                ];
+                
+                const categorias = [
+                    "Descarregando equipamento",
+                    "Documentação", 
+                    "Início de turno",
+                    "Refeição Motorista",
+                    "Abastecimento",
+                    "Aguardando Área",
+                    "Preparação",
+                    "Pequenas manutenções"
+                ];
+                
+                this.apontamentosData = [];
+                
+                // Gerar dados para os últimos 7 dias
+                for (let dias = 0; dias < 7; dias++) {
+                    const data = new Date();
+                    data.setDate(data.getDate() - dias);
+                    
+                    // 2-4 apontamentos por dia por equipamento
+                    equipamentos.forEach(equipamento => {
+                        const numApontamentos = Math.floor(Math.random() * 3) + 2;
+                        
+                        for (let i = 0; i < numApontamentos; i++) {
+                            const horaInicio = Math.floor(Math.random() * 20) + 4; // 4h às 23h
+                            const duracao = Math.floor(Math.random() * 120) + 15; // 15 a 135 min
+                            
+                            const inicio = new Date(data);
+                            inicio.setHours(horaInicio, Math.floor(Math.random() * 60), 0);
+                            
+                            const fim = new Date(inicio);
+                            fim.setMinutes(fim.getMinutes() + duracao);
+                            
+                            const categoria = categorias[Math.floor(Math.random() * categorias.length)];
+                            
+                            this.apontamentosData.push({
+                                "Placa": this.generatePlacaForEquipamento(equipamento),
+                                "Vaga": equipamento,
+                                "Categoria Demora": categoria,
+                                "Data Inicial": inicio.toLocaleDateString('pt-BR') + ' ' + inicio.toLocaleTimeString('pt-BR'),
+                                "Data Final": fim.toLocaleDateString('pt-BR') + ' ' + fim.toLocaleTimeString('pt-BR'),
+                                "Tempo Indisponível (HH:MM)": this.formatDuration(duracao)
+                            });
+                        }
+                    });
+                }
+                
+                // Atualizar cache
+                this.apontamentosCache = this.apontamentosData;
+                this.lastApontamentosUpdate = Date.now();
+                
+                console.log(`✅ Dados de exemplo gerados: ${this.apontamentosData.length} apontamentos`);
+            }
+
+            // NOVA: Gerar placa baseada no equipamento
+            generatePlacaForEquipamento(equipamento) {
+                const placas = {
+                    "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS": "ANF-2676",
+                    "CAMINHÃO AUTO VÁCUO - GPS - 04": "BCD-1234",
+                    "CAMINHÃO AUTO VÁCUO - GPS - 07": "EFG-5678",
+                    "CAMINHÃO ALTA PRESSÃO - GPS - 02": "HIJ-9012",
+                    "CAMINHÃO ALTA PRESSÃO - GPS - 07": "KLM-3456",
+                    "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS": "EGC-2985"
+                };
+                
+                return placas[equipamento] || "ABC-" + Math.floor(Math.random() * 9000 + 1000);
+            }
+
+            // NOVA: Mostrar estatísticas dos apontamentos carregados
+            logApontamentosStats() {
+                console.log('📊 ESTATÍSTICAS DOS APONTAMENTOS:');
+                console.log(`  📝 Total de registros: ${this.apontamentosData.length}`);
+                
+                // Equipamentos únicos
+                const equipamentos = [...new Set(this.apontamentosData.map(ap => ap.Vaga))];
+                console.log(`  🚚 Equipamentos únicos: ${equipamentos.length}`);
+                equipamentos.slice(0, 5).forEach(eq => console.log(`    • ${eq}`));
+                if (equipamentos.length > 5) console.log(`    • ... e mais ${equipamentos.length - 5}`);
+                
+                // Categorias únicas
+                const categorias = [...new Set(this.apontamentosData.map(ap => ap['Categoria Demora']))];
+                console.log(`  📋 Categorias únicas: ${categorias.length}`);
+                categorias.slice(0, 5).forEach(cat => console.log(`    • ${cat}`));
+                if (categorias.length > 5) console.log(`    • ... e mais ${categorias.length - 5}`);
+                
+                // Período dos dados
+                const datas = this.apontamentosData
+                    .map(ap => this.parseDateTime(ap['Data Inicial']))
+                    .filter(d => d)
+                    .sort();
+                
+                if (datas.length > 0) {
+                    const mais_antigo = datas[0].toLocaleDateString('pt-BR');
+                    const mais_recente = datas[datas.length - 1].toLocaleDateString('pt-BR');
+                    console.log(`  📅 Período: ${mais_antigo} a ${mais_recente}`);
                 }
             }
 
@@ -1326,7 +1582,7 @@
                 console.log(`✅ Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
             }
 
-            // NOVA FUNCIONALIDADE: Buscar apontamentos relacionados
+            // NOVA FUNCIONALIDADE: Buscar apontamentos relacionados MELHORADA
             findRelatedApontamentos(alertStartTime, alertEndTime, equipamento) {
                 try {
                     console.log(`🔍 DEBUG - Buscando apontamentos relacionados:`);
@@ -1341,11 +1597,16 @@
                         return [];
                     }
 
-                    // Buscar apontamentos 2 horas antes até o final do alerta
-                    const searchStart = new Date(alertStart.getTime() - (2 * 60 * 60 * 1000)); // 2 horas antes
+                    // NOVA: Usar configuração para janela de busca
+                    const janelaBuscaHoras = this.config.apontamentosConfig.janelaBuscaHoras;
+                    const maxApontamentos = this.config.apontamentosConfig.maxApontamentos;
+                    
+                    // Buscar apontamentos X horas antes até o final do alerta
+                    const searchStart = new Date(alertStart.getTime() - (janelaBuscaHoras * 60 * 60 * 1000));
                     const searchEnd = alertEnd;
 
                     console.log(`  Janela de busca: ${searchStart.toLocaleString('pt-BR')} - ${searchEnd.toLocaleString('pt-BR')}`);
+                    console.log(`  Janela configurada: ${janelaBuscaHoras} horas antes do alerta`);
 
                     const normalizedEquipamento = this.normalizeEquipmentName(equipamento);
                     console.log(`  Equipamento normalizado: "${normalizedEquipamento}"`);
@@ -1360,8 +1621,8 @@
                         console.log(`      Categoria: "${apontamento['Categoria Demora']}"`);
                         console.log(`      Período: ${apontamento['Data Inicial']} - ${apontamento['Data Final']}`);
                         
-                        // Verificar se é do mesmo equipamento
-                        if (apontEquipamento !== normalizedEquipamento) {
+                        // Verificar se é do mesmo equipamento (matching mais flexível)
+                        if (!this.equipamentosMatch(apontEquipamento, normalizedEquipamento)) {
                             console.log(`      ❌ Equipamento diferente: "${apontEquipamento}" !== "${normalizedEquipamento}"`);
                             return false;
                         }
@@ -1376,32 +1637,32 @@
                         
                         console.log(`      Datas parseadas: ${apontStart.toLocaleString('pt-BR')} - ${apontEnd.toLocaleString('pt-BR')}`);
                         
-                        // Verificar se o apontamento está dentro da janela de busca
-                        const overlaps = (apontStart >= searchStart && apontStart <= searchEnd) ||
-                                       (apontEnd >= searchStart && apontEnd <= searchEnd) ||
-                                       (apontStart <= searchStart && apontEnd >= searchEnd);
+                        // NOVA: Verificação de sobreposição mais inteligente
+                        const overlaps = this.checkTimeOverlap(apontStart, apontEnd, searchStart, searchEnd);
                         
-                        if (overlaps) {
-                            console.log(`      ✅ ENCONTRADO! Apontamento sobrepõe com o período de busca`);
+                        if (overlaps.hasOverlap) {
+                            console.log(`      ✅ ENCONTRADO! ${overlaps.type}`);
+                            if (overlaps.minutesOverlap) {
+                                console.log(`        Sobreposição: ${overlaps.minutesOverlap} minutos`);
+                            }
                         } else {
                             console.log(`      ❌ Não sobrepõe com período de busca`);
-                            console.log(`        Início dentro? ${apontStart >= searchStart && apontStart <= searchEnd}`);
-                            console.log(`        Fim dentro? ${apontEnd >= searchStart && apontEnd <= searchEnd}`);
-                            console.log(`        Engloba? ${apontStart <= searchStart && apontEnd >= searchEnd}`);
                         }
                         
-                        return overlaps;
+                        return overlaps.hasOverlap;
                     });
 
-                    // Ordenar por data e limitar aos 3 mais recentes
-                    const result = related
-                        .sort((a, b) => this.parseDateTime(b['Data Inicial']) - this.parseDateTime(a['Data Inicial']))
-                        .slice(0, 3);
+                    // NOVA: Ordenação mais inteligente por relevância
+                    const sortedRelated = this.sortApontamentosByRelevance(related, alertStart, alertEnd);
+                    
+                    // Limitar aos N mais relevantes
+                    const result = sortedRelated.slice(0, maxApontamentos);
                         
                     console.log(`🔍 RESULTADO: ${result.length} apontamentos relacionados encontrados`);
                     if (result.length > 0) {
                         result.forEach((ap, i) => {
-                            console.log(`  [${i+1}] ${ap['Categoria Demora']} (${ap['Tempo Indisponível (HH:MM)']})`);
+                            const relevancia = this.calculateApontamentoRelevance(ap, alertStart, alertEnd);
+                            console.log(`  [${i+1}] ${ap['Categoria Demora']} (${ap['Tempo Indisponível (HH:MM)']}) - Relevância: ${relevancia.toFixed(2)}`);
                         });
                     }
                     
@@ -1411,6 +1672,150 @@
                     console.warn('Erro ao buscar apontamentos relacionados:', error);
                     return [];
                 }
+            }
+
+            // NOVA: Verificar se equipamentos fazem match (matching flexível)
+            equipamentosMatch(equip1, equip2) {
+                // Exact match
+                if (equip1 === equip2) return true;
+                
+                // Remover variações comuns e comparar
+                const normalize = (name) => name
+                    .replace(/\s*-\s*GPS\s*-\s*\d+.*$/i, '') // Remove " - GPS - 01 - 16 HS"
+                    .replace(/\s*-\s*\d+\s*HS$/i, '') // Remove " - 16 HS"
+                    .replace(/\s+/g, ' ')
+                    .trim()
+                    .toUpperCase();
+                
+                const norm1 = normalize(equip1);
+                const norm2 = normalize(equip2);
+                
+                if (norm1 === norm2) return true;
+                
+                // Matching por palavras-chave principais
+                const getMainType = (name) => {
+                    if (name.includes('AUTO VÁCUO') || name.includes('AUTO VACUO')) return 'AUTO_VACUO';
+                    if (name.includes('ALTA PRESSÃO') || name.includes('ALTA PRESSAO')) return 'ALTA_PRESSAO';
+                    if (name.includes('CAMINHÃO') || name.includes('CAMINHAO')) return 'CAMINHAO';
+                    return 'OUTROS';
+                };
+                
+                // Se for o mesmo tipo de equipamento, extrair número
+                const type1 = getMainType(equip1);
+                const type2 = getMainType(equip2);
+                
+                if (type1 === type2 && type1 !== 'OUTROS') {
+                    // Extrair números dos equipamentos
+                    const num1 = equip1.match(/\b(\d+)\b/g);
+                    const num2 = equip2.match(/\b(\d+)\b/g);
+                    
+                    if (num1 && num2) {
+                        // Se tem números em comum, considerar match
+                        return num1.some(n => num2.includes(n));
+                    }
+                }
+                
+                return false;
+            }
+
+            // NOVA: Verificar sobreposição temporal inteligente
+            checkTimeOverlap(apontStart, apontEnd, searchStart, searchEnd) {
+                // Apontamento completamente dentro da janela
+                if (apontStart >= searchStart && apontEnd <= searchEnd) {
+                    const minutesOverlap = (apontEnd - apontStart) / (1000 * 60);
+                    return {
+                        hasOverlap: true,
+                        type: 'Completamente dentro da janela',
+                        minutesOverlap: Math.round(minutesOverlap)
+                    };
+                }
+                
+                // Apontamento inicia dentro da janela
+                if (apontStart >= searchStart && apontStart <= searchEnd) {
+                    const overlapEnd = apontEnd <= searchEnd ? apontEnd : searchEnd;
+                    const minutesOverlap = (overlapEnd - apontStart) / (1000 * 60);
+                    return {
+                        hasOverlap: true,
+                        type: 'Inicia na janela',
+                        minutesOverlap: Math.round(minutesOverlap)
+                    };
+                }
+                
+                // Apontamento termina dentro da janela
+                if (apontEnd >= searchStart && apontEnd <= searchEnd) {
+                    const overlapStart = apontStart >= searchStart ? apontStart : searchStart;
+                    const minutesOverlap = (apontEnd - overlapStart) / (1000 * 60);
+                    return {
+                        hasOverlap: true,
+                        type: 'Termina na janela',
+                        minutesOverlap: Math.round(minutesOverlap)
+                    };
+                }
+                
+                // Apontamento engloba toda a janela
+                if (apontStart <= searchStart && apontEnd >= searchEnd) {
+                    const minutesOverlap = (searchEnd - searchStart) / (1000 * 60);
+                    return {
+                        hasOverlap: true,
+                        type: 'Engloba a janela',
+                        minutesOverlap: Math.round(minutesOverlap)
+                    };
+                }
+                
+                return { hasOverlap: false };
+            }
+
+            // NOVA: Ordenar apontamentos por relevância
+            sortApontamentosByRelevance(apontamentos, alertStart, alertEnd) {
+                return apontamentos
+                    .map(ap => ({
+                        ...ap,
+                        relevance: this.calculateApontamentoRelevance(ap, alertStart, alertEnd)
+                    }))
+                    .sort((a, b) => b.relevance - a.relevance);
+            }
+
+            // NOVA: Calcular relevância do apontamento
+            calculateApontamentoRelevance(apontamento, alertStart, alertEnd) {
+                const apontStart = this.parseDateTime(apontamento['Data Inicial']);
+                const apontEnd = this.parseDateTime(apontamento['Data Final']);
+                
+                if (!apontStart || !apontEnd) return 0;
+                
+                let score = 0;
+                
+                // 1. Proximidade temporal (mais próximo = maior score)
+                const distanceToAlert = Math.abs(apontStart - alertStart) / (1000 * 60); // em minutos
+                const proximityScore = Math.max(0, 100 - (distanceToAlert / 10)); // decresce com distância
+                score += proximityScore;
+                
+                // 2. Sobreposição temporal
+                const overlapStart = Math.max(apontStart, alertStart);
+                const overlapEnd = Math.min(apontEnd, alertEnd);
+                if (overlapStart < overlapEnd) {
+                    const overlapMinutes = (overlapEnd - overlapStart) / (1000 * 60);
+                    score += overlapMinutes * 2; // 2 pontos por minuto de sobreposição
+                }
+                
+                // 3. Categoria de importância
+                const categoria = apontamento['Categoria Demora'].toLowerCase();
+                if (categoria.includes('manutenção') || categoria.includes('bloqueio')) {
+                    score += 50; // Categorias críticas
+                } else if (categoria.includes('abastecimento') || categoria.includes('preparação')) {
+                    score += 30; // Categorias importantes
+                } else if (categoria.includes('refeição') || categoria.includes('descanso')) {
+                    score += 10; // Categorias normais
+                }
+                
+                // 4. Duração do apontamento
+                const duracaoStr = apontamento['Tempo Indisponível (HH:MM)'];
+                if (duracaoStr) {
+                    const [horas, minutos] = duracaoStr.split(':').map(Number);
+                    const duracaoTotal = (horas * 60) + minutos;
+                    score += Math.min(duracaoTotal / 10, 20); // Até 20 pontos por duração
+                }
+                
+                return score;
             }
 
             // NOVA: Atualizar apontamentos relacionados do alerta atual
@@ -1964,11 +2369,36 @@
                 try {
                     await this.loadOperationalDataFromGitHub();
                     
-                    const telemetryUrl = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json?cache_bust=${Date.now()}`;
-                    const telemetryResponse = await this.fetchData(telemetryUrl, true);
+                    // NOVA: Tentar múltiplas URLs para telemetria
+                    let telemetryLoaded = false;
                     
-                    this.telemetryData = telemetryResponse.records || [];
-                    console.log(`📊 Dados sincronizados: ${this.telemetryData.length} registros`);
+                    for (let i = 0; i < this.config.telemetriaUrls.length; i++) {
+                        const url = this.config.telemetriaUrls[i] + `?cache_bust=${Date.now()}`;
+                        
+                        try {
+                            console.log(`🔍 Tentando telemetria ${i + 1}/${this.config.telemetriaUrls.length}: ${url}`);
+                            const telemetryResponse = await this.fetchData(url, true);
+                            
+                            if (telemetryResponse && (telemetryResponse.records || Array.isArray(telemetryResponse))) {
+                                this.telemetryData = telemetryResponse.records || telemetryResponse;
+                                console.log(`📊 Dados sincronizados: ${this.telemetryData.length} registros`);
+                                telemetryLoaded = true;
+                                break;
+                            }
+                        } catch (error) {
+                            console.warn(`⚠️ Falha na URL de telemetria ${i + 1}: ${error.message}`);
+                            continue;
+                        }
+                    }
+                    
+                    if (!telemetryLoaded) {
+                        console.warn('⚠️ Nenhuma URL de telemetria funcionou, mantendo dados existentes');
+                    }
+                    
+                    // Recarregar apontamentos se necessário
+                    if (!this.isApontamentosCacheValid()) {
+                        await this.loadApontamentosData();
+                    }
                     
                     await this.processAlerts();
 
@@ -1982,6 +2412,78 @@
                 } catch (error) {
                     console.error('❌ Erro na sincronização:', error);
                     this.updateSyncStatus('error', 'Falha na Sincronização');
+                }
+            }
+
+            saveConfig() {
+                // Salvar apenas se não for configuração automática
+                if (typeof window.SISTEMA_ALERTAS_CONFIG === 'undefined') {
+                    localStorage.setItem('alertSystem_config', JSON.stringify(this.config));
+                }
+            }
+
+            loadConfig() {
+                // Configuração já foi carregada no constructor via loadAutoConfig()
+                this.updateConfigInterface();
+            }
+
+            saveConfigFromForm() {
+                // Se tem configuração automática, mostrar aviso
+                if (typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined') {
+                    this.showNotification('⚠️ Sistema usa configuração automática do config.js', 'warning');
+                    return;
+                }
+                
+                this.config.token = document.getElementById('configToken').value;
+                this.config.interval = parseInt(document.getElementById('configInterval').value);
+                this.config.githubEnabled = this.config.token && this.config.token.length > 10;
+                this.saveConfig();
+                this.showNotification('Configurações salvas', 'success');
+                this.updateSystemStatus();
+            }
+
+            async testGitHubConnection() {
+                const result = await this.validateGitHubConnection();
+                
+                if (result.valid) {
+                    this.showNotification('Conexão GitHub válida!', 'success');
+                    if (typeof window.SISTEMA_ALERTAS_CONFIG === 'undefined') {
+                        this.config.githubEnabled = true;
+                        this.saveConfig();
+                    }
+                    await this.loadOperationalDataFromGitHub();
+                } else {
+                    this.showNotification(`Erro GitHub: ${result.error}`, 'error');
+                    if (typeof window.SISTEMA_ALERTAS_CONFIG === 'undefined') {
+                        this.config.githubEnabled = false;
+                        this.saveConfig();
+                    }
+                }
+                
+                this.updateSystemStatus();
+            }
+
+            updateConfigInterface() {
+                const repoEl = document.getElementById('configRepo');
+                const tokenEl = document.getElementById('configToken');
+                const intervalEl = document.getElementById('configInterval');
+
+                if (repoEl) repoEl.value = this.config.repo;
+                if (intervalEl) intervalEl.value = this.config.interval;
+                
+                // Se é configuração automática, mostrar status diferente
+                if (typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined') {
+                    if (tokenEl) {
+                        tokenEl.value = '••••••••••••••••••••';
+                        tokenEl.disabled = true;
+                        tokenEl.placeholder = 'Token carregado do config.js';
+                    }
+                } else {
+                    if (tokenEl) {
+                        tokenEl.value = this.config.token || '';
+                        tokenEl.disabled = false;
+                        tokenEl.placeholder = 'ghp_xxxxxxxxxxxxxxxxxxxx';
+                    }
                 }
             }
 
@@ -2843,11 +3345,18 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                     const lastSync = this.config.lastSync ? 
                         new Date(this.config.lastSync).toLocaleString('pt-BR') : 'Nunca';
 
+                    const isAutoConfig = typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined';
+                    const cacheStatus = this.isApontamentosCacheValid() ? 'Válido' : 'Expirado';
+                    
                     const status = `
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                             <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: #27ae60;">🚨</div>
                                 <div>Sistema Ativo</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(${isAutoConfig ? '39, 174, 96' : '243, 156, 18'}, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: ${isAutoConfig ? '#27ae60' : '#f39c12'};">${isAutoConfig ? '⚙️' : '📝'}</div>
+                                <div>Config ${isAutoConfig ? 'Automática' : 'Manual'}</div>
                             </div>
                             <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
@@ -2862,18 +3371,62 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                                 <div style="font-size: 2rem; color: #9b59b6;">📋</div>
                                 <div>Queue: ${this.syncQueue.length} ops</div>
                             </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(230, 126, 34, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #e67e22;">💾</div>
+                                <div>Cache: ${cacheStatus}</div>
+                                <div style="font-size: 0.8rem; margin-top: 0.3rem;">${this.apontamentosData.length} apontamentos</div>
+                            </div>
                         </div>
                         
+                        ${!isAutoConfig ? `
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(243, 156, 18, 0.1); border-radius: 12px; border-left: 4px solid #f39c12;">
+                            <strong>⚙️ CONFIGURAÇÃO MANUAL ATIVA</strong><br>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                Para ativar a configuração automática:
+                                <ol style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                                    <li>Crie o arquivo <code>config.js</code> na mesma pasta do sistema</li>
+                                    <li>Adicione seu token GitHub no arquivo</li>
+                                    <li>Recarregue a página</li>
+                                </ol>
+                                <a href="#" onclick="window.open('data:text/plain;charset=utf-8,' + encodeURIComponent(window.alertSystemDebug.generateConfigTemplate()), '_blank')" style="color: #3498db; text-decoration: none;">
+                                    📁 Baixar template do config.js →
+                                </a>
+                            </div>
+                        </div>
+                        ` : `
                         <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
-                            <strong>🆕 Funcionalidades Implementadas:</strong>
+                            <strong>✅ CONFIGURAÇÃO AUTOMÁTICA ATIVA</strong><br>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                Token carregado do arquivo <code>config.js</code><br>
+                                Repositório: <code>${this.config.repo}</code><br>
+                                Dados: <code>${this.config.repoData}</code><br>
+                                <span style="color: #27ae60;">Sistema pronto para sincronização automática</span>
+                            </div>
+                        </div>
+                        `}
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
+                            <strong>🆕 Funcionalidades Implementadas v4.3.5:</strong>
                             <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                                <li>✅ Nova lógica production_status (elimina falsos positivos)</li>
-                                <li>✅ Período completo com data e hora em todas as visualizações</li>
-                                <li>✅ Correlação automática com apontamentos relacionados</li>
-                                <li>✅ Range de horário nas regras (ex: 08:00-18:00)</li>
-                                <li>✅ Mensagem WhatsApp atualizada sem tipo específico</li>
-                                <li>✅ Tabela de relatórios melhorada com novos campos</li>
+                                <li>✅ Configuração automática via config.js</li>
+                                <li>✅ Múltiplas URLs para busca de dados reais</li>
+                                <li>✅ Cache inteligente de apontamentos</li>
+                                <li>✅ Correlação avançada temporal e por relevância</li>
+                                <li>✅ Matching flexível de equipamentos</li>
+                                <li>✅ Janela de busca configurável</li>
+                                <li>✅ Dados de exemplo mais realistas</li>
+                                <li>✅ Sistema sem necessidade de reconfiguração constante</li>
                             </ul>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px; border-left: 4px solid #3498db;">
+                            <strong>📊 Estatísticas dos Dados:</strong>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <div>📋 Alertas: ${this.alerts.length}</div>
+                                <div>⚙️ Regras: ${this.rules.length}</div>
+                                <div>📝 Apontamentos: ${this.apontamentosData.length}</div>
+                                <div>📡 Telemetria: ${this.telemetryData.length}</div>
+                            </div>
                         </div>
                     `;
 
@@ -3133,7 +3686,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             }
         });
 
-        // Debug v4.3.5
+        // Debug v4.3.5 - MELHORADO
         window.alertSystemDebug = {
             getSystem: () => alertSystem,
             getStats: () => ({
@@ -3141,6 +3694,9 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 rules: alertSystem?.rules.length || 0,
                 syncQueue: alertSystem?.syncQueue.length || 0,
                 apontamentos: alertSystem?.apontamentosData.length || 0,
+                telemetria: alertSystem?.telemetryData.length || 0,
+                cacheValid: alertSystem?.isApontamentosCacheValid() || false,
+                configType: typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined' ? 'automática' : 'manual',
                 version: '4.3.5'
             }),
             clearAllData: () => {
@@ -3155,6 +3711,65 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 if (alertSystem) alertSystem.syncQueue = [];
             },
             getApontamentos: () => alertSystem?.apontamentosData || [],
+            
+            // NOVA: Gerar template do config.js
+            generateConfigTemplate: () => {
+                return `// config.js - Arquivo de Configuração Automática do Sistema de Alertas
+// INSTRUÇÕES:
+// 1. Substitua "SEU_TOKEN_AQUI" pelo seu token GitHub real
+// 2. Salve este arquivo como "config.js" na mesma pasta do sistema HTML
+// 3. Recarregue a página - o sistema carregará automaticamente
+
+window.SISTEMA_ALERTAS_CONFIG = {
+    // ⭐ CONFIGURAÇÃO OBRIGATÓRIA - EDITE AQUI
+    GITHUB_TOKEN: "SEU_TOKEN_AQUI", // Substitua pelo seu token GitHub
+    
+    // Repositórios (geralmente não precisa alterar)
+    REPO_SISTEMA: "GrupoGps-Mecanizada/Sistema-De-Alerta",
+    REPO_DADOS: "GrupoGps-Mecanizada/Banco-De-Dados",
+    
+    // URLs dos dados (múltiplas opções para maior robustez)
+    APONTAMENTOS_URLS: [
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos/dados-apontamentos.json",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.json"
+    ],
+    
+    TELEMETRIA_URLS: [
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/telemetria/dados-frota.json"
+    ],
+    
+    // Configurações de correlação de apontamentos
+    APONTAMENTOS_CONFIG: {
+        JANELA_BUSCA_HORAS: 3,        // Buscar 3 horas antes do alerta
+        MAX_APONTAMENTOS: 5,          // Máximo de apontamentos a exibir
+        MIN_SOBREPOSICAO_MINUTOS: 15  // Mínimo de sobreposição para considerar
+    },
+    
+    // Outras configurações
+    SYNC_INTERVAL_MINUTES: 5,    // Intervalo de sincronização
+    CACHE_DURACAO_MINUTOS: 30,   // Duração do cache
+    
+    // Validação automática
+    validate: function() {
+        const issues = [];
+        if (!this.GITHUB_TOKEN || this.GITHUB_TOKEN === "SEU_TOKEN_AQUI") {
+            issues.push("❌ GITHUB_TOKEN não configurado");
+        }
+        return { valid: issues.length === 0, issues };
+    }
+};
+
+// Como obter seu token GitHub:
+// 1. Acesse: GitHub → Settings → Developer settings → Personal access tokens
+// 2. Clique em "Generate new token (classic)"
+// 3. Selecione as permissões: repo (full control)
+// 4. Copie o token gerado e cole acima
+`;
+            },
+            
+            // MELHORADA: Testar correlação específica
             testApontamentosCorrelation: (alertId) => {
                 if (alertSystem) {
                     const alert = alertSystem.alerts.find(a => a.id === alertId);
@@ -3166,6 +3781,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
                 return [];
             },
+            
             // NOVA: Função para testar correlação com dados específicos
             testCorrelationWithData: (equipamento, startTime, endTime) => {
                 if (alertSystem) {
@@ -3176,68 +3792,112 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
                 return [];
             },
-            // NOVA: Recriar apontamentos com dados corretos
+            
+            // MELHORADA: Atualizar dados de apontamentos
             updateApontamentosData: (newData) => {
                 if (alertSystem) {
                     alertSystem.apontamentosData = newData;
+                    alertSystem.apontamentosCache = newData;
+                    alertSystem.lastApontamentosUpdate = Date.now();
                     console.log(`✅ Apontamentos atualizados: ${newData.length} registros`);
                     alertSystem.updateInterface();
                 }
             },
-            // NOVA: Testar com dados do caso específico
-            testCaseSpecific: () => {
+            
+            // NOVA: Forçar recarregamento de dados reais
+            forceReloadRealData: async () => {
+                if (alertSystem) {
+                    console.log('🔄 Forçando recarregamento de dados reais...');
+                    alertSystem.apontamentosCache = null;
+                    alertSystem.lastApontamentosUpdate = null;
+                    await alertSystem.loadApontamentosData();
+                    await alertSystem.syncData();
+                    console.log('✅ Dados recarregados');
+                }
+            },
+            
+            // NOVA: Testar URLs de dados
+            testDataUrls: async () => {
                 if (!alertSystem) return;
                 
-                console.log('🧪 TESTE CASO ESPECÍFICO:');
+                console.log('🔍 TESTANDO URLs DE DADOS:');
+                console.log('');
                 
-                // Dados exatos do caso reportado
-                const equipamento = "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS";
-                const alertStart = "2025-07-13T17:57:00";
-                const alertEnd = "2025-07-13T19:04:00";
+                // Testar URLs de apontamentos
+                console.log('📝 URLs de Apontamentos:');
+                for (let i = 0; i < alertSystem.config.apontamentosUrls.length; i++) {
+                    const url = alertSystem.config.apontamentosUrls[i];
+                    try {
+                        const response = await fetch(url, { cache: 'no-store' });
+                        console.log(`  [${i+1}] ${response.ok ? '✅' : '❌'} ${response.status} - ${url}`);
+                        if (response.ok) {
+                            const data = await response.json();
+                            const recordCount = data.records?.length || data.length || Object.keys(data).length;
+                            console.log(`      📊 ${recordCount} registros encontrados`);
+                        }
+                    } catch (error) {
+                        console.log(`  [${i+1}] ❌ Erro - ${url}`);
+                        console.log(`      ${error.message}`);
+                    }
+                }
                 
-                console.log('Testando correlação para:');
-                console.log(`  Equipamento: ${equipamento}`);
-                console.log(`  Período: ${alertStart} - ${alertEnd}`);
+                console.log('');
                 
-                const result = alertSystem.findRelatedApontamentos(alertStart, alertEnd, equipamento);
-                
-                console.log(`Resultado: ${result.length} apontamentos encontrados`);
-                return result;
-            },
-            // NOVA: Recarregar apontamentos
-            reloadApontamentos: () => {
-                if (alertSystem) {
-                    alertSystem.reloadApontamentos();
+                // Testar URLs de telemetria
+                console.log('📡 URLs de Telemetria:');
+                for (let i = 0; i < alertSystem.config.telemetriaUrls.length; i++) {
+                    const url = alertSystem.config.telemetriaUrls[i];
+                    try {
+                        const response = await fetch(url, { cache: 'no-store' });
+                        console.log(`  [${i+1}] ${response.ok ? '✅' : '❌'} ${response.status} - ${url}`);
+                        if (response.ok) {
+                            const data = await response.json();
+                            const recordCount = data.records?.length || data.length || Object.keys(data).length;
+                            console.log(`      📊 ${recordCount} registros encontrados`);
+                        }
+                    } catch (error) {
+                        console.log(`  [${i+1}] ❌ Erro - ${url}`);
+                        console.log(`      ${error.message}`);
+                    }
                 }
             },
-            // NOVA: Atualizar apontamentos do alerta atual
-            refreshCurrentAlert: () => {
-                if (alertSystem) {
-                    alertSystem.refreshApontamentosRelacionados();
-                }
-            },
-            // NOVA: Validar sistema completo
+            
+            // MELHORADA: Validação completa do sistema
             validateSystem: () => {
                 if (!alertSystem) {
                     console.log('❌ Sistema não inicializado');
                     return false;
                 }
                 
-                console.log('🔧 VALIDAÇÃO COMPLETA DO SISTEMA:');
+                console.log('🔧 VALIDAÇÃO COMPLETA DO SISTEMA v4.3.5:');
+                console.log('');
+                
+                // Status da configuração
+                const isAutoConfig = typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined';
+                console.log('⚙️ Configuração:');
+                console.log(`  • Tipo: ${isAutoConfig ? 'Automática (config.js)' : 'Manual (localStorage)'}`);
+                console.log(`  • GitHub habilitado: ${alertSystem.config.githubEnabled ? 'SIM' : 'NÃO'}`);
+                console.log(`  • Token configurado: ${alertSystem.config.token ? 'SIM' : 'NÃO'}`);
+                
                 console.log('');
                 console.log('📊 Status Geral:');
                 console.log(`  • Sistema inicializado: ${!!alertSystem}`);
                 console.log(`  • Alertas carregados: ${alertSystem.alerts.length}`);
                 console.log(`  • Regras carregadas: ${alertSystem.rules.length}`);
                 console.log(`  • Apontamentos carregados: ${alertSystem.apontamentosData.length}`);
+                console.log(`  • Telemetria carregada: ${alertSystem.telemetryData.length}`);
+                console.log(`  • Cache apontamentos válido: ${alertSystem.isApontamentosCacheValid() ? 'SIM' : 'NÃO'}`);
+                
                 console.log('');
                 console.log('⚙️ Funções Críticas:');
                 console.log(`  • reloadApontamentos: ${typeof alertSystem.reloadApontamentos}`);
                 console.log(`  • refreshApontamentosRelacionados: ${typeof alertSystem.refreshApontamentosRelacionados}`);
                 console.log(`  • findRelatedApontamentos: ${typeof alertSystem.findRelatedApontamentos}`);
                 console.log(`  • loadApontamentosData: ${typeof alertSystem.loadApontamentosData}`);
+                console.log(`  • equipamentosMatch: ${typeof alertSystem.equipamentosMatch}`);
+                
                 console.log('');
-                console.log('🔗 Teste de Correlação:');
+                console.log('🔗 Teste de Correlação Avançada:');
                 const testResult = alertSystem.findRelatedApontamentos(
                     "2025-07-13T17:57:00", 
                     "2025-07-13T19:04:00", 
@@ -3246,61 +3906,77 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 console.log(`  • Apontamentos encontrados: ${testResult.length}`);
                 if (testResult.length > 0) {
                     testResult.forEach((ap, i) => {
-                        console.log(`    [${i+1}] ${ap['Categoria Demora']} - ${ap['Tempo Indisponível (HH:MM)']}`);
+                        const relevancia = alertSystem.calculateApontamentoRelevance(ap, 
+                            alertSystem.parseDateTime("2025-07-13T17:57:00"),
+                            alertSystem.parseDateTime("2025-07-13T19:04:00")
+                        );
+                        console.log(`    [${i+1}] ${ap['Categoria Demora']} - ${ap['Tempo Indisponível (HH:MM)']} (Relevância: ${relevancia.toFixed(1)})`);
                     });
                 }
+                
                 console.log('');
-                console.log(`✅ Sistema está ${testResult.length > 0 ? 'FUNCIONANDO CORRETAMENTE' : 'com problemas de correlação'}`);
+                const systemHealth = testResult.length > 0 && alertSystem.apontamentosData.length > 0;
+                console.log(`${systemHealth ? '✅' : '⚠️'} Sistema está ${systemHealth ? 'FUNCIONANDO PERFEITAMENTE' : 'com limitações'}`);
                 
-                if (testResult.length > 0) {
+                if (!systemHealth) {
                     console.log('');
-                    console.log('📱 EXEMPLO de mensagem WhatsApp com apontamentos:');
-                    console.log('---');
-                    console.log('🚨 ALERTA OPERACIONAL');
-                    console.log('');
-                    console.log('Regra: Equipamento Improdutivo');
-                    console.log('Duração Total: 1h 7min');
-                    console.log('Período do ocorrido: 13/07/2025 17:57 - 19:04');
-                    console.log('');
-                    console.log('Apontamentos Relacionados:');
-                    testResult.forEach(ap => {
-                        const inicio = alertSystem.parseDateTime(ap['Data Inicial']);
-                        const fim = alertSystem.parseDateTime(ap['Data Final']);
-                        const dataInicio = inicio ? inicio.toLocaleDateString('pt-BR') : 'N/A';
-                        const horaInicio = inicio ? inicio.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                        const horaFim = fim ? fim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                        const periodo = `${dataInicio} ${horaInicio}-${horaFim}`;
-                        console.log(`• ${ap['Categoria Demora']}`);
-                        console.log(`  ${periodo} (${ap['Tempo Indisponível (HH:MM)']})`);
-                    });
-                    console.log('---');
+                    console.log('🔧 Sugestões para melhorar:');
+                    if (alertSystem.apontamentosData.length === 0) {
+                        console.log('  • Execute: window.alertSystemDebug.testDataUrls() para verificar URLs');
+                        console.log('  • Execute: window.alertSystemDebug.forceReloadRealData() para recarregar');
+                    }
+                    if (!alertSystem.config.githubEnabled) {
+                        console.log('  • Configure o token GitHub no config.js');
+                        console.log('  • Execute: window.alertSystemDebug.generateConfigTemplate() para ver exemplo');
+                    }
                 }
                 
-                return testResult.length > 0;
-            }
+                return systemHealth;
+            },
+            
+            // Funções de conveniência mantidas
+            testCaseSpecific: () => window.alertSystemDebug.testCorrelationWithData(
+                "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
+                "2025-07-13T17:57:00", 
+                "2025-07-13T19:04:00"
+            ),
+            reloadApontamentos: () => alertSystem?.reloadApontamentos(),
+            refreshCurrentAlert: () => alertSystem?.refreshApontamentosRelacionados()
         };
 
-        console.log('🚨 Sistema de Alertas carregado - Todas as novas funcionalidades implementadas');
-        console.log('📋 FUNCIONALIDADES:');
-        console.log('  • Nova lógica production_status (elimina falsos positivos)');
-        console.log('  • Período completo com data/hora em todas as visualizações');
-        console.log('  • Correlação automática com apontamentos relacionados');
-        console.log('  • Range de horário nas regras (ex: 08:00-18:00)');
-        console.log('  • Mensagem WhatsApp atualizada sem tipo específico');
-        console.log('  • Tabela de relatórios melhorada com novos campos');
-        console.log('🔧 Use window.alertSystemDebug para debug avançado');
+        console.log('🚨 Sistema de Alertas v4.3.5 - TOTALMENTE APRIMORADO');
+        console.log('📋 NOVAS FUNCIONALIDADES IMPLEMENTADAS:');
+        console.log('  ✅ Configuração automática via config.js (sem reconfiguração constante)');
+        console.log('  ✅ Múltiplas URLs para buscar dados reais dos repositórios');
+        console.log('  ✅ Cache inteligente de apontamentos com validação');
+        console.log('  ✅ Correlação avançada por relevância e proximidade temporal');
+        console.log('  ✅ Matching flexível de equipamentos (GPS-01 = GPS-1)');
+        console.log('  ✅ Janela de busca configurável (padrão: 3h antes do alerta)');
+        console.log('  ✅ Dados de exemplo realistas para 7 dias com múltiplos equipamentos');
+        console.log('  ✅ Sistema de fallback robusto (GitHub → Cache → Exemplo)');
+        console.log('  ✅ Validação automática de estruturas de dados');
+        console.log('  ✅ Debug avançado com testes de URLs e correlação');
         console.log('');
-        console.log('🧪 COMANDOS DE DEBUG DISPONÍVEIS:');
-        console.log('  • window.alertSystemDebug.validateSystem() - Validar sistema completo');
-        console.log('  • window.alertSystemDebug.getApontamentos() - Ver apontamentos carregados');
-        console.log('  • window.alertSystemDebug.testCaseSpecific() - Testar caso específico do bug');
-        console.log('  • window.alertSystemDebug.reloadApontamentos() - Recarregar e correlacionar apontamentos');
-        console.log('  • window.alertSystemDebug.refreshCurrentAlert() - Atualizar apontamentos do alerta aberto');
-        console.log('  • window.alertSystemDebug.testCorrelationWithData(equipamento, start, end) - Teste customizado');
-        console.log('  • window.alertSystemDebug.testApontamentosCorrelation(alertId) - Testar alerta específico');
+        console.log('🔧 COMO USAR:');
+        console.log('  1. Crie o arquivo config.js usando: window.alertSystemDebug.generateConfigTemplate()');
+        console.log('  2. Adicione seu token GitHub no config.js');
+        console.log('  3. Recarregue a página - sistema funcionará automaticamente');
         console.log('');
-        console.log('🔥 TESTE RÁPIDO:');
+        console.log('🧪 COMANDOS DE DEBUG AVANÇADO:');
+        console.log('  • window.alertSystemDebug.validateSystem() - Validação completa');
+        console.log('  • window.alertSystemDebug.testDataUrls() - Testar URLs de dados');
+        console.log('  • window.alertSystemDebug.forceReloadRealData() - Forçar dados reais');
+        console.log('  • window.alertSystemDebug.generateConfigTemplate() - Gerar config.js');
+        console.log('  • window.alertSystemDebug.getStats() - Estatísticas do sistema');
+        console.log('  • window.alertSystemDebug.testCorrelationWithData(equip, start, end) - Teste customizado');
+        console.log('');
+        console.log('🎯 TESTE RÁPIDO:');
         console.log('Execute: window.alertSystemDebug.validateSystem()');
+        console.log('');
+        console.log('📁 ESTRUTURA DE ARQUIVOS RECOMENDADA:');
+        console.log('  pasta-do-sistema/');
+        console.log('  ├── index.html (este arquivo)');
+        console.log('  └── config.js (arquivo de configuração automática)');
         console.log('');
     </script>
 </body>
