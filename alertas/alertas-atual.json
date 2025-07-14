@@ -1,16 +1,16 @@
 {
-  "timestamp": 1752454798237,
+  "timestamp": 1752454881875,
   "version": "4.3.5",
   "type": "operational",
   "total": 2,
   "alerts": [
     {
-      "id": "ouozng",
+      "id": "xwd1jh",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
       "tipo": "Status",
       "identificador": "Improdutivo (Ocioso)",
-      "ruleId": 1752454072474,
-      "ruleName": "Motor Desligado",
+      "ruleId": 1752152405852,
+      "ruleName": "Equipamento Improdutivo",
       "severity": "alto",
       "duration": "1h 7min",
       "durationMinutes": 66.5,
@@ -20,10 +20,10 @@
       "fullTimeRange": "13/07/2025 17:57 - 19:04",
       "consolidated": false,
       "originalCount": 1,
-      "timestamp": 1752454792556,
-      "fullDateTime": "13/07/2025 21:59",
+      "timestamp": 1752454878973,
+      "fullDateTime": "13/07/2025 22:01",
       "date": "13/07/2025",
-      "time": "21:59:52",
+      "time": "22:01:18",
       "status": "pendente",
       "placa": "",
       "motorista": "",
@@ -32,15 +32,15 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS - há 1h 7min com motor Desligado"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS com improdutividade há 1h 7min"
     },
     {
-      "id": "m2x340",
+      "id": "d1917z",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS",
       "tipo": "Status",
       "identificador": "Improdutivo (Ocioso)",
-      "ruleId": 1752454072474,
-      "ruleName": "Motor Desligado",
+      "ruleId": 1752152405852,
+      "ruleName": "Equipamento Improdutivo",
       "severity": "alto",
       "duration": "1h 1min",
       "durationMinutes": 60.916666666666664,
@@ -50,10 +50,10 @@
       "fullTimeRange": "13/07/2025 11:42 - 12:43",
       "consolidated": false,
       "originalCount": 1,
-      "timestamp": 1752454792545,
-      "fullDateTime": "13/07/2025 21:59",
+      "timestamp": 1752454878972,
+      "fullDateTime": "13/07/2025 22:01",
       "date": "13/07/2025",
-      "time": "21:59:52",
+      "time": "22:01:18",
       "status": "pendente",
       "placa": "",
       "motorista": "",
@@ -62,7 +62,7 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - há 1h 1min com motor Desligado"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS com improdutividade há 1h 1min"
     }
   ]
 }
