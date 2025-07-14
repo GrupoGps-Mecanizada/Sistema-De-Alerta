@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752536098272,
+  "timestamp": 1752536398271,
   "version": "4.3.5",
   "type": "operational",
   "total": 27,
   "alerts": [
     {
-      "id": "w5unac",
+      "id": "uqpsua",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 07",
       "tipo": "Status",
       "identificador": "Improdutivo (Ocioso)",
@@ -20,10 +20,10 @@
       "fullTimeRange": "14/07/2025 08:35 - 09:29",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1752536093743,
-      "fullDateTime": "14/07/2025 20:34",
+      "timestamp": 1752536393649,
+      "fullDateTime": "14/07/2025 20:39",
       "date": "14/07/2025",
-      "time": "20:34:53",
+      "time": "20:39:53",
       "status": "pendente",
       "placa": "",
       "motorista": "",
