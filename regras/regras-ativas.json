@@ -1,5 +1,5 @@
 {
-  "timestamp": 1752455152315,
+  "timestamp": 1752501586406,
   "version": "4.3.5",
   "total": 1,
   "rules": [
@@ -9,7 +9,7 @@
       "type": "improdutivo",
       "identifier": "",
       "timeOperator": ">",
-      "timeValue": 60,
+      "timeValue": 40,
       "timeStart": "07:00",
       "timeEnd": "19:00",
       "severity": "alto",
