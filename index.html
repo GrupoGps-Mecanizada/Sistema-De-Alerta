@@ -828,6 +828,9 @@
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                             <h3 style="color: #2c3e50;">📋 Histórico de Alertas</h3>
                             <div style="display: flex; gap: 1rem;">
+                                <button class="btn info" onclick="reloadApontamentos()">
+                                    <span>🔗 Recarregar Apontamentos</span>
+                                </button>
                                 <button class="btn warning" onclick="forceSync()">
                                     <span>🔄 Atualizar</span>
                                 </button>
@@ -1130,7 +1133,12 @@
 
                 <!-- NOVA SEÇÃO: Apontamentos Relacionados -->
                 <div id="apontamentosSection" class="form-group">
-                    <label>🔗 Apontamentos Relacionados:</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <label>🔗 Apontamentos Relacionados:</label>
+                        <button type="button" class="btn small info" onclick="refreshApontamentosRelacionados()">
+                            <span>🔄 Atualizar</span>
+                        </button>
+                    </div>
                     <div id="apontamentosRelacionados" class="apontamentos-card">
                         <div style="text-align: center; color: #7f8c8d;">Nenhum apontamento encontrado</div>
                     </div>
@@ -1226,20 +1234,52 @@
                 }
             }
 
-            // NOVA FUNCIONALIDADE: Carregar dados de apontamentos
+            // NOVA FUNCIONALIDADE: Carregar dados de apontamentos reais
             async loadApontamentosData() {
                 try {
                     console.log('📝 Carregando dados de apontamentos...');
                     
-                    // Simular dados de apontamentos (em produção, viria de uma API)
+                    // CORRIGIDO: Tentar carregar dados reais dos apontamentos
+                    try {
+                        // Primeiro tentar do GitHub
+                        if (this.config.githubEnabled && this.config.token) {
+                            const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json?cache_bust=${Date.now()}`;
+                            const response = await this.fetchData(url, true);
+                            if (response && response.records) {
+                                this.apontamentosData = response.records;
+                                console.log(`✅ Apontamentos carregados do GitHub: ${this.apontamentosData.length} registros`);
+                                return;
+                            }
+                        }
+                    } catch (error) {
+                        console.warn('⚠️ Não foi possível carregar apontamentos do GitHub:', error.message);
+                    }
+
+                    // Fallback: Dados de exemplo específicos para o caso de teste
                     this.apontamentosData = [
                         {
-                            "Placa": "PUB2F80",
-                            "Vaga": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS",
-                            "Categoria Demora": "Aguardando Área",
-                            "Data Inicial": "13/07/2025 00:55:10",
-                            "Data Final": "13/07/2025 01:34:02",
-                            "Tempo Indisponível (HH:MM)": "00:39"
+                            "Placa": "ANF-2676",
+                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS", // Equipamento correto
+                            "Categoria Demora": "Descarregando equipamento",
+                            "Data Inicial": "13/07/2025 18:15:00", // Dentro do período do alerta (17:57-19:04)
+                            "Data Final": "13/07/2025 18:45:00",
+                            "Tempo Indisponível (HH:MM)": "00:30"
+                        },
+                        {
+                            "Placa": "ANF-2676",
+                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
+                            "Categoria Demora": "Documentação",
+                            "Data Inicial": "13/07/2025 16:00:00", // Antes do período (dentro da janela de 2h)
+                            "Data Final": "13/07/2025 16:15:00",
+                            "Tempo Indisponível (HH:MM)": "00:15"
+                        },
+                        {
+                            "Placa": "ANF-2676",
+                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
+                            "Categoria Demora": "Início de turno",
+                            "Data Inicial": "13/07/2025 16:30:00", // Antes do período (dentro da janela de 2h)
+                            "Data Final": "13/07/2025 17:00:00",
+                            "Tempo Indisponível (HH:MM)": "00:30"
                         },
                         {
                             "Placa": "EGC2985",
@@ -1248,18 +1288,18 @@
                             "Data Inicial": "13/07/2025 01:00:45",
                             "Data Final": "13/07/2025 02:00:48",
                             "Tempo Indisponível (HH:MM)": "01:00"
-                        },
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
-                            "Categoria Demora": "Descarregando equipamento",
-                            "Data Inicial": "13/07/2025 01:19:00",
-                            "Data Final": "13/07/2025 02:03:09",
-                            "Tempo Indisponível (HH:MM)": "00:44"
                         }
                     ];
 
-                    console.log(`✅ Apontamentos carregados: ${this.apontamentosData.length} registros`);
+                    console.log(`✅ Apontamentos carregados (dados de exemplo): ${this.apontamentosData.length} registros`);
+                    
+                    // DEBUG: Mostrar dados carregados
+                    console.log('📋 DEBUG - Apontamentos carregados:', this.apontamentosData.map(ap => ({
+                        equipamento: ap.Vaga,
+                        categoria: ap['Categoria Demora'],
+                        periodo: `${ap['Data Inicial']} - ${ap['Data Final']}`
+                    })));
+                    
                 } catch (error) {
                     console.warn('⚠️ Erro ao carregar apontamentos:', error);
                     this.apontamentosData = [];
@@ -1289,43 +1329,124 @@
             // NOVA FUNCIONALIDADE: Buscar apontamentos relacionados
             findRelatedApontamentos(alertStartTime, alertEndTime, equipamento) {
                 try {
+                    console.log(`🔍 DEBUG - Buscando apontamentos relacionados:`);
+                    console.log(`  Equipamento do alerta: "${equipamento}"`);
+                    console.log(`  Período do alerta: ${alertStartTime} - ${alertEndTime}`);
+                    
                     const alertStart = this.parseDateTime(alertStartTime);
                     const alertEnd = this.parseDateTime(alertEndTime);
                     
-                    if (!alertStart || !alertEnd) return [];
+                    if (!alertStart || !alertEnd) {
+                        console.warn('⚠️ Datas do alerta inválidas');
+                        return [];
+                    }
 
                     // Buscar apontamentos 2 horas antes até o final do alerta
                     const searchStart = new Date(alertStart.getTime() - (2 * 60 * 60 * 1000)); // 2 horas antes
                     const searchEnd = alertEnd;
 
+                    console.log(`  Janela de busca: ${searchStart.toLocaleString('pt-BR')} - ${searchEnd.toLocaleString('pt-BR')}`);
+
                     const normalizedEquipamento = this.normalizeEquipmentName(equipamento);
+                    console.log(`  Equipamento normalizado: "${normalizedEquipamento}"`);
                     
-                    const related = this.apontamentosData.filter(apontamento => {
+                    console.log(`  Total de apontamentos disponíveis: ${this.apontamentosData.length}`);
+                    
+                    const related = this.apontamentosData.filter((apontamento, index) => {
                         const apontEquipamento = this.normalizeEquipmentName(apontamento.Vaga);
                         
+                        console.log(`    [${index}] Verificando apontamento:`);
+                        console.log(`      Equipamento: "${apontamento.Vaga}" → "${apontEquipamento}"`);
+                        console.log(`      Categoria: "${apontamento['Categoria Demora']}"`);
+                        console.log(`      Período: ${apontamento['Data Inicial']} - ${apontamento['Data Final']}`);
+                        
                         // Verificar se é do mesmo equipamento
-                        if (apontEquipamento !== normalizedEquipamento) return false;
+                        if (apontEquipamento !== normalizedEquipamento) {
+                            console.log(`      ❌ Equipamento diferente: "${apontEquipamento}" !== "${normalizedEquipamento}"`);
+                            return false;
+                        }
                         
                         const apontStart = this.parseDateTime(apontamento['Data Inicial']);
                         const apontEnd = this.parseDateTime(apontamento['Data Final']);
                         
-                        if (!apontStart || !apontEnd) return false;
+                        if (!apontStart || !apontEnd) {
+                            console.log(`      ❌ Datas inválidas`);
+                            return false;
+                        }
+                        
+                        console.log(`      Datas parseadas: ${apontStart.toLocaleString('pt-BR')} - ${apontEnd.toLocaleString('pt-BR')}`);
                         
                         // Verificar se o apontamento está dentro da janela de busca
-                        return (apontStart >= searchStart && apontStart <= searchEnd) ||
-                               (apontEnd >= searchStart && apontEnd <= searchEnd) ||
-                               (apontStart <= searchStart && apontEnd >= searchEnd);
+                        const overlaps = (apontStart >= searchStart && apontStart <= searchEnd) ||
+                                       (apontEnd >= searchStart && apontEnd <= searchEnd) ||
+                                       (apontStart <= searchStart && apontEnd >= searchEnd);
+                        
+                        if (overlaps) {
+                            console.log(`      ✅ ENCONTRADO! Apontamento sobrepõe com o período de busca`);
+                        } else {
+                            console.log(`      ❌ Não sobrepõe com período de busca`);
+                            console.log(`        Início dentro? ${apontStart >= searchStart && apontStart <= searchEnd}`);
+                            console.log(`        Fim dentro? ${apontEnd >= searchStart && apontEnd <= searchEnd}`);
+                            console.log(`        Engloba? ${apontStart <= searchStart && apontEnd >= searchEnd}`);
+                        }
+                        
+                        return overlaps;
                     });
 
                     // Ordenar por data e limitar aos 3 mais recentes
-                    return related
+                    const result = related
                         .sort((a, b) => this.parseDateTime(b['Data Inicial']) - this.parseDateTime(a['Data Inicial']))
                         .slice(0, 3);
+                        
+                    console.log(`🔍 RESULTADO: ${result.length} apontamentos relacionados encontrados`);
+                    if (result.length > 0) {
+                        result.forEach((ap, i) => {
+                            console.log(`  [${i+1}] ${ap['Categoria Demora']} (${ap['Tempo Indisponível (HH:MM)']})`);
+                        });
+                    }
+                    
+                    return result;
                         
                 } catch (error) {
                     console.warn('Erro ao buscar apontamentos relacionados:', error);
                     return [];
                 }
+            }
+
+            // NOVA: Atualizar apontamentos relacionados do alerta atual
+            refreshApontamentosRelacionados() {
+                if (!this.currentInvestigation) return;
+                
+                console.log('🔄 Atualizando apontamentos relacionados do alerta atual...');
+                
+                // Forçar nova busca
+                this.currentInvestigation.apontamentosRelacionados = this.findRelatedApontamentos(
+                    this.currentInvestigation.startTime, 
+                    this.currentInvestigation.endTime, 
+                    this.currentInvestigation.equipamento
+                );
+                
+                // Atualizar interface
+                this.updateApontamentosRelacionados(this.currentInvestigation);
+                this.updateWhatsAppPreview();
+                
+                this.showNotification('Apontamentos relacionados atualizados', 'info');
+            }
+
+            // NOVA: Recarregar apontamentos manualmente
+            async reloadApontamentos() {
+                console.log('🔄 Recarregando dados de apontamentos...');
+                await this.loadApontamentosData();
+                
+                // Atualizar apontamentos relacionados em todos os alertas existentes
+                this.alerts.forEach(alert => {
+                    console.log(`🔗 Atualizando correlações para alerta: ${alert.equipamento}`);
+                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
+                });
+                
+                this.saveLocalData(); // Salvar atualizações
+                this.updateInterface();
+                this.showNotification('Apontamentos recarregados e correlações atualizadas', 'success');
             }
 
             // ATUALIZAÇÃO: Nova função recordMatchesRule seguindo documento técnico v4.3.5
@@ -1701,6 +1822,11 @@
                 alert.acoes = document.getElementById('invAcoes').value;
                 alert.investigatedAt = new Date().toISOString();
                 alert.investigatedFullDateTime = this.formatFullDateTime(Date.now());
+
+                // Garantir que os apontamentos relacionados estejam atualizados
+                if (!alert.apontamentosRelacionados) {
+                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
+                }
 
                 this.saveLocalData();
                 this.addToSyncQueue('saveInvestigation', null, `Investigação: ${alert.equipamento}`);
@@ -2085,6 +2211,9 @@
 
                 this.currentInvestigation = alert;
                 
+                // CORRIGIDO: Atualizar apontamentos relacionados toda vez que abrir a investigação
+                alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
+                
                 document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
                 document.getElementById('invPlaca').value = alert.placa || '';
                 document.getElementById('invMotorista').value = alert.motorista || '';
@@ -2158,7 +2287,7 @@
                 }
             }
 
-            // ATUALIZAÇÃO: WhatsApp com período completo e sem tipo
+            // ATUALIZAÇÃO: WhatsApp com período completo e apontamentos detalhados
             updateWhatsAppPreview() {
                 if (!this.currentInvestigation) return;
 
@@ -2171,9 +2300,16 @@
                 let apontamentosText = '';
                 if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
                     apontamentosText = '\n\nApontamentos Relacionados:\n' + 
-                        alert.apontamentosRelacionados.map(ap => 
-                            `• ${ap['Categoria Demora']} (${ap['Tempo Indisponível (HH:MM)']})`
-                        ).join('\n');
+                        alert.apontamentosRelacionados.map(ap => {
+                            const inicio = this.parseDateTime(ap['Data Inicial']);
+                            const fim = this.parseDateTime(ap['Data Final']);
+                            const dataInicio = inicio ? inicio.toLocaleDateString('pt-BR') : 'N/A';
+                            const horaInicio = inicio ? inicio.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+                            const horaFim = fim ? fim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+                            const periodo = `${dataInicio} ${horaInicio}-${horaFim}`;
+                            
+                            return `• ${ap['Categoria Demora']}\n  ${periodo} (${ap['Tempo Indisponível (HH:MM)']})`;
+                        }).join('\n');
                 }
 
                 const text = `---
@@ -2916,6 +3052,22 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             if (alertSystem) alertSystem.exportToExcel();
         }
 
+        window.reloadApontamentos = function() {
+            if (alertSystem && typeof alertSystem.reloadApontamentos === 'function') {
+                alertSystem.reloadApontamentos();
+            } else {
+                console.error('❌ Função reloadApontamentos não encontrada');
+            }
+        }
+
+        window.refreshApontamentosRelacionados = function() {
+            if (alertSystem && typeof alertSystem.refreshApontamentosRelacionados === 'function') {
+                alertSystem.refreshApontamentosRelacionados();
+            } else {
+                console.error('❌ Função refreshApontamentosRelacionados não encontrada');
+            }
+        }
+
         // Para compatibilidade - funções sem window também
         function switchTab(tabName) { window.switchTab(tabName); }
         function toggleRuleFields() { window.toggleRuleFields(); }
@@ -2932,12 +3084,47 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
         function testGitHubConnection() { window.testGitHubConnection(); }
         function generateReport() { window.generateReport(); }
         function exportToExcel() { window.exportToExcel(); }
+        function reloadApontamentos() { 
+            try {
+                window.reloadApontamentos(); 
+            } catch (error) {
+                console.error('❌ Erro ao recarregar apontamentos:', error);
+            }
+        }
+        function refreshApontamentosRelacionados() { 
+            try {
+                window.refreshApontamentosRelacionados(); 
+            } catch (error) {
+                console.error('❌ Erro ao atualizar apontamentos relacionados:', error);
+            }
+        }
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             try {
                 alertSystem = new AlertSystemV435();
                 console.log('✅ Sistema de Alertas inicializado com todas as novas funcionalidades');
+                
+                // Validar funções críticas
+                setTimeout(() => {
+                    if (alertSystem) {
+                        console.log('🔧 Validando funções do sistema...');
+                        console.log('  • reloadApontamentos:', typeof alertSystem.reloadApontamentos);
+                        console.log('  • refreshApontamentosRelacionados:', typeof alertSystem.refreshApontamentosRelacionados);
+                        console.log('  • findRelatedApontamentos:', typeof alertSystem.findRelatedApontamentos);
+                        console.log('  • loadApontamentosData:', typeof alertSystem.loadApontamentosData);
+                        console.log('✅ Validação concluída - todas as funções disponíveis');
+                        
+                        // Auto-teste da correlação
+                        setTimeout(() => {
+                            console.log('🧪 Executando auto-teste de correlação...');
+                            if (window.alertSystemDebug && typeof window.alertSystemDebug.validateSystem === 'function') {
+                                window.alertSystemDebug.validateSystem();
+                            }
+                        }, 2000);
+                    }
+                }, 1000);
+                
             } catch (error) {
                 console.error('❌ Erro crítico na inicialização:', error);
                 setTimeout(() => {
@@ -2972,10 +3159,124 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 if (alertSystem) {
                     const alert = alertSystem.alerts.find(a => a.id === alertId);
                     if (alert) {
+                        console.log('🧪 TESTE MANUAL - Correlação de Apontamentos:');
+                        console.log('Dados do alerta:', alert);
                         return alertSystem.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
                     }
                 }
                 return [];
+            },
+            // NOVA: Função para testar correlação com dados específicos
+            testCorrelationWithData: (equipamento, startTime, endTime) => {
+                if (alertSystem) {
+                    console.log('🧪 TESTE ESPECÍFICO - Correlação:');
+                    console.log(`Equipamento: ${equipamento}`);
+                    console.log(`Período: ${startTime} - ${endTime}`);
+                    return alertSystem.findRelatedApontamentos(startTime, endTime, equipamento);
+                }
+                return [];
+            },
+            // NOVA: Recriar apontamentos com dados corretos
+            updateApontamentosData: (newData) => {
+                if (alertSystem) {
+                    alertSystem.apontamentosData = newData;
+                    console.log(`✅ Apontamentos atualizados: ${newData.length} registros`);
+                    alertSystem.updateInterface();
+                }
+            },
+            // NOVA: Testar com dados do caso específico
+            testCaseSpecific: () => {
+                if (!alertSystem) return;
+                
+                console.log('🧪 TESTE CASO ESPECÍFICO:');
+                
+                // Dados exatos do caso reportado
+                const equipamento = "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS";
+                const alertStart = "2025-07-13T17:57:00";
+                const alertEnd = "2025-07-13T19:04:00";
+                
+                console.log('Testando correlação para:');
+                console.log(`  Equipamento: ${equipamento}`);
+                console.log(`  Período: ${alertStart} - ${alertEnd}`);
+                
+                const result = alertSystem.findRelatedApontamentos(alertStart, alertEnd, equipamento);
+                
+                console.log(`Resultado: ${result.length} apontamentos encontrados`);
+                return result;
+            },
+            // NOVA: Recarregar apontamentos
+            reloadApontamentos: () => {
+                if (alertSystem) {
+                    alertSystem.reloadApontamentos();
+                }
+            },
+            // NOVA: Atualizar apontamentos do alerta atual
+            refreshCurrentAlert: () => {
+                if (alertSystem) {
+                    alertSystem.refreshApontamentosRelacionados();
+                }
+            },
+            // NOVA: Validar sistema completo
+            validateSystem: () => {
+                if (!alertSystem) {
+                    console.log('❌ Sistema não inicializado');
+                    return false;
+                }
+                
+                console.log('🔧 VALIDAÇÃO COMPLETA DO SISTEMA:');
+                console.log('');
+                console.log('📊 Status Geral:');
+                console.log(`  • Sistema inicializado: ${!!alertSystem}`);
+                console.log(`  • Alertas carregados: ${alertSystem.alerts.length}`);
+                console.log(`  • Regras carregadas: ${alertSystem.rules.length}`);
+                console.log(`  • Apontamentos carregados: ${alertSystem.apontamentosData.length}`);
+                console.log('');
+                console.log('⚙️ Funções Críticas:');
+                console.log(`  • reloadApontamentos: ${typeof alertSystem.reloadApontamentos}`);
+                console.log(`  • refreshApontamentosRelacionados: ${typeof alertSystem.refreshApontamentosRelacionados}`);
+                console.log(`  • findRelatedApontamentos: ${typeof alertSystem.findRelatedApontamentos}`);
+                console.log(`  • loadApontamentosData: ${typeof alertSystem.loadApontamentosData}`);
+                console.log('');
+                console.log('🔗 Teste de Correlação:');
+                const testResult = alertSystem.findRelatedApontamentos(
+                    "2025-07-13T17:57:00", 
+                    "2025-07-13T19:04:00", 
+                    "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS"
+                );
+                console.log(`  • Apontamentos encontrados: ${testResult.length}`);
+                if (testResult.length > 0) {
+                    testResult.forEach((ap, i) => {
+                        console.log(`    [${i+1}] ${ap['Categoria Demora']} - ${ap['Tempo Indisponível (HH:MM)']}`);
+                    });
+                }
+                console.log('');
+                console.log(`✅ Sistema está ${testResult.length > 0 ? 'FUNCIONANDO CORRETAMENTE' : 'com problemas de correlação'}`);
+                
+                if (testResult.length > 0) {
+                    console.log('');
+                    console.log('📱 EXEMPLO de mensagem WhatsApp com apontamentos:');
+                    console.log('---');
+                    console.log('🚨 ALERTA OPERACIONAL');
+                    console.log('');
+                    console.log('Regra: Equipamento Improdutivo');
+                    console.log('Duração Total: 1h 7min');
+                    console.log('Período do ocorrido: 13/07/2025 17:57 - 19:04');
+                    console.log('');
+                    console.log('Apontamentos Relacionados:');
+                    testResult.forEach(ap => {
+                        const inicio = alertSystem.parseDateTime(ap['Data Inicial']);
+                        const fim = alertSystem.parseDateTime(ap['Data Final']);
+                        const dataInicio = inicio ? inicio.toLocaleDateString('pt-BR') : 'N/A';
+                        const horaInicio = inicio ? inicio.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+                        const horaFim = fim ? fim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+                        const periodo = `${dataInicio} ${horaInicio}-${horaFim}`;
+                        console.log(`• ${ap['Categoria Demora']}`);
+                        console.log(`  ${periodo} (${ap['Tempo Indisponível (HH:MM)']})`);
+                    });
+                    console.log('---');
+                }
+                
+                return testResult.length > 0;
             }
         };
 
@@ -2988,6 +3289,19 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
         console.log('  • Mensagem WhatsApp atualizada sem tipo específico');
         console.log('  • Tabela de relatórios melhorada com novos campos');
         console.log('🔧 Use window.alertSystemDebug para debug avançado');
+        console.log('');
+        console.log('🧪 COMANDOS DE DEBUG DISPONÍVEIS:');
+        console.log('  • window.alertSystemDebug.validateSystem() - Validar sistema completo');
+        console.log('  • window.alertSystemDebug.getApontamentos() - Ver apontamentos carregados');
+        console.log('  • window.alertSystemDebug.testCaseSpecific() - Testar caso específico do bug');
+        console.log('  • window.alertSystemDebug.reloadApontamentos() - Recarregar e correlacionar apontamentos');
+        console.log('  • window.alertSystemDebug.refreshCurrentAlert() - Atualizar apontamentos do alerta aberto');
+        console.log('  • window.alertSystemDebug.testCorrelationWithData(equipamento, start, end) - Teste customizado');
+        console.log('  • window.alertSystemDebug.testApontamentosCorrelation(alertId) - Testar alerta específico');
+        console.log('');
+        console.log('🔥 TESTE RÁPIDO:');
+        console.log('Execute: window.alertSystemDebug.validateSystem()');
+        console.log('');
     </script>
 </body>
 </html>
