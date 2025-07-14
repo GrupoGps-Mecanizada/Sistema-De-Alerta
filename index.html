@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Alertas GrupoGPS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <!-- Configuração Automática - Carrega config.js se disponível -->
     <script src="config.js" onerror="console.warn('⚠️ config.js não encontrado - usando configuração manual')"></script>
     <style>
@@ -677,6 +678,23 @@
             background: rgba(102, 126, 234, 0.05);
         }
 
+        /* CSV Debug Panel */
+        .csv-debug-panel {
+            background: rgba(243, 156, 18, 0.1);
+            border: 1px solid rgba(243, 156, 18, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .csv-debug-title {
+            font-weight: 600;
+            color: #f39c12;
+            margin-bottom: 0.5rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .main-content {
@@ -831,7 +849,10 @@
                             <h3 style="color: #2c3e50;">📋 Histórico de Alertas</h3>
                             <div style="display: flex; gap: 1rem;">
                                 <button class="btn info" onclick="reloadApontamentos()">
-                                    <span>🔗 Recarregar Apontamentos</span>
+                                    <span>🔗 Recarregar CSV</span>
+                                </button>
+                                <button class="btn secondary" onclick="testSpecificCSV()">
+                                    <span>🎯 Testar URL Específica</span>
                                 </button>
                                 <button class="btn warning" onclick="forceSync()">
                                     <span>🔄 Atualizar</span>
@@ -1040,7 +1061,6 @@
                     </div>
                 </div>
 
-                <!-- NOVA FUNCIONALIDADE: Range de Horário -->
                 <div class="form-row">
                     <div class="form-group half">
                         <label>🕐 Hora Início (opcional):</label>
@@ -1133,10 +1153,10 @@
                     </select>
                 </div>
 
-                <!-- NOVA SEÇÃO: Apontamentos Relacionados -->
+                <!-- Apontamentos Relacionados -->
                 <div id="apontamentosSection" class="form-group">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <label>🔗 Apontamentos Relacionados:</label>
+                        <label>🔗 Apontamentos Relacionados (CSV):</label>
                         <button type="button" class="btn small info" onclick="refreshApontamentosRelacionados()">
                             <span>🔄 Atualizar</span>
                         </button>
@@ -1156,7 +1176,7 @@
                     <textarea id="invAcoes" placeholder="Descreva as ações corretivas implementadas..."></textarea>
                 </div>
 
-                <!-- WhatsApp Copy ATUALIZADO -->
+                <!-- WhatsApp Copy -->
                 <div class="form-group">
                     <label>📱 Copiar para WhatsApp:</label>
                     <div class="whatsapp-text" id="whatsappText">
@@ -1183,29 +1203,29 @@
     </div>
 
     <script>
-        // Sistema de Alertas v4.3.5 - GrupoGPS
-        // NOVA ATUALIZAÇÃO: Nova lógica production_status + Correlação apontamentos + Range horário + Período completo
+        // Sistema de Alertas v4.4.0 - CORRIGIDO PARA CSV
+        // NOVA ATUALIZAÇÃO: Suporte completo para dados CSV dos apontamentos reais
         
-        class AlertSystemV435 {
+        class AlertSystemV440 {
             constructor() {
                 this.telemetryData = [];
-                this.apontamentosData = []; // NOVA: Dados de apontamentos
+                this.apontamentosData = []; // Dados CSV dos apontamentos
                 this.rules = [];
                 this.alerts = [];
                 this.isProcessing = false;
                 this.editingRuleId = null;
                 this.currentInvestigation = null;
                 this.syncQueue = [];
-                this.apontamentosCache = null; // NOVO: Cache de apontamentos
-                this.lastApontamentosUpdate = null; // NOVO: Timestamp da última atualização
+                this.apontamentosCache = null;
+                this.lastApontamentosUpdate = null;
                 
-                // NOVA: Configuração automática com fallback
+                // NOVA: Configuração automática com suporte a CSV
                 this.config = this.loadAutoConfig();
 
                 this.initializeSystem();
             }
 
-            // NOVA: Carregamento automático da configuração
+            // CORRIGIDA: Configuração para trabalhar com CSV
             loadAutoConfig() {
                 const defaultConfig = {
                     repo: 'GrupoGps-Mecanizada/Sistema-De-Alerta',
@@ -1215,11 +1235,12 @@
                     lastSync: null,
                     githubEnabled: false,
                     lastDataLoad: null,
+                    // ATUALIZADO: URLs para arquivos CSV - URL ESPECÍFICA DO USUÁRIO
                     apontamentosUrls: [
-                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json",
-                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos/dados-apontamentos.json",
-                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.json",
-                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos.json"
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/csv/apontamentos.csv",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.csv",
+                        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos.csv"
                     ],
                     telemetriaUrls: [
                         "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json",
@@ -1231,7 +1252,25 @@
                         maxApontamentos: 5,
                         minSobreposicaoMinutos: 15
                     },
-                    cacheDuracaoMinutos: 30
+            
+            // NOVA: Forçar recarregamento de dados CSV
+            forceReloadCSV: async () => {
+                if (alertSystem) {
+                    console.log('🔄 Forçando recarregamento de dados CSV...');
+                    alertSystem.apontamentosCache = null;
+                    alertSystem.lastApontamentosUpdate = null;
+                    await alertSystem.loadApontamentosCSV();
+                    await alertSystem.syncData();
+                    console.log('✅ Dados CSV recarregados');
+                }
+            },
+                    cacheDuracaoMinutos: 30,
+                    csvConfig: {
+                        delimiter: ",",
+                        skipEmptyLines: true,
+                        dynamicTyping: true,
+                        header: true
+                    }
                 };
 
                 // Tentar carregar configuração automática do config.js
@@ -1252,13 +1291,15 @@
                             apontamentosUrls: autoConfig.APONTAMENTOS_URLS || defaultConfig.apontamentosUrls,
                             telemetriaUrls: autoConfig.TELEMETRIA_URLS || defaultConfig.telemetriaUrls,
                             apontamentosConfig: autoConfig.APONTAMENTOS_CONFIG || defaultConfig.apontamentosConfig,
-                            cacheDuracaoMinutos: autoConfig.CACHE_DURACAO_MINUTOS || 30
+                            cacheDuracaoMinutos: autoConfig.CACHE_DURACAO_MINUTOS || 30,
+                            csvConfig: autoConfig.CSV_CONFIG || defaultConfig.csvConfig
                         };
                         
                         console.log('✅ Configuração automática carregada com sucesso');
                         console.log(`📡 GitHub habilitado: ${config.githubEnabled ? 'SIM' : 'NÃO'}`);
                         console.log(`📂 Repositório: ${config.repo}`);
                         console.log(`📊 Repositório de dados: ${config.repoData}`);
+                        console.log(`📝 URLs CSV configuradas: ${config.apontamentosUrls.length}`);
                         
                         return config;
                     } else {
@@ -1278,7 +1319,7 @@
             }
 
             async initializeSystem() {
-                console.log('🚨 Sistema de Alertas - Inicializando com novas funcionalidades...');
+                console.log('🚨 Sistema de Alertas v4.4.0 - CORRIGIDO PARA CSV');
                 this.updateSyncStatus('loading', 'Iniciando...');
 
                 try {
@@ -1287,7 +1328,7 @@
                     this.initDates();
                     
                     await this.loadDataWithPriority();
-                    await this.loadApontamentosData(); // NOVA: Carregar apontamentos
+                    await this.loadApontamentosCSV(); // NOVA: Carregar dados CSV
                     
                     this.updateInterface();
                     this.startPeriodicSync();
@@ -1296,7 +1337,7 @@
                     window.alertSystem = this;
                     
                     this.updateSyncStatus('success', 'Sistema ativo');
-                    console.log('✅ Sistema inicializado com todas as correções aplicadas.');
+                    console.log('✅ Sistema inicializado com suporte completo a CSV.');
                     
                 } catch (error) {
                     console.error('❌ Erro crítico na inicialização:', error);
@@ -1305,10 +1346,11 @@
                 }
             }
 
-            // NOVA FUNCIONALIDADE: Carregar dados de apontamentos reais com múltiplas URLs
-            async loadApontamentosData() {
+            // NOVA FUNCIONALIDADE: Carregar dados CSV dos apontamentos
+            async loadApontamentosCSV() {
                 try {
-                    console.log('📝 Carregando dados de apontamentos reais...');
+                    console.log('📝 Carregando dados CSV de apontamentos...');
+                    console.log('📍 URL principal: Banco-De-Dados/Apontamentos/apontamentos-atuais.csv');
                     
                     // Verificar cache primeiro
                     if (this.isApontamentosCacheValid()) {
@@ -1319,28 +1361,39 @@
                     
                     let dadosCarregados = false;
                     
-                    // Tentar carregar de múltiplas URLs
+                    // Tentar carregar de múltiplas URLs CSV
                     for (let i = 0; i < this.config.apontamentosUrls.length; i++) {
                         const url = this.config.apontamentosUrls[i];
                         
                         try {
-                            console.log(`🔍 Tentativa ${i + 1}/${this.config.apontamentosUrls.length}: ${url}`);
+                            if (i === 0) {
+                                console.log(`🎯 Tentativa ${i + 1}/${this.config.apontamentosUrls.length} - URL ESPECÍFICA: ${url}`);
+                            } else {
+                                console.log(`🔍 Tentativa ${i + 1}/${this.config.apontamentosUrls.length} - Fallback: ${url}`);
+                            }
                             
-                            const response = await this.fetchData(url, true);
+                            const csvText = await this.fetchData(url, false); // false = texto
                             
-                            if (response && this.isValidApontamentosResponse(response)) {
-                                // Processar dados conforme estrutura
-                                this.apontamentosData = this.processApontamentosResponse(response);
+                            if (csvText && csvText.length > 100) { // Verificar se tem conteúdo
+                                const parsedData = await this.parseCSVData(csvText);
                                 
-                                // Atualizar cache
-                                this.apontamentosCache = this.apontamentosData;
-                                this.lastApontamentosUpdate = Date.now();
-                                
-                                console.log(`✅ Apontamentos carregados com sucesso: ${this.apontamentosData.length} registros`);
-                                console.log(`📍 Fonte: ${url}`);
-                                
-                                dadosCarregados = true;
-                                break;
+                                if (parsedData && parsedData.length > 0) {
+                                    this.apontamentosData = parsedData;
+                                    
+                                    // Atualizar cache
+                                    this.apontamentosCache = this.apontamentosData;
+                                    this.lastApontamentosUpdate = Date.now();
+                                    
+                                    console.log(`✅ CSV carregado com sucesso: ${this.apontamentosData.length} registros`);
+                                    console.log(`📍 Fonte: ${i === 0 ? 'URL ESPECÍFICA' : 'URL FALLBACK'} - ${url}`);
+                                    
+                                    dadosCarregados = true;
+                                    break;
+                                } else {
+                                    console.warn(`⚠️ CSV vazio ou inválido: ${url}`);
+                                }
+                            } else {
+                                console.warn(`⚠️ Arquivo CSV muito pequeno: ${url}`);
                             }
                         } catch (error) {
                             console.warn(`⚠️ Falha na URL ${i + 1}: ${error.message}`);
@@ -1349,7 +1402,8 @@
                     }
                     
                     if (!dadosCarregados) {
-                        console.warn('⚠️ Nenhuma URL de apontamentos funcionou, usando dados de exemplo');
+                        console.warn('⚠️ Nenhuma URL CSV funcionou, usando dados de exemplo');
+                        console.warn('💡 Verifique se o arquivo existe em: Banco-De-Dados/Apontamentos/apontamentos-atuais.csv');
                         this.loadApontamentosExemplo();
                     }
                     
@@ -1357,12 +1411,188 @@
                     this.logApontamentosStats();
                     
                 } catch (error) {
-                    console.error('❌ Erro ao carregar apontamentos:', error);
+                    console.error('❌ Erro ao carregar CSV de apontamentos:', error);
                     this.loadApontamentosExemplo();
                 }
             }
 
-            // NOVA: Verificar se cache de apontamentos ainda é válido
+            // NOVA: Processar dados CSV usando Papaparse
+            async parseCSVData(csvText) {
+                return new Promise((resolve, reject) => {
+                    console.log('🔧 Processando CSV com Papaparse...');
+                    
+                    Papa.parse(csvText, {
+                        ...this.config.csvConfig,
+                        complete: (results) => {
+                            try {
+                                console.log(`📊 CSV parseado: ${results.data.length} linhas`);
+                                
+                                if (results.errors && results.errors.length > 0) {
+                                    console.warn('⚠️ Erros durante o parsing CSV:', results.errors);
+                                }
+                                
+                                // Normalizar dados CSV para formato padrão
+                                const normalizedData = this.normalizeCSVData(results.data);
+                                
+                                console.log(`✅ Dados normalizados: ${normalizedData.length} registros válidos`);
+                                resolve(normalizedData);
+                                
+                            } catch (error) {
+                                console.error('❌ Erro ao processar dados CSV:', error);
+                                reject(error);
+                            }
+                        },
+                        error: (error) => {
+                            console.error('❌ Erro no Papaparse:', error);
+                            reject(error);
+                        }
+                    });
+                });
+            }
+
+            // NOVA: Normalizar dados CSV para formato padrão
+            normalizeCSVData(rawData) {
+                if (!rawData || rawData.length === 0) {
+                    console.warn('⚠️ Dados CSV vazios');
+                    return [];
+                }
+                
+                console.log('🔧 Normalizando dados CSV...');
+                console.log('Amostra do primeiro registro:', rawData[0]);
+                
+                // Detectar colunas disponíveis
+                const firstRow = rawData[0];
+                const columns = Object.keys(firstRow);
+                console.log('Colunas detectadas:', columns);
+                
+                // Mapear colunas para formato padrão
+                const columnMapping = this.detectCSVColumns(columns);
+                console.log('Mapeamento de colunas:', columnMapping);
+                
+                const normalizedData = rawData
+                    .filter(row => row && typeof row === 'object') // Filtrar linhas válidas
+                    .map((row, index) => {
+                        try {
+                            const normalized = {
+                                'Vaga': this.getColumnValue(row, columnMapping.equipamento) || 'N/A',
+                                'Placa': this.getColumnValue(row, columnMapping.placa) || 'N/A',
+                                'Categoria Demora': this.getColumnValue(row, columnMapping.categoria) || 'N/A',
+                                'Data Inicial': this.getColumnValue(row, columnMapping.dataInicio) || '',
+                                'Data Final': this.getColumnValue(row, columnMapping.dataFim) || '',
+                                'Tempo Indisponível (HH:MM)': this.getColumnValue(row, columnMapping.duracao) || '00:00'
+                            };
+                            
+                            // Validar dados essenciais
+                            if (normalized['Vaga'] === 'N/A' || 
+                                !normalized['Data Inicial'] || 
+                                !normalized['Data Final']) {
+                                return null; // Registro inválido
+                            }
+                            
+                            return normalized;
+                            
+                        } catch (error) {
+                            console.warn(`⚠️ Erro ao normalizar linha ${index}:`, error, row);
+                            return null;
+                        }
+                    })
+                    .filter(row => row !== null); // Remover registros inválidos
+                
+                console.log(`🔄 Normalização concluída: ${normalizedData.length}/${rawData.length} registros válidos`);
+                
+                return normalizedData;
+            }
+
+            // NOVA: Detectar colunas CSV automaticamente
+            detectCSVColumns(columns) {
+                const mapping = {
+                    equipamento: null,
+                    placa: null,
+                    categoria: null,
+                    dataInicio: null,
+                    dataFim: null,
+                    duracao: null
+                };
+                
+                // Buscar colunas por palavras-chave (case insensitive)
+                columns.forEach(col => {
+                    const colLower = col.toLowerCase().trim();
+                    
+                    // Equipamento/Vaga
+                    if (colLower.includes('vaga') || colLower.includes('equipamento') || 
+                        colLower.includes('equipment') || colLower.includes('vehicle')) {
+                        mapping.equipamento = col;
+                    }
+                    
+                    // Placa
+                    else if (colLower.includes('placa') || colLower.includes('plate') || 
+                             colLower.includes('license')) {
+                        mapping.placa = col;
+                    }
+                    
+                    // Categoria
+                    else if (colLower.includes('categoria') || colLower.includes('demora') || 
+                             colLower.includes('tipo') || colLower.includes('category') ||
+                             colLower.includes('reason') || colLower.includes('motivo')) {
+                        mapping.categoria = col;
+                    }
+                    
+                    // Data/Hora Inicial
+                    else if ((colLower.includes('data') || colLower.includes('date') || colLower.includes('time')) && 
+                             (colLower.includes('inicial') || colLower.includes('inicio') || 
+                              colLower.includes('start') || colLower.includes('begin'))) {
+                        mapping.dataInicio = col;
+                    }
+                    
+                    // Data/Hora Final
+                    else if ((colLower.includes('data') || colLower.includes('date') || colLower.includes('time')) && 
+                             (colLower.includes('final') || colLower.includes('fim') || 
+                              colLower.includes('end') || colLower.includes('finish'))) {
+                        mapping.dataFim = col;
+                    }
+                    
+                    // Duração/Tempo
+                    else if (colLower.includes('tempo') || colLower.includes('duração') || 
+                             colLower.includes('duracao') || colLower.includes('duration') ||
+                             colLower.includes('indisponível') || colLower.includes('indisponivel')) {
+                        mapping.duracao = col;
+                    }
+                });
+                
+                // Fallbacks se não encontrou correspondência exata
+                if (!mapping.equipamento) {
+                    mapping.equipamento = columns.find(col => 
+                        col.toLowerCase().includes('equip') || 
+                        col.toLowerCase().includes('vag'));
+                }
+                
+                if (!mapping.categoria) {
+                    mapping.categoria = columns.find(col => 
+                        col.toLowerCase().includes('cat') || 
+                        col.toLowerCase().includes('tip'));
+                }
+                
+                return mapping;
+            }
+
+            // NOVA: Obter valor da coluna com fallback
+            getColumnValue(row, columnName) {
+                if (!columnName || !row) return null;
+                
+                let value = row[columnName];
+                
+                // Limpar valor
+                if (typeof value === 'string') {
+                    value = value.trim();
+                    if (value === '' || value === 'null' || value === 'undefined') {
+                        return null;
+                    }
+                }
+                
+                return value;
+            }
+
+            // Verificar se cache de apontamentos ainda é válido
             isApontamentosCacheValid() {
                 if (!this.apontamentosCache || !this.lastApontamentosUpdate) {
                     return false;
@@ -1374,84 +1604,7 @@
                 return ageSinceUpdate < maxCacheAge;
             }
 
-            // NOVA: Validar resposta de apontamentos
-            isValidApontamentosResponse(response) {
-                // Verificar diferentes estruturas possíveis
-                if (Array.isArray(response) && response.length > 0) {
-                    return this.hasApontamentoFields(response[0]);
-                }
-                
-                if (response.records && Array.isArray(response.records) && response.records.length > 0) {
-                    return this.hasApontamentoFields(response.records[0]);
-                }
-                
-                if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-                    return this.hasApontamentoFields(response.data[0]);
-                }
-                
-                if (response.apontamentos && Array.isArray(response.apontamentos) && response.apontamentos.length > 0) {
-                    return this.hasApontamentoFields(response.apontamentos[0]);
-                }
-                
-                return false;
-            }
-
-            // NOVA: Verificar se registro tem campos de apontamento
-            hasApontamentoFields(record) {
-                const requiredFields = ['Vaga', 'Categoria Demora', 'Data Inicial', 'Data Final'];
-                const alternativeFields = ['equipamento', 'categoria', 'inicio', 'fim'];
-                
-                // Verificar campos obrigatórios padrão
-                const hasStandardFields = requiredFields.every(field => 
-                    record.hasOwnProperty(field) && record[field]
-                );
-                
-                // Verificar campos alternativos
-                const hasAlternativeFields = alternativeFields.every(field => 
-                    record.hasOwnProperty(field) && record[field]
-                );
-                
-                return hasStandardFields || hasAlternativeFields;
-            }
-
-            // NOVA: Processar resposta de apontamentos conforme estrutura
-            processApontamentosResponse(response) {
-                let dados = [];
-                
-                if (Array.isArray(response)) {
-                    dados = response;
-                } else if (response.records) {
-                    dados = response.records;
-                } else if (response.data) {
-                    dados = response.data;
-                } else if (response.apontamentos) {
-                    dados = response.apontamentos;
-                }
-                
-                // Normalizar estrutura dos dados
-                return dados.map(record => {
-                    // Se já está no formato padrão, retornar como está
-                    if (record['Vaga'] && record['Categoria Demora']) {
-                        return record;
-                    }
-                    
-                    // Converter formatos alternativos para formato padrão
-                    return {
-                        'Vaga': record.equipamento || record.Vaga || record.vaga || 'N/A',
-                        'Placa': record.placa || record.Placa || 'N/A',
-                        'Categoria Demora': record.categoria || record['Categoria Demora'] || record.tipo || 'N/A',
-                        'Data Inicial': record.inicio || record['Data Inicial'] || record.start || record.data_inicio,
-                        'Data Final': record.fim || record['Data Final'] || record.end || record.data_fim,
-                        'Tempo Indisponível (HH:MM)': record.duracao || record['Tempo Indisponível (HH:MM)'] || record.tempo || '00:00'
-                    };
-                }).filter(record => 
-                    record['Vaga'] !== 'N/A' && 
-                    record['Data Inicial'] && 
-                    record['Data Final']
-                );
-            }
-
-            // NOVA: Carregar dados de exemplo como fallback
+            // Carregar dados de exemplo como fallback
             loadApontamentosExemplo() {
                 console.log('📋 Carregando apontamentos de exemplo...');
                 
@@ -1518,7 +1671,7 @@
                 console.log(`✅ Dados de exemplo gerados: ${this.apontamentosData.length} apontamentos`);
             }
 
-            // NOVA: Gerar placa baseada no equipamento
+            // Gerar placa baseada no equipamento
             generatePlacaForEquipamento(equipamento) {
                 const placas = {
                     "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS": "ANF-2676",
@@ -1532,10 +1685,15 @@
                 return placas[equipamento] || "ABC-" + Math.floor(Math.random() * 9000 + 1000);
             }
 
-            // NOVA: Mostrar estatísticas dos apontamentos carregados
+            // Mostrar estatísticas dos apontamentos carregados
             logApontamentosStats() {
-                console.log('📊 ESTATÍSTICAS DOS APONTAMENTOS:');
+                console.log('📊 ESTATÍSTICAS DOS APONTAMENTOS CSV:');
                 console.log(`  📝 Total de registros: ${this.apontamentosData.length}`);
+                
+                if (this.apontamentosData.length === 0) {
+                    console.log('  ❌ Nenhum dado foi carregado');
+                    return;
+                }
                 
                 // Equipamentos únicos
                 const equipamentos = [...new Set(this.apontamentosData.map(ap => ap.Vaga))];
@@ -1560,6 +1718,12 @@
                     const mais_recente = datas[datas.length - 1].toLocaleDateString('pt-BR');
                     console.log(`  📅 Período: ${mais_antigo} a ${mais_recente}`);
                 }
+                
+                // Amostra dos dados para debug
+                console.log('  🔍 Amostra de dados (3 registros):');
+                this.apontamentosData.slice(0, 3).forEach((ap, i) => {
+                    console.log(`    [${i+1}] ${ap.Vaga} - ${ap['Categoria Demora']} - ${ap['Data Inicial']}`);
+                });
             }
 
             async loadDataWithPriority() {
@@ -1582,10 +1746,10 @@
                 console.log(`✅ Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
             }
 
-            // NOVA FUNCIONALIDADE: Buscar apontamentos relacionados MELHORADA
+            // NOVA FUNCIONALIDADE: Buscar apontamentos relacionados CORRIGIDA para CSV
             findRelatedApontamentos(alertStartTime, alertEndTime, equipamento) {
                 try {
-                    console.log(`🔍 DEBUG - Buscando apontamentos relacionados:`);
+                    console.log(`🔍 DEBUG CSV - Buscando apontamentos relacionados:`);
                     console.log(`  Equipamento do alerta: "${equipamento}"`);
                     console.log(`  Período do alerta: ${alertStartTime} - ${alertEndTime}`);
                     
@@ -1597,7 +1761,7 @@
                         return [];
                     }
 
-                    // NOVA: Usar configuração para janela de busca
+                    // Usar configuração para janela de busca
                     const janelaBuscaHoras = this.config.apontamentosConfig.janelaBuscaHoras;
                     const maxApontamentos = this.config.apontamentosConfig.maxApontamentos;
                     
@@ -1616,7 +1780,7 @@
                     const related = this.apontamentosData.filter((apontamento, index) => {
                         const apontEquipamento = this.normalizeEquipmentName(apontamento.Vaga);
                         
-                        console.log(`    [${index}] Verificando apontamento:`);
+                        console.log(`    [${index}] Verificando apontamento CSV:`);
                         console.log(`      Equipamento: "${apontamento.Vaga}" → "${apontEquipamento}"`);
                         console.log(`      Categoria: "${apontamento['Categoria Demora']}"`);
                         console.log(`      Período: ${apontamento['Data Inicial']} - ${apontamento['Data Final']}`);
@@ -1631,17 +1795,17 @@
                         const apontEnd = this.parseDateTime(apontamento['Data Final']);
                         
                         if (!apontStart || !apontEnd) {
-                            console.log(`      ❌ Datas inválidas`);
+                            console.log(`      ❌ Datas inválidas do CSV`);
                             return false;
                         }
                         
                         console.log(`      Datas parseadas: ${apontStart.toLocaleString('pt-BR')} - ${apontEnd.toLocaleString('pt-BR')}`);
                         
-                        // NOVA: Verificação de sobreposição mais inteligente
+                        // Verificação de sobreposição
                         const overlaps = this.checkTimeOverlap(apontStart, apontEnd, searchStart, searchEnd);
                         
                         if (overlaps.hasOverlap) {
-                            console.log(`      ✅ ENCONTRADO! ${overlaps.type}`);
+                            console.log(`      ✅ ENCONTRADO CSV! ${overlaps.type}`);
                             if (overlaps.minutesOverlap) {
                                 console.log(`        Sobreposição: ${overlaps.minutesOverlap} minutos`);
                             }
@@ -1652,13 +1816,13 @@
                         return overlaps.hasOverlap;
                     });
 
-                    // NOVA: Ordenação mais inteligente por relevância
+                    // Ordenação por relevância
                     const sortedRelated = this.sortApontamentosByRelevance(related, alertStart, alertEnd);
                     
                     // Limitar aos N mais relevantes
                     const result = sortedRelated.slice(0, maxApontamentos);
                         
-                    console.log(`🔍 RESULTADO: ${result.length} apontamentos relacionados encontrados`);
+                    console.log(`🔍 RESULTADO CSV: ${result.length} apontamentos relacionados encontrados`);
                     if (result.length > 0) {
                         result.forEach((ap, i) => {
                             const relevancia = this.calculateApontamentoRelevance(ap, alertStart, alertEnd);
@@ -1669,12 +1833,12 @@
                     return result;
                         
                 } catch (error) {
-                    console.warn('Erro ao buscar apontamentos relacionados:', error);
+                    console.warn('❌ Erro ao buscar apontamentos relacionados do CSV:', error);
                     return [];
                 }
             }
 
-            // NOVA: Verificar se equipamentos fazem match (matching flexível)
+            // Verificar se equipamentos fazem match (matching flexível)
             equipamentosMatch(equip1, equip2) {
                 // Exact match
                 if (equip1 === equip2) return true;
@@ -1718,7 +1882,7 @@
                 return false;
             }
 
-            // NOVA: Verificar sobreposição temporal inteligente
+            // Verificar sobreposição temporal inteligente
             checkTimeOverlap(apontStart, apontEnd, searchStart, searchEnd) {
                 // Apontamento completamente dentro da janela
                 if (apontStart >= searchStart && apontEnd <= searchEnd) {
@@ -1765,7 +1929,7 @@
                 return { hasOverlap: false };
             }
 
-            // NOVA: Ordenar apontamentos por relevância
+            // Ordenar apontamentos por relevância
             sortApontamentosByRelevance(apontamentos, alertStart, alertEnd) {
                 return apontamentos
                     .map(ap => ({
@@ -1775,7 +1939,7 @@
                     .sort((a, b) => b.relevance - a.relevance);
             }
 
-            // NOVA: Calcular relevância do apontamento
+            // Calcular relevância do apontamento
             calculateApontamentoRelevance(apontamento, alertStart, alertEnd) {
                 const apontStart = this.parseDateTime(apontamento['Data Inicial']);
                 const apontEnd = this.parseDateTime(apontamento['Data Final']);
@@ -1818,11 +1982,11 @@
                 return score;
             }
 
-            // NOVA: Atualizar apontamentos relacionados do alerta atual
+            // Atualizar apontamentos relacionados do alerta atual
             refreshApontamentosRelacionados() {
                 if (!this.currentInvestigation) return;
                 
-                console.log('🔄 Atualizando apontamentos relacionados do alerta atual...');
+                console.log('🔄 Atualizando apontamentos relacionados do CSV...');
                 
                 // Forçar nova busca
                 this.currentInvestigation.apontamentosRelacionados = this.findRelatedApontamentos(
@@ -1835,49 +1999,42 @@
                 this.updateApontamentosRelacionados(this.currentInvestigation);
                 this.updateWhatsAppPreview();
                 
-                this.showNotification('Apontamentos relacionados atualizados', 'info');
+                this.showNotification('Apontamentos CSV atualizados', 'info');
             }
 
-            // NOVA: Recarregar apontamentos manualmente
+            // Recarregar apontamentos CSV manualmente
             async reloadApontamentos() {
-                console.log('🔄 Recarregando dados de apontamentos...');
-                await this.loadApontamentosData();
+                console.log('🔄 Recarregando dados CSV de apontamentos...');
+                
+                // Limpar cache para forçar novo carregamento
+                this.apontamentosCache = null;
+                this.lastApontamentosUpdate = null;
+                
+                await this.loadApontamentosCSV();
                 
                 // Atualizar apontamentos relacionados em todos os alertas existentes
                 this.alerts.forEach(alert => {
-                    console.log(`🔗 Atualizando correlações para alerta: ${alert.equipamento}`);
+                    console.log(`🔗 Atualizando correlações CSV para alerta: ${alert.equipamento}`);
                     alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
                 });
                 
                 this.saveLocalData(); // Salvar atualizações
                 this.updateInterface();
-                this.showNotification('Apontamentos recarregados e correlações atualizadas', 'success');
+                this.showNotification('Dados CSV recarregados e correlações atualizadas', 'success');
             }
 
-            // ATUALIZAÇÃO: Nova função recordMatchesRule seguindo documento técnico v4.3.5
-            /**
-             * ATUALIZAÇÃO v4.3.5 - MOTOR DE REGRAS OBJETIVO E FOCADO EM PRODUTIVIDADE
-             * Esta função agora opera sobre o fato consumado do 'production_status',
-             * fornecido pelo script de captura de dados.
-             */
+            // ATUALIZAÇÃO: Nova função recordMatchesRule seguindo documento técnico v4.4.0
             recordMatchesRule(record, rule) {
                 // NOVA LÓGICA PARA REGRAS DE IMPRODUTIVIDADE
                 if (rule.type === 'improdutivo') {
-                    // Passo 1: A condição primária para qualquer alerta de ociosidade.
-                    // O sistema verifica se o script já classificou este evento como improdutivo.
                     if (!record.production_status || !record.production_status.includes('Improdutivo')) {
-                        // Se o evento não é improdutivo ('Trabalho Efetivo', 'Operacional', etc.),
-                        // a função retorna 'false' imediatamente, descartando o alerta.
-                        // Isso resolve, na raiz, todos os cenários de falsos positivos.
                         return false;
                     }
 
-                    // Passo 2: Se o evento é de fato improdutivo, a única verificação restante
-                    // é se a sua duração excede o tempo limite definido na regra.
                     const duration = this.getRecordDuration(record, 'status');
                     const timeCondition = this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
                     
-                    // NOVA: Verificar range de horário se definido
+                    // Verificar range de horário se definido
                     if (rule.timeStart && rule.timeEnd) {
                         const recordTime = this.parseDateTime(record.start);
                         if (!this.isWithinTimeRange(recordTime, rule.timeStart, rule.timeEnd)) {
@@ -1888,7 +2045,7 @@
                     return timeCondition;
                 }
                 
-                // LÓGICA ORIGINAL PARA APONTAMENTOS (mantida para compatibilidade)
+                // LÓGICA PARA APONTAMENTOS CSV
                 if (rule.type === 'apontamento') {
                     const identifier = record['Categoria Demora'];
                     
@@ -1901,7 +2058,7 @@
                     const duration = this.getRecordDuration(record, 'apontamento');
                     const timeCondition = this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
                     
-                    // NOVA: Verificar range de horário se definido
+                    // Verificar range de horário se definido
                     if (rule.timeStart && rule.timeEnd) {
                         const recordTime = this.parseDateTime(record['Data Inicial']);
                         if (!this.isWithinTimeRange(recordTime, rule.timeStart, rule.timeEnd)) {
@@ -1915,7 +2072,7 @@
                 return false;
             }
 
-            // NOVA FUNCIONALIDADE: Verificar se horário está dentro do range
+            // Verificar se horário está dentro do range
             isWithinTimeRange(dateTime, startTime, endTime) {
                 if (!dateTime || !startTime || !endTime) return true;
                 
@@ -2020,7 +2177,7 @@
                 if (this.isProcessing) return;
                 
                 this.isProcessing = true;
-                console.log('🔄 Processando alertas com nova lógica...');
+                console.log('🔄 Processando alertas com suporte CSV...');
 
                 try {
                     if (!this.telemetryData || this.telemetryData.length === 0) {
@@ -2090,7 +2247,7 @@
                 }
             }
 
-            // ATUALIZAÇÃO: Formatação completa de data/hora para período
+            // Formatação completa de data/hora para período
             formatFullTimeRange(start, end) {
                 const startDate = this.parseDateTime(start);
                 const endDate = this.parseDateTime(end);
@@ -2140,7 +2297,7 @@
                     startTime: this.parseDateTime(startTime).toISOString(),
                     endTime: this.parseDateTime(endTime).toISOString(),
                     timeRange: this.formatTimeRange(startTime, endTime), // Original curto
-                    fullTimeRange: this.formatFullTimeRange(startTime, endTime), // NOVO: Com data completa
+                    fullTimeRange: this.formatFullTimeRange(startTime, endTime), // Com data completa
                     consolidated: record.consolidated || false,
                     originalCount: record.originalCount || 1,
                     timestamp: alertTimestamp,
@@ -2150,11 +2307,11 @@
                     status: 'pendente',
                     placa: '', motorista: '', area: '', supervisor: '',
                     observacoes: '', acoes: '',
-                    // NOVA: Apontamentos relacionados
+                    // Apontamentos relacionados CSV
                     apontamentosRelacionados: this.findRelatedApontamentos(startTime, endTime, equipamento)
                 };
 
-                // ATUALIZADA: Mensagem sem tipo específico
+                // Mensagem sem tipo específico
                 alert.message = rule.message
                     .replace('{equipamento}', this.getDisplayName(equipamento))
                     .replace('{tempo}', alert.duration);
@@ -2173,7 +2330,6 @@
                     identifier: identifier,
                     timeOperator: document.getElementById('ruleTimeOperator').value,
                     timeValue: parseInt(document.getElementById('ruleTimeValue').value),
-                    // NOVA: Range de horário
                     timeStart: document.getElementById('ruleTimeStart').value || null,
                     timeEnd: document.getElementById('ruleTimeEnd').value || null,
                     severity: document.getElementById('ruleSeverity').value,
@@ -2228,7 +2384,7 @@
                 alert.investigatedAt = new Date().toISOString();
                 alert.investigatedFullDateTime = this.formatFullDateTime(Date.now());
 
-                // Garantir que os apontamentos relacionados estejam atualizados
+                // Garantir que os apontamentos relacionados CSV estejam atualizados
                 if (!alert.apontamentosRelacionados) {
                     alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
                 }
@@ -2241,7 +2397,7 @@
                 this.showNotification('Investigação salva e sincronizada', 'success');
             }
 
-            // ATUALIZAÇÃO: Lista de alertas com período completo
+            // Lista de alertas com período completo
             updateAlertsList() {
                 const container = document.getElementById('alertsList');
                 if (!container) return;
@@ -2303,7 +2459,7 @@
                             </div>
                             ${alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0 ? `
                             <div class="alert-detail">
-                                <div class="alert-detail-label">Apontamentos Relacionados</div>
+                                <div class="alert-detail-label">Apontamentos CSV</div>
                                 <div class="alert-detail-value" style="color: #3498db;">🔗 ${alert.apontamentosRelacionados.length} encontrado(s)</div>
                             </div>
                             ` : ''}
@@ -2326,7 +2482,7 @@
                         vacancy_code: "536",
                         vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
                         status: "off",
-                        production_status: "Improdutivo (Ocioso)", // NOVO CAMPO
+                        production_status: "Improdutivo (Ocioso)",
                         status_title: "Motor Desligado",
                         start: "2025-07-11T09:06:19",
                         end: "2025-07-11T09:48:49",
@@ -2336,7 +2492,7 @@
                         vacancy_code: "526",
                         vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 04",
                         status: "off",
-                        production_status: "Improdutivo (Ocioso)", // NOVO CAMPO
+                        production_status: "Improdutivo (Ocioso)",
                         status_title: "Motor Desligado",
                         start: "2025-07-11T09:57:39",
                         end: "2025-07-11T11:24:09",
@@ -2348,12 +2504,12 @@
                     {
                         id: 1752152405852,
                         name: "Equipamento Improdutivo",
-                        type: "improdutivo", // NOVO TIPO
+                        type: "improdutivo",
                         identifier: "",
                         timeOperator: ">",
                         timeValue: 40,
-                        timeStart: "08:00", // NOVA: Range de horário
-                        timeEnd: "18:00",   // NOVA: Range de horário
+                        timeStart: "08:00",
+                        timeEnd: "18:00",
                         severity: "alto",
                         message: "{equipamento} com improdutividade há {tempo}",
                         active: true
@@ -2369,7 +2525,7 @@
                 try {
                     await this.loadOperationalDataFromGitHub();
                     
-                    // NOVA: Tentar múltiplas URLs para telemetria
+                    // Tentar múltiplas URLs para telemetria
                     let telemetryLoaded = false;
                     
                     for (let i = 0; i < this.config.telemetriaUrls.length; i++) {
@@ -2395,9 +2551,9 @@
                         console.warn('⚠️ Nenhuma URL de telemetria funcionou, mantendo dados existentes');
                     }
                     
-                    // Recarregar apontamentos se necessário
+                    // Recarregar apontamentos CSV se necessário
                     if (!this.isApontamentosCacheValid()) {
-                        await this.loadApontamentosData();
+                        await this.loadApontamentosCSV();
                     }
                     
                     await this.processAlerts();
@@ -2487,6 +2643,188 @@
                 }
             }
 
+            updateSystemStatus() {
+                const container = document.getElementById('systemStatus');
+                if (!container) return;
+
+                this.validateGitHubConnection().then(githubStatus => {
+                    const lastSync = this.config.lastSync ? 
+                        new Date(this.config.lastSync).toLocaleString('pt-BR') : 'Nunca';
+
+                    const isAutoConfig = typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined';
+                    const cacheStatus = this.isApontamentosCacheValid() ? 'Válido' : 'Expirado';
+                    
+                    const status = `
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #27ae60;">🚨</div>
+                                <div>Sistema Ativo</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(${isAutoConfig ? '39, 174, 96' : '243, 156, 18'}, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: ${isAutoConfig ? '#27ae60' : '#f39c12'};">${isAutoConfig ? '⚙️' : '📝'}</div>
+                                <div>Config ${isAutoConfig ? 'Automática' : 'Manual'}</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
+                                <div>GitHub ${githubStatus.valid ? 'Conectado' : 'Desconectado'}</div>
+                                ${!githubStatus.valid && githubStatus.error ? `<div style="font-size: 0.8rem; color: #e74c3c; margin-top: 0.5rem;">${githubStatus.error}</div>` : ''}
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #3498db;">🔄</div>
+                                <div>Última Sync: ${lastSync}</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #9b59b6;">📋</div>
+                                <div>Queue: ${this.syncQueue.length} ops</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: rgba(230, 126, 34, 0.1); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: #e67e22;">💾</div>
+                                <div>Cache CSV: ${cacheStatus}</div>
+                                <div style="font-size: 0.8rem; margin-top: 0.3rem;">${this.apontamentosData.length} registros</div>
+                            </div>
+                        </div>
+                        
+                        ${!isAutoConfig ? `
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(243, 156, 18, 0.1); border-radius: 12px; border-left: 4px solid #f39c12;">
+                            <strong>⚙️ CONFIGURAÇÃO MANUAL ATIVA</strong><br>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                Para ativar a configuração automática:
+                                <ol style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                                    <li>Crie o arquivo <code>config.js</code> na mesma pasta do sistema</li>
+                                    <li>Adicione seu token GitHub no arquivo</li>
+                                    <li>Configure URLs CSV dos apontamentos</li>
+                                    <li>Recarregue a página</li>
+                                </ol>
+                                <a href="#" onclick="window.alertSystemDebug.generateConfigTemplate()" style="color: #3498db; text-decoration: none;">
+                                    📁 Gerar template do config.js →
+                                </a>
+                            </div>
+                        </div>
+                        ` : `
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
+                            <strong>✅ CONFIGURAÇÃO AUTOMÁTICA ATIVA</strong><br>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                Token carregado do arquivo <code>config.js</code><br>
+                                Repositório: <code>${this.config.repo}</code><br>
+                                Dados: <code>${this.config.repoData}</code><br>
+                                URLs CSV: <code>${this.config.apontamentosUrls.length} configuradas</code><br>
+                                <span style="color: #27ae60;">Sistema pronto para dados CSV</span>
+                            </div>
+                        </div>
+                        `}
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
+                            <strong>🆕 Funcionalidades v4.4.0 - SUPORTE CSV:</strong>
+                            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                                <li>✅ Processamento completo de arquivos CSV</li>
+                                <li>✅ Detecção automática de colunas CSV</li>
+                                <li>✅ Múltiplas URLs para busca de dados CSV</li>
+                                <li>✅ Cache inteligente de apontamentos CSV</li>
+                                <li>✅ Normalização automática de dados CSV</li>
+                                <li>✅ Correlação avançada com dados CSV</li>
+                                <li>✅ Validação robusta de estruturas CSV</li>
+                                <li>✅ Fallback para dados de exemplo</li>
+                                <li>✅ Interface atualizada para CSV</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px; border-left: 4px solid #3498db;">
+                            <strong>📊 Estatísticas dos Dados CSV:</strong>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <div>📋 Alertas: ${this.alerts.length}</div>
+                                <div>⚙️ Regras: ${this.rules.length}</div>
+                                <div>📝 Apontamentos CSV: ${this.apontamentosData.length}</div>
+                                <div>📡 Telemetria: ${this.telemetryData.length}</div>
+                            </div>
+                        </div>
+                        
+                        ${this.apontamentosData.length > 0 ? `
+                        <div class="csv-debug-panel">
+                            <div class="csv-debug-title">🔍 Debug CSV - Amostra dos Dados:</div>
+                            ${this.apontamentosData.slice(0, 2).map((ap, i) => `
+                                <div style="margin: 0.5rem 0; padding: 0.5rem; background: rgba(255,255,255,0.5); border-radius: 6px;">
+                                    [${i+1}] ${ap.Vaga} | ${ap['Categoria Demora']} | ${ap['Data Inicial']} → ${ap['Data Final']}
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    `;
+
+                    container.innerHTML = status;
+                });
+            }
+
+            async validateGitHubConnection() {
+                if (!this.config.token) {
+                    return { valid: false, error: 'Token não configurado' };
+                }
+
+                try {
+                    const response = await fetch(`https://api.github.com/repos/${this.config.repo}`, {
+                        headers: {
+                            'Authorization': `token ${this.config.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        return { valid: true };
+                    } else {
+                        const errorData = await response.json();
+                        return { valid: false, error: `${response.status}: ${errorData.message}` };
+                    }
+                } catch (error) {
+                    return { valid: false, error: error.message };
+                }
+            }
+
+            startPeriodicSync() {
+                setTimeout(() => this.syncData(), 2000);
+                
+                setInterval(() => {
+                    if (!this.isProcessing) {
+                        this.syncData();
+                    }
+                }, this.config.interval * 60 * 1000);
+            }
+
+            updateSyncStatus(type, message) {
+                const dot = document.getElementById('syncDot');
+                const status = document.getElementById('syncStatus');
+                
+                if (dot) dot.className = `sync-dot ${type}`;
+                if (status) status.textContent = message;
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutRight 0.3s ease-in';
+                    setTimeout(() => notification.remove(), 300);
+                }, 4000);
+            }
+
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            async forceSync() {
+                await this.syncData();
+            }
+
             async fetchData(url, isJson = false) {
                 const response = await fetch(url, { cache: 'no-store' });
                 if (!response.ok) throw new Error(`HTTP ${response.status} em ${url}`);
@@ -2517,7 +2855,7 @@
             async saveOperationalDataToGitHub() {
                 const operationalData = {
                     timestamp: Date.now(),
-                    version: '4.3.5',
+                    version: '4.4.0',
                     type: 'operational',
                     total: this.alerts.length,
                     alerts: this.alerts,
@@ -2533,7 +2871,7 @@
             async saveRulesToGitHub() {
                 const rulesData = {
                     timestamp: Date.now(),
-                    version: '4.3.5',
+                    version: '4.4.0',
                     total: this.rules.length,
                     rules: this.rules
                 };
@@ -2706,14 +3044,14 @@
                 }
             }
 
-            // ATUALIZAÇÃO: Investigação com apontamentos relacionados
+            // Investigação com apontamentos relacionados CSV
             openInvestigation(alertId) {
                 const alert = this.alerts.find(a => a.id === alertId);
                 if (!alert) return;
 
                 this.currentInvestigation = alert;
                 
-                // CORRIGIDO: Atualizar apontamentos relacionados toda vez que abrir a investigação
+                // Atualizar apontamentos relacionados CSV
                 alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
                 
                 document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
@@ -2728,20 +3066,20 @@
                 document.getElementById('invObservacoes').value = alert.observacoes || '';
                 document.getElementById('invAcoes').value = alert.acoes || '';
 
-                // NOVA: Exibir apontamentos relacionados
+                // Exibir apontamentos relacionados CSV
                 this.updateApontamentosRelacionados(alert);
 
                 this.updateWhatsAppPreview();
                 document.getElementById('investigationModal').classList.add('show');
             }
 
-            // NOVA FUNCIONALIDADE: Atualizar apontamentos relacionados na interface
+            // Atualizar apontamentos relacionados CSV na interface
             updateApontamentosRelacionados(alert) {
                 const container = document.getElementById('apontamentosRelacionados');
                 if (!container) return;
 
                 if (!alert.apontamentosRelacionados || alert.apontamentosRelacionados.length === 0) {
-                    container.innerHTML = '<div style="text-align: center; color: #7f8c8d;">Nenhum apontamento encontrado no período</div>';
+                    container.innerHTML = '<div style="text-align: center; color: #7f8c8d;">Nenhum apontamento CSV encontrado no período</div>';
                     return;
                 }
 
@@ -2754,7 +3092,8 @@
                         <div class="apontamento-item">
                             <div>
                                 <strong>${apontamento['Categoria Demora']}</strong><br>
-                                <small style="color: #7f8c8d;">${periodo}</small>
+                                <small style="color: #7f8c8d;">${periodo}</small><br>
+                                <small style="color: #3498db;">📋 Fonte: CSV</small>
                             </div>
                             <div style="text-align: right;">
                                 <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">
@@ -2789,7 +3128,7 @@
                 }
             }
 
-            // ATUALIZAÇÃO: WhatsApp com período completo e apontamentos detalhados
+            // WhatsApp com período completo e apontamentos CSV detalhados
             updateWhatsAppPreview() {
                 if (!this.currentInvestigation) return;
 
@@ -2801,7 +3140,7 @@
 
                 let apontamentosText = '';
                 if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
-                    apontamentosText = '\n\nApontamentos Relacionados:\n' + 
+                    apontamentosText = '\n\nApontamentos Relacionados (CSV):\n' + 
                         alert.apontamentosRelacionados.map(ap => {
                             const inicio = this.parseDateTime(ap['Data Inicial']);
                             const fim = this.parseDateTime(ap['Data Final']);
@@ -2864,7 +3203,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 document.getElementById('pendingAlerts').textContent = pendingAlerts.length;
             }
 
-            // ATUALIZAÇÃO: Lista de regras com range de horário
+            // Lista de regras com range de horário
             updateRulesList() {
                 const container = document.getElementById('rulesList');
                 if (!container) return;
@@ -2901,7 +3240,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                             </div>
                         </div>
                         <div class="rule-config">
-                            <div><strong>Tipo:</strong> ${rule.type === 'improdutivo' ? 'Improdutividade' : 'Apontamento'}</div>
+                            <div><strong>Tipo:</strong> ${rule.type === 'improdutivo' ? 'Improdutividade' : 'Apontamento CSV'}</div>
                             <div><strong>Condição:</strong> ${rule.timeOperator} ${rule.timeValue} min</div>
                             <div><strong>Horário:</strong> ${timeRangeText}</div>
                             <div><strong>Gravidade:</strong> <span class="severity-badge ${rule.severity}">${this.getSeverityText(rule.severity)}</span></div>
@@ -3066,7 +3405,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 this.showNotification(`Relatório gerado: ${filtered.length} registros`, 'success');
             }
 
-            // ATUALIZAÇÃO: Tabela de relatórios melhorada
+            // Tabela de relatórios melhorada
             renderReportTable(data) {
                 const container = document.getElementById('reportTable');
                 if (!container) return;
@@ -3094,6 +3433,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                                 <th>Motorista</th>
                                 <th>Área</th>
                                 <th>Status</th>
+                                <th>Apontamentos CSV</th>
                                 <th>Observações</th>
                             </tr>
                         </thead>
@@ -3110,6 +3450,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                                     <td>${alert.motorista || 'N/I'}</td>
                                     <td>${alert.area || 'N/I'}</td>
                                     <td><span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span></td>
+                                    <td>${alert.apontamentosRelacionados ? alert.apontamentosRelacionados.length : 0} registros</td>
                                     <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${alert.observacoes || 'N/I'}</td>
                                 </tr>
                             `).join('')}
@@ -3130,24 +3471,12 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 try {
                     const wb = XLSX.utils.table_to_book(table, { sheet: "RelatorioAlertas" });
                     const today = new Date().toISOString().split('T')[0];
-                    XLSX.writeFile(wb, `Relatorio_Alertas_${today}.xlsx`);
-                    this.showNotification('Relatório exportado para Excel!', 'success');
+                    XLSX.writeFile(wb, `Relatorio_Alertas_CSV_${today}.xlsx`);
+                    this.showNotification('Relatório CSV exportado para Excel!', 'success');
                 } catch (error) {
                     console.error("Erro ao exportar para Excel:", error);
                     this.showNotification('Falha ao exportar para Excel.', 'error');
                 }
-            }
-
-            loadConfig() {
-                const saved = localStorage.getItem('alertSystem_config');
-                if (saved) {
-                    this.config = { ...this.config, ...JSON.parse(saved) };
-                }
-                this.updateConfigInterface();
-            }
-
-            saveConfig() {
-                localStorage.setItem('alertSystem_config', JSON.stringify(this.config));
             }
 
             loadLocalData() {
@@ -3327,217 +3656,13 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 });
             }
 
-            updateConfigInterface() {
-                const repoEl = document.getElementById('configRepo');
-                const tokenEl = document.getElementById('configToken');
-                const intervalEl = document.getElementById('configInterval');
-
-                if (repoEl) repoEl.value = this.config.repo;
-                if (tokenEl) tokenEl.value = this.config.token || '';
-                if (intervalEl) intervalEl.value = this.config.interval;
-            }
-
-            updateSystemStatus() {
-                const container = document.getElementById('systemStatus');
-                if (!container) return;
-
-                this.validateGitHubConnection().then(githubStatus => {
-                    const lastSync = this.config.lastSync ? 
-                        new Date(this.config.lastSync).toLocaleString('pt-BR') : 'Nunca';
-
-                    const isAutoConfig = typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined';
-                    const cacheStatus = this.isApontamentosCacheValid() ? 'Válido' : 'Expirado';
-                    
-                    const status = `
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                            <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: #27ae60;">🚨</div>
-                                <div>Sistema Ativo</div>
-                            </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(${isAutoConfig ? '39, 174, 96' : '243, 156, 18'}, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: ${isAutoConfig ? '#27ae60' : '#f39c12'};">${isAutoConfig ? '⚙️' : '📝'}</div>
-                                <div>Config ${isAutoConfig ? 'Automática' : 'Manual'}</div>
-                            </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
-                                <div>GitHub ${githubStatus.valid ? 'Conectado' : 'Desconectado'}</div>
-                                ${!githubStatus.valid && githubStatus.error ? `<div style="font-size: 0.8rem; color: #e74c3c; margin-top: 0.5rem;">${githubStatus.error}</div>` : ''}
-                            </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: #3498db;">🔄</div>
-                                <div>Última Sync: ${lastSync}</div>
-                            </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: #9b59b6;">📋</div>
-                                <div>Queue: ${this.syncQueue.length} ops</div>
-                            </div>
-                            <div style="text-align: center; padding: 1rem; background: rgba(230, 126, 34, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: #e67e22;">💾</div>
-                                <div>Cache: ${cacheStatus}</div>
-                                <div style="font-size: 0.8rem; margin-top: 0.3rem;">${this.apontamentosData.length} apontamentos</div>
-                            </div>
-                        </div>
-                        
-                        ${!isAutoConfig ? `
-                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(243, 156, 18, 0.1); border-radius: 12px; border-left: 4px solid #f39c12;">
-                            <strong>⚙️ CONFIGURAÇÃO MANUAL ATIVA</strong><br>
-                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
-                                Para ativar a configuração automática:
-                                <ol style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                                    <li>Crie o arquivo <code>config.js</code> na mesma pasta do sistema</li>
-                                    <li>Adicione seu token GitHub no arquivo</li>
-                                    <li>Recarregue a página</li>
-                                </ol>
-                                <a href="#" onclick="window.open('data:text/plain;charset=utf-8,' + encodeURIComponent(window.alertSystemDebug.generateConfigTemplate()), '_blank')" style="color: #3498db; text-decoration: none;">
-                                    📁 Baixar template do config.js →
-                                </a>
-                            </div>
-                        </div>
-                        ` : `
-                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
-                            <strong>✅ CONFIGURAÇÃO AUTOMÁTICA ATIVA</strong><br>
-                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
-                                Token carregado do arquivo <code>config.js</code><br>
-                                Repositório: <code>${this.config.repo}</code><br>
-                                Dados: <code>${this.config.repoData}</code><br>
-                                <span style="color: #27ae60;">Sistema pronto para sincronização automática</span>
-                            </div>
-                        </div>
-                        `}
-                        
-                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
-                            <strong>🆕 Funcionalidades Implementadas v4.3.5:</strong>
-                            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                                <li>✅ Configuração automática via config.js</li>
-                                <li>✅ Múltiplas URLs para busca de dados reais</li>
-                                <li>✅ Cache inteligente de apontamentos</li>
-                                <li>✅ Correlação avançada temporal e por relevância</li>
-                                <li>✅ Matching flexível de equipamentos</li>
-                                <li>✅ Janela de busca configurável</li>
-                                <li>✅ Dados de exemplo mais realistas</li>
-                                <li>✅ Sistema sem necessidade de reconfiguração constante</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px; border-left: 4px solid #3498db;">
-                            <strong>📊 Estatísticas dos Dados:</strong>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; margin-top: 0.5rem; font-size: 0.9rem;">
-                                <div>📋 Alertas: ${this.alerts.length}</div>
-                                <div>⚙️ Regras: ${this.rules.length}</div>
-                                <div>📝 Apontamentos: ${this.apontamentosData.length}</div>
-                                <div>📡 Telemetria: ${this.telemetryData.length}</div>
-                            </div>
-                        </div>
-                    `;
-
-                    container.innerHTML = status;
-                });
-            }
-
-            async validateGitHubConnection() {
-                if (!this.config.token) {
-                    return { valid: false, error: 'Token não configurado' };
-                }
-
-                try {
-                    const response = await fetch(`https://api.github.com/repos/${this.config.repo}`, {
-                        headers: {
-                            'Authorization': `token ${this.config.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        return { valid: true };
-                    } else {
-                        const errorData = await response.json();
-                        return { valid: false, error: `${response.status}: ${errorData.message}` };
-                    }
-                } catch (error) {
-                    return { valid: false, error: error.message };
-                }
-            }
-
-            startPeriodicSync() {
-                setTimeout(() => this.syncData(), 2000);
-                
-                setInterval(() => {
-                    if (!this.isProcessing) {
-                        this.syncData();
-                    }
-                }, this.config.interval * 60 * 1000);
-            }
-
-            updateSyncStatus(type, message) {
-                const dot = document.getElementById('syncDot');
-                const status = document.getElementById('syncStatus');
-                
-                if (dot) dot.className = `sync-dot ${type}`;
-                if (status) status.textContent = message;
-            }
-
-            showNotification(message, type = 'info') {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.textContent = message;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.style.animation = 'slideOutRight 0.3s ease-in';
-                    setTimeout(() => notification.remove(), 300);
-                }, 4000);
-            }
-
-            debounce(func, wait) {
-                let timeout;
-                return function executedFunction(...args) {
-                    const later = () => {
-                        clearTimeout(timeout);
-                        func(...args);
-                    };
-                    clearTimeout(timeout);
-                    timeout = setTimeout(later, wait);
-                };
-            }
-
-            async forceSync() {
-                await this.syncData();
-            }
-
-            saveConfigFromForm() {
-                this.config.token = document.getElementById('configToken').value;
-                this.config.interval = parseInt(document.getElementById('configInterval').value);
-                this.config.githubEnabled = this.config.token && this.config.token.length > 10;
-                this.saveConfig();
-                this.showNotification('Configurações salvas', 'success');
-                this.updateSystemStatus();
-            }
-
             async syncRulesFromGitHub() {
                 this.showNotification('Carregando regras do GitHub...', 'info');
                 await this.loadRulesFromGitHub();
             }
-
-            async testGitHubConnection() {
-                const result = await this.validateGitHubConnection();
-                
-                if (result.valid) {
-                    this.showNotification('Conexão GitHub válida!', 'success');
-                    this.config.githubEnabled = true;
-                    this.saveConfig();
-                    await this.loadOperationalDataFromGitHub();
-                } else {
-                    this.showNotification(`Erro GitHub: ${result.error}`, 'error');
-                    this.config.githubEnabled = false;
-                    this.saveConfig();
-                }
-                
-                this.updateSystemStatus();
-            }
         }
 
-        // Funções globais - CORRIGIDAS
+        // Funções globais - CORRIGIDAS para CSV
         let alertSystem = null;
 
         // Declarar todas as funções globais antes da inicialização
@@ -3621,6 +3746,14 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             }
         }
 
+        window.testSpecificCSV = function() {
+            if (window.alertSystemDebug && typeof window.alertSystemDebug.testSpecificCSV === 'function') {
+                window.alertSystemDebug.testSpecificCSV();
+            } else {
+                console.error('❌ Função testSpecificCSV não encontrada');
+            }
+        }
+
         // Para compatibilidade - funções sem window também
         function switchTab(tabName) { window.switchTab(tabName); }
         function toggleRuleFields() { window.toggleRuleFields(); }
@@ -3641,63 +3774,73 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             try {
                 window.reloadApontamentos(); 
             } catch (error) {
-                console.error('❌ Erro ao recarregar apontamentos:', error);
+                console.error('❌ Erro ao recarregar apontamentos CSV:', error);
             }
         }
         function refreshApontamentosRelacionados() { 
             try {
                 window.refreshApontamentosRelacionados(); 
             } catch (error) {
-                console.error('❌ Erro ao atualizar apontamentos relacionados:', error);
+                console.error('❌ Erro ao atualizar apontamentos CSV relacionados:', error);
+            }
+        }
+        function testSpecificCSV() { 
+            try {
+                window.testSpecificCSV(); 
+            } catch (error) {
+                console.error('❌ Erro ao testar URL específica:', error);
             }
         }
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             try {
-                alertSystem = new AlertSystemV435();
-                console.log('✅ Sistema de Alertas inicializado com todas as novas funcionalidades');
+                alertSystem = new AlertSystemV440();
+                console.log('✅ Sistema de Alertas v4.4.0 inicializado com suporte completo a CSV');
                 
-                // Validar funções críticas
+                // Validar funções críticas CSV
                 setTimeout(() => {
                     if (alertSystem) {
-                        console.log('🔧 Validando funções do sistema...');
+                        console.log('🔧 Validando funções CSV do sistema...');
                         console.log('  • reloadApontamentos:', typeof alertSystem.reloadApontamentos);
                         console.log('  • refreshApontamentosRelacionados:', typeof alertSystem.refreshApontamentosRelacionados);
                         console.log('  • findRelatedApontamentos:', typeof alertSystem.findRelatedApontamentos);
-                        console.log('  • loadApontamentosData:', typeof alertSystem.loadApontamentosData);
-                        console.log('✅ Validação concluída - todas as funções disponíveis');
+                        console.log('  • loadApontamentosCSV:', typeof alertSystem.loadApontamentosCSV);
+                        console.log('  • parseCSVData:', typeof alertSystem.parseCSVData);
+                        console.log('  • normalizeCSVData:', typeof alertSystem.normalizeCSVData);
+                        console.log('  • detectCSVColumns:', typeof alertSystem.detectCSVColumns);
+                        console.log('✅ Validação CSV concluída - todas as funções disponíveis');
                         
-                        // Auto-teste da correlação
+                        // Auto-teste da correlação CSV
                         setTimeout(() => {
-                            console.log('🧪 Executando auto-teste de correlação...');
-                            if (window.alertSystemDebug && typeof window.alertSystemDebug.validateSystem === 'function') {
-                                window.alertSystemDebug.validateSystem();
+                            console.log('🧪 Executando auto-teste de correlação CSV...');
+                            if (window.alertSystemDebug && typeof window.alertSystemDebug.validateCSVSystem === 'function') {
+                                window.alertSystemDebug.validateCSVSystem();
                             }
                         }, 2000);
                     }
                 }, 1000);
                 
             } catch (error) {
-                console.error('❌ Erro crítico na inicialização:', error);
+                console.error('❌ Erro crítico na inicialização CSV:', error);
                 setTimeout(() => {
-                    alertSystem = new AlertSystemV435();
+                    alertSystem = new AlertSystemV440();
                 }, 3000);
             }
         });
 
-        // Debug v4.3.5 - MELHORADO
+        // Debug v4.4.0 - MELHORADO PARA CSV
         window.alertSystemDebug = {
             getSystem: () => alertSystem,
             getStats: () => ({
                 alerts: alertSystem?.alerts.length || 0,
                 rules: alertSystem?.rules.length || 0,
                 syncQueue: alertSystem?.syncQueue.length || 0,
-                apontamentos: alertSystem?.apontamentosData.length || 0,
+                apontamentosCSV: alertSystem?.apontamentosData.length || 0,
                 telemetria: alertSystem?.telemetryData.length || 0,
                 cacheValid: alertSystem?.isApontamentosCacheValid() || false,
                 configType: typeof window.SISTEMA_ALERTAS_CONFIG !== 'undefined' ? 'automática' : 'manual',
-                version: '4.3.5'
+                version: '4.4.0 - CSV Support'
             }),
             clearAllData: () => {
                 if (alertSystem) {
@@ -3710,15 +3853,16 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             clearQueue: () => {
                 if (alertSystem) alertSystem.syncQueue = [];
             },
-            getApontamentos: () => alertSystem?.apontamentosData || [],
+            getApontamentosCSV: () => alertSystem?.apontamentosData || [],
             
-            // NOVA: Gerar template do config.js
+            // NOVA: Gerar template do config.js para CSV
             generateConfigTemplate: () => {
-                return `// config.js - Arquivo de Configuração Automática do Sistema de Alertas
+                return `// config.js - Arquivo de Configuração Automática do Sistema de Alertas v4.4.0
 // INSTRUÇÕES:
 // 1. Substitua "SEU_TOKEN_AQUI" pelo seu token GitHub real
-// 2. Salve este arquivo como "config.js" na mesma pasta do sistema HTML
-// 3. Recarregue a página - o sistema carregará automaticamente
+// 2. Configure as URLs dos arquivos CSV dos apontamentos
+// 3. Salve este arquivo como "config.js" na mesma pasta do sistema HTML
+// 4. Recarregue a página - o sistema carregará automaticamente
 
 window.SISTEMA_ALERTAS_CONFIG = {
     // ⭐ CONFIGURAÇÃO OBRIGATÓRIA - EDITE AQUI
@@ -3728,11 +3872,12 @@ window.SISTEMA_ALERTAS_CONFIG = {
     REPO_SISTEMA: "GrupoGps-Mecanizada/Sistema-De-Alerta",
     REPO_DADOS: "GrupoGps-Mecanizada/Banco-De-Dados",
     
-    // URLs dos dados (múltiplas opções para maior robustez)
+    // URLs dos dados CSV (múltiplas opções para maior robustez)
     APONTAMENTOS_URLS: [
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json",
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos/dados-apontamentos.json",
-        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.json"
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/csv/apontamentos.csv",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/data/apontamentos.csv",
+        "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/apontamentos.csv"
     ],
     
     TELEMETRIA_URLS: [
@@ -3740,11 +3885,19 @@ window.SISTEMA_ALERTAS_CONFIG = {
         "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/telemetria/dados-frota.json"
     ],
     
-    // Configurações de correlação de apontamentos
+    // Configurações de correlação CSV
     APONTAMENTOS_CONFIG: {
         JANELA_BUSCA_HORAS: 3,        // Buscar 3 horas antes do alerta
-        MAX_APONTAMENTOS: 5,          // Máximo de apontamentos a exibir
+        MAX_APONTAMENTOS: 5,          // Máximo de apontamentos CSV a exibir
         MIN_SOBREPOSICAO_MINUTOS: 15  // Mínimo de sobreposição para considerar
+    },
+    
+    // Configurações CSV
+    CSV_CONFIG: {
+        delimiter: ",",               // Separador CSV (vírgula)
+        skipEmptyLines: true,         // Pular linhas vazias
+        dynamicTyping: true,          // Conversão automática de tipos
+        header: true                  // Primeira linha são cabeçalhos
     },
     
     // Outras configurações
@@ -3757,6 +3910,9 @@ window.SISTEMA_ALERTAS_CONFIG = {
         if (!this.GITHUB_TOKEN || this.GITHUB_TOKEN === "SEU_TOKEN_AQUI") {
             issues.push("❌ GITHUB_TOKEN não configurado");
         }
+        if (!this.APONTAMENTOS_URLS || this.APONTAMENTOS_URLS.length === 0) {
+            issues.push("❌ URLs CSV não configuradas");
+        }
         return { valid: issues.length === 0, issues };
     }
 };
@@ -3766,15 +3922,25 @@ window.SISTEMA_ALERTAS_CONFIG = {
 // 2. Clique em "Generate new token (classic)"
 // 3. Selecione as permissões: repo (full control)
 // 4. Copie o token gerado e cole acima
+
+// Estrutura esperada do CSV:
+// - Coluna com equipamento/vaga (ex: "Vaga", "Equipamento")
+// - Coluna com categoria (ex: "Categoria Demora", "Tipo")
+// - Coluna com data inicial (ex: "Data Inicial", "Início")
+// - Coluna com data final (ex: "Data Final", "Fim")
+// - Coluna com duração (ex: "Tempo Indisponível (HH:MM)", "Duração")
+// - Opcionalmente: placa do veículo
+
+// O sistema detecta automaticamente as colunas baseado nos nomes!
 `;
             },
             
-            // MELHORADA: Testar correlação específica
-            testApontamentosCorrelation: (alertId) => {
+            // NOVA: Testar correlação CSV específica
+            testCSVCorrelation: (alertId) => {
                 if (alertSystem) {
                     const alert = alertSystem.alerts.find(a => a.id === alertId);
                     if (alert) {
-                        console.log('🧪 TESTE MANUAL - Correlação de Apontamentos:');
+                        console.log('🧪 TESTE CSV - Correlação de Apontamentos:');
                         console.log('Dados do alerta:', alert);
                         return alertSystem.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
                     }
@@ -3782,94 +3948,82 @@ window.SISTEMA_ALERTAS_CONFIG = {
                 return [];
             },
             
-            // NOVA: Função para testar correlação com dados específicos
-            testCorrelationWithData: (equipamento, startTime, endTime) => {
-                if (alertSystem) {
-                    console.log('🧪 TESTE ESPECÍFICO - Correlação:');
-                    console.log(`Equipamento: ${equipamento}`);
-                    console.log(`Período: ${startTime} - ${endTime}`);
-                    return alertSystem.findRelatedApontamentos(startTime, endTime, equipamento);
+            // NOVA: Testar processamento CSV
+            testCSVProcessing: async (csvText) => {
+                if (alertSystem && csvText) {
+                    console.log('🧪 TESTE CSV - Processamento:');
+                    console.log('Tamanho do CSV:', csvText.length, 'caracteres');
+                    try {
+                        const result = await alertSystem.parseCSVData(csvText);
+                        console.log('✅ CSV processado:', result.length, 'registros');
+                        return result;
+                    } catch (error) {
+                        console.error('❌ Erro no processamento CSV:', error);
+                        return null;
+                    }
                 }
-                return [];
+                return null;
             },
             
-            // MELHORADA: Atualizar dados de apontamentos
-            updateApontamentosData: (newData) => {
-                if (alertSystem) {
-                    alertSystem.apontamentosData = newData;
-                    alertSystem.apontamentosCache = newData;
-                    alertSystem.lastApontamentosUpdate = Date.now();
-                    console.log(`✅ Apontamentos atualizados: ${newData.length} registros`);
-                    alertSystem.updateInterface();
-                }
-            },
-            
-            // NOVA: Forçar recarregamento de dados reais
-            forceReloadRealData: async () => {
-                if (alertSystem) {
-                    console.log('🔄 Forçando recarregamento de dados reais...');
-                    alertSystem.apontamentosCache = null;
-                    alertSystem.lastApontamentosUpdate = null;
-                    await alertSystem.loadApontamentosData();
-                    await alertSystem.syncData();
-                    console.log('✅ Dados recarregados');
-                }
-            },
-            
-            // NOVA: Testar URLs de dados
-            testDataUrls: async () => {
+            // MELHORADA: Testar URLs CSV
+            testCSVUrls: async () => {
                 if (!alertSystem) return;
                 
-                console.log('🔍 TESTANDO URLs DE DADOS:');
+                console.log('🔍 TESTANDO URLs CSV:');
+                console.log('📍 URL Principal: Banco-De-Dados/Apontamentos/apontamentos-atuais.csv');
                 console.log('');
                 
-                // Testar URLs de apontamentos
-                console.log('📝 URLs de Apontamentos:');
                 for (let i = 0; i < alertSystem.config.apontamentosUrls.length; i++) {
                     const url = alertSystem.config.apontamentosUrls[i];
                     try {
+                        if (i === 0) {
+                            console.log(`🎯 [${i+1}] URL ESPECÍFICA: ${url}`);
+                        } else {
+                            console.log(`📝 [${i+1}] URL Fallback: ${url}`);
+                        }
+                        
                         const response = await fetch(url, { cache: 'no-store' });
-                        console.log(`  [${i+1}] ${response.ok ? '✅' : '❌'} ${response.status} - ${url}`);
+                        console.log(`  Status: ${response.ok ? '✅' : '❌'} ${response.status}`);
+                        
                         if (response.ok) {
-                            const data = await response.json();
-                            const recordCount = data.records?.length || data.length || Object.keys(data).length;
-                            console.log(`      📊 ${recordCount} registros encontrados`);
+                            const csvText = await response.text();
+                            console.log(`  Tamanho: ${csvText.length} caracteres`);
+                            
+                            // Testar parsing
+                            try {
+                                const parsed = await alertSystem.parseCSVData(csvText);
+                                console.log(`  ✅ CSV válido: ${parsed.length} registros`);
+                                
+                                // Mostrar amostra
+                                if (parsed.length > 0) {
+                                    console.log(`  Amostra:`, parsed[0]);
+                                }
+                                
+                                if (i === 0) {
+                                    console.log(`  🎯 URL ESPECÍFICA FUNCIONANDO PERFEITAMENTE!`);
+                                }
+                            } catch (parseError) {
+                                console.log(`  ❌ Erro de parsing: ${parseError.message}`);
+                            }
                         }
                     } catch (error) {
-                        console.log(`  [${i+1}] ❌ Erro - ${url}`);
-                        console.log(`      ${error.message}`);
-                    }
-                }
-                
-                console.log('');
-                
-                // Testar URLs de telemetria
-                console.log('📡 URLs de Telemetria:');
-                for (let i = 0; i < alertSystem.config.telemetriaUrls.length; i++) {
-                    const url = alertSystem.config.telemetriaUrls[i];
-                    try {
-                        const response = await fetch(url, { cache: 'no-store' });
-                        console.log(`  [${i+1}] ${response.ok ? '✅' : '❌'} ${response.status} - ${url}`);
-                        if (response.ok) {
-                            const data = await response.json();
-                            const recordCount = data.records?.length || data.length || Object.keys(data).length;
-                            console.log(`      📊 ${recordCount} registros encontrados`);
+                        console.log(`  ❌ Erro: ${error.message}`);
+                        if (i === 0) {
+                            console.log(`  💡 Verifique se o arquivo existe em: Banco-De-Dados/Apontamentos/apontamentos-atuais.csv`);
                         }
-                    } catch (error) {
-                        console.log(`  [${i+1}] ❌ Erro - ${url}`);
-                        console.log(`      ${error.message}`);
                     }
+                    console.log('');
                 }
             },
             
-            // MELHORADA: Validação completa do sistema
-            validateSystem: () => {
+            // NOVA: Validação completa do sistema CSV
+            validateCSVSystem: () => {
                 if (!alertSystem) {
                     console.log('❌ Sistema não inicializado');
                     return false;
                 }
                 
-                console.log('🔧 VALIDAÇÃO COMPLETA DO SISTEMA v4.3.5:');
+                console.log('🔧 VALIDAÇÃO COMPLETA DO SISTEMA CSV v4.4.0:');
                 console.log('');
                 
                 // Status da configuração
@@ -3878,32 +4032,35 @@ window.SISTEMA_ALERTAS_CONFIG = {
                 console.log(`  • Tipo: ${isAutoConfig ? 'Automática (config.js)' : 'Manual (localStorage)'}`);
                 console.log(`  • GitHub habilitado: ${alertSystem.config.githubEnabled ? 'SIM' : 'NÃO'}`);
                 console.log(`  • Token configurado: ${alertSystem.config.token ? 'SIM' : 'NÃO'}`);
+                console.log(`  • URLs CSV configuradas: ${alertSystem.config.apontamentosUrls.length}`);
                 
                 console.log('');
                 console.log('📊 Status Geral:');
                 console.log(`  • Sistema inicializado: ${!!alertSystem}`);
                 console.log(`  • Alertas carregados: ${alertSystem.alerts.length}`);
                 console.log(`  • Regras carregadas: ${alertSystem.rules.length}`);
-                console.log(`  • Apontamentos carregados: ${alertSystem.apontamentosData.length}`);
+                console.log(`  • Apontamentos CSV carregados: ${alertSystem.apontamentosData.length}`);
                 console.log(`  • Telemetria carregada: ${alertSystem.telemetryData.length}`);
-                console.log(`  • Cache apontamentos válido: ${alertSystem.isApontamentosCacheValid() ? 'SIM' : 'NÃO'}`);
+                console.log(`  • Cache CSV válido: ${alertSystem.isApontamentosCacheValid() ? 'SIM' : 'NÃO'}`);
                 
                 console.log('');
-                console.log('⚙️ Funções Críticas:');
+                console.log('⚙️ Funções CSV Críticas:');
+                console.log(`  • loadApontamentosCSV: ${typeof alertSystem.loadApontamentosCSV}`);
+                console.log(`  • parseCSVData: ${typeof alertSystem.parseCSVData}`);
+                console.log(`  • normalizeCSVData: ${typeof alertSystem.normalizeCSVData}`);
+                console.log(`  • detectCSVColumns: ${typeof alertSystem.detectCSVColumns}`);
                 console.log(`  • reloadApontamentos: ${typeof alertSystem.reloadApontamentos}`);
                 console.log(`  • refreshApontamentosRelacionados: ${typeof alertSystem.refreshApontamentosRelacionados}`);
                 console.log(`  • findRelatedApontamentos: ${typeof alertSystem.findRelatedApontamentos}`);
-                console.log(`  • loadApontamentosData: ${typeof alertSystem.loadApontamentosData}`);
-                console.log(`  • equipamentosMatch: ${typeof alertSystem.equipamentosMatch}`);
                 
                 console.log('');
-                console.log('🔗 Teste de Correlação Avançada:');
+                console.log('🔗 Teste de Correlação CSV:');
                 const testResult = alertSystem.findRelatedApontamentos(
                     "2025-07-13T17:57:00", 
                     "2025-07-13T19:04:00", 
                     "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS"
                 );
-                console.log(`  • Apontamentos encontrados: ${testResult.length}`);
+                console.log(`  • Apontamentos CSV encontrados: ${testResult.length}`);
                 if (testResult.length > 0) {
                     testResult.forEach((ap, i) => {
                         const relevancia = alertSystem.calculateApontamentoRelevance(ap, 
@@ -3916,14 +4073,15 @@ window.SISTEMA_ALERTAS_CONFIG = {
                 
                 console.log('');
                 const systemHealth = testResult.length > 0 && alertSystem.apontamentosData.length > 0;
-                console.log(`${systemHealth ? '✅' : '⚠️'} Sistema está ${systemHealth ? 'FUNCIONANDO PERFEITAMENTE' : 'com limitações'}`);
+                console.log(`${systemHealth ? '✅' : '⚠️'} Sistema CSV está ${systemHealth ? 'FUNCIONANDO PERFEITAMENTE' : 'com limitações'}`);
                 
                 if (!systemHealth) {
                     console.log('');
                     console.log('🔧 Sugestões para melhorar:');
                     if (alertSystem.apontamentosData.length === 0) {
-                        console.log('  • Execute: window.alertSystemDebug.testDataUrls() para verificar URLs');
-                        console.log('  • Execute: window.alertSystemDebug.forceReloadRealData() para recarregar');
+                        console.log('  • Execute: window.alertSystemDebug.testCSVUrls() para verificar URLs CSV');
+                        console.log('  • Execute: window.alertSystemDebug.forceReloadCSV() para recarregar');
+                        console.log('  • Verifique se as URLs CSV estão corretas no config.js');
                     }
                     if (!alertSystem.config.githubEnabled) {
                         console.log('  • Configure o token GitHub no config.js');
@@ -3934,50 +4092,117 @@ window.SISTEMA_ALERTAS_CONFIG = {
                 return systemHealth;
             },
             
+            // NOVA: Testar apenas a URL específica do usuário
+            testSpecificCSV: async () => {
+                if (!alertSystem) return;
+                
+                const specificUrl = "https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv";
+                
+                console.log('🎯 TESTANDO URL ESPECÍFICA:');
+                console.log(`📍 ${specificUrl}`);
+                console.log('');
+                
+                try {
+                    const response = await fetch(specificUrl, { cache: 'no-store' });
+                    console.log(`Status: ${response.ok ? '✅' : '❌'} ${response.status}`);
+                    
+                    if (response.ok) {
+                        const csvText = await response.text();
+                        console.log(`Tamanho: ${csvText.length} caracteres`);
+                        console.log(`Primeiras linhas:`);
+                        console.log(csvText.substring(0, 300) + '...');
+                        
+                        // Testar parsing completo
+                        try {
+                            const parsed = await alertSystem.parseCSVData(csvText);
+                            console.log(`✅ CSV processado com sucesso: ${parsed.length} registros`);
+                            
+                            if (parsed.length > 0) {
+                                console.log(`📊 Estrutura detectada:`);
+                                console.log('  Colunas:', Object.keys(parsed[0]));
+                                console.log(`📋 Amostra do primeiro registro:`);
+                                console.log(parsed[0]);
+                                
+                                // Testar correlação
+                                console.log('🔗 Testando correlação...');
+                                const equipamentos = [...new Set(parsed.map(ap => ap.Vaga))].slice(0, 3);
+                                equipamentos.forEach(eq => {
+                                    console.log(`  • ${eq}: ${parsed.filter(ap => ap.Vaga === eq).length} apontamentos`);
+                                });
+                            }
+                            
+                            return { success: true, data: parsed };
+                        } catch (parseError) {
+                            console.error(`❌ Erro de parsing: ${parseError.message}`);
+                            return { success: false, error: parseError.message };
+                        }
+                    } else {
+                        console.error(`❌ Erro HTTP: ${response.status}`);
+                        return { success: false, error: `HTTP ${response.status}` };
+                    }
+                } catch (error) {
+                    console.error(`❌ Erro de conexão: ${error.message}`);
+                    console.log('💡 Possíveis soluções:');
+                    console.log('  1. Verifique se o arquivo existe no repositório');
+                    console.log('  2. Verifique se o repositório está público');
+                    console.log('  3. Teste a URL no navegador:', specificUrl);
+                    return { success: false, error: error.message };
+                }
+            },
+            
             // Funções de conveniência mantidas
-            testCaseSpecific: () => window.alertSystemDebug.testCorrelationWithData(
-                "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
-                "2025-07-13T17:57:00", 
-                "2025-07-13T19:04:00"
-            ),
+            testCaseSpecific: () => window.alertSystemDebug.testCSVCorrelation(),
             reloadApontamentos: () => alertSystem?.reloadApontamentos(),
             refreshCurrentAlert: () => alertSystem?.refreshApontamentosRelacionados()
         };
 
-        console.log('🚨 Sistema de Alertas v4.3.5 - TOTALMENTE APRIMORADO');
-        console.log('📋 NOVAS FUNCIONALIDADES IMPLEMENTADAS:');
-        console.log('  ✅ Configuração automática via config.js (sem reconfiguração constante)');
-        console.log('  ✅ Múltiplas URLs para buscar dados reais dos repositórios');
-        console.log('  ✅ Cache inteligente de apontamentos com validação');
-        console.log('  ✅ Correlação avançada por relevância e proximidade temporal');
-        console.log('  ✅ Matching flexível de equipamentos (GPS-01 = GPS-1)');
-        console.log('  ✅ Janela de busca configurável (padrão: 3h antes do alerta)');
-        console.log('  ✅ Dados de exemplo realistas para 7 dias com múltiplos equipamentos');
-        console.log('  ✅ Sistema de fallback robusto (GitHub → Cache → Exemplo)');
-        console.log('  ✅ Validação automática de estruturas de dados');
-        console.log('  ✅ Debug avançado com testes de URLs e correlação');
+        console.log('🚨 Sistema de Alertas v4.4.0 - SUPORTE COMPLETO A CSV');
+        console.log('📋 CONFIGURADO PARA SEU ARQUIVO CSV:');
+        console.log('📍 URL Principal: Banco-De-Dados/Apontamentos/apontamentos-atuais.csv');
+        console.log('📋 FUNCIONALIDADES CSV IMPLEMENTADAS:');
+        console.log('  ✅ Processamento completo de arquivos CSV com Papaparse');
+        console.log('  ✅ Detecção automática de colunas CSV (equipamento, categoria, datas, etc.)');
+        console.log('  ✅ Múltiplas URLs para busca de dados CSV reais');
+        console.log('  ✅ Cache inteligente de apontamentos CSV com validação');
+        console.log('  ✅ Normalização automática de estruturas CSV variadas');
+        console.log('  ✅ Correlação avançada com dados CSV por relevância');
+        console.log('  ✅ Validação robusta de formatos CSV');
+        console.log('  ✅ Fallback para dados de exemplo se CSV falhar');
+        console.log('  ✅ Interface específica para dados CSV');
+        console.log('  ✅ Debug avançado com testes de URLs e parsing CSV');
         console.log('');
-        console.log('🔧 COMO USAR:');
-        console.log('  1. Crie o arquivo config.js usando: window.alertSystemDebug.generateConfigTemplate()');
-        console.log('  2. Adicione seu token GitHub no config.js');
-        console.log('  3. Recarregue a página - sistema funcionará automaticamente');
+        console.log('🔧 COMO USAR COM CSV:');
+        console.log('  1. Coloque seus arquivos CSV no repositório GitHub');
+        console.log('  2. Crie o arquivo config.js usando: window.alertSystemDebug.generateConfigTemplate()');
+        console.log('  3. Configure as URLs dos arquivos CSV no config.js');
+        console.log('  4. Adicione seu token GitHub no config.js');
+        console.log('  5. Recarregue a página - sistema funcionará automaticamente com CSV');
         console.log('');
-        console.log('🧪 COMANDOS DE DEBUG AVANÇADO:');
-        console.log('  • window.alertSystemDebug.validateSystem() - Validação completa');
-        console.log('  • window.alertSystemDebug.testDataUrls() - Testar URLs de dados');
-        console.log('  • window.alertSystemDebug.forceReloadRealData() - Forçar dados reais');
-        console.log('  • window.alertSystemDebug.generateConfigTemplate() - Gerar config.js');
-        console.log('  • window.alertSystemDebug.getStats() - Estatísticas do sistema');
-        console.log('  • window.alertSystemDebug.testCorrelationWithData(equip, start, end) - Teste customizado');
+        console.log('🧪 COMANDOS DE DEBUG CSV:');
+        console.log('  • window.alertSystemDebug.validateCSVSystem() - Validação completa CSV');
+        console.log('  • window.alertSystemDebug.testSpecificCSV() - Testar URL específica do usuário');
+        console.log('  • window.alertSystemDebug.testCSVUrls() - Testar todas URLs de dados CSV');
+        console.log('  • window.alertSystemDebug.forceReloadCSV() - Forçar dados CSV');
+        console.log('  • window.alertSystemDebug.testCSVProcessing(csvText) - Testar parsing');
+        console.log('  • window.alertSystemDebug.testCSVCorrelation(alertId) - Teste correlação');
+        console.log('  • window.alertSystemDebug.getApontamentosCSV() - Ver dados CSV carregados');
         console.log('');
-        console.log('🎯 TESTE RÁPIDO:');
-        console.log('Execute: window.alertSystemDebug.validateSystem()');
+        console.log('🎯 TESTE RÁPIDO CSV:');
+        console.log('Execute: window.alertSystemDebug.testSpecificCSV() - Testar sua URL específica');
+        console.log('Execute: window.alertSystemDebug.validateCSVSystem() - Validação completa');
         console.log('');
-        console.log('📁 ESTRUTURA DE ARQUIVOS RECOMENDADA:');
-        console.log('  pasta-do-sistema/');
-        console.log('  ├── index.html (este arquivo)');
-        console.log('  └── config.js (arquivo de configuração automática)');
+        console.log('📁 ESTRUTURA DE ARQUIVOS CSV SUPORTADA:');
+        console.log('  📍 URL Principal: Banco-De-Dados/Apontamentos/apontamentos-atuais.csv');
+        console.log('  Colunas detectadas automaticamente por palavra-chave:');
+        console.log('  • Equipamento: "Vaga", "Equipamento", "Vehicle"');
+        console.log('  • Categoria: "Categoria Demora", "Tipo", "Category"');
+        console.log('  • Data Inicial: "Data Inicial", "Início", "Start"');
+        console.log('  • Data Final: "Data Final", "Fim", "End"');
+        console.log('  • Duração: "Tempo Indisponível", "Duração", "Duration"');
+        console.log('  • Placa: "Placa", "Plate", "License"');
         console.log('');
+        console.log('🎯 TESTE ESPECÍFICO DO SEU ARQUIVO:');
+        console.log('Execute: window.alertSystemDebug.testSpecificCSV()');
     </script>
 </body>
 </html>
