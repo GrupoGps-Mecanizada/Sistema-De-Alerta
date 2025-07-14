@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752502753237,
+  "timestamp": 1752502868247,
   "version": "4.3.5",
   "type": "operational",
   "total": 21,
   "alerts": [
     {
-      "id": "w3ooai",
+      "id": "vjcbsj",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 07",
       "tipo": "Status",
       "identificador": "Improdutivo (Ocioso)",
@@ -20,10 +20,10 @@
       "fullTimeRange": "14/07/2025 08:35 - 09:29",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1752502705421,
-      "fullDateTime": "14/07/2025 11:18",
+      "timestamp": 1752502865236,
+      "fullDateTime": "14/07/2025 11:21",
       "date": "14/07/2025",
-      "time": "11:18:25",
+      "time": "11:21:05",
       "status": "pendente",
       "placa": "",
       "motorista": "",
