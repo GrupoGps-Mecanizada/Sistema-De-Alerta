@@ -1,9 +1,60 @@
 {
-  "timestamp": 1752573537175,
+  "timestamp": 1752573837180,
   "version": "5.0",
   "type": "operational",
-  "total": 28,
+  "total": 29,
   "alerts": [
+    {
+      "id": "pxbfin",
+      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 07",
+      "tipo": "Status",
+      "identificador": "off",
+      "ruleId": 1752152405852,
+      "ruleName": "Motor Desligado Prolongado",
+      "severity": "alto",
+      "duration": "54min",
+      "durationMinutes": 54.016666666666666,
+      "startTime": "2025-07-14T11:35:12.000Z",
+      "endTime": "2025-07-14T12:29:13.000Z",
+      "timeRange": "14/07/2025 08:35 - 09:29",
+      "consolidated": true,
+      "originalCount": 2,
+      "timestamp": 1752573778143,
+      "fullDateTime": "15/07/2025 07:02",
+      "date": "15/07/2025",
+      "time": "07:02:58",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Troca de Equipamento",
+          "inicio": "14/07/2025 09:21",
+          "fim": "14/07/2025 09:21",
+          "duracao": "0min",
+          "duracaoMinutos": 0.11666666666666667
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "14/07/2025 08:22",
+          "fim": "14/07/2025 09:04",
+          "duracao": "43min",
+          "duracaoMinutos": 42.61666666666667
+        },
+        {
+          "categoria": "Abastecimento (Água)",
+          "inicio": "14/07/2025 07:32",
+          "fim": "14/07/2025 08:07",
+          "duracao": "35min",
+          "duracaoMinutos": 35.11666666666667
+        }
+      ],
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - motor desligado há 54min"
+    },
     {
       "id": "rcgw83",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 07",
