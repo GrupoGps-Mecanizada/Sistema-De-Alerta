@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752540657182,
+  "timestamp": 1752540957181,
   "version": "4.3.5",
   "type": "operational",
   "total": 35,
   "alerts": [
     {
-      "id": "i076dx",
+      "id": "gl2e2q",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 07",
       "tipo": "Status",
       "identificador": "Improdutivo (Ocioso)",
@@ -20,10 +20,10 @@
       "fullTimeRange": "14/07/2025 08:35 - 09:29",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1752540597654,
-      "fullDateTime": "14/07/2025 21:49",
+      "timestamp": 1752540897292,
+      "fullDateTime": "14/07/2025 21:54",
       "date": "14/07/2025",
-      "time": "21:49:57",
+      "time": "21:54:57",
       "status": "pendente",
       "placa": "",
       "motorista": "",
