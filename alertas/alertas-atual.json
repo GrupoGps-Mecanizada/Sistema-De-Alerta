@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752583437175,
+  "timestamp": 1752583737168,
   "version": "5.0",
   "type": "operational",
   "total": 51,
   "alerts": [
     {
-      "id": "j9hbx4",
+      "id": "kom3da",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
       "tipo": "Status",
       "identificador": "off",
@@ -19,10 +19,10 @@
       "timeRange": "15/07/2025 06:25 - 07:10",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1752583377797,
-      "fullDateTime": "15/07/2025 09:42",
+      "timestamp": 1752583677285,
+      "fullDateTime": "15/07/2025 09:47",
       "date": "15/07/2025",
-      "time": "09:42:57",
+      "time": "09:47:57",
       "status": "pendente",
       "placa": "",
       "motorista": "",
