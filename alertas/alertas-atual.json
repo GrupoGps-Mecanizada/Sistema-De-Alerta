@@ -1,9 +1,60 @@
 {
-  "timestamp": 1752582537171,
+  "timestamp": 1752582837171,
   "version": "5.0",
   "type": "operational",
-  "total": 49,
+  "total": 50,
   "alerts": [
+    {
+      "id": "6h9jsu",
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
+      "tipo": "Status",
+      "identificador": "off",
+      "ruleId": 1752152405852,
+      "ruleName": "Motor Desligado Prolongado",
+      "severity": "alto",
+      "duration": "45min",
+      "durationMinutes": 45.333333333333336,
+      "startTime": "2025-07-15T09:25:33.000Z",
+      "endTime": "2025-07-15T10:10:53.000Z",
+      "timeRange": "15/07/2025 06:25 - 07:10",
+      "consolidated": true,
+      "originalCount": 2,
+      "timestamp": 1752582777809,
+      "fullDateTime": "15/07/2025 09:32",
+      "date": "15/07/2025",
+      "time": "09:32:57",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Abastecimento (Combustível) ",
+          "inicio": "15/07/2025 07:10",
+          "fim": "15/07/2025 07:50",
+          "duracao": "40min",
+          "duracaoMinutos": 39.55
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "15/07/2025 08:29",
+          "fim": "15/07/2025 08:48",
+          "duracao": "19min",
+          "duracaoMinutos": 19.216666666666665
+        },
+        {
+          "categoria": "Aguardando Área",
+          "inicio": "15/07/2025 08:51",
+          "fim": "15/07/2025 09:14",
+          "duracao": "23min",
+          "duracaoMinutos": 22.6
+        }
+      ],
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - motor desligado há 45min"
+    },
     {
       "id": "524l1s",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
