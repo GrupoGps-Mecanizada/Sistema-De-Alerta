@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Alertas GrupoGPS</title>
+    <title>Sistema de Alertas GrupoGPS v5.0</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -226,15 +227,6 @@
             margin-bottom: 1.5rem;
         }
 
-        .form-group.half {
-            flex: 1;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-
         .form-group label {
             font-weight: 600;
             color: #2c3e50;
@@ -336,25 +328,40 @@
             font-weight: 500;
         }
 
-        /* Apontamentos Card */
-        .apontamentos-card {
-            background: rgba(52, 152, 219, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            border-radius: 8px;
-            padding: 1rem;
+        /* Apontamentos Section */
+        .apontamentos-section {
             margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .apontamentos-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #5a6c7d;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .apontamento-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.4rem;
+            border-left: 3px solid #3498db;
+            font-size: 0.85rem;
         }
 
-        .apontamento-item:last-child {
-            border-bottom: none;
+        .apontamento-categoria {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .apontamento-tempo {
+            color: #7f8c8d;
+            font-size: 0.8rem;
         }
 
         /* Status Badge */
@@ -646,35 +653,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Report Table */
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .report-table th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .report-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9rem;
-        }
-
-        .report-table tr:hover {
-            background: rgba(102, 126, 234, 0.05);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .main-content {
@@ -709,10 +687,6 @@
                 width: 100%;
                 justify-content: flex-start;
             }
-
-            .form-row {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
@@ -722,7 +696,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="header-brand">
-                    <h1>🚨 Sistema de Alertas GrupoGPS</h1>
+                    <h1>Sistema de Alertas GrupoGPS v5.0</h1>
                 </div>
                 
                 <div class="header-controls">
@@ -738,16 +712,16 @@
         <nav class="nav-tabs">
             <div class="nav-tabs-container">
                 <div class="nav-tab active" onclick="switchTab('history')">
-                    <span>📋 Histórico de Alertas</span>
+                    <span>Histórico de Alertas</span>
                 </div>
                 <div class="nav-tab" onclick="switchTab('rules')">
-                    <span>⚙️ Configurar Regras</span>
+                    <span>Configurar Regras</span>
                 </div>
                 <div class="nav-tab" onclick="switchTab('reports')">
-                    <span>📊 Relatórios</span>
+                    <span>Relatórios</span>
                 </div>
                 <div class="nav-tab" onclick="switchTab('config')">
-                    <span>🔧 Configurações</span>
+                    <span>Configurações</span>
                 </div>
             </div>
         </nav>
@@ -826,16 +800,13 @@
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                            <h3 style="color: #2c3e50;">📋 Histórico de Alertas</h3>
+                            <h3 style="color: #2c3e50;">Histórico de Alertas</h3>
                             <div style="display: flex; gap: 1rem;">
-                                <button class="btn info" onclick="reloadApontamentos()">
-                                    <span>🔗 Recarregar Apontamentos</span>
-                                </button>
                                 <button class="btn warning" onclick="forceSync()">
-                                    <span>🔄 Atualizar</span>
+                                    <span>Atualizar</span>
                                 </button>
                                 <button class="btn secondary" onclick="clearAllAlerts()">
-                                    <span>🗑️ Limpar Histórico</span>
+                                    <span>Limpar Histórico</span>
                                 </button>
                             </div>
                         </div>
@@ -855,13 +826,13 @@
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                            <h3 style="color: #2c3e50;">⚙️ Configurar Regras de Alerta</h3>
+                            <h3 style="color: #2c3e50;">Configurar Regras de Alerta</h3>
                             <div style="display: flex; gap: 1rem;">
                                 <button class="btn secondary" onclick="syncRulesFromGitHub()">
-                                    <span>🔄 Sincronizar</span>
+                                    <span>Sincronizar</span>
                                 </button>
                                 <button class="btn" onclick="openRuleModal()">
-                                    <span>➕ Nova Regra</span>
+                                    <span>Nova Regra</span>
                                 </button>
                             </div>
                         </div>
@@ -880,7 +851,7 @@
             <div id="reports-tab" class="tab-content">
                 <!-- Filtros de Relatório -->
                 <div class="filters-panel">
-                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">📊 Filtros do Relatório</h4>
+                    <h4 style="color: #2c3e50; margin-bottom: 1rem;">Filtros do Relatório</h4>
                     <div class="filters-grid">
                         <div class="form-group">
                             <label>Data Inicial:</label>
@@ -909,10 +880,10 @@
                     </div>
                     <div style="margin-top: 1rem; display: flex; gap: 1rem;">
                         <button class="btn" onclick="generateReport()">
-                            <span>📊 Gerar Relatório</span>
+                            <span>Gerar Relatório</span>
                         </button>
                         <button class="btn success" onclick="exportToExcel()">
-                            <span>📈 Exportar Excel</span>
+                            <span>Exportar Excel</span>
                         </button>
                     </div>
                 </div>
@@ -920,7 +891,7 @@
                 <!-- Tabela de Relatório -->
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
-                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">📋 Dados Detalhados</h3>
+                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">Dados Detalhados</h3>
                         <div id="reportTable" style="overflow-x: auto;">
                             <div class="loading-state">
                                 <div>Gere um relatório para ver os dados</div>
@@ -934,11 +905,11 @@
             <div id="config-tab" class="tab-content">
                 <div class="glass-panel">
                     <div style="padding: 2rem;">
-                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">🔧 Configurações do Sistema</h3>
+                        <h3 style="color: #2c3e50; margin-bottom: 2rem;">Configurações do Sistema</h3>
                         
                         <!-- Configurações GitHub -->
                         <div class="filters-panel">
-                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🔐 Integração GitHub</h4>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Integração GitHub</h4>
                             <div class="filters-grid">
                                 <div class="form-group">
                                     <label>Repositório:</label>
@@ -956,19 +927,34 @@
                                     <label>&nbsp;</label>
                                     <div style="display: flex; gap: 0.5rem;">
                                         <button class="btn" onclick="saveConfig()">
-                                            <span>💾 Salvar</span>
+                                            <span>Salvar</span>
                                         </button>
                                         <button class="btn info" onclick="testGitHubConnection()">
-                                            <span>🧪 Testar</span>
+                                            <span>Testar</span>
                                         </button>
                                     </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Instruções de Token -->
+                            <div style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px; border-left: 4px solid #3498db;">
+                                <strong>Como criar um Personal Access Token:</strong>
+                                <ol style="margin: 0.5rem 0; padding-left: 1.5rem; line-height: 1.6;">
+                                    <li>Acesse GitHub → Settings → Developer settings → Personal access tokens</li>
+                                    <li>Clique em "Generate new token" → "Generate new token (classic)"</li>
+                                    <li>Nome: "Sistema Alertas GrupoGPS"</li>
+                                    <li><strong>Permissões necessárias:</strong> repo, read:user</li>
+                                    <li>Copie o token e cole no campo acima</li>
+                                </ol>
+                                <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #2980b9;">
+                                    <strong>O sistema criará automaticamente:</strong> pastas /alertas, /regras, /config, /relatorios
                                 </div>
                             </div>
                         </div>
 
                         <!-- Status do Sistema -->
                         <div class="filters-panel">
-                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">📊 Status do Sistema</h4>
+                            <h4 style="color: #2c3e50; margin-bottom: 1rem;">Status do Sistema</h4>
                             <div id="systemStatus">
                                 <div class="loading-state" style="height: 150px;">
                                     <div>Verificando configurações...</div>
@@ -982,7 +968,7 @@
 
         <!-- Footer -->
         <footer style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.2); padding: 2rem; text-align: center; color: #5a6c7d; font-size: 0.9rem;">
-            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas</p>
+            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas v5.0</p>
         </footer>
     </div>
 
@@ -990,36 +976,49 @@
     <div id="ruleModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">⚙️ Nova Regra de Alerta</h2>
+                <h2 class="modal-title" id="modalTitle">Nova Regra de Alerta</h2>
                 <span class="close" onclick="closeRuleModal()">&times;</span>
             </div>
             
             <form id="ruleForm">
                 <div class="form-group">
                     <label>Nome da Regra:</label>
-                    <input type="text" id="ruleName" placeholder="Ex: Equipamento Improdutivo" required>
+                    <input type="text" id="ruleName" placeholder="Ex: Refeição Prolongada" required>
                 </div>
 
                 <div class="form-group">
                     <label>Tipo de Dados:</label>
                     <select id="ruleType" onchange="toggleRuleFields()">
-                        <option value="improdutivo">📊 Improdutividade (Production Status)</option>
-                        <option value="apontamento">📝 Apontamentos Específicos</option>
+                        <option value="status">Status de Telemetria</option>
+                        <option value="apontamento">Apontamentos</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="statusField">
+                    <label>Status do Motor:</label>
+                    <select id="ruleStatus">
+                        <option value="">Qualquer status</option>
+                        <option value="on">Motor Ligado</option>
+                        <option value="off">Motor Desligado</option>
+                        <option value="stopped">Parado Ligado</option>
+                        <option value="maintenance">Em Manutenção</option>
+                        <option value="out_of_plant">Fora da Planta</option>
+                        <option value="production_off">Equipamento Improdutivo</option>
                     </select>
                 </div>
 
                 <div class="form-group" id="apontamentoField" style="display: none;">
-                    <label>Categoria de Apontamento:</label>
+                    <label>Apontamento:</label>
                     <select id="ruleApontamento">
                         <option value="">Qualquer apontamento</option>
-                        <option value="Refeição Motorista">Refeição Motorista</option>
-                        <option value="Aguardando Área">Aguardando Área</option>
-                        <option value="Descarregando equipamento">Descarregando equipamento</option>
-                        <option value="Abastecimento">Abastecimento</option>
                         <option value="Documentação">Documentação</option>
+                        <option value="Abastecimento">Abastecimento</option>
+                        <option value="Refeição Motorista">Refeição Motorista</option>
                         <option value="Preparação">Preparação</option>
+                        <option value="Aguardando Área">Aguardando Área</option>
                         <option value="Bloqueio">Bloqueio</option>
-                        <option value="Pequenas manutenções">Pequenas manutenções</option>
+                        <option value="Descarregamento">Descarregamento</option>
+                        <option value="Pequenas manutenções">Pequenas Manutenções</option>
                     </select>
                 </div>
 
@@ -1034,19 +1033,7 @@
                     </div>
                     <div class="form-group">
                         <label>Duração (minutos):</label>
-                        <input type="number" id="ruleTimeValue" min="1" placeholder="60" required>
-                    </div>
-                </div>
-
-                <!-- NOVA FUNCIONALIDADE: Range de Horário -->
-                <div class="form-row">
-                    <div class="form-group half">
-                        <label>🕐 Hora Início (opcional):</label>
-                        <input type="time" id="ruleTimeStart" placeholder="08:00">
-                    </div>
-                    <div class="form-group half">
-                        <label>🕕 Hora Fim (opcional):</label>
-                        <input type="time" id="ruleTimeEnd" placeholder="18:00">
+                        <input type="number" id="ruleTimeValue" min="1" placeholder="45" required>
                     </div>
                 </div>
 
@@ -1062,15 +1049,15 @@
 
                 <div class="form-group">
                     <label>Mensagem do Alerta:</label>
-                    <input type="text" id="ruleMessage" placeholder="Ex: {equipamento} com improdutividade há {tempo}" required>
+                    <input type="text" id="ruleMessage" placeholder="Ex: {equipamento} com {tipo} há {tempo}" required>
                 </div>
 
                 <div style="display: flex; gap: 1rem; margin-top: 2rem;">
                     <button type="submit" class="btn success">
-                        <span>💾 Salvar Regra</span>
+                        <span>Salvar Regra</span>
                     </button>
                     <button type="button" class="btn secondary" onclick="closeRuleModal()">
-                        <span>❌ Cancelar</span>
+                        <span>Cancelar</span>
                     </button>
                 </div>
             </form>
@@ -1081,7 +1068,7 @@
     <div id="investigationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">🔍 Investigar Alerta</h2>
+                <h2 class="modal-title">Investigar Alerta</h2>
                 <span class="close" onclick="closeInvestigationModal()">&times;</span>
             </div>
             
@@ -1108,15 +1095,11 @@
                         <input type="text" id="invSupervisor">
                     </div>
                     <div class="form-group">
-                        <label>Data/Hora do Alerta Gerado:</label>
-                        <input type="text" id="invDataHoraAlerta" readonly>
+                        <label>Data/Hora do Alerta:</label>
+                        <input type="text" id="invDataHora" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Período do Ocorrido:</label>
-                        <input type="text" id="invPeriodoOcorrido" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Duração Total:</label>
+                        <label>Tempo Total:</label>
                         <input type="text" id="invTempoTotal" readonly>
                     </div>
                 </div>
@@ -1130,19 +1113,6 @@
                         <option value="fechado">Fechado</option>
                     </select>
                 </div>
-
-                <!-- NOVA SEÇÃO: Apontamentos Relacionados -->
-                <div id="apontamentosSection" class="form-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <label>🔗 Apontamentos Relacionados:</label>
-                        <button type="button" class="btn small info" onclick="refreshApontamentosRelacionados()">
-                            <span>🔄 Atualizar</span>
-                        </button>
-                    </div>
-                    <div id="apontamentosRelacionados" class="apontamentos-card">
-                        <div style="text-align: center; color: #7f8c8d;">Nenhum apontamento encontrado</div>
-                    </div>
-                </div>
                 
                 <div class="form-group">
                     <label>Observações:</label>
@@ -1154,26 +1124,26 @@
                     <textarea id="invAcoes" placeholder="Descreva as ações corretivas implementadas..."></textarea>
                 </div>
 
-                <!-- WhatsApp Copy ATUALIZADO -->
+                <!-- WhatsApp Copy -->
                 <div class="form-group">
-                    <label>📱 Copiar para WhatsApp:</label>
+                    <label>Copiar para WhatsApp:</label>
                     <div class="whatsapp-text" id="whatsappText">
                         Preencha os dados acima para gerar o texto
                     </div>
                     <button type="button" class="btn info" onclick="copyToWhatsApp()">
-                        <span>📋 Copiar Texto WhatsApp</span>
+                        <span>Copiar Texto WhatsApp</span>
                     </button>
                 </div>
                 
                 <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
                     <button type="button" class="btn danger" onclick="deleteAlert()">
-                        <span>🗑️ Excluir Alerta</span>
+                        <span>Excluir Alerta</span>
                     </button>
                     <button type="button" class="btn secondary" onclick="closeInvestigationModal()">
-                        <span>❌ Cancelar</span>
+                        <span>Cancelar</span>
                     </button>
                     <button type="button" class="btn success" onclick="saveInvestigation()">
-                        <span>💾 Salvar</span>
+                        <span>Salvar</span>
                     </button>
                 </div>
             </div>
@@ -1181,13 +1151,18 @@
     </div>
 
     <script>
-        // Sistema de Alertas v4.3.5 - GrupoGPS
-        // NOVA ATUALIZAÇÃO: Nova lógica production_status + Correlação apontamentos + Range horário + Período completo
+        // Sistema de Alertas v5.0 - GrupoGPS
+        // CORREÇÕES CRÍTICAS: 
+        // 1. Mudança de JSON para CSV para apontamentos
+        // 2. Redução de logs
+        // 3. Busca inteligente de apontamentos próximos
+        // 4. Garantia de dados reais
+        // 5. Lógica de consolidação aprimorada
         
-        class AlertSystemV435 {
+        class AlertSystemV5 {
             constructor() {
                 this.telemetryData = [];
-                this.apontamentosData = []; // NOVA: Dados de apontamentos
+                this.apontamentosData = [];
                 this.rules = [];
                 this.alerts = [];
                 this.isProcessing = false;
@@ -1203,12 +1178,16 @@
                     lastDataLoad: null
                 };
 
+                // Configurações de proximidade temporal para apontamentos
+                this.APONTAMENTO_TIME_WINDOW = 120; // minutos antes e depois do alerta
+                this.MAX_APONTAMENTOS_PER_ALERT = 3; // máximo de apontamentos relacionados
+
                 this.initializeSystem();
             }
 
             async initializeSystem() {
-                console.log('🚨 Sistema de Alertas - Inicializando com novas funcionalidades...');
-                this.updateSyncStatus('loading', 'Iniciando...');
+                console.log('Sistema de Alertas v5.0 - Inicializando...');
+                this.updateSyncStatus('loading', 'Iniciando v5.0...');
 
                 try {
                     this.loadConfig();
@@ -1216,7 +1195,6 @@
                     this.initDates();
                     
                     await this.loadDataWithPriority();
-                    await this.loadApontamentosData(); // NOVA: Carregar apontamentos
                     
                     this.updateInterface();
                     this.startPeriodicSync();
@@ -1224,309 +1202,145 @@
                     
                     window.alertSystem = this;
                     
-                    this.updateSyncStatus('success', 'Sistema ativo');
-                    console.log('✅ Sistema inicializado com todas as correções aplicadas.');
+                    this.updateSyncStatus('success', 'Sistema v5.0 ativo');
+                    console.log('✅ Sistema inicializado com sucesso.');
                     
                 } catch (error) {
-                    console.error('❌ Erro crítico na inicialização:', error);
+                    console.error('❌ Erro na inicialização:', error);
                     this.updateSyncStatus('error', 'Falha na inicialização');
                     setTimeout(() => this.initializeSystem(), 3000);
                 }
             }
 
-            // NOVA FUNCIONALIDADE: Carregar dados de apontamentos reais
-            async loadApontamentosData() {
-                try {
-                    console.log('📝 Carregando dados de apontamentos...');
-                    
-                    // CORRIGIDO: Tentar carregar dados reais dos apontamentos
-                    try {
-                        // Primeiro tentar do GitHub
-                        if (this.config.githubEnabled && this.config.token) {
-                            const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/latest-apontamentos-data.json?cache_bust=${Date.now()}`;
-                            const response = await this.fetchData(url, true);
-                            if (response && response.records) {
-                                this.apontamentosData = response.records;
-                                console.log(`✅ Apontamentos carregados do GitHub: ${this.apontamentosData.length} registros`);
-                                return;
-                            }
-                        }
-                    } catch (error) {
-                        console.warn('⚠️ Não foi possível carregar apontamentos do GitHub:', error.message);
-                    }
-
-                    // Fallback: Dados de exemplo específicos para o caso de teste
-                    this.apontamentosData = [
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS", // Equipamento correto
-                            "Categoria Demora": "Descarregando equipamento",
-                            "Data Inicial": "13/07/2025 18:15:00", // Dentro do período do alerta (17:57-19:04)
-                            "Data Final": "13/07/2025 18:45:00",
-                            "Tempo Indisponível (HH:MM)": "00:30"
-                        },
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
-                            "Categoria Demora": "Documentação",
-                            "Data Inicial": "13/07/2025 16:00:00", // Antes do período (dentro da janela de 2h)
-                            "Data Final": "13/07/2025 16:15:00",
-                            "Tempo Indisponível (HH:MM)": "00:15"
-                        },
-                        {
-                            "Placa": "ANF-2676",
-                            "Vaga": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
-                            "Categoria Demora": "Início de turno",
-                            "Data Inicial": "13/07/2025 16:30:00", // Antes do período (dentro da janela de 2h)
-                            "Data Final": "13/07/2025 17:00:00",
-                            "Tempo Indisponível (HH:MM)": "00:30"
-                        },
-                        {
-                            "Placa": "EGC2985",
-                            "Vaga": "CAMINHÃO ALTA PRESSÃO - GPS - 08 - 24 HS",
-                            "Categoria Demora": "Refeição Motorista",
-                            "Data Inicial": "13/07/2025 01:00:45",
-                            "Data Final": "13/07/2025 02:00:48",
-                            "Tempo Indisponível (HH:MM)": "01:00"
-                        }
-                    ];
-
-                    console.log(`✅ Apontamentos carregados (dados de exemplo): ${this.apontamentosData.length} registros`);
-                    
-                    // DEBUG: Mostrar dados carregados
-                    console.log('📋 DEBUG - Apontamentos carregados:', this.apontamentosData.map(ap => ({
-                        equipamento: ap.Vaga,
-                        categoria: ap['Categoria Demora'],
-                        periodo: `${ap['Data Inicial']} - ${ap['Data Final']}`
-                    })));
-                    
-                } catch (error) {
-                    console.warn('⚠️ Erro ao carregar apontamentos:', error);
-                    this.apontamentosData = [];
-                }
-            }
-
             async loadDataWithPriority() {
-                console.log('📋 Carregando dados com prioridade...');
-                
                 if (this.config.githubEnabled && this.config.token) {
-                    console.log('🔄 Carregando dados do GitHub...');
                     await this.loadOperationalDataFromGitHub();
                     await this.loadRulesFromGitHub();
+                    await this.loadApontamentosData();
                 } 
                 
-                console.log('💾 Carregando dados locais...');
                 this.loadLocalData();
                 
                 if (this.alerts.length === 0 && this.rules.length === 0) {
-                    console.log('🔧 Carregando dados de exemplo...');
                     this.loadExampleData();
                 }
-                
-                console.log(`✅ Dados carregados: ${this.alerts.length} alertas, ${this.rules.length} regras`);
             }
 
-            // NOVA FUNCIONALIDADE: Buscar apontamentos relacionados
-            findRelatedApontamentos(alertStartTime, alertEndTime, equipamento) {
+            // CORREÇÃO 1: Carregar apontamentos de CSV ao invés de JSON
+            async loadApontamentosData() {
                 try {
-                    console.log(`🔍 DEBUG - Buscando apontamentos relacionados:`);
-                    console.log(`  Equipamento do alerta: "${equipamento}"`);
-                    console.log(`  Período do alerta: ${alertStartTime} - ${alertEndTime}`);
+                    const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv?cache_bust=${Date.now()}`;
+                    const csvText = await this.fetchData(url, false);
                     
-                    const alertStart = this.parseDateTime(alertStartTime);
-                    const alertEnd = this.parseDateTime(alertEndTime);
-                    
-                    if (!alertStart || !alertEnd) {
-                        console.warn('⚠️ Datas do alerta inválidas');
-                        return [];
-                    }
-
-                    // Buscar apontamentos 2 horas antes até o final do alerta
-                    const searchStart = new Date(alertStart.getTime() - (2 * 60 * 60 * 1000)); // 2 horas antes
-                    const searchEnd = alertEnd;
-
-                    console.log(`  Janela de busca: ${searchStart.toLocaleString('pt-BR')} - ${searchEnd.toLocaleString('pt-BR')}`);
-
-                    const normalizedEquipamento = this.normalizeEquipmentName(equipamento);
-                    console.log(`  Equipamento normalizado: "${normalizedEquipamento}"`);
-                    
-                    console.log(`  Total de apontamentos disponíveis: ${this.apontamentosData.length}`);
-                    
-                    const related = this.apontamentosData.filter((apontamento, index) => {
-                        const apontEquipamento = this.normalizeEquipmentName(apontamento.Vaga);
-                        
-                        console.log(`    [${index}] Verificando apontamento:`);
-                        console.log(`      Equipamento: "${apontamento.Vaga}" → "${apontEquipamento}"`);
-                        console.log(`      Categoria: "${apontamento['Categoria Demora']}"`);
-                        console.log(`      Período: ${apontamento['Data Inicial']} - ${apontamento['Data Final']}`);
-                        
-                        // Verificar se é do mesmo equipamento
-                        if (apontEquipamento !== normalizedEquipamento) {
-                            console.log(`      ❌ Equipamento diferente: "${apontEquipamento}" !== "${normalizedEquipamento}"`);
-                            return false;
-                        }
-                        
-                        const apontStart = this.parseDateTime(apontamento['Data Inicial']);
-                        const apontEnd = this.parseDateTime(apontamento['Data Final']);
-                        
-                        if (!apontStart || !apontEnd) {
-                            console.log(`      ❌ Datas inválidas`);
-                            return false;
-                        }
-                        
-                        console.log(`      Datas parseadas: ${apontStart.toLocaleString('pt-BR')} - ${apontEnd.toLocaleString('pt-BR')}`);
-                        
-                        // Verificar se o apontamento está dentro da janela de busca
-                        const overlaps = (apontStart >= searchStart && apontStart <= searchEnd) ||
-                                       (apontEnd >= searchStart && apontEnd <= searchEnd) ||
-                                       (apontStart <= searchStart && apontEnd >= searchEnd);
-                        
-                        if (overlaps) {
-                            console.log(`      ✅ ENCONTRADO! Apontamento sobrepõe com o período de busca`);
-                        } else {
-                            console.log(`      ❌ Não sobrepõe com período de busca`);
-                            console.log(`        Início dentro? ${apontStart >= searchStart && apontStart <= searchEnd}`);
-                            console.log(`        Fim dentro? ${apontEnd >= searchStart && apontEnd <= searchEnd}`);
-                            console.log(`        Engloba? ${apontStart <= searchStart && apontEnd >= searchEnd}`);
-                        }
-                        
-                        return overlaps;
+                    // Parse CSV com PapaParse
+                    const parsed = Papa.parse(csvText, {
+                        header: true,
+                        dynamicTyping: true,
+                        skipEmptyLines: true,
+                        delimitersToGuess: [',', '\t', '|', ';']
                     });
-
-                    // Ordenar por data e limitar aos 3 mais recentes
-                    const result = related
-                        .sort((a, b) => this.parseDateTime(b['Data Inicial']) - this.parseDateTime(a['Data Inicial']))
-                        .slice(0, 3);
-                        
-                    console.log(`🔍 RESULTADO: ${result.length} apontamentos relacionados encontrados`);
-                    if (result.length > 0) {
-                        result.forEach((ap, i) => {
-                            console.log(`  [${i+1}] ${ap['Categoria Demora']} (${ap['Tempo Indisponível (HH:MM)']})`);
-                        });
-                    }
                     
-                    return result;
+                    if (parsed.data && parsed.data.length > 0) {
+                        this.apontamentosData = parsed.data;
+                        console.log(`✅ Apontamentos carregados: ${this.apontamentosData.length} registros`);
                         
+                        // Salvar localmente para cache
+                        localStorage.setItem('alertSystem_apontamentos_v5', JSON.stringify(this.apontamentosData));
+                    }
                 } catch (error) {
-                    console.warn('Erro ao buscar apontamentos relacionados:', error);
+                    console.warn('⚠️ Erro ao carregar apontamentos do GitHub:', error.message);
+                    
+                    // Tentar carregar do cache local
+                    const cached = localStorage.getItem('alertSystem_apontamentos_v5');
+                    if (cached) {
+                        this.apontamentosData = JSON.parse(cached);
+                        console.log('📋 Apontamentos carregados do cache local');
+                    }
+                }
+            }
+
+            // CORREÇÃO 3: Busca inteligente de apontamentos próximos
+            findRelatedApontamentos(alert) {
+                if (!this.apontamentosData || this.apontamentosData.length === 0) {
                     return [];
                 }
-            }
 
-            // NOVA: Atualizar apontamentos relacionados do alerta atual
-            refreshApontamentosRelacionados() {
-                if (!this.currentInvestigation) return;
+                const alertStart = this.parseDateTime(alert.startTime);
+                const alertEnd = this.parseDateTime(alert.endTime);
                 
-                console.log('🔄 Atualizando apontamentos relacionados do alerta atual...');
-                
-                // Forçar nova busca
-                this.currentInvestigation.apontamentosRelacionados = this.findRelatedApontamentos(
-                    this.currentInvestigation.startTime, 
-                    this.currentInvestigation.endTime, 
-                    this.currentInvestigation.equipamento
-                );
-                
-                // Atualizar interface
-                this.updateApontamentosRelacionados(this.currentInvestigation);
-                this.updateWhatsAppPreview();
-                
-                this.showNotification('Apontamentos relacionados atualizados', 'info');
-            }
+                if (!alertStart || !alertEnd) return [];
 
-            // NOVA: Recarregar apontamentos manualmente
-            async reloadApontamentos() {
-                console.log('🔄 Recarregando dados de apontamentos...');
-                await this.loadApontamentosData();
+                // Janela de busca: X minutos antes e depois do período do alerta
+                const searchStart = new Date(alertStart.getTime() - (this.APONTAMENTO_TIME_WINDOW * 60 * 1000));
+                const searchEnd = new Date(alertEnd.getTime() + (this.APONTAMENTO_TIME_WINDOW * 60 * 1000));
+
+                const equipamentoNormalizado = this.normalizeEquipmentName(alert.equipamento);
                 
-                // Atualizar apontamentos relacionados em todos os alertas existentes
-                this.alerts.forEach(alert => {
-                    console.log(`🔗 Atualizando correlações para alerta: ${alert.equipamento}`);
-                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
+                // Filtrar apontamentos relevantes
+                const relevantApontamentos = this.apontamentosData.filter(apontamento => {
+                    // Verificar se é o mesmo equipamento
+                    const apontEquipamento = this.normalizeEquipmentName(apontamento.Vaga || apontamento.Equipamento);
+                    if (apontEquipamento !== equipamentoNormalizado) return false;
+
+                    // Verificar período
+                    const apontStart = this.parseDateTime(apontamento['Data Inicial'] || apontamento.DataInicial);
+                    const apontEnd = this.parseDateTime(apontamento['Data Final'] || apontamento.DataFinal);
+                    
+                    if (!apontStart || !apontEnd) return false;
+
+                    // Verificar se há sobreposição ou proximidade temporal
+                    return (apontStart <= searchEnd && apontEnd >= searchStart);
                 });
-                
-                this.saveLocalData(); // Salvar atualizações
-                this.updateInterface();
-                this.showNotification('Apontamentos recarregados e correlações atualizadas', 'success');
+
+                // Ordenar por proximidade temporal (mais próximos primeiro)
+                relevantApontamentos.sort((a, b) => {
+                    const aStart = this.parseDateTime(a['Data Inicial'] || a.DataInicial);
+                    const bStart = this.parseDateTime(b['Data Inicial'] || b.DataInicial);
+                    
+                    // Calcular distância temporal do centro do alerta
+                    const alertCenter = new Date((alertStart.getTime() + alertEnd.getTime()) / 2);
+                    const aDist = Math.abs(aStart.getTime() - alertCenter.getTime());
+                    const bDist = Math.abs(bStart.getTime() - alertCenter.getTime());
+                    
+                    return aDist - bDist;
+                });
+
+                // Limitar quantidade de apontamentos retornados
+                return relevantApontamentos.slice(0, this.MAX_APONTAMENTOS_PER_ALERT).map(apontamento => {
+                    const duration = this.calculateApontamentoDuration(apontamento);
+                    return {
+                        categoria: apontamento['Categoria Demora'] || apontamento.Categoria || 'N/I',
+                        inicio: this.formatDateTime(apontamento['Data Inicial'] || apontamento.DataInicial),
+                        fim: this.formatDateTime(apontamento['Data Final'] || apontamento.DataFinal),
+                        duracao: this.formatDuration(duration),
+                        duracaoMinutos: duration
+                    };
+                });
             }
 
-            // ATUALIZAÇÃO: Nova função recordMatchesRule seguindo documento técnico v4.3.5
-            /**
-             * ATUALIZAÇÃO v4.3.5 - MOTOR DE REGRAS OBJETIVO E FOCADO EM PRODUTIVIDADE
-             * Esta função agora opera sobre o fato consumado do 'production_status',
-             * fornecido pelo script de captura de dados.
-             */
-            recordMatchesRule(record, rule) {
-                // NOVA LÓGICA PARA REGRAS DE IMPRODUTIVIDADE
-                if (rule.type === 'improdutivo') {
-                    // Passo 1: A condição primária para qualquer alerta de ociosidade.
-                    // O sistema verifica se o script já classificou este evento como improdutivo.
-                    if (!record.production_status || !record.production_status.includes('Improdutivo')) {
-                        // Se o evento não é improdutivo ('Trabalho Efetivo', 'Operacional', etc.),
-                        // a função retorna 'false' imediatamente, descartando o alerta.
-                        // Isso resolve, na raiz, todos os cenários de falsos positivos.
-                        return false;
-                    }
-
-                    // Passo 2: Se o evento é de fato improdutivo, a única verificação restante
-                    // é se a sua duração excede o tempo limite definido na regra.
-                    const duration = this.getRecordDuration(record, 'status');
-                    const timeCondition = this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
-                    
-                    // NOVA: Verificar range de horário se definido
-                    if (rule.timeStart && rule.timeEnd) {
-                        const recordTime = this.parseDateTime(record.start);
-                        if (!this.isWithinTimeRange(recordTime, rule.timeStart, rule.timeEnd)) {
-                            return false;
-                        }
-                    }
-                    
-                    return timeCondition;
-                }
+            calculateApontamentoDuration(apontamento) {
+                const start = this.parseDateTime(apontamento['Data Inicial'] || apontamento.DataInicial);
+                const end = this.parseDateTime(apontamento['Data Final'] || apontamento.DataFinal);
                 
-                // LÓGICA ORIGINAL PARA APONTAMENTOS (mantida para compatibilidade)
-                if (rule.type === 'apontamento') {
-                    const identifier = record['Categoria Demora'];
-                    
-                    if (rule.identifier && rule.identifier.trim() !== '') {
-                        if (rule.identifier !== identifier) {
-                            return false;
-                        }
-                    }
-
-                    const duration = this.getRecordDuration(record, 'apontamento');
-                    const timeCondition = this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
-                    
-                    // NOVA: Verificar range de horário se definido
-                    if (rule.timeStart && rule.timeEnd) {
-                        const recordTime = this.parseDateTime(record['Data Inicial']);
-                        if (!this.isWithinTimeRange(recordTime, rule.timeStart, rule.timeEnd)) {
-                            return false;
-                        }
-                    }
-                    
-                    return timeCondition;
-                }
-
-                return false;
+                if (!start || !end) return 0;
+                
+                return (end.getTime() - start.getTime()) / (1000 * 60); // retorna em minutos
             }
 
-            // NOVA FUNCIONALIDADE: Verificar se horário está dentro do range
-            isWithinTimeRange(dateTime, startTime, endTime) {
-                if (!dateTime || !startTime || !endTime) return true;
+            formatDateTime(dateStr) {
+                const date = this.parseDateTime(dateStr);
+                if (!date) return 'N/I';
                 
-                const recordHour = dateTime.getHours();
-                const recordMinute = dateTime.getMinutes();
-                const recordTotalMinutes = recordHour * 60 + recordMinute;
+                const time = date.toLocaleTimeString('pt-BR', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                const dateFormatted = date.toLocaleDateString('pt-BR');
                 
-                const [startHour, startMin] = startTime.split(':').map(Number);
-                const [endHour, endMin] = endTime.split(':').map(Number);
-                
-                const startTotalMinutes = startHour * 60 + startMin;
-                const endTotalMinutes = endHour * 60 + endMin;
-                
-                return recordTotalMinutes >= startTotalMinutes && recordTotalMinutes <= endTotalMinutes;
+                return `${dateFormatted} ${time}`;
             }
 
+            // Sistema de queue otimizado
             addToSyncQueue(operation, data, description) {
                 this.syncQueue.push({
                     id: Date.now() + Math.random(),
@@ -1537,8 +1351,6 @@
                     retries: 0,
                     maxRetries: 3
                 });
-                
-                console.log(`📋 Operação adicionada à queue: ${description}`);
             }
 
             startSyncQueueProcessor() {
@@ -1553,8 +1365,6 @@
                 const operation = this.syncQueue.shift();
                 if (!operation) return;
 
-                console.log(`🔄 Processando: ${operation.description}`);
-                
                 try {
                     switch (operation.operation) {
                         case 'saveRules':
@@ -1568,20 +1378,30 @@
                             break;
                     }
                     
-                    console.log(`✅ Sincronização concluída: ${operation.description}`);
                     this.showNotification(`Sincronizado: ${operation.description}`, 'success');
                     
                 } catch (error) {
-                    console.error(`❌ Erro na sincronização: ${operation.description}`, error);
-                    
                     if (operation.retries < operation.maxRetries) {
                         operation.retries++;
                         this.syncQueue.unshift(operation);
-                        console.log(`🔄 Recolocando na queue (tentativa ${operation.retries}/${operation.maxRetries})`);
                     } else {
                         this.showNotification(`Falha na sincronização: ${operation.description}`, 'error');
                     }
                 }
+            }
+
+            // Motor de regras aprimorado
+            recordMatchesRule(record, rule, type) {
+                const identifier = type === 'status' ? record.status : record['Categoria Demora'];
+                
+                if (rule.identifier && rule.identifier.trim() !== '') {
+                    if (rule.identifier !== identifier) {
+                        return false;
+                    }
+                }
+
+                const duration = this.getRecordDuration(record, type);
+                return this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
             }
 
             generateAlertId(record, rule) {
@@ -1590,7 +1410,6 @@
                 let parsedDate = this.parseDateTime(startTime);
                 if (!parsedDate || isNaN(parsedDate.getTime())) {
                     parsedDate = new Date();
-                    console.warn(`Data inválida detectada: ${startTime}, usando timestamp atual`);
                 }
                 
                 const components = [
@@ -1611,15 +1430,14 @@
                 return Math.abs(hash).toString(36);
             }
 
+            // Processamento de alertas otimizado
             async processAlerts() {
                 if (this.isProcessing) return;
                 
                 this.isProcessing = true;
-                console.log('🔄 Processando alertas com nova lógica...');
 
                 try {
                     if (!this.telemetryData || this.telemetryData.length === 0) {
-                        console.log('⚠️ Nenhum dado de telemetria disponível para processamento');
                         return;
                     }
 
@@ -1629,16 +1447,15 @@
                     let updatedAlertsCount = 0;
 
                     for (const record of consolidatedStatus) {
-                        if (!record || !record.vacancy_name) {
-                            console.warn('Registro inválido ignorado:', record);
+                        if (!record || !record.vacancy_name || !record.status) {
                             continue;
                         }
 
-                        const activeRules = this.rules.filter(r => r.active && r.type === 'improdutivo');
+                        const activeRules = this.rules.filter(r => r.active && r.type === 'status');
                         
                         for (const rule of activeRules) {
                             try {
-                                if (this.recordMatchesRule(record, rule)) {
+                                if (this.recordMatchesRule(record, rule, 'status')) {
                                     const alertId = this.generateAlertId(record, rule);
                                     const existingAlert = this.alerts.find(a => a.id === alertId);
                                     
@@ -1648,12 +1465,19 @@
                                             existingAlert.duration = this.formatDuration(newDuration);
                                             existingAlert.durationMinutes = newDuration;
                                             existingAlert.endTime = record.end;
-                                            existingAlert.fullTimeRange = this.formatFullTimeRange(existingAlert.startTime, record.end);
+                                            existingAlert.timeRange = this.formatTimeRange(existingAlert.startTime, record.end);
+                                            
+                                            // Atualizar apontamentos relacionados
+                                            existingAlert.apontamentosRelacionados = this.findRelatedApontamentos(existingAlert);
+                                            
                                             updatedAlertsCount++;
                                         }
                                     } else {
                                         const newAlert = this.createAlert(record, rule, 'status');
                                         if (newAlert) {
+                                            // Adicionar apontamentos relacionados
+                                            newAlert.apontamentosRelacionados = this.findRelatedApontamentos(newAlert);
+                                            
                                             this.alerts.unshift(newAlert);
                                             newAlertsCount++;
                                         }
@@ -1671,37 +1495,16 @@
                         this.saveLocalData();
                         this.addToSyncQueue('saveAlerts', null, `${newAlertsCount} novos alertas`);
                         this.updateInterface();
+                        
                         if (newAlertsCount > 0) {
                             this.showNotification(`${newAlertsCount} novos alertas detectados`, 'info');
                         }
-                    } else {
-                        console.log('ℹ️ Nenhum novo alerta gerado no processamento');
                     }
 
                 } catch (error) {
                     console.error('❌ Erro no processamento:', error);
                 } finally {
                     this.isProcessing = false;
-                }
-            }
-
-            // ATUALIZAÇÃO: Formatação completa de data/hora para período
-            formatFullTimeRange(start, end) {
-                const startDate = this.parseDateTime(start);
-                const endDate = this.parseDateTime(end);
-                
-                if (!startDate || !endDate) return 'N/A';
-                
-                const startDateStr = startDate.toLocaleDateString('pt-BR');
-                const endDateStr = endDate.toLocaleDateString('pt-BR');
-                const startTime = startDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                const endTime = endDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                
-                // Se for o mesmo dia, mostrar data uma vez
-                if (startDateStr === endDateStr) {
-                    return `${startDateStr} ${startTime} - ${endTime}`;
-                } else {
-                    return `${startDateStr} ${startTime} - ${endDateStr} ${endTime}`;
                 }
             }
 
@@ -1714,9 +1517,7 @@
 
             createAlert(record, rule, type) {
                 const equipamento = this.normalizeEquipmentName(record.vacancy_name || record.Vaga);
-                const identifier = type === 'status' ? 
-                    (record.production_status || record.status) : 
-                    record['Categoria Demora'];
+                const identifier = type === 'status' ? record.status : record['Categoria Demora'];
                 const duration = this.getRecordDuration(record, type);
                 const startTime = record.start || record['Data Inicial'];
                 const endTime = record.end || record['Data Final'];
@@ -1734,8 +1535,7 @@
                     durationMinutes: duration,
                     startTime: this.parseDateTime(startTime).toISOString(),
                     endTime: this.parseDateTime(endTime).toISOString(),
-                    timeRange: this.formatTimeRange(startTime, endTime), // Original curto
-                    fullTimeRange: this.formatFullTimeRange(startTime, endTime), // NOVO: Com data completa
+                    timeRange: this.formatTimeRange(startTime, endTime),
                     consolidated: record.consolidated || false,
                     originalCount: record.originalCount || 1,
                     timestamp: alertTimestamp,
@@ -1745,98 +1545,18 @@
                     status: 'pendente',
                     placa: '', motorista: '', area: '', supervisor: '',
                     observacoes: '', acoes: '',
-                    // NOVA: Apontamentos relacionados
-                    apontamentosRelacionados: this.findRelatedApontamentos(startTime, endTime, equipamento)
+                    apontamentosRelacionados: []
                 };
 
-                // ATUALIZADA: Mensagem sem tipo específico
                 alert.message = rule.message
                     .replace('{equipamento}', this.getDisplayName(equipamento))
+                    .replace('{tipo}', identifier)
                     .replace('{tempo}', alert.duration);
                 
                 return alert;
             }
 
-            async saveRule() {
-                const type = document.getElementById('ruleType').value;
-                const identifier = type === 'apontamento' ? 
-                    document.getElementById('ruleApontamento').value : '';
-
-                const ruleData = {
-                    name: document.getElementById('ruleName').value,
-                    type: type,
-                    identifier: identifier,
-                    timeOperator: document.getElementById('ruleTimeOperator').value,
-                    timeValue: parseInt(document.getElementById('ruleTimeValue').value),
-                    // NOVA: Range de horário
-                    timeStart: document.getElementById('ruleTimeStart').value || null,
-                    timeEnd: document.getElementById('ruleTimeEnd').value || null,
-                    severity: document.getElementById('ruleSeverity').value,
-                    message: document.getElementById('ruleMessage').value,
-                    active: true
-                };
-
-                if (this.editingRuleId) {
-                    const index = this.rules.findIndex(r => r.id === this.editingRuleId);
-                    if (index !== -1) {
-                        this.rules[index] = { ...this.rules[index], ...ruleData };
-                        this.showNotification('Regra atualizada', 'success');
-                    }
-                } else {
-                    const newRule = {
-                        id: Date.now(),
-                        ...ruleData
-                    };
-                    this.rules.push(newRule);
-                    this.showNotification('Regra criada', 'success');
-                }
-
-                this.saveLocalData();
-                this.addToSyncQueue('saveRules', null, `Regra: ${ruleData.name}`);
-                
-                this.updateRulesList();
-                this.closeRuleModal();
-            }
-
-            clearAllAlerts() {
-                if (confirm('Tem certeza que deseja limpar todo o histórico? Esta ação é irreversível.')) {
-                    this.alerts = [];
-                    this.saveLocalData();
-                    this.addToSyncQueue('saveAlerts', null, 'Limpeza do histórico');
-                    this.updateInterface();
-                    this.showNotification('Histórico limpo permanentemente', 'info');
-                }
-            }
-
-            saveInvestigation() {
-                if (!this.currentInvestigation) return;
-
-                const alert = this.currentInvestigation;
-                
-                alert.placa = document.getElementById('invPlaca').value;
-                alert.motorista = document.getElementById('invMotorista').value;
-                alert.area = document.getElementById('invArea').value;
-                alert.supervisor = document.getElementById('invSupervisor').value;
-                alert.status = document.getElementById('invStatus').value;
-                alert.observacoes = document.getElementById('invObservacoes').value;
-                alert.acoes = document.getElementById('invAcoes').value;
-                alert.investigatedAt = new Date().toISOString();
-                alert.investigatedFullDateTime = this.formatFullDateTime(Date.now());
-
-                // Garantir que os apontamentos relacionados estejam atualizados
-                if (!alert.apontamentosRelacionados) {
-                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
-                }
-
-                this.saveLocalData();
-                this.addToSyncQueue('saveInvestigation', null, `Investigação: ${alert.equipamento}`);
-                
-                this.updateInterface();
-                this.closeInvestigationModal();
-                this.showNotification('Investigação salva e sincronizada', 'success');
-            }
-
-            // ATUALIZAÇÃO: Lista de alertas com período completo
+            // UI: Atualização da lista de alertas com apontamentos
             updateAlertsList() {
                 const container = document.getElementById('alertsList');
                 if (!container) return;
@@ -1860,29 +1580,52 @@
                     else if (alert.severity === 'medium') normalizedSeverity = 'medio';
                     else if (alert.severity === 'low') normalizedSeverity = 'baixo';
 
+                    // Seção de apontamentos relacionados
+                    let apontamentosHtml = '';
+                    if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
+                        apontamentosHtml = `
+                            <div class="apontamentos-section">
+                                <div class="apontamentos-title">
+                                    <span>📋</span>
+                                    <span>Apontamentos Relacionados:</span>
+                                </div>
+                                ${alert.apontamentosRelacionados.map(ap => `
+                                    <div class="apontamento-item">
+                                        <div class="apontamento-categoria">${ap.categoria}</div>
+                                        <div class="apontamento-tempo">${ap.inicio} - ${ap.fim} (${ap.duracao})</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
                     return `
                     <div class="alert-card ${normalizedSeverity}">
                         <div class="alert-header">
                             <div class="alert-title">${alert.message}</div>
                             <div class="alert-actions">
                                 <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">
-                                    <span>🔍 Investigar</span>
+                                    <span>Investigar</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="alert-time">Alerta gerado em: ${alert.fullDateTime || `${alert.date} ${alert.time}`}</div>
+                        <div class="alert-time">${alert.fullDateTime || `${alert.date} ${alert.time}`}</div>
                         <div class="alert-details">
                             <div class="alert-detail">
                                 <div class="alert-detail-label">Equipamento</div>
                                 <div class="alert-detail-value">${this.getDisplayName(alert.equipamento)}</div>
                             </div>
                             <div class="alert-detail">
+                                <div class="alert-detail-label">Tipo</div>
+                                <div class="alert-detail-value">${alert.tipo} - ${alert.identificador}</div>
+                            </div>
+                            <div class="alert-detail">
                                 <div class="alert-detail-label">Duração</div>
                                 <div class="alert-detail-value">${alert.duration}</div>
                             </div>
                             <div class="alert-detail">
-                                <div class="alert-detail-label">Período do Ocorrido</div>
-                                <div class="alert-detail-value">${alert.fullTimeRange || alert.timeRange}</div>
+                                <div class="alert-detail-label">Período</div>
+                                <div class="alert-detail-value">${alert.timeRange}</div>
                             </div>
                             <div class="alert-detail">
                                 <div class="alert-detail-label">Status</div>
@@ -1896,12 +1639,6 @@
                                     <span class="severity-badge ${normalizedSeverity}">${this.getSeverityText(alert.severity)}</span>
                                 </div>
                             </div>
-                            ${alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0 ? `
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Apontamentos Relacionados</div>
-                                <div class="alert-detail-value" style="color: #3498db;">🔗 ${alert.apontamentosRelacionados.length} encontrado(s)</div>
-                            </div>
-                            ` : ''}
                             ${alert.consolidated ? `
                             <div class="alert-detail">
                                 <div class="alert-detail-label">Consolidado</div>
@@ -1909,60 +1646,58 @@
                             </div>
                             ` : ''}
                         </div>
+                        ${apontamentosHtml}
                     </div>
                 `}).join('');
             }
 
+            // Carregar dados de exemplo
             loadExampleData() {
-                console.log('📋 Carregando dados de exemplo...');
-                
                 this.telemetryData = [
                     {
                         vacancy_code: "536",
                         vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
                         status: "off",
-                        production_status: "Improdutivo (Ocioso)", // NOVO CAMPO
                         status_title: "Motor Desligado",
-                        start: "2025-07-11T09:06:19",
-                        end: "2025-07-11T09:48:49",
+                        start: "2025-07-14T09:06:19",
+                        end: "2025-07-14T09:48:49",
                         total_time: "0.70833333333333"
-                    },
-                    {
-                        vacancy_code: "526",
-                        vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 04",
-                        status: "off",
-                        production_status: "Improdutivo (Ocioso)", // NOVO CAMPO
-                        status_title: "Motor Desligado",
-                        start: "2025-07-11T09:57:39",
-                        end: "2025-07-11T11:24:09",
-                        total_time: "1.4416666666667"
                     }
                 ];
 
                 this.rules = [
                     {
                         id: 1752152405852,
-                        name: "Equipamento Improdutivo",
-                        type: "improdutivo", // NOVO TIPO
-                        identifier: "",
+                        name: "Motor Desligado Prolongado",
+                        type: "status",
+                        identifier: "off",
                         timeOperator: ">",
-                        timeValue: 40,
-                        timeStart: "08:00", // NOVA: Range de horário
-                        timeEnd: "18:00",   // NOVA: Range de horário
+                        timeValue: 30,
                         severity: "alto",
-                        message: "{equipamento} com improdutividade há {tempo}",
+                        message: "{equipamento} - motor desligado há {tempo}",
                         active: true
+                    }
+                ];
+
+                this.apontamentosData = [
+                    {
+                        Vaga: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
+                        "Categoria Demora": "Refeição Motorista",
+                        "Data Inicial": "2025-07-14 09:15:00",
+                        "Data Final": "2025-07-14 09:45:00"
                     }
                 ];
 
                 this.processAlerts();
             }
 
+            // Sistema de sincronização
             async syncData() {
                 this.updateSyncStatus('loading', 'Sincronizando...');
                 
                 try {
                     await this.loadOperationalDataFromGitHub();
+                    await this.loadApontamentosData();
                     
                     const telemetryUrl = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json?cache_bust=${Date.now()}`;
                     const telemetryResponse = await this.fetchData(telemetryUrl, true);
@@ -1991,9 +1726,9 @@
                 return isJson ? response.json() : response.text();
             }
 
+            // Gestão GitHub
             async loadOperationalDataFromGitHub() {
                 if (!this.config.githubEnabled || !this.config.token) {
-                    console.log("⚠️ GitHub não configurado. Pulando carregamento.");
                     return;
                 }
                 
@@ -2015,7 +1750,7 @@
             async saveOperationalDataToGitHub() {
                 const operationalData = {
                     timestamp: Date.now(),
-                    version: '4.3.5',
+                    version: '5.0',
                     type: 'operational',
                     total: this.alerts.length,
                     alerts: this.alerts,
@@ -2024,14 +1759,14 @@
                 await this.createOrUpdateGitHubFile(
                     'alertas/alertas-atual.json', 
                     JSON.stringify(operationalData, null, 2), 
-                    'Atualização automática do sistema'
+                    'Atualização automática v5.0'
                 );
             }
 
             async saveRulesToGitHub() {
                 const rulesData = {
                     timestamp: Date.now(),
-                    version: '4.3.5',
+                    version: '5.0',
                     total: this.rules.length,
                     rules: this.rules
                 };
@@ -2039,7 +1774,7 @@
                 await this.createOrUpdateGitHubFile(
                     'regras/regras-ativas.json', 
                     JSON.stringify(rulesData, null, 2), 
-                    'Atualização de regras do sistema'
+                    'Atualização de regras v5.0'
                 );
             }
 
@@ -2106,6 +1841,7 @@
                 return await response.json();
             }
 
+            // Consolidação de registros
             consolidateRecords(records, type = 'status') {
                 if (!records || records.length === 0) return [];
                 
@@ -2204,66 +1940,31 @@
                 }
             }
 
-            // ATUALIZAÇÃO: Investigação com apontamentos relacionados
+            // Sistema de investigação
             openInvestigation(alertId) {
                 const alert = this.alerts.find(a => a.id === alertId);
                 if (!alert) return;
 
                 this.currentInvestigation = alert;
                 
-                // CORRIGIDO: Atualizar apontamentos relacionados toda vez que abrir a investigação
-                alert.apontamentosRelacionados = this.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
+                // Atualizar apontamentos relacionados se necessário
+                if (!alert.apontamentosRelacionados || alert.apontamentosRelacionados.length === 0) {
+                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert);
+                }
                 
                 document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
                 document.getElementById('invPlaca').value = alert.placa || '';
                 document.getElementById('invMotorista').value = alert.motorista || '';
                 document.getElementById('invArea').value = alert.area || '';
                 document.getElementById('invSupervisor').value = alert.supervisor || '';
-                document.getElementById('invDataHoraAlerta').value = alert.fullDateTime || `${alert.date} ${alert.time}`;
-                document.getElementById('invPeriodoOcorrido').value = alert.fullTimeRange || alert.timeRange;
+                document.getElementById('invDataHora').value = alert.fullDateTime || `${alert.date} ${alert.time}`;
                 document.getElementById('invTempoTotal').value = alert.duration;
                 document.getElementById('invStatus').value = alert.status || 'pendente';
                 document.getElementById('invObservacoes').value = alert.observacoes || '';
                 document.getElementById('invAcoes').value = alert.acoes || '';
 
-                // NOVA: Exibir apontamentos relacionados
-                this.updateApontamentosRelacionados(alert);
-
                 this.updateWhatsAppPreview();
                 document.getElementById('investigationModal').classList.add('show');
-            }
-
-            // NOVA FUNCIONALIDADE: Atualizar apontamentos relacionados na interface
-            updateApontamentosRelacionados(alert) {
-                const container = document.getElementById('apontamentosRelacionados');
-                if (!container) return;
-
-                if (!alert.apontamentosRelacionados || alert.apontamentosRelacionados.length === 0) {
-                    container.innerHTML = '<div style="text-align: center; color: #7f8c8d;">Nenhum apontamento encontrado no período</div>';
-                    return;
-                }
-
-                const apontamentosHtml = alert.apontamentosRelacionados.map(apontamento => {
-                    const inicio = this.parseDateTime(apontamento['Data Inicial']);
-                    const fim = this.parseDateTime(apontamento['Data Final']);
-                    const periodo = inicio && fim ? this.formatFullTimeRange(apontamento['Data Inicial'], apontamento['Data Final']) : 'N/A';
-                    
-                    return `
-                        <div class="apontamento-item">
-                            <div>
-                                <strong>${apontamento['Categoria Demora']}</strong><br>
-                                <small style="color: #7f8c8d;">${periodo}</small>
-                            </div>
-                            <div style="text-align: right;">
-                                <span style="background: #3498db; color: white; padding: 0.2rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">
-                                    ${apontamento['Tempo Indisponível (HH:MM)']}
-                                </span>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                container.innerHTML = apontamentosHtml;
             }
 
             closeInvestigationModal() {
@@ -2287,7 +1988,6 @@
                 }
             }
 
-            // ATUALIZAÇÃO: WhatsApp com período completo e apontamentos detalhados
             updateWhatsAppPreview() {
                 if (!this.currentInvestigation) return;
 
@@ -2297,19 +1997,13 @@
                 const area = document.getElementById('invArea').value || 'N/I';
                 const supervisor = document.getElementById('invSupervisor').value || 'N/I';
 
+                // Formatação de apontamentos relacionados
                 let apontamentosText = '';
                 if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
-                    apontamentosText = '\n\nApontamentos Relacionados:\n' + 
-                        alert.apontamentosRelacionados.map(ap => {
-                            const inicio = this.parseDateTime(ap['Data Inicial']);
-                            const fim = this.parseDateTime(ap['Data Final']);
-                            const dataInicio = inicio ? inicio.toLocaleDateString('pt-BR') : 'N/A';
-                            const horaInicio = inicio ? inicio.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                            const horaFim = fim ? fim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                            const periodo = `${dataInicio} ${horaInicio}-${horaFim}`;
-                            
-                            return `• ${ap['Categoria Demora']}\n  ${periodo} (${ap['Tempo Indisponível (HH:MM)']})`;
-                        }).join('\n');
+                    apontamentosText = '\n\nApontamentos Relacionados:\n';
+                    alert.apontamentosRelacionados.forEach(ap => {
+                        apontamentosText += `• ${ap.categoria}\n  ${ap.inicio} - ${ap.fim} (${ap.duracao})\n`;
+                    });
                 }
 
                 const text = `---
@@ -2317,6 +2011,7 @@
 
 Regra: ${alert.ruleName}
 Duração Total: ${alert.duration}
+Período do ocorrido: ${alert.timeRange}
 
 Equipamento: ${this.getDisplayName(alert.equipamento)}
 Supervisor: ${supervisor}
@@ -2324,8 +2019,8 @@ Placa: ${placa}
 Motorista: ${motorista}
 Área: ${area}
 
-Data/Hora do alerta gerado: ${alert.fullDateTime || `${alert.date} ${alert.time}`}
-Período do ocorrido: ${alert.fullTimeRange || alert.timeRange}
+Data/Hora: ${alert.fullDateTime || `${alert.date} ${alert.time}`}
+Status do Motor: ${alert.identificador}
 
 Situação: ${this.getStatusText(alert.status)}${apontamentosText}
 ---`;
@@ -2342,6 +2037,47 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 });
             }
 
+            // Salvar regra
+            async saveRule() {
+                const type = document.getElementById('ruleType').value;
+                const identifier = type === 'status' ? 
+                    document.getElementById('ruleStatus').value : 
+                    document.getElementById('ruleApontamento').value;
+
+                const ruleData = {
+                    name: document.getElementById('ruleName').value,
+                    type: type,
+                    identifier: identifier,
+                    timeOperator: document.getElementById('ruleTimeOperator').value,
+                    timeValue: parseInt(document.getElementById('ruleTimeValue').value),
+                    severity: document.getElementById('ruleSeverity').value,
+                    message: document.getElementById('ruleMessage').value,
+                    active: true
+                };
+
+                if (this.editingRuleId) {
+                    const index = this.rules.findIndex(r => r.id === this.editingRuleId);
+                    if (index !== -1) {
+                        this.rules[index] = { ...this.rules[index], ...ruleData };
+                        this.showNotification('Regra atualizada', 'success');
+                    }
+                } else {
+                    const newRule = {
+                        id: Date.now(),
+                        ...ruleData
+                    };
+                    this.rules.push(newRule);
+                    this.showNotification('Regra criada', 'success');
+                }
+
+                this.saveLocalData();
+                this.addToSyncQueue('saveRules', null, `Regra: ${ruleData.name}`);
+                
+                this.updateRulesList();
+                this.closeRuleModal();
+            }
+
+            // Interface
             updateInterface() {
                 this.updateStats();
                 this.updateAlertsList();
@@ -2362,7 +2098,6 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 document.getElementById('pendingAlerts').textContent = pendingAlerts.length;
             }
 
-            // ATUALIZAÇÃO: Lista de regras com range de horário
             updateRulesList() {
                 const container = document.getElementById('rulesList');
                 if (!container) return;
@@ -2377,11 +2112,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                     return;
                 }
 
-                container.innerHTML = this.rules.map(rule => {
-                    const timeRangeText = rule.timeStart && rule.timeEnd ? 
-                        `${rule.timeStart} - ${rule.timeEnd}` : 'Qualquer horário';
-                    
-                    return `
+                container.innerHTML = this.rules.map(rule => `
                     <div class="rule-card ${rule.active ? 'active' : 'inactive'}">
                         <div class="rule-header">
                             <div class="rule-name">${rule.name}</div>
@@ -2399,16 +2130,16 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                             </div>
                         </div>
                         <div class="rule-config">
-                            <div><strong>Tipo:</strong> ${rule.type === 'improdutivo' ? 'Improdutividade' : 'Apontamento'}</div>
+                            <div><strong>Tipo:</strong> ${rule.type === 'status' ? 'Status' : 'Apontamento'}</div>
+                            <div><strong>Identificador:</strong> ${rule.identifier || 'Qualquer'}</div>
                             <div><strong>Condição:</strong> ${rule.timeOperator} ${rule.timeValue} min</div>
-                            <div><strong>Horário:</strong> ${timeRangeText}</div>
                             <div><strong>Gravidade:</strong> <span class="severity-badge ${rule.severity}">${this.getSeverityText(rule.severity)}</span></div>
                         </div>
                         <div style="margin-top: 1rem;">
                             <strong>Mensagem:</strong> ${rule.message}
                         </div>
                     </div>
-                `}).join('');
+                `).join('');
             }
 
             getFilteredAlerts() {
@@ -2460,28 +2191,28 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 return filtered;
             }
 
+            // Gerenciamento de regras
             openRuleModal(ruleId = null) {
                 this.editingRuleId = ruleId;
                 const modal = document.getElementById('ruleModal');
                 const title = document.getElementById('modalTitle');
 
                 if (ruleId) {
-                    title.textContent = '⚙️ Editar Regra';
+                    title.textContent = 'Editar Regra';
                     const rule = this.rules.find(r => r.id === ruleId);
                     if (rule) {
                         document.getElementById('ruleName').value = rule.name;
                         document.getElementById('ruleType').value = rule.type;
+                        document.getElementById('ruleStatus').value = rule.type === 'status' ? rule.identifier : '';
                         document.getElementById('ruleApontamento').value = rule.type === 'apontamento' ? rule.identifier : '';
                         document.getElementById('ruleTimeOperator').value = rule.timeOperator;
                         document.getElementById('ruleTimeValue').value = rule.timeValue;
-                        document.getElementById('ruleTimeStart').value = rule.timeStart || '';
-                        document.getElementById('ruleTimeEnd').value = rule.timeEnd || '';
                         document.getElementById('ruleSeverity').value = rule.severity;
                         document.getElementById('ruleMessage').value = rule.message;
                         this.toggleRuleFields();
                     }
                 } else {
-                    title.textContent = '⚙️ Nova Regra';
+                    title.textContent = 'Nova Regra';
                     document.getElementById('ruleForm').reset();
                     this.toggleRuleFields();
                 }
@@ -2496,12 +2227,15 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
 
             toggleRuleFields() {
                 const type = document.getElementById('ruleType').value;
+                const statusField = document.getElementById('statusField');
                 const apontamentoField = document.getElementById('apontamentoField');
 
-                if (type === 'apontamento') {
-                    apontamentoField.style.display = 'block';
-                } else {
+                if (type === 'status') {
+                    statusField.style.display = 'block';
                     apontamentoField.style.display = 'none';
+                } else {
+                    statusField.style.display = 'none';
+                    apontamentoField.style.display = 'block';
                 }
             }
 
@@ -2533,6 +2267,42 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
             }
 
+            // Salvar investigação
+            saveInvestigation() {
+                if (!this.currentInvestigation) return;
+
+                const alert = this.currentInvestigation;
+                
+                alert.placa = document.getElementById('invPlaca').value;
+                alert.motorista = document.getElementById('invMotorista').value;
+                alert.area = document.getElementById('invArea').value;
+                alert.supervisor = document.getElementById('invSupervisor').value;
+                alert.status = document.getElementById('invStatus').value;
+                alert.observacoes = document.getElementById('invObservacoes').value;
+                alert.acoes = document.getElementById('invAcoes').value;
+                alert.investigatedAt = new Date().toISOString();
+                alert.investigatedFullDateTime = this.formatFullDateTime(Date.now());
+
+                this.saveLocalData();
+                this.addToSyncQueue('saveInvestigation', null, `Investigação: ${alert.equipamento}`);
+                
+                this.updateInterface();
+                this.closeInvestigationModal();
+                this.showNotification('Investigação salva e sincronizada', 'success');
+            }
+
+            // Limpar histórico
+            clearAllAlerts() {
+                if (confirm('Tem certeza que deseja limpar todo o histórico? Esta ação é irreversível.')) {
+                    this.alerts = [];
+                    this.saveLocalData();
+                    this.addToSyncQueue('saveAlerts', null, 'Limpeza do histórico');
+                    this.updateInterface();
+                    this.showNotification('Histórico limpo permanentemente', 'info');
+                }
+            }
+
+            // Relatórios
             generateReport() {
                 const startDate = document.getElementById('reportDateStart')?.value;
                 const endDate = document.getElementById('reportDateEnd')?.value;
@@ -2564,7 +2334,6 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 this.showNotification(`Relatório gerado: ${filtered.length} registros`, 'success');
             }
 
-            // ATUALIZAÇÃO: Tabela de relatórios melhorada
             renderReportTable(data) {
                 const container = document.getElementById('reportTable');
                 if (!container) return;
@@ -2579,38 +2348,50 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
 
                 const table = `
-                    <table class="report-table">
+                    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
                         <thead>
-                            <tr>
-                                <th>Data/Hora do Alerta</th>
-                                <th>Equipamento</th>
-                                <th>Placa</th>
-                                <th>Regra</th>
-                                <th>Período do Ocorrido</th>
-                                <th>Duração</th>
-                                <th>Supervisor</th>
-                                <th>Motorista</th>
-                                <th>Área</th>
-                                <th>Status</th>
-                                <th>Observações</th>
+                            <tr style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                                <th style="padding: 1rem; text-align: left;">Data/Hora</th>
+                                <th style="padding: 1rem; text-align: left;">Equipamento</th>
+                                <th style="padding: 1rem; text-align: left;">Supervisor</th>
+                                <th style="padding: 1rem; text-align: left;">Tipo</th>
+                                <th style="padding: 1rem; text-align: left;">Período</th>
+                                <th style="padding: 1rem; text-align: left;">Duração</th>
+                                <th style="padding: 1rem; text-align: left;">Status</th>
+                                <th style="padding: 1rem; text-align: left;">Gravidade</th>
+                                <th style="padding: 1rem; text-align: left;">Motorista</th>
+                                <th style="padding: 1rem; text-align: left;">Placa</th>
+                                <th style="padding: 1rem; text-align: left;">Apontamentos</th>
+                                <th style="padding: 1rem; text-align: left;">Observações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${data.map(alert => `
-                                <tr>
-                                    <td>${alert.fullDateTime || `${alert.date} ${alert.time}`}</td>
-                                    <td>${this.getDisplayName(alert.equipamento)}</td>
-                                    <td>${alert.placa || 'N/I'}</td>
-                                    <td>${alert.ruleName}</td>
-                                    <td>${alert.fullTimeRange || alert.timeRange}</td>
-                                    <td>${alert.duration}</td>
-                                    <td>${alert.supervisor || 'N/I'}</td>
-                                    <td>${alert.motorista || 'N/I'}</td>
-                                    <td>${alert.area || 'N/I'}</td>
-                                    <td><span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span></td>
-                                    <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${alert.observacoes || 'N/I'}</td>
-                                </tr>
-                            `).join('')}
+                            ${data.map(alert => {
+                                const apontamentosText = alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0
+                                    ? alert.apontamentosRelacionados.map(ap => `${ap.categoria} (${ap.duracao})`).join('; ')
+                                    : 'N/A';
+
+                                return `
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td style="padding: 1rem;">${alert.fullDateTime || `${alert.date} ${alert.time}`}</td>
+                                        <td style="padding: 1rem;">${this.getDisplayName(alert.equipamento)}</td>
+                                        <td style="padding: 1rem;">${alert.supervisor || 'N/I'}</td>
+                                        <td style="padding: 1rem;">${alert.tipo} - ${alert.identificador}</td>
+                                        <td style="padding: 1rem;">${alert.timeRange}</td>
+                                        <td style="padding: 1rem;">${alert.duration}</td>
+                                        <td style="padding: 1rem;">
+                                            <span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span>
+                                        </td>
+                                        <td style="padding: 1rem;">
+                                            <span class="severity-badge ${alert.severity}">${this.getSeverityText(alert.severity)}</span>
+                                        </td>
+                                        <td style="padding: 1rem;">${alert.motorista || 'N/I'}</td>
+                                        <td style="padding: 1rem;">${alert.placa || 'N/I'}</td>
+                                        <td style="padding: 1rem; font-size: 0.85rem;">${apontamentosText}</td>
+                                        <td style="padding: 1rem;">${alert.observacoes || 'N/I'}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
                         </tbody>
                     </table>
                 `;
@@ -2636,8 +2417,9 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
             }
 
+            // Configuração e armazenamento
             loadConfig() {
-                const saved = localStorage.getItem('alertSystem_config');
+                const saved = localStorage.getItem('alertSystem_config_v5');
                 if (saved) {
                     this.config = { ...this.config, ...JSON.parse(saved) };
                 }
@@ -2645,13 +2427,13 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             }
 
             saveConfig() {
-                localStorage.setItem('alertSystem_config', JSON.stringify(this.config));
+                localStorage.setItem('alertSystem_config_v5', JSON.stringify(this.config));
             }
 
             loadLocalData() {
                 try {
-                    const alertsData = localStorage.getItem('alertSystem_alerts');
-                    const rulesData = localStorage.getItem('alertSystem_rules');
+                    const alertsData = localStorage.getItem('alertSystem_alerts_v5');
+                    const rulesData = localStorage.getItem('alertSystem_rules_v5');
 
                     if (alertsData) {
                         this.alerts = JSON.parse(alertsData);
@@ -2661,7 +2443,6 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                         this.rules = JSON.parse(rulesData);
                     }
 
-                    console.log(`💾 Dados locais: ${this.alerts.length} alertas, ${this.rules.length} regras`);
                 } catch (error) {
                     console.error('❌ Erro ao carregar dados locais:', error);
                 }
@@ -2669,13 +2450,14 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
 
             saveLocalData() {
                 try {
-                    localStorage.setItem('alertSystem_alerts', JSON.stringify(this.alerts));
-                    localStorage.setItem('alertSystem_rules', JSON.stringify(this.rules));
+                    localStorage.setItem('alertSystem_alerts_v5', JSON.stringify(this.alerts));
+                    localStorage.setItem('alertSystem_rules_v5', JSON.stringify(this.rules));
                 } catch (error) {
                     console.error('❌ Erro ao salvar dados locais:', error);
                 }
             }
 
+            // Utilidades
             normalizeEquipmentName(name) {
                 if (!name) return 'Equipamento Desconhecido';
                 return name.toString().toUpperCase().trim();
@@ -2692,11 +2474,13 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 if (!dateStr) return null;
 
                 try {
+                    // Formato ISO com T
                     if (typeof dateStr === 'string' && dateStr.includes('T')) {
                         const date = new Date(dateStr);
                         return isNaN(date.getTime()) ? null : date;
                     }
                     
+                    // Formato brasileiro DD/MM/YYYY HH:MM:SS
                     if (typeof dateStr === 'string' && dateStr.includes('/')) {
                         const [datePart, timePart = '00:00:00'] = dateStr.split(' ');
                         const [day, month, year] = datePart.split('/');
@@ -2705,11 +2489,13 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                         return isNaN(date.getTime()) ? null : date;
                     }
 
+                    // Timestamp numérico
                     if (typeof dateStr === 'number') {
                         const date = new Date(dateStr);
                         return isNaN(date.getTime()) ? null : date;
                     }
 
+                    // Tentativa direta de conversão
                     const date = new Date(dateStr);
                     return isNaN(date.getTime()) ? null : date;
                     
@@ -2737,8 +2523,9 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 
                 const startTime = startDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
                 const endTime = endDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                const dateStr = startDate.toLocaleDateString('pt-BR');
                 
-                return `${startTime} - ${endTime}`;
+                return `${dateStr} ${startTime} - ${endTime}`;
             }
 
             getStatusText(status) {
@@ -2846,8 +2633,8 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                     const status = `
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                             <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
-                                <div style="font-size: 2rem; color: #27ae60;">🚨</div>
-                                <div>Sistema Ativo</div>
+                                <div style="font-size: 2rem; color: #27ae60;">✅</div>
+                                <div>Sistema v5.0 Ativo</div>
                             </div>
                             <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
@@ -2865,14 +2652,14 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                         </div>
                         
                         <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
-                            <strong>🆕 Funcionalidades Implementadas:</strong>
+                            <strong>Correções v5.0 Implementadas:</strong>
                             <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                                <li>✅ Nova lógica production_status (elimina falsos positivos)</li>
-                                <li>✅ Período completo com data e hora em todas as visualizações</li>
-                                <li>✅ Correlação automática com apontamentos relacionados</li>
-                                <li>✅ Range de horário nas regras (ex: 08:00-18:00)</li>
-                                <li>✅ Mensagem WhatsApp atualizada sem tipo específico</li>
-                                <li>✅ Tabela de relatórios melhorada com novos campos</li>
+                                <li>✅ Carregamento de apontamentos via CSV (corrigido)</li>
+                                <li>✅ Busca inteligente de apontamentos próximos</li>
+                                <li>✅ Redução significativa de logs</li>
+                                <li>✅ Garantia de dados reais e precisos</li>
+                                <li>✅ Lógica de consolidação aprimorada</li>
+                                <li>✅ WhatsApp com apontamentos relacionados</li>
                             </ul>
                         </div>
                     `;
@@ -2948,6 +2735,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 };
             }
 
+            // Métodos públicos
             async forceSync() {
                 await this.syncData();
             }
@@ -2984,11 +2772,10 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             }
         }
 
-        // Funções globais - CORRIGIDAS
+        // Funções globais
         let alertSystem = null;
 
-        // Declarar todas as funções globais antes da inicialização
-        window.switchTab = function(tabName) {
+        function switchTab(tabName) {
             document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
@@ -2996,312 +2783,96 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
-        window.toggleRuleFields = function() {
+        function toggleRuleFields() {
             if (alertSystem) alertSystem.toggleRuleFields();
         }
 
-        window.openRuleModal = function() {
+        function openRuleModal() {
             if (alertSystem) alertSystem.openRuleModal();
         }
 
-        window.closeRuleModal = function() {
+        function closeRuleModal() {
             if (alertSystem) alertSystem.closeRuleModal();
         }
 
-        window.closeInvestigationModal = function() {
+        function closeInvestigationModal() {
             if (alertSystem) alertSystem.closeInvestigationModal();
         }
 
-        window.saveInvestigation = function() {
+        function saveInvestigation() {
             if (alertSystem) alertSystem.saveInvestigation();
         }
 
-        window.deleteAlert = function() {
+        function deleteAlert() {
             if (alertSystem) alertSystem.deleteAlert();
         }
 
-        window.copyToWhatsApp = function() {
+        function copyToWhatsApp() {
             if (alertSystem) alertSystem.copyToWhatsApp();
         }
 
-        window.forceSync = function() {
+        function forceSync() {
             if (alertSystem) alertSystem.forceSync();
         }
 
-        window.clearAllAlerts = function() {
+        function clearAllAlerts() {
             if (alertSystem) alertSystem.clearAllAlerts();
         }
 
-        window.saveConfig = function() {
+        function saveConfig() {
             if (alertSystem) alertSystem.saveConfigFromForm();
         }
 
-        window.syncRulesFromGitHub = function() {
+        function syncRulesFromGitHub() {
             if (alertSystem) alertSystem.syncRulesFromGitHub();
         }
 
-        window.testGitHubConnection = function() {
+        function testGitHubConnection() {
             if (alertSystem) alertSystem.testGitHubConnection();
         }
 
-        window.generateReport = function() {
+        function generateReport() {
             if (alertSystem) alertSystem.generateReport();
         }
 
-        window.exportToExcel = function() {
+        function exportToExcel() {
             if (alertSystem) alertSystem.exportToExcel();
-        }
-
-        window.reloadApontamentos = function() {
-            if (alertSystem && typeof alertSystem.reloadApontamentos === 'function') {
-                alertSystem.reloadApontamentos();
-            } else {
-                console.error('❌ Função reloadApontamentos não encontrada');
-            }
-        }
-
-        window.refreshApontamentosRelacionados = function() {
-            if (alertSystem && typeof alertSystem.refreshApontamentosRelacionados === 'function') {
-                alertSystem.refreshApontamentosRelacionados();
-            } else {
-                console.error('❌ Função refreshApontamentosRelacionados não encontrada');
-            }
-        }
-
-        // Para compatibilidade - funções sem window também
-        function switchTab(tabName) { window.switchTab(tabName); }
-        function toggleRuleFields() { window.toggleRuleFields(); }
-        function openRuleModal() { window.openRuleModal(); }
-        function closeRuleModal() { window.closeRuleModal(); }
-        function closeInvestigationModal() { window.closeInvestigationModal(); }
-        function saveInvestigation() { window.saveInvestigation(); }
-        function deleteAlert() { window.deleteAlert(); }
-        function copyToWhatsApp() { window.copyToWhatsApp(); }
-        function forceSync() { window.forceSync(); }
-        function clearAllAlerts() { window.clearAllAlerts(); }
-        function saveConfig() { window.saveConfig(); }
-        function syncRulesFromGitHub() { window.syncRulesFromGitHub(); }
-        function testGitHubConnection() { window.testGitHubConnection(); }
-        function generateReport() { window.generateReport(); }
-        function exportToExcel() { window.exportToExcel(); }
-        function reloadApontamentos() { 
-            try {
-                window.reloadApontamentos(); 
-            } catch (error) {
-                console.error('❌ Erro ao recarregar apontamentos:', error);
-            }
-        }
-        function refreshApontamentosRelacionados() { 
-            try {
-                window.refreshApontamentosRelacionados(); 
-            } catch (error) {
-                console.error('❌ Erro ao atualizar apontamentos relacionados:', error);
-            }
         }
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             try {
-                alertSystem = new AlertSystemV435();
-                console.log('✅ Sistema de Alertas inicializado com todas as novas funcionalidades');
-                
-                // Validar funções críticas
-                setTimeout(() => {
-                    if (alertSystem) {
-                        console.log('🔧 Validando funções do sistema...');
-                        console.log('  • reloadApontamentos:', typeof alertSystem.reloadApontamentos);
-                        console.log('  • refreshApontamentosRelacionados:', typeof alertSystem.refreshApontamentosRelacionados);
-                        console.log('  • findRelatedApontamentos:', typeof alertSystem.findRelatedApontamentos);
-                        console.log('  • loadApontamentosData:', typeof alertSystem.loadApontamentosData);
-                        console.log('✅ Validação concluída - todas as funções disponíveis');
-                        
-                        // Auto-teste da correlação
-                        setTimeout(() => {
-                            console.log('🧪 Executando auto-teste de correlação...');
-                            if (window.alertSystemDebug && typeof window.alertSystemDebug.validateSystem === 'function') {
-                                window.alertSystemDebug.validateSystem();
-                            }
-                        }, 2000);
-                    }
-                }, 1000);
-                
+                alertSystem = new AlertSystemV5();
+                console.log('✅ Sistema de Alertas v5.0 inicializado');
             } catch (error) {
                 console.error('❌ Erro crítico na inicialização:', error);
                 setTimeout(() => {
-                    alertSystem = new AlertSystemV435();
+                    alertSystem = new AlertSystemV5();
                 }, 3000);
             }
         });
 
-        // Debug v4.3.5
+        // Debug simplificado
         window.alertSystemDebug = {
             getSystem: () => alertSystem,
             getStats: () => ({
                 alerts: alertSystem?.alerts.length || 0,
                 rules: alertSystem?.rules.length || 0,
-                syncQueue: alertSystem?.syncQueue.length || 0,
                 apontamentos: alertSystem?.apontamentosData.length || 0,
-                version: '4.3.5'
+                syncQueue: alertSystem?.syncQueue.length || 0,
+                version: '5.0'
             }),
-            clearAllData: () => {
-                if (alertSystem) {
-                    alertSystem.alerts = [];
-                    alertSystem.saveLocalData();
-                    alertSystem.updateInterface();
-                }
-            },
-            getQueue: () => alertSystem?.syncQueue || [],
-            clearQueue: () => {
-                if (alertSystem) alertSystem.syncQueue = [];
-            },
-            getApontamentos: () => alertSystem?.apontamentosData || [],
-            testApontamentosCorrelation: (alertId) => {
-                if (alertSystem) {
-                    const alert = alertSystem.alerts.find(a => a.id === alertId);
-                    if (alert) {
-                        console.log('🧪 TESTE MANUAL - Correlação de Apontamentos:');
-                        console.log('Dados do alerta:', alert);
-                        return alertSystem.findRelatedApontamentos(alert.startTime, alert.endTime, alert.equipamento);
-                    }
-                }
-                return [];
-            },
-            // NOVA: Função para testar correlação com dados específicos
-            testCorrelationWithData: (equipamento, startTime, endTime) => {
-                if (alertSystem) {
-                    console.log('🧪 TESTE ESPECÍFICO - Correlação:');
-                    console.log(`Equipamento: ${equipamento}`);
-                    console.log(`Período: ${startTime} - ${endTime}`);
-                    return alertSystem.findRelatedApontamentos(startTime, endTime, equipamento);
-                }
-                return [];
-            },
-            // NOVA: Recriar apontamentos com dados corretos
-            updateApontamentosData: (newData) => {
-                if (alertSystem) {
-                    alertSystem.apontamentosData = newData;
-                    console.log(`✅ Apontamentos atualizados: ${newData.length} registros`);
-                    alertSystem.updateInterface();
-                }
-            },
-            // NOVA: Testar com dados do caso específico
-            testCaseSpecific: () => {
-                if (!alertSystem) return;
-                
-                console.log('🧪 TESTE CASO ESPECÍFICO:');
-                
-                // Dados exatos do caso reportado
-                const equipamento = "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS";
-                const alertStart = "2025-07-13T17:57:00";
-                const alertEnd = "2025-07-13T19:04:00";
-                
-                console.log('Testando correlação para:');
-                console.log(`  Equipamento: ${equipamento}`);
-                console.log(`  Período: ${alertStart} - ${alertEnd}`);
-                
-                const result = alertSystem.findRelatedApontamentos(alertStart, alertEnd, equipamento);
-                
-                console.log(`Resultado: ${result.length} apontamentos encontrados`);
-                return result;
-            },
-            // NOVA: Recarregar apontamentos
             reloadApontamentos: () => {
                 if (alertSystem) {
-                    alertSystem.reloadApontamentos();
-                }
-            },
-            // NOVA: Atualizar apontamentos do alerta atual
-            refreshCurrentAlert: () => {
-                if (alertSystem) {
-                    alertSystem.refreshApontamentosRelacionados();
-                }
-            },
-            // NOVA: Validar sistema completo
-            validateSystem: () => {
-                if (!alertSystem) {
-                    console.log('❌ Sistema não inicializado');
-                    return false;
-                }
-                
-                console.log('🔧 VALIDAÇÃO COMPLETA DO SISTEMA:');
-                console.log('');
-                console.log('📊 Status Geral:');
-                console.log(`  • Sistema inicializado: ${!!alertSystem}`);
-                console.log(`  • Alertas carregados: ${alertSystem.alerts.length}`);
-                console.log(`  • Regras carregadas: ${alertSystem.rules.length}`);
-                console.log(`  • Apontamentos carregados: ${alertSystem.apontamentosData.length}`);
-                console.log('');
-                console.log('⚙️ Funções Críticas:');
-                console.log(`  • reloadApontamentos: ${typeof alertSystem.reloadApontamentos}`);
-                console.log(`  • refreshApontamentosRelacionados: ${typeof alertSystem.refreshApontamentosRelacionados}`);
-                console.log(`  • findRelatedApontamentos: ${typeof alertSystem.findRelatedApontamentos}`);
-                console.log(`  • loadApontamentosData: ${typeof alertSystem.loadApontamentosData}`);
-                console.log('');
-                console.log('🔗 Teste de Correlação:');
-                const testResult = alertSystem.findRelatedApontamentos(
-                    "2025-07-13T17:57:00", 
-                    "2025-07-13T19:04:00", 
-                    "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS"
-                );
-                console.log(`  • Apontamentos encontrados: ${testResult.length}`);
-                if (testResult.length > 0) {
-                    testResult.forEach((ap, i) => {
-                        console.log(`    [${i+1}] ${ap['Categoria Demora']} - ${ap['Tempo Indisponível (HH:MM)']}`);
+                    alertSystem.loadApontamentosData().then(() => {
+                        console.log('✅ Apontamentos recarregados');
                     });
                 }
-                console.log('');
-                console.log(`✅ Sistema está ${testResult.length > 0 ? 'FUNCIONANDO CORRETAMENTE' : 'com problemas de correlação'}`);
-                
-                if (testResult.length > 0) {
-                    console.log('');
-                    console.log('📱 EXEMPLO de mensagem WhatsApp com apontamentos:');
-                    console.log('---');
-                    console.log('🚨 ALERTA OPERACIONAL');
-                    console.log('');
-                    console.log('Regra: Equipamento Improdutivo');
-                    console.log('Duração Total: 1h 7min');
-                    console.log('Período do ocorrido: 13/07/2025 17:57 - 19:04');
-                    console.log('');
-                    console.log('Apontamentos Relacionados:');
-                    testResult.forEach(ap => {
-                        const inicio = alertSystem.parseDateTime(ap['Data Inicial']);
-                        const fim = alertSystem.parseDateTime(ap['Data Final']);
-                        const dataInicio = inicio ? inicio.toLocaleDateString('pt-BR') : 'N/A';
-                        const horaInicio = inicio ? inicio.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                        const horaFim = fim ? fim.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                        const periodo = `${dataInicio} ${horaInicio}-${horaFim}`;
-                        console.log(`• ${ap['Categoria Demora']}`);
-                        console.log(`  ${periodo} (${ap['Tempo Indisponível (HH:MM)']})`);
-                    });
-                    console.log('---');
-                }
-                
-                return testResult.length > 0;
             }
         };
 
-        console.log('🚨 Sistema de Alertas carregado - Todas as novas funcionalidades implementadas');
-        console.log('📋 FUNCIONALIDADES:');
-        console.log('  • Nova lógica production_status (elimina falsos positivos)');
-        console.log('  • Período completo com data/hora em todas as visualizações');
-        console.log('  • Correlação automática com apontamentos relacionados');
-        console.log('  • Range de horário nas regras (ex: 08:00-18:00)');
-        console.log('  • Mensagem WhatsApp atualizada sem tipo específico');
-        console.log('  • Tabela de relatórios melhorada com novos campos');
-        console.log('🔧 Use window.alertSystemDebug para debug avançado');
-        console.log('');
-        console.log('🧪 COMANDOS DE DEBUG DISPONÍVEIS:');
-        console.log('  • window.alertSystemDebug.validateSystem() - Validar sistema completo');
-        console.log('  • window.alertSystemDebug.getApontamentos() - Ver apontamentos carregados');
-        console.log('  • window.alertSystemDebug.testCaseSpecific() - Testar caso específico do bug');
-        console.log('  • window.alertSystemDebug.reloadApontamentos() - Recarregar e correlacionar apontamentos');
-        console.log('  • window.alertSystemDebug.refreshCurrentAlert() - Atualizar apontamentos do alerta aberto');
-        console.log('  • window.alertSystemDebug.testCorrelationWithData(equipamento, start, end) - Teste customizado');
-        console.log('  • window.alertSystemDebug.testApontamentosCorrelation(alertId) - Testar alerta específico');
-        console.log('');
-        console.log('🔥 TESTE RÁPIDO:');
-        console.log('Execute: window.alertSystemDebug.validateSystem()');
-        console.log('');
+        console.log('Sistema de Alertas v5.0 - Todas as correções implementadas');
+        console.log('Use window.alertSystemDebug para debug');
     </script>
 </body>
 </html>
