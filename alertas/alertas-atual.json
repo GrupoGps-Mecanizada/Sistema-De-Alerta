@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752577437169,
+  "timestamp": 1752577737166,
   "version": "5.0",
   "type": "operational",
   "total": 41,
   "alerts": [
     {
-      "id": "lvo29u",
+      "id": "kgjaru",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
       "tipo": "Status",
       "identificador": "off",
@@ -19,10 +19,10 @@
       "timeRange": "15/07/2025 06:25 - 07:10",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1752577377777,
-      "fullDateTime": "15/07/2025 08:02",
+      "timestamp": 1752577677288,
+      "fullDateTime": "15/07/2025 08:07",
       "date": "15/07/2025",
-      "time": "08:02:57",
+      "time": "08:07:57",
       "status": "pendente",
       "placa": "",
       "motorista": "",
