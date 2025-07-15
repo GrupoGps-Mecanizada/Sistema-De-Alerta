@@ -1,11 +1,11 @@
 {
-  "timestamp": 1752572637177,
+  "timestamp": 1752572937167,
   "version": "5.0",
   "type": "operational",
   "total": 27,
   "alerts": [
     {
-      "id": "thalqx",
+      "id": "uwfd16",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 07",
       "tipo": "Status",
       "identificador": "off",
@@ -19,10 +19,10 @@
       "timeRange": "14/07/2025 08:35 - 09:29",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1752572577886,
-      "fullDateTime": "15/07/2025 06:42",
+      "timestamp": 1752572877307,
+      "fullDateTime": "15/07/2025 06:47",
       "date": "15/07/2025",
-      "time": "06:42:57",
+      "time": "06:47:57",
       "status": "pendente",
       "placa": "",
       "motorista": "",
