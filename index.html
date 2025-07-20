@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Alertas GrupoGPS v5.0</title>
+    <title>Sistema de Alertas GrupoGPS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
@@ -696,7 +696,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="header-brand">
-                    <h1>Sistema de Alertas GrupoGPS v5.0</h1>
+                    <h1>Sistema de Alertas GrupoGPS</h1>
                 </div>
                 
                 <div class="header-controls">
@@ -968,7 +968,7 @@
 
         <!-- Footer -->
         <footer style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.2); padding: 2rem; text-align: center; color: #5a6c7d; font-size: 0.9rem;">
-            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas v5.0</p>
+            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas</p>
         </footer>
     </div>
 
@@ -983,7 +983,7 @@
             <form id="ruleForm">
                 <div class="form-group">
                     <label>Nome da Regra:</label>
-                    <input type="text" id="ruleName" placeholder="Ex: Refeição Prolongada" required>
+                    <input type="text" id="ruleName" placeholder="Ex: Motor Desligado Prolongado" required>
                 </div>
 
                 <div class="form-group">
@@ -995,15 +995,17 @@
                 </div>
 
                 <div class="form-group" id="statusField">
-                    <label>Status do Motor:</label>
+                    <label>Status do Equipamento:</label>
                     <select id="ruleStatus">
                         <option value="">Qualquer status</option>
-                        <option value="on">Motor Ligado</option>
-                        <option value="off">Motor Desligado</option>
-                        <option value="stopped">Parado Ligado</option>
-                        <option value="maintenance">Em Manutenção</option>
-                        <option value="out_of_plant">Fora da Planta</option>
-                        <option value="production_off">Equipamento Improdutivo</option>
+                        <option value="Motor Ligado">Motor Ligado</option>
+                        <option value="Motor Desligado">Motor Desligado</option>
+                        <option value="Parado Ligado">Parado Ligado</option>
+                        <option value="Motor Secundário Ligado">Motor Secundário Ligado</option>
+                        <option value="Em manutenção">Em manutenção</option>
+                        <option value="Fora da Planta">Fora da Planta</option>
+                        <option value="Indisponível / Sem Apropriação">Indisponível / Sem Apropriação</option>
+                        <option value="Sem dados de bordo">Sem dados de bordo</option>
                     </select>
                 </div>
 
@@ -1151,15 +1153,15 @@
     </div>
 
     <script>
-        // Sistema de Alertas v5.0 - GrupoGPS
-        // CORREÇÕES CRÍTICAS: 
-        // 1. Mudança de JSON para CSV para apontamentos
-        // 2. Redução de logs
-        // 3. Busca inteligente de apontamentos próximos
-        // 4. Garantia de dados reais
-        // 5. Lógica de consolidação aprimorada
+        // Sistema de Alertas v6.0 - GrupoGPS
+        // ATUALIZAÇÃO CRÍTICA: Nova estrutura de dados Timeline em CSV
+        // 1. Mudança de fonte: JSON → CSV
+        // 2. Novos status reais do Gauss
+        // 3. Campos atualizados para nova estrutura
+        // 4. Mapeamento de dados corrigido
+        // 5. Lógica de processamento adaptada
         
-        class AlertSystemV5 {
+        class AlertSystemV6 {
             constructor() {
                 this.telemetryData = [];
                 this.apontamentosData = [];
@@ -1178,6 +1180,18 @@
                     lastDataLoad: null
                 };
 
+                // NOVO: Status disponíveis na nova estrutura
+                this.availableStatus = [
+                    'Motor Ligado',
+                    'Motor Desligado',
+                    'Parado Ligado',
+                    'Motor Secundário Ligado',
+                    'Em manutenção',
+                    'Fora da Planta',
+                    'Indisponível / Sem Apropriação',
+                    'Sem dados de bordo'
+                ];
+
                 // Configurações de proximidade temporal para apontamentos
                 this.APONTAMENTO_TIME_WINDOW = 120; // minutos antes e depois do alerta
                 this.MAX_APONTAMENTOS_PER_ALERT = 3; // máximo de apontamentos relacionados
@@ -1186,8 +1200,8 @@
             }
 
             async initializeSystem() {
-                console.log('Sistema de Alertas v5.0 - Inicializando...');
-                this.updateSyncStatus('loading', 'Iniciando v5.0...');
+                console.log('Sistema de Alertas - Inicializando com nova estrutura CSV...');
+                this.updateSyncStatus('loading', 'Iniciando sistema...');
 
                 try {
                     this.loadConfig();
@@ -1202,8 +1216,8 @@
                     
                     window.alertSystem = this;
                     
-                    this.updateSyncStatus('success', 'Sistema v5.0 ativo');
-                    console.log('✅ Sistema inicializado com sucesso.');
+                    this.updateSyncStatus('success', 'Sistema ativo');
+                    console.log('✅ Sistema inicializado com sucesso');
                     
                 } catch (error) {
                     console.error('❌ Erro na inicialização:', error);
@@ -1226,10 +1240,11 @@
                 }
             }
 
-            // CORREÇÃO 1: Carregar apontamentos de CSV ao invés de JSON
-            async loadApontamentosData() {
+            // NOVO: Carregar dados da timeline do CSV
+            async loadTimelineData() {
                 try {
-                    const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv?cache_bust=${Date.now()}`;
+                    // MUDANÇA CRÍTICA: Nova URL da timeline em CSV
+                    const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/captured-data.csv?cache_bust=${Date.now()}`;
                     const csvText = await this.fetchData(url, false);
                     
                     // Parse CSV com PapaParse
@@ -1241,17 +1256,111 @@
                     });
                     
                     if (parsed.data && parsed.data.length > 0) {
-                        this.apontamentosData = parsed.data;
-                        console.log(`✅ Apontamentos carregados: ${this.apontamentosData.length} registros`);
+                        // NOVO: Transformar dados CSV para formato interno
+                        this.telemetryData = this.transformTimelineData(parsed.data);
+                        console.log(`✅ Timeline carregada (CSV): ${this.telemetryData.length} registros`);
                         
                         // Salvar localmente para cache
-                        localStorage.setItem('alertSystem_apontamentos_v5', JSON.stringify(this.apontamentosData));
+                        localStorage.setItem('alertSystem_telemetry', JSON.stringify(this.telemetryData));
+                        return true;
                     }
                 } catch (error) {
-                    console.warn('⚠️ Erro ao carregar apontamentos do GitHub:', error.message);
+                    console.warn('⚠️ Erro ao carregar timeline do GitHub:', error.message);
                     
                     // Tentar carregar do cache local
-                    const cached = localStorage.getItem('alertSystem_apontamentos_v5');
+                    const cached = localStorage.getItem('alertSystem_telemetry');
+                    if (cached) {
+                        this.telemetryData = JSON.parse(cached);
+                        console.log('📋 Timeline carregada do cache local');
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            // NOVO: Transformar dados CSV para formato interno compatível
+            transformTimelineData(csvData) {
+                return csvData.map(row => {
+                    // Mapear campos CSV para estrutura interna
+                    return {
+                        vacancy_name: row.VAGA || row.vaga || '',
+                        equipamento: row.EQUIPAMENTO || row.equipamento || '',
+                        status: row.STATUS || row.status || '',
+                        start: this.parseCSVDateTime(row.ENTRADA || row.entrada),
+                        end: this.parseCSVDateTime(row.SAIDA || row.saida),
+                        total_time: this.parseCSVTimeTotal(row['TEMPO TOTAL'] || row.tempo_total),
+                        // Manter compatibilidade com código existente
+                        vacancy_code: this.extractVacancyCode(row.VAGA || row.vaga),
+                        status_title: row.STATUS || row.status || ''
+                    };
+                }).filter(row => row.vacancy_name && row.status); // Filtrar registros inválidos
+            }
+
+            // NOVO: Parser para datas CSV (formato brasileiro)
+            parseCSVDateTime(dateTimeStr) {
+                if (!dateTimeStr) return null;
+                
+                try {
+                    // Formato: "2025-07-19 00:00" ou "2025-07-19 00:00:00"
+                    if (typeof dateTimeStr === 'string') {
+                        // Se já está no formato ISO, apenas adicionar T
+                        if (dateTimeStr.includes(' ') && !dateTimeStr.includes('T')) {
+                            return dateTimeStr.replace(' ', 'T');
+                        }
+                        return dateTimeStr;
+                    }
+                    return dateTimeStr;
+                } catch (error) {
+                    console.warn('Erro ao processar data CSV:', dateTimeStr);
+                    return null;
+                }
+            }
+
+            // NOVO: Parser para tempo total CSV
+            parseCSVTimeTotal(timeTotal) {
+                if (!timeTotal) return 0;
+                
+                if (typeof timeTotal === 'number') {
+                    return timeTotal; // Já está em horas decimais
+                }
+                
+                if (typeof timeTotal === 'string') {
+                    return parseFloat(timeTotal) || 0;
+                }
+                
+                return 0;
+            }
+
+            // NOVO: Extrair código da vaga
+            extractVacancyCode(vagaName) {
+                if (!vagaName) return '';
+                
+                // Tentar extrair número da vaga (ex: "CAMINHÃO AUTO VÁCUO - GPS - 06" → "06")
+                const match = vagaName.match(/(\d+)$/);
+                return match ? match[1] : '';
+            }
+
+            // Carregar apontamentos de CSV (mantido da v5.0)
+            async loadApontamentosData() {
+                try {
+                    const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv?cache_bust=${Date.now()}`;
+                    const csvText = await this.fetchData(url, false);
+                    
+                    const parsed = Papa.parse(csvText, {
+                        header: true,
+                        dynamicTyping: true,
+                        skipEmptyLines: true,
+                        delimitersToGuess: [',', '\t', '|', ';']
+                    });
+                    
+                    if (parsed.data && parsed.data.length > 0) {
+                        this.apontamentosData = parsed.data;
+                        console.log(`✅ Apontamentos carregados: ${this.apontamentosData.length} registros`);
+                        localStorage.setItem('alertSystem_apontamentos', JSON.stringify(this.apontamentosData));
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erro ao carregar apontamentos:', error.message);
+                    const cached = localStorage.getItem('alertSystem_apontamentos');
                     if (cached) {
                         this.apontamentosData = JSON.parse(cached);
                         console.log('📋 Apontamentos carregados do cache local');
@@ -1259,7 +1368,7 @@
                 }
             }
 
-            // CORREÇÃO 3: Busca inteligente de apontamentos próximos
+            // Busca inteligente de apontamentos próximos (mantido da v5.0)
             findRelatedApontamentos(alert) {
                 if (!this.apontamentosData || this.apontamentosData.length === 0) {
                     return [];
@@ -1270,34 +1379,27 @@
                 
                 if (!alertStart || !alertEnd) return [];
 
-                // Janela de busca: X minutos antes e depois do período do alerta
                 const searchStart = new Date(alertStart.getTime() - (this.APONTAMENTO_TIME_WINDOW * 60 * 1000));
                 const searchEnd = new Date(alertEnd.getTime() + (this.APONTAMENTO_TIME_WINDOW * 60 * 1000));
 
                 const equipamentoNormalizado = this.normalizeEquipmentName(alert.equipamento);
                 
-                // Filtrar apontamentos relevantes
                 const relevantApontamentos = this.apontamentosData.filter(apontamento => {
-                    // Verificar se é o mesmo equipamento
                     const apontEquipamento = this.normalizeEquipmentName(apontamento.Vaga || apontamento.Equipamento);
                     if (apontEquipamento !== equipamentoNormalizado) return false;
 
-                    // Verificar período
                     const apontStart = this.parseDateTime(apontamento['Data Inicial'] || apontamento.DataInicial);
                     const apontEnd = this.parseDateTime(apontamento['Data Final'] || apontamento.DataFinal);
                     
                     if (!apontStart || !apontEnd) return false;
 
-                    // Verificar se há sobreposição ou proximidade temporal
                     return (apontStart <= searchEnd && apontEnd >= searchStart);
                 });
 
-                // Ordenar por proximidade temporal (mais próximos primeiro)
                 relevantApontamentos.sort((a, b) => {
                     const aStart = this.parseDateTime(a['Data Inicial'] || a.DataInicial);
                     const bStart = this.parseDateTime(b['Data Inicial'] || b.DataInicial);
                     
-                    // Calcular distância temporal do centro do alerta
                     const alertCenter = new Date((alertStart.getTime() + alertEnd.getTime()) / 2);
                     const aDist = Math.abs(aStart.getTime() - alertCenter.getTime());
                     const bDist = Math.abs(bStart.getTime() - alertCenter.getTime());
@@ -1305,7 +1407,6 @@
                     return aDist - bDist;
                 });
 
-                // Limitar quantidade de apontamentos retornados
                 return relevantApontamentos.slice(0, this.MAX_APONTAMENTOS_PER_ALERT).map(apontamento => {
                     const duration = this.calculateApontamentoDuration(apontamento);
                     return {
@@ -1324,7 +1425,7 @@
                 
                 if (!start || !end) return 0;
                 
-                return (end.getTime() - start.getTime()) / (1000 * 60); // retorna em minutos
+                return (end.getTime() - start.getTime()) / (1000 * 60);
             }
 
             formatDateTime(dateStr) {
@@ -1340,57 +1441,53 @@
                 return `${dateFormatted} ${time}`;
             }
 
-            // Sistema de queue otimizado
-            addToSyncQueue(operation, data, description) {
-                this.syncQueue.push({
-                    id: Date.now() + Math.random(),
-                    operation: operation,
-                    data: data,
-                    description: description,
-                    timestamp: Date.now(),
-                    retries: 0,
-                    maxRetries: 3
-                });
-            }
-
-            startSyncQueueProcessor() {
-                setInterval(async () => {
-                    if (this.syncQueue.length > 0 && this.config.githubEnabled) {
-                        await this.processSyncQueue();
-                    }
-                }, 5000);
-            }
-
-            async processSyncQueue() {
-                const operation = this.syncQueue.shift();
-                if (!operation) return;
-
+            // Sistema de sync atualizado para v6.0
+            async syncData() {
+                this.updateSyncStatus('loading', 'Sincronizando...');
+                
                 try {
-                    switch (operation.operation) {
-                        case 'saveRules':
-                            await this.saveRulesToGitHub();
-                            break;
-                        case 'saveAlerts':
-                            await this.saveOperationalDataToGitHub();
-                            break;
-                        case 'saveInvestigation':
-                            await this.saveOperationalDataToGitHub();
-                            break;
-                    }
+                    // Carregar dados operacionais do GitHub
+                    await this.loadOperationalDataFromGitHub();
                     
-                    this.showNotification(`Sincronizado: ${operation.description}`, 'success');
+                    // Carregar apontamentos
+                    await this.loadApontamentosData();
                     
-                } catch (error) {
-                    if (operation.retries < operation.maxRetries) {
-                        operation.retries++;
-                        this.syncQueue.unshift(operation);
+                    // MUDANÇA CRÍTICA: Carregar timeline do CSV
+                    const timelineLoaded = await this.loadTimelineData();
+                    
+                    if (timelineLoaded) {
+                        console.log(`📊 Timeline sincronizada: ${this.telemetryData.length} registros`);
+                        
+                        // Mostrar amostra dos novos dados no console para debug
+                        if (this.telemetryData.length > 0) {
+                            const sample = this.telemetryData[0];
+                            console.log('🔍 Amostra de dados:', {
+                                equipamento: sample.vacancy_name,
+                                status: sample.status,
+                                inicio: sample.start,
+                                duracao: sample.total_time
+                            });
+                        }
+                        
+                        await this.processAlerts();
                     } else {
-                        this.showNotification(`Falha na sincronização: ${operation.description}`, 'error');
+                        console.warn('⚠️ Falha ao carregar timeline, usando dados em cache');
                     }
+
+                    if (this.config.githubEnabled) {
+                        this.config.lastSync = Date.now();
+                        this.saveConfig();
+                    }
+                    
+                    this.updateSyncStatus('success', 'Sincronizado!');
+
+                } catch (error) {
+                    console.error('❌ Erro na sincronização:', error);
+                    this.updateSyncStatus('error', 'Falha na Sincronização');
                 }
             }
 
-            // Motor de regras aprimorado
+            // Motor de regras adaptado para novos status
             recordMatchesRule(record, rule, type) {
                 const identifier = type === 'status' ? record.status : record['Categoria Demora'];
                 
@@ -1402,6 +1499,34 @@
 
                 const duration = this.getRecordDuration(record, type);
                 return this.checkTimeCondition(duration, rule.timeOperator, rule.timeValue);
+            }
+
+            // NOVO: Adaptado para novos campos CSV
+            getRecordDuration(record, type) {
+                if (record.consolidatedDuration) {
+                    return record.consolidatedDuration;
+                }
+
+                if (type === 'status') {
+                    const start = this.parseDateTime(record.start);
+                    const end = this.parseDateTime(record.end);
+                    if (start && end) {
+                        return (end.getTime() - start.getTime()) / (1000 * 60);
+                    }
+                    
+                    // Fallback: usar total_time se disponível
+                    if (record.total_time) {
+                        return record.total_time * 60; // Converter horas para minutos
+                    }
+                    
+                    return 0;
+                } else {
+                    const timeStr = record['Tempo Indisponível (HH:MM)'];
+                    if (!timeStr) return 0;
+                    
+                    const [hours, minutes] = timeStr.split(':').map(Number);
+                    return (hours * 60) + (minutes || 0);
+                }
             }
 
             generateAlertId(record, rule) {
@@ -1466,18 +1591,13 @@
                                             existingAlert.durationMinutes = newDuration;
                                             existingAlert.endTime = record.end;
                                             existingAlert.timeRange = this.formatTimeRange(existingAlert.startTime, record.end);
-                                            
-                                            // Atualizar apontamentos relacionados
                                             existingAlert.apontamentosRelacionados = this.findRelatedApontamentos(existingAlert);
-                                            
                                             updatedAlertsCount++;
                                         }
                                     } else {
                                         const newAlert = this.createAlert(record, rule, 'status');
                                         if (newAlert) {
-                                            // Adicionar apontamentos relacionados
                                             newAlert.apontamentosRelacionados = this.findRelatedApontamentos(newAlert);
-                                            
                                             this.alerts.unshift(newAlert);
                                             newAlertsCount++;
                                         }
@@ -1506,13 +1626,6 @@
                 } finally {
                     this.isProcessing = false;
                 }
-            }
-
-            formatFullDateTime(timestamp) {
-                const date = new Date(timestamp);
-                const dateStr = date.toLocaleDateString('pt-BR');
-                const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                return `${dateStr} ${timeStr}`;
             }
 
             createAlert(record, rule, type) {
@@ -1556,121 +1669,78 @@
                 return alert;
             }
 
-            // UI: Atualização da lista de alertas com apontamentos
-            updateAlertsList() {
-                const container = document.getElementById('alertsList');
+            formatFullDateTime(timestamp) {
+                const date = new Date(timestamp);
+                const dateStr = date.toLocaleDateString('pt-BR');
+                const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                return `${dateStr} ${timeStr}`;
+            }
+
+            // UI: Lista de regras atualizada com novos status
+            updateRulesList() {
+                const container = document.getElementById('rulesList');
                 if (!container) return;
 
-                if (this.alerts.length === 0) {
+                if (this.rules.length === 0) {
                     container.innerHTML = `
                         <div class="loading-state">
-                            <div style="font-size: 3rem;">✅</div>
-                            <div>Nenhum alerta registrado</div>
+                            <div style="font-size: 3rem;">⚙️</div>
+                            <div>Nenhuma regra configurada</div>
                         </div>
                     `;
                     return;
                 }
 
-                const filteredAlerts = this.getFilteredAlerts();
-                
-                container.innerHTML = filteredAlerts.map(alert => {
-                    let normalizedSeverity = alert.severity;
-                    if (alert.severity === 'critical') normalizedSeverity = 'critico';
-                    else if (alert.severity === 'high') normalizedSeverity = 'alto';
-                    else if (alert.severity === 'medium') normalizedSeverity = 'medio';
-                    else if (alert.severity === 'low') normalizedSeverity = 'baixo';
-
-                    // Seção de apontamentos relacionados
-                    let apontamentosHtml = '';
-                    if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
-                        apontamentosHtml = `
-                            <div class="apontamentos-section">
-                                <div class="apontamentos-title">
-                                    <span>📋</span>
-                                    <span>Apontamentos Relacionados:</span>
-                                </div>
-                                ${alert.apontamentosRelacionados.map(ap => `
-                                    <div class="apontamento-item">
-                                        <div class="apontamento-categoria">${ap.categoria}</div>
-                                        <div class="apontamento-tempo">${ap.inicio} - ${ap.fim} (${ap.duracao})</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        `;
-                    }
-
-                    return `
-                    <div class="alert-card ${normalizedSeverity}">
-                        <div class="alert-header">
-                            <div class="alert-title">${alert.message}</div>
-                            <div class="alert-actions">
-                                <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">
-                                    <span>Investigar</span>
+                container.innerHTML = this.rules.map(rule => `
+                    <div class="rule-card ${rule.active ? 'active' : 'inactive'}">
+                        <div class="rule-header">
+                            <div class="rule-name">${rule.name}</div>
+                            <div class="rule-actions">
+                                <button class="btn small ${rule.active ? 'warning' : 'success'}" 
+                                        onclick="alertSystem.toggleRule(${rule.id})">
+                                    <span>${rule.active ? 'Desativar' : 'Ativar'}</span>
+                                </button>
+                                <button class="btn small secondary" onclick="alertSystem.editRule(${rule.id})">
+                                    <span>Editar</span>
+                                </button>
+                                <button class="btn small danger" onclick="alertSystem.deleteRule(${rule.id})">
+                                    <span>Excluir</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="alert-time">${alert.fullDateTime || `${alert.date} ${alert.time}`}</div>
-                        <div class="alert-details">
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Equipamento</div>
-                                <div class="alert-detail-value">${this.getDisplayName(alert.equipamento)}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Tipo</div>
-                                <div class="alert-detail-value">${alert.tipo} - ${alert.identificador}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Duração</div>
-                                <div class="alert-detail-value">${alert.duration}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Período</div>
-                                <div class="alert-detail-value">${alert.timeRange}</div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Status</div>
-                                <div class="alert-detail-value">
-                                    <span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span>
-                                </div>
-                            </div>
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Gravidade</div>
-                                <div class="alert-detail-value">
-                                    <span class="severity-badge ${normalizedSeverity}">${this.getSeverityText(alert.severity)}</span>
-                                </div>
-                            </div>
-                            ${alert.consolidated ? `
-                            <div class="alert-detail">
-                                <div class="alert-detail-label">Consolidado</div>
-                                <div class="alert-detail-value" style="color: #27ae60;">✅ ${alert.originalCount} registros</div>
-                            </div>
-                            ` : ''}
+                        <div class="rule-config">
+                            <div><strong>Tipo:</strong> ${rule.type === 'status' ? 'Status' : 'Apontamento'}</div>
+                            <div><strong>Identificador:</strong> ${rule.identifier || 'Qualquer'}</div>
+                            <div><strong>Condição:</strong> ${rule.timeOperator} ${rule.timeValue} min</div>
+                            <div><strong>Gravidade:</strong> <span class="severity-badge ${rule.severity}">${this.getSeverityText(rule.severity)}</span></div>
                         </div>
-                        ${apontamentosHtml}
+                        <div style="margin-top: 1rem;">
+                            <strong>Mensagem:</strong> ${rule.message}
+                        </div>
                     </div>
-                `}).join('');
+                `).join('');
             }
 
-            // Carregar dados de exemplo
+            // Carregar dados de exemplo com novos status
             loadExampleData() {
+                // NOVO: Dados de exemplo com estrutura CSV
                 this.telemetryData = [
                     {
-                        vacancy_code: "536",
                         vacancy_name: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
-                        status: "off",
-                        status_title: "Motor Desligado",
-                        start: "2025-07-14T09:06:19",
-                        end: "2025-07-14T09:48:49",
-                        total_time: "0.70833333333333"
+                        equipamento: "PUB2F80",
+                        status: "Motor Desligado",
+                        start: "2025-07-19T09:06:19",
+                        end: "2025-07-19T09:48:49",
+                        total_time: 0.708
                     }
                 ];
 
                 this.rules = [
                     {
-                        id: 1752152405852,
+                        id: Date.now(),
                         name: "Motor Desligado Prolongado",
                         type: "status",
-                        identifier: "off",
+                        identifier: "Motor Desligado",
                         timeOperator: ">",
                         timeValue: 30,
                         severity: "alto",
@@ -1683,165 +1753,74 @@
                     {
                         Vaga: "CAMINHÃO ALTA PRESSÃO - GPS - 02",
                         "Categoria Demora": "Refeição Motorista",
-                        "Data Inicial": "2025-07-14 09:15:00",
-                        "Data Final": "2025-07-14 09:45:00"
+                        "Data Inicial": "2025-07-19 09:15:00",
+                        "Data Final": "2025-07-19 09:45:00"
                     }
                 ];
 
                 this.processAlerts();
             }
 
-            // Sistema de sincronização
-            async syncData() {
-                this.updateSyncStatus('loading', 'Sincronizando...');
-                
-                try {
-                    await this.loadOperationalDataFromGitHub();
-                    await this.loadApontamentosData();
-                    
-                    const telemetryUrl = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Timeline/latest-fleet-data.json?cache_bust=${Date.now()}`;
-                    const telemetryResponse = await this.fetchData(telemetryUrl, true);
-                    
-                    this.telemetryData = telemetryResponse.records || [];
-                    console.log(`📊 Dados sincronizados: ${this.telemetryData.length} registros`);
-                    
-                    await this.processAlerts();
-
-                    if (this.config.githubEnabled) {
-                        this.config.lastSync = Date.now();
-                        this.saveConfig();
-                    }
-                    
-                    this.updateSyncStatus('success', 'Sincronizado!');
-
-                } catch (error) {
-                    console.error('❌ Erro na sincronização:', error);
-                    this.updateSyncStatus('error', 'Falha na Sincronização');
-                }
-            }
-
-            async fetchData(url, isJson = false) {
-                const response = await fetch(url, { cache: 'no-store' });
-                if (!response.ok) throw new Error(`HTTP ${response.status} em ${url}`);
-                return isJson ? response.json() : response.text();
-            }
-
-            // Gestão GitHub
-            async loadOperationalDataFromGitHub() {
-                if (!this.config.githubEnabled || !this.config.token) {
-                    return;
-                }
-                
-                try {
-                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/alertas/alertas-atual.json?cache_bust=${Date.now()}`;
-                    const data = await this.fetchData(url, true);
-                    
-                    if (data && data.alerts && Array.isArray(data.alerts)) {
-                        this.alerts = data.alerts;
-                        this.config.lastDataLoad = data.timestamp;
-                        console.log(`✅ Estado carregado do GitHub: ${this.alerts.length} alertas`);
-                        this.saveLocalData();
-                    }
-                } catch (error) {
-                    console.warn('⚠️ Não foi possível carregar dados do GitHub:', error.message);
-                }
-            }
-
-            async saveOperationalDataToGitHub() {
-                const operationalData = {
+            // Sistema de sync queue (mantido)
+            addToSyncQueue(operation, data, description) {
+                this.syncQueue.push({
+                    id: Date.now() + Math.random(),
+                    operation: operation,
+                    data: data,
+                    description: description,
                     timestamp: Date.now(),
-                    version: '5.0',
-                    type: 'operational',
-                    total: this.alerts.length,
-                    alerts: this.alerts,
-                };
-                
-                await this.createOrUpdateGitHubFile(
-                    'alertas/alertas-atual.json', 
-                    JSON.stringify(operationalData, null, 2), 
-                    'Atualização automática v5.0'
-                );
-            }
-
-            async saveRulesToGitHub() {
-                const rulesData = {
-                    timestamp: Date.now(),
-                    version: '5.0',
-                    total: this.rules.length,
-                    rules: this.rules
-                };
-                
-                await this.createOrUpdateGitHubFile(
-                    'regras/regras-ativas.json', 
-                    JSON.stringify(rulesData, null, 2), 
-                    'Atualização de regras v5.0'
-                );
-            }
-
-            async loadRulesFromGitHub() {
-                try {
-                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/regras/regras-ativas.json?cache_bust=${Date.now()}`;
-                    const data = await this.fetchData(url, true);
-                    
-                    if (data && data.rules && Array.isArray(data.rules)) {
-                        this.rules = data.rules;
-                        this.saveLocalData();
-                        this.updateRulesList();
-                        console.log(`✅ Regras carregadas: ${data.rules.length}`);
-                    }
-                } catch (error) {
-                    console.warn('⚠️ Erro ao carregar regras:', error.message);
-                }
-            }
-
-            async createOrUpdateGitHubFile(path, content, commitMessage) {
-                const url = `https://api.github.com/repos/${this.config.repo}/contents/${path}`;
-                
-                let sha = null;
-                try {
-                    const response = await fetch(url, {
-                        headers: {
-                            'Authorization': `token ${this.config.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        const data = await response.json();
-                        sha = data.sha;
-                    }
-                } catch (error) {
-                    console.log(`📁 Arquivo ${path} não existe, será criado`);
-                }
-
-                const body = {
-                    message: commitMessage,
-                    content: btoa(unescape(encodeURIComponent(content)))
-                };
-
-                if (sha) {
-                    body.sha = sha;
-                }
-
-                const response = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${this.config.token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(body)
+                    retries: 0,
+                    maxRetries: 3
                 });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`GitHub API Error: ${response.status} - ${errorData.message}`);
-                }
-
-                return await response.json();
             }
 
-            // Consolidação de registros
+            startSyncQueueProcessor() {
+                setInterval(async () => {
+                    if (this.syncQueue.length > 0 && this.config.githubEnabled) {
+                        await this.processSyncQueue();
+                    }
+                }, 5000);
+            }
+
+            async processSyncQueue() {
+                const operation = this.syncQueue.shift();
+                if (!operation) return;
+
+                try {
+                    switch (operation.operation) {
+                        case 'saveRules':
+                            await this.saveRulesToGitHub();
+                            break;
+                        case 'saveAlerts':
+                            await this.saveOperationalDataToGitHub();
+                            break;
+                        case 'saveInvestigation':
+                            await this.saveOperationalDataToGitHub();
+                            break;
+                    }
+                    
+                    this.showNotification(`Sincronizado: ${operation.description}`, 'success');
+                    
+                } catch (error) {
+                    if (operation.retries < operation.maxRetries) {
+                        operation.retries++;
+                        this.syncQueue.unshift(operation);
+                    } else {
+                        this.showNotification(`Falha na sincronização: ${operation.description}`, 'error');
+                    }
+                }
+            }
+
+            checkTimeCondition(duration, operator, threshold) {
+                switch (operator) {
+                    case '>': return duration > threshold;
+                    case '<': return duration < threshold;
+                    case '=': return Math.abs(duration - threshold) < 1;
+                    default: return false;
+                }
+            }
+
+            // Consolidação de registros (mantido)
             consolidateRecords(records, type = 'status') {
                 if (!records || records.length === 0) return [];
                 
@@ -1913,171 +1892,128 @@
                 return consolidated;
             }
 
-            getRecordDuration(record, type) {
-                if (record.consolidatedDuration) {
-                    return record.consolidatedDuration;
+            // GitHub integration (mantido mas com logs v6.0)
+            async loadOperationalDataFromGitHub() {
+                if (!this.config.githubEnabled || !this.config.token) {
+                    return;
                 }
-
-                if (type === 'status') {
-                    const start = this.parseDateTime(record.start);
-                    const end = this.parseDateTime(record.end);
-                    return start && end ? (end.getTime() - start.getTime()) / (1000 * 60) : 0;
-                } else {
-                    const timeStr = record['Tempo Indisponível (HH:MM)'];
-                    if (!timeStr) return 0;
+                
+                try {
+                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/alertas/alertas-atual.json?cache_bust=${Date.now()}`;
+                    const data = await this.fetchData(url, true);
                     
-                    const [hours, minutes] = timeStr.split(':').map(Number);
-                    return (hours * 60) + (minutes || 0);
-                }
-            }
-
-            checkTimeCondition(duration, operator, threshold) {
-                switch (operator) {
-                    case '>': return duration > threshold;
-                    case '<': return duration < threshold;
-                    case '=': return Math.abs(duration - threshold) < 1;
-                    default: return false;
-                }
-            }
-
-            // Sistema de investigação
-            openInvestigation(alertId) {
-                const alert = this.alerts.find(a => a.id === alertId);
-                if (!alert) return;
-
-                this.currentInvestigation = alert;
-                
-                // Atualizar apontamentos relacionados se necessário
-                if (!alert.apontamentosRelacionados || alert.apontamentosRelacionados.length === 0) {
-                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert);
-                }
-                
-                document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
-                document.getElementById('invPlaca').value = alert.placa || '';
-                document.getElementById('invMotorista').value = alert.motorista || '';
-                document.getElementById('invArea').value = alert.area || '';
-                document.getElementById('invSupervisor').value = alert.supervisor || '';
-                document.getElementById('invDataHora').value = alert.fullDateTime || `${alert.date} ${alert.time}`;
-                document.getElementById('invTempoTotal').value = alert.duration;
-                document.getElementById('invStatus').value = alert.status || 'pendente';
-                document.getElementById('invObservacoes').value = alert.observacoes || '';
-                document.getElementById('invAcoes').value = alert.acoes || '';
-
-                this.updateWhatsAppPreview();
-                document.getElementById('investigationModal').classList.add('show');
-            }
-
-            closeInvestigationModal() {
-                document.getElementById('investigationModal').classList.remove('show');
-                this.currentInvestigation = null;
-            }
-
-            deleteAlert() {
-                if (!this.currentInvestigation) return;
-
-                if (confirm('Tem certeza que deseja excluir este alerta?')) {
-                    const index = this.alerts.findIndex(a => a.id === this.currentInvestigation.id);
-                    if (index !== -1) {
-                        this.alerts.splice(index, 1);
+                    if (data && data.alerts && Array.isArray(data.alerts)) {
+                        this.alerts = data.alerts;
+                        this.config.lastDataLoad = data.timestamp;
+                        console.log(`✅ Estado carregado do GitHub: ${this.alerts.length} alertas`);
                         this.saveLocalData();
-                        this.addToSyncQueue('saveAlerts', null, 'Exclusão de alerta');
-                        this.updateInterface();
-                        this.closeInvestigationModal();
-                        this.showNotification('Alerta excluído', 'info');
                     }
+                } catch (error) {
+                    console.warn('⚠️ Não foi possível carregar dados do GitHub:', error.message);
                 }
             }
 
-            updateWhatsAppPreview() {
-                if (!this.currentInvestigation) return;
+            async saveOperationalDataToGitHub() {
+                const operationalData = {
+                    timestamp: Date.now(),
+                    version: '6.0',
+                    type: 'operational',
+                    total: this.alerts.length,
+                    alerts: this.alerts,
+                };
+                
+                await this.createOrUpdateGitHubFile(
+                    'alertas/alertas-atual.json', 
+                    JSON.stringify(operationalData, null, 2), 
+                    'Atualização automática do sistema'
+                );
+            }
 
-                const alert = this.currentInvestigation;
-                const placa = document.getElementById('invPlaca').value || 'N/I';
-                const motorista = document.getElementById('invMotorista').value || 'N/I';
-                const area = document.getElementById('invArea').value || 'N/I';
-                const supervisor = document.getElementById('invSupervisor').value || 'N/I';
+            async saveRulesToGitHub() {
+                const rulesData = {
+                    timestamp: Date.now(),
+                    version: '6.0',
+                    total: this.rules.length,
+                    rules: this.rules
+                };
+                
+                await this.createOrUpdateGitHubFile(
+                    'regras/regras-ativas.json', 
+                    JSON.stringify(rulesData, null, 2), 
+                    'Atualização de regras do sistema'
+                );
+            }
 
-                // Formatação de apontamentos relacionados
-                let apontamentosText = '';
-                if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
-                    apontamentosText = '\n\nApontamentos Relacionados:\n';
-                    alert.apontamentosRelacionados.forEach(ap => {
-                        apontamentosText += `• ${ap.categoria}\n  ${ap.inicio} - ${ap.fim} (${ap.duracao})\n`;
+            async loadRulesFromGitHub() {
+                try {
+                    const url = `https://raw.githubusercontent.com/${this.config.repo}/main/regras/regras-ativas.json?cache_bust=${Date.now()}`;
+                    const data = await this.fetchData(url, true);
+                    
+                    if (data && data.rules && Array.isArray(data.rules)) {
+                        this.rules = data.rules;
+                        this.saveLocalData();
+                        this.updateRulesList();
+                        console.log(`✅ Regras carregadas: ${data.rules.length}`);
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erro ao carregar regras:', error.message);
+                }
+            }
+
+            async createOrUpdateGitHubFile(path, content, commitMessage) {
+                const url = `https://api.github.com/repos/${this.config.repo}/contents/${path}`;
+                
+                let sha = null;
+                try {
+                    const response = await fetch(url, {
+                        headers: {
+                            'Authorization': `token ${this.config.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
                     });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        sha = data.sha;
+                    }
+                } catch (error) {
+                    console.log(`📁 Arquivo ${path} não existe, será criado`);
                 }
 
-                const text = `---
-🚨 ALERTA OPERACIONAL
-
-Regra: ${alert.ruleName}
-Duração Total: ${alert.duration}
-Período do ocorrido: ${alert.timeRange}
-
-Equipamento: ${this.getDisplayName(alert.equipamento)}
-Supervisor: ${supervisor}
-Placa: ${placa}
-Motorista: ${motorista}
-Área: ${area}
-
-Data/Hora: ${alert.fullDateTime || `${alert.date} ${alert.time}`}
-Status do Motor: ${alert.identificador}
-
-Situação: ${this.getStatusText(alert.status)}${apontamentosText}
----`;
-
-                document.getElementById('whatsappText').textContent = text;
-            }
-
-            copyToWhatsApp() {
-                const text = document.getElementById('whatsappText').textContent;
-                navigator.clipboard.writeText(text).then(() => {
-                    this.showNotification('Texto copiado para área de transferência', 'success');
-                }).catch(() => {
-                    this.showNotification('Erro ao copiar texto', 'error');
-                });
-            }
-
-            // Salvar regra
-            async saveRule() {
-                const type = document.getElementById('ruleType').value;
-                const identifier = type === 'status' ? 
-                    document.getElementById('ruleStatus').value : 
-                    document.getElementById('ruleApontamento').value;
-
-                const ruleData = {
-                    name: document.getElementById('ruleName').value,
-                    type: type,
-                    identifier: identifier,
-                    timeOperator: document.getElementById('ruleTimeOperator').value,
-                    timeValue: parseInt(document.getElementById('ruleTimeValue').value),
-                    severity: document.getElementById('ruleSeverity').value,
-                    message: document.getElementById('ruleMessage').value,
-                    active: true
+                const body = {
+                    message: commitMessage,
+                    content: btoa(unescape(encodeURIComponent(content)))
                 };
 
-                if (this.editingRuleId) {
-                    const index = this.rules.findIndex(r => r.id === this.editingRuleId);
-                    if (index !== -1) {
-                        this.rules[index] = { ...this.rules[index], ...ruleData };
-                        this.showNotification('Regra atualizada', 'success');
-                    }
-                } else {
-                    const newRule = {
-                        id: Date.now(),
-                        ...ruleData
-                    };
-                    this.rules.push(newRule);
-                    this.showNotification('Regra criada', 'success');
+                if (sha) {
+                    body.sha = sha;
                 }
 
-                this.saveLocalData();
-                this.addToSyncQueue('saveRules', null, `Regra: ${ruleData.name}`);
-                
-                this.updateRulesList();
-                this.closeRuleModal();
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${this.config.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`GitHub API Error: ${response.status} - ${errorData.message}`);
+                }
+
+                return await response.json();
             }
 
-            // Interface
+            async fetchData(url, isJson = false) {
+                const response = await fetch(url, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status} em ${url}`);
+                return isJson ? response.json() : response.text();
+            }
+
+            // Interface updates (mantido com adaptações)
             updateInterface() {
                 this.updateStats();
                 this.updateAlertsList();
@@ -2098,48 +2034,97 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 document.getElementById('pendingAlerts').textContent = pendingAlerts.length;
             }
 
-            updateRulesList() {
-                const container = document.getElementById('rulesList');
+            updateAlertsList() {
+                const container = document.getElementById('alertsList');
                 if (!container) return;
 
-                if (this.rules.length === 0) {
+                if (this.alerts.length === 0) {
                     container.innerHTML = `
                         <div class="loading-state">
-                            <div style="font-size: 3rem;">⚙️</div>
-                            <div>Nenhuma regra configurada</div>
+                            <div style="font-size: 3rem;">✅</div>
+                            <div>Nenhum alerta registrado</div>
                         </div>
                     `;
                     return;
                 }
 
-                container.innerHTML = this.rules.map(rule => `
-                    <div class="rule-card ${rule.active ? 'active' : 'inactive'}">
-                        <div class="rule-header">
-                            <div class="rule-name">${rule.name}</div>
-                            <div class="rule-actions">
-                                <button class="btn small ${rule.active ? 'warning' : 'success'}" 
-                                        onclick="alertSystem.toggleRule(${rule.id})">
-                                    <span>${rule.active ? 'Desativar' : 'Ativar'}</span>
-                                </button>
-                                <button class="btn small secondary" onclick="alertSystem.editRule(${rule.id})">
-                                    <span>Editar</span>
-                                </button>
-                                <button class="btn small danger" onclick="alertSystem.deleteRule(${rule.id})">
-                                    <span>Excluir</span>
+                const filteredAlerts = this.getFilteredAlerts();
+                
+                container.innerHTML = filteredAlerts.map(alert => {
+                    let normalizedSeverity = alert.severity;
+                    if (alert.severity === 'critical') normalizedSeverity = 'critico';
+                    else if (alert.severity === 'high') normalizedSeverity = 'alto';
+                    else if (alert.severity === 'medium') normalizedSeverity = 'medio';
+                    else if (alert.severity === 'low') normalizedSeverity = 'baixo';
+
+                    let apontamentosHtml = '';
+                    if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
+                        apontamentosHtml = `
+                            <div class="apontamentos-section">
+                                <div class="apontamentos-title">
+                                    <span>📋</span>
+                                    <span>Apontamentos Relacionados:</span>
+                                </div>
+                                ${alert.apontamentosRelacionados.map(ap => `
+                                    <div class="apontamento-item">
+                                        <div class="apontamento-categoria">${ap.categoria}</div>
+                                        <div class="apontamento-tempo">${ap.inicio} - ${ap.fim} (${ap.duracao})</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
+                    return `
+                    <div class="alert-card ${normalizedSeverity}">
+                        <div class="alert-header">
+                            <div class="alert-title">${alert.message}</div>
+                            <div class="alert-actions">
+                                <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">
+                                    <span>Investigar</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="rule-config">
-                            <div><strong>Tipo:</strong> ${rule.type === 'status' ? 'Status' : 'Apontamento'}</div>
-                            <div><strong>Identificador:</strong> ${rule.identifier || 'Qualquer'}</div>
-                            <div><strong>Condição:</strong> ${rule.timeOperator} ${rule.timeValue} min</div>
-                            <div><strong>Gravidade:</strong> <span class="severity-badge ${rule.severity}">${this.getSeverityText(rule.severity)}</span></div>
+                        <div class="alert-time">${alert.fullDateTime || `${alert.date} ${alert.time}`}</div>
+                        <div class="alert-details">
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Equipamento</div>
+                                <div class="alert-detail-value">${this.getDisplayName(alert.equipamento)}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Status</div>
+                                <div class="alert-detail-value">${alert.identificador}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Duração</div>
+                                <div class="alert-detail-value">${alert.duration}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Período</div>
+                                <div class="alert-detail-value">${alert.timeRange}</div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Investigação</div>
+                                <div class="alert-detail-value">
+                                    <span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span>
+                                </div>
+                            </div>
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Gravidade</div>
+                                <div class="alert-detail-value">
+                                    <span class="severity-badge ${normalizedSeverity}">${this.getSeverityText(alert.severity)}</span>
+                                </div>
+                            </div>
+                            ${alert.consolidated ? `
+                            <div class="alert-detail">
+                                <div class="alert-detail-label">Consolidado</div>
+                                <div class="alert-detail-value" style="color: #27ae60;">✅ ${alert.originalCount} registros</div>
+                            </div>
+                            ` : ''}
                         </div>
-                        <div style="margin-top: 1rem;">
-                            <strong>Mensagem:</strong> ${rule.message}
-                        </div>
+                        ${apontamentosHtml}
                     </div>
-                `).join('');
+                `}).join('');
             }
 
             getFilteredAlerts() {
@@ -2191,7 +2176,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 return filtered;
             }
 
-            // Gerenciamento de regras
+            // Rule management (adaptado para novos status)
             openRuleModal(ruleId = null) {
                 this.editingRuleId = ruleId;
                 const modal = document.getElementById('ruleModal');
@@ -2239,6 +2224,45 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
             }
 
+            async saveRule() {
+                const type = document.getElementById('ruleType').value;
+                const identifier = type === 'status' ? 
+                    document.getElementById('ruleStatus').value : 
+                    document.getElementById('ruleApontamento').value;
+
+                const ruleData = {
+                    name: document.getElementById('ruleName').value,
+                    type: type,
+                    identifier: identifier,
+                    timeOperator: document.getElementById('ruleTimeOperator').value,
+                    timeValue: parseInt(document.getElementById('ruleTimeValue').value),
+                    severity: document.getElementById('ruleSeverity').value,
+                    message: document.getElementById('ruleMessage').value,
+                    active: true
+                };
+
+                if (this.editingRuleId) {
+                    const index = this.rules.findIndex(r => r.id === this.editingRuleId);
+                    if (index !== -1) {
+                        this.rules[index] = { ...this.rules[index], ...ruleData };
+                        this.showNotification('Regra atualizada', 'success');
+                    }
+                } else {
+                    const newRule = {
+                        id: Date.now(),
+                        ...ruleData
+                    };
+                    this.rules.push(newRule);
+                    this.showNotification('Regra criada', 'success');
+                }
+
+                this.saveLocalData();
+                this.addToSyncQueue('saveRules', null, `Regra: ${ruleData.name}`);
+                
+                this.updateRulesList();
+                this.closeRuleModal();
+            }
+
             editRule(ruleId) {
                 this.openRuleModal(ruleId);
             }
@@ -2267,7 +2291,101 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
             }
 
-            // Salvar investigação
+            // Investigation system (mantido)
+            openInvestigation(alertId) {
+                const alert = this.alerts.find(a => a.id === alertId);
+                if (!alert) return;
+
+                this.currentInvestigation = alert;
+                
+                if (!alert.apontamentosRelacionados || alert.apontamentosRelacionados.length === 0) {
+                    alert.apontamentosRelacionados = this.findRelatedApontamentos(alert);
+                }
+                
+                document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
+                document.getElementById('invPlaca').value = alert.placa || '';
+                document.getElementById('invMotorista').value = alert.motorista || '';
+                document.getElementById('invArea').value = alert.area || '';
+                document.getElementById('invSupervisor').value = alert.supervisor || '';
+                document.getElementById('invDataHora').value = alert.fullDateTime || `${alert.date} ${alert.time}`;
+                document.getElementById('invTempoTotal').value = alert.duration;
+                document.getElementById('invStatus').value = alert.status || 'pendente';
+                document.getElementById('invObservacoes').value = alert.observacoes || '';
+                document.getElementById('invAcoes').value = alert.acoes || '';
+
+                this.updateWhatsAppPreview();
+                document.getElementById('investigationModal').classList.add('show');
+            }
+
+            closeInvestigationModal() {
+                document.getElementById('investigationModal').classList.remove('show');
+                this.currentInvestigation = null;
+            }
+
+            deleteAlert() {
+                if (!this.currentInvestigation) return;
+
+                if (confirm('Tem certeza que deseja excluir este alerta?')) {
+                    const index = this.alerts.findIndex(a => a.id === this.currentInvestigation.id);
+                    if (index !== -1) {
+                        this.alerts.splice(index, 1);
+                        this.saveLocalData();
+                        this.addToSyncQueue('saveAlerts', null, 'Exclusão de alerta');
+                        this.updateInterface();
+                        this.closeInvestigationModal();
+                        this.showNotification('Alerta excluído', 'info');
+                    }
+                }
+            }
+
+            updateWhatsAppPreview() {
+                if (!this.currentInvestigation) return;
+
+                const alert = this.currentInvestigation;
+                const placa = document.getElementById('invPlaca').value || 'N/I';
+                const motorista = document.getElementById('invMotorista').value || 'N/I';
+                const area = document.getElementById('invArea').value || 'N/I';
+                const supervisor = document.getElementById('invSupervisor').value || 'N/I';
+
+                let apontamentosText = '';
+                if (alert.apontamentosRelacionados && alert.apontamentosRelacionados.length > 0) {
+                    apontamentosText = '\n\nApontamentos Relacionados:\n';
+                    alert.apontamentosRelacionados.forEach(ap => {
+                        apontamentosText += `• ${ap.categoria}\n  ${ap.inicio} - ${ap.fim} (${ap.duracao})\n`;
+                    });
+                }
+
+                const text = `---
+🚨 ALERTA OPERACIONAL
+
+Regra: ${alert.ruleName}
+Status: ${alert.identificador}
+Duração Total: ${alert.duration}
+Período: ${alert.timeRange}
+
+Equipamento: ${this.getDisplayName(alert.equipamento)}
+Supervisor: ${supervisor}
+Placa: ${placa}
+Motorista: ${motorista}
+Área: ${area}
+
+Data/Hora: ${alert.fullDateTime || `${alert.date} ${alert.time}`}
+
+Situação: ${this.getStatusText(alert.status)}${apontamentosText}
+---`;
+
+                document.getElementById('whatsappText').textContent = text;
+            }
+
+            copyToWhatsApp() {
+                const text = document.getElementById('whatsappText').textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    this.showNotification('Texto copiado para área de transferência', 'success');
+                }).catch(() => {
+                    this.showNotification('Erro ao copiar texto', 'error');
+                });
+            }
+
             saveInvestigation() {
                 if (!this.currentInvestigation) return;
 
@@ -2291,18 +2409,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 this.showNotification('Investigação salva e sincronizada', 'success');
             }
 
-            // Limpar histórico
-            clearAllAlerts() {
-                if (confirm('Tem certeza que deseja limpar todo o histórico? Esta ação é irreversível.')) {
-                    this.alerts = [];
-                    this.saveLocalData();
-                    this.addToSyncQueue('saveAlerts', null, 'Limpeza do histórico');
-                    this.updateInterface();
-                    this.showNotification('Histórico limpo permanentemente', 'info');
-                }
-            }
-
-            // Relatórios
+            // Reports (mantido)
             generateReport() {
                 const startDate = document.getElementById('reportDateStart')?.value;
                 const endDate = document.getElementById('reportDateEnd')?.value;
@@ -2353,14 +2460,13 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                             <tr style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
                                 <th style="padding: 1rem; text-align: left;">Data/Hora</th>
                                 <th style="padding: 1rem; text-align: left;">Equipamento</th>
-                                <th style="padding: 1rem; text-align: left;">Supervisor</th>
-                                <th style="padding: 1rem; text-align: left;">Tipo</th>
-                                <th style="padding: 1rem; text-align: left;">Período</th>
-                                <th style="padding: 1rem; text-align: left;">Duração</th>
                                 <th style="padding: 1rem; text-align: left;">Status</th>
+                                <th style="padding: 1rem; text-align: left;">Duração</th>
+                                <th style="padding: 1rem; text-align: left;">Período</th>
+                                <th style="padding: 1rem; text-align: left;">Investigação</th>
                                 <th style="padding: 1rem; text-align: left;">Gravidade</th>
                                 <th style="padding: 1rem; text-align: left;">Motorista</th>
-                                <th style="padding: 1rem; text-align: left;">Placa</th>
+                                <th style="padding: 1rem; text-align: left;">Supervisor</th>
                                 <th style="padding: 1rem; text-align: left;">Apontamentos</th>
                                 <th style="padding: 1rem; text-align: left;">Observações</th>
                             </tr>
@@ -2375,10 +2481,9 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                                     <tr style="border-bottom: 1px solid #eee;">
                                         <td style="padding: 1rem;">${alert.fullDateTime || `${alert.date} ${alert.time}`}</td>
                                         <td style="padding: 1rem;">${this.getDisplayName(alert.equipamento)}</td>
-                                        <td style="padding: 1rem;">${alert.supervisor || 'N/I'}</td>
-                                        <td style="padding: 1rem;">${alert.tipo} - ${alert.identificador}</td>
-                                        <td style="padding: 1rem;">${alert.timeRange}</td>
+                                        <td style="padding: 1rem;">${alert.identificador}</td>
                                         <td style="padding: 1rem;">${alert.duration}</td>
+                                        <td style="padding: 1rem;">${alert.timeRange}</td>
                                         <td style="padding: 1rem;">
                                             <span class="status-badge ${alert.status}">${this.getStatusText(alert.status)}</span>
                                         </td>
@@ -2386,7 +2491,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                                             <span class="severity-badge ${alert.severity}">${this.getSeverityText(alert.severity)}</span>
                                         </td>
                                         <td style="padding: 1rem;">${alert.motorista || 'N/I'}</td>
-                                        <td style="padding: 1rem;">${alert.placa || 'N/I'}</td>
+                                        <td style="padding: 1rem;">${alert.supervisor || 'N/I'}</td>
                                         <td style="padding: 1rem; font-size: 0.85rem;">${apontamentosText}</td>
                                         <td style="padding: 1rem;">${alert.observacoes || 'N/I'}</td>
                                     </tr>
@@ -2417,9 +2522,19 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 }
             }
 
-            // Configuração e armazenamento
+            clearAllAlerts() {
+                if (confirm('Tem certeza que deseja limpar todo o histórico? Esta ação é irreversível.')) {
+                    this.alerts = [];
+                    this.saveLocalData();
+                    this.addToSyncQueue('saveAlerts', null, 'Limpeza do histórico');
+                    this.updateInterface();
+                    this.showNotification('Histórico limpo permanentemente', 'info');
+                }
+            }
+
+            // Configuration and storage (mantido)
             loadConfig() {
-                const saved = localStorage.getItem('alertSystem_config_v5');
+                const saved = localStorage.getItem('alertSystem_config');
                 if (saved) {
                     this.config = { ...this.config, ...JSON.parse(saved) };
                 }
@@ -2427,13 +2542,13 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             }
 
             saveConfig() {
-                localStorage.setItem('alertSystem_config_v5', JSON.stringify(this.config));
+                localStorage.setItem('alertSystem_config', JSON.stringify(this.config));
             }
 
             loadLocalData() {
                 try {
-                    const alertsData = localStorage.getItem('alertSystem_alerts_v5');
-                    const rulesData = localStorage.getItem('alertSystem_rules_v5');
+                    const alertsData = localStorage.getItem('alertSystem_alerts');
+                    const rulesData = localStorage.getItem('alertSystem_rules');
 
                     if (alertsData) {
                         this.alerts = JSON.parse(alertsData);
@@ -2450,14 +2565,14 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
 
             saveLocalData() {
                 try {
-                    localStorage.setItem('alertSystem_alerts_v5', JSON.stringify(this.alerts));
-                    localStorage.setItem('alertSystem_rules_v5', JSON.stringify(this.rules));
+                    localStorage.setItem('alertSystem_alerts', JSON.stringify(this.alerts));
+                    localStorage.setItem('alertSystem_rules', JSON.stringify(this.rules));
                 } catch (error) {
                     console.error('❌ Erro ao salvar dados locais:', error);
                 }
             }
 
-            // Utilidades
+            // Utilities (mantido com pequenos ajustes)
             normalizeEquipmentName(name) {
                 if (!name) return 'Equipamento Desconhecido';
                 return name.toString().toUpperCase().trim();
@@ -2474,13 +2589,11 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                 if (!dateStr) return null;
 
                 try {
-                    // Formato ISO com T
                     if (typeof dateStr === 'string' && dateStr.includes('T')) {
                         const date = new Date(dateStr);
                         return isNaN(date.getTime()) ? null : date;
                     }
                     
-                    // Formato brasileiro DD/MM/YYYY HH:MM:SS
                     if (typeof dateStr === 'string' && dateStr.includes('/')) {
                         const [datePart, timePart = '00:00:00'] = dateStr.split(' ');
                         const [day, month, year] = datePart.split('/');
@@ -2489,13 +2602,11 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                         return isNaN(date.getTime()) ? null : date;
                     }
 
-                    // Timestamp numérico
                     if (typeof dateStr === 'number') {
                         const date = new Date(dateStr);
                         return isNaN(date.getTime()) ? null : date;
                     }
 
-                    // Tentativa direta de conversão
                     const date = new Date(dateStr);
                     return isNaN(date.getTime()) ? null : date;
                     
@@ -2634,7 +2745,7 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                             <div style="text-align: center; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: #27ae60;">✅</div>
-                                <div>Sistema v5.0 Ativo</div>
+                                <div>Sistema Ativo</div>
                             </div>
                             <div style="text-align: center; padding: 1rem; background: rgba(${githubStatus.valid ? '39, 174, 96' : '231, 76, 60'}, 0.1); border-radius: 12px;">
                                 <div style="font-size: 2rem; color: ${githubStatus.valid ? '#27ae60' : '#e74c3c'};">${githubStatus.valid ? '🔐' : '🔒'}</div>
@@ -2652,15 +2763,24 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
                         </div>
                         
                         <div style="margin-top: 1rem; padding: 1rem; background: rgba(39, 174, 96, 0.1); border-radius: 12px; border-left: 4px solid #27ae60;">
-                            <strong>Correções v5.0 Implementadas:</strong>
+                            <strong>Atualizações Implementadas:</strong>
                             <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                                <li>✅ Carregamento de apontamentos via CSV (corrigido)</li>
-                                <li>✅ Busca inteligente de apontamentos próximos</li>
-                                <li>✅ Redução significativa de logs</li>
-                                <li>✅ Garantia de dados reais e precisos</li>
-                                <li>✅ Lógica de consolidação aprimorada</li>
-                                <li>✅ WhatsApp com apontamentos relacionados</li>
+                                <li>✅ Nova estrutura de dados Timeline em CSV</li>
+                                <li>✅ Status reais do Gauss implementados</li>
+                                <li>✅ Mapeamento de campos atualizado</li>
+                                <li>✅ Parser de datas CSV brasileiro</li>
+                                <li>✅ Regras com todos os novos status</li>
+                                <li>✅ Compatibilidade com dados existentes</li>
                             </ul>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: rgba(52, 152, 219, 0.1); border-radius: 12px; border-left: 4px solid #3498db;">
+                            <strong>Novos Status Disponíveis:</strong>
+                            <div style="margin: 0.5rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                ${this.availableStatus.map(status => `
+                                    <span style="background: rgba(52, 152, 219, 0.2); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">${status}</span>
+                                `).join('')}
+                            </div>
                         </div>
                     `;
 
@@ -2779,7 +2899,12 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
             document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            event.target.classList.add('active');
+            // Encontrar e ativar a aba clicada
+            const clickedTab = event.target.closest('.nav-tab');
+            if (clickedTab) {
+                clickedTab.classList.add('active');
+            }
+            
             document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
@@ -2842,37 +2967,70 @@ Situação: ${this.getStatusText(alert.status)}${apontamentosText}
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             try {
-                alertSystem = new AlertSystemV5();
-                console.log('✅ Sistema de Alertas v5.0 inicializado');
+                alertSystem = new AlertSystemV6();
+                console.log('✅ Sistema de Alertas inicializado - Nova estrutura CSV implementada');
             } catch (error) {
                 console.error('❌ Erro crítico na inicialização:', error);
                 setTimeout(() => {
-                    alertSystem = new AlertSystemV5();
+                    alertSystem = new AlertSystemV6();
                 }, 3000);
             }
         });
 
-        // Debug simplificado
+        // Debug atualizado
         window.alertSystemDebug = {
             getSystem: () => alertSystem,
             getStats: () => ({
                 alerts: alertSystem?.alerts.length || 0,
                 rules: alertSystem?.rules.length || 0,
+                telemetryRecords: alertSystem?.telemetryData.length || 0,
                 apontamentos: alertSystem?.apontamentosData.length || 0,
                 syncQueue: alertSystem?.syncQueue.length || 0,
-                version: '5.0'
+                availableStatus: alertSystem?.availableStatus || [],
+                version: '6.0'
             }),
+            reloadTimeline: () => {
+                if (alertSystem) {
+                    alertSystem.loadTimelineData().then(() => {
+                        console.log('✅ Timeline recarregada');
+                        alertSystem.processAlerts();
+                    });
+                }
+            },
             reloadApontamentos: () => {
                 if (alertSystem) {
                     alertSystem.loadApontamentosData().then(() => {
                         console.log('✅ Apontamentos recarregados');
                     });
                 }
+            },
+            testNewStatus: (status) => {
+                if (alertSystem && alertSystem.availableStatus.includes(status)) {
+                    console.log(`✅ Status "${status}" está disponível`);
+                    return true;
+                } else {
+                    console.log(`❌ Status "${status}" não encontrado. Disponíveis:`, alertSystem?.availableStatus);
+                    return false;
+                }
+            },
+            showDataSample: () => {
+                if (alertSystem && alertSystem.telemetryData.length > 0) {
+                    console.log('📊 Amostra dos dados Timeline:');
+                    console.table(alertSystem.telemetryData.slice(0, 3));
+                } else {
+                    console.log('❌ Nenhum dado de timeline carregado');
+                }
             }
         };
 
-        console.log('Sistema de Alertas v5.0 - Todas as correções implementadas');
-        console.log('Use window.alertSystemDebug para debug');
+        console.log('🚀 Sistema de Alertas - Atualização Timeline CSV Implementada');
+        console.log('📋 Principais mudanças:');
+        console.log('   ✅ Fonte de dados: JSON → CSV');
+        console.log('   ✅ Status reais do Gauss implementados');
+        console.log('   ✅ Nova estrutura de campos mapeada');
+        console.log('   ✅ Parser de datas brasileiro');
+        console.log('   ✅ Compatibilidade com dados existentes');
+        console.log('🔧 Use window.alertSystemDebug para debug e testes');
     </script>
 </body>
 </html>
