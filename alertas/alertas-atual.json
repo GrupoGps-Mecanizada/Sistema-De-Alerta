@@ -1,9 +1,90 @@
 {
-  "timestamp": 1752971947333,
+  "timestamp": 1752975057149,
   "version": "6.0",
   "type": "operational",
-  "total": 24,
+  "total": 26,
   "alerts": [
+    {
+      "id": "6a2swc",
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1752971386096,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "44min",
+      "durationMinutes": 43.95,
+      "startTime": "2025-07-20T00:32:30.000Z",
+      "endTime": "2025-07-20T01:16:27.000Z",
+      "timeRange": "19/07/2025 21:32 - 22:16",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1752974997825,
+      "fullDateTime": "19/07/2025 22:29",
+      "date": "19/07/2025",
+      "time": "22:29:57",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Refeição Motorista",
+          "inicio": "19/07/2025 20:56",
+          "fim": "19/07/2025 21:56",
+          "duracao": "1h 0min",
+          "duracaoMinutos": 60.03333333333333
+        },
+        {
+          "categoria": "Descarregando equipamento",
+          "inicio": "19/07/2025 19:23",
+          "fim": "19/07/2025 19:32",
+          "duracao": "10min",
+          "duracaoMinutos": 9.583333333333334
+        }
+      ],
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 44min"
+    },
+    {
+      "id": "hufknc",
+      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1752971386096,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "49min",
+      "durationMinutes": 49.45,
+      "startTime": "2025-07-20T00:26:57.000Z",
+      "endTime": "2025-07-20T01:16:24.000Z",
+      "timeRange": "19/07/2025 21:26 - 22:16",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1752974997822,
+      "fullDateTime": "19/07/2025 22:29",
+      "date": "19/07/2025",
+      "time": "22:29:57",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Refeição Motorista",
+          "inicio": "19/07/2025 20:23",
+          "fim": "19/07/2025 21:19",
+          "duracao": "56min",
+          "duracaoMinutos": 56.35
+        }
+      ],
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 49min"
+    },
     {
       "id": "ysdp6e",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
