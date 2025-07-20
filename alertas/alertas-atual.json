@@ -1,5 +1,5 @@
 {
-  "timestamp": 1752976557150,
+  "timestamp": 1752976857151,
   "version": "6.0",
   "type": "operational",
   "total": 26,
@@ -56,11 +56,11 @@
       "ruleId": 1752971386096,
       "ruleName": "Motor Desligado",
       "severity": "alto",
-      "duration": "1h 10min",
-      "durationMinutes": 70.08333333333333,
+      "duration": "1h 21min",
+      "durationMinutes": 80.65,
       "startTime": "2025-07-20T00:26:57.000Z",
-      "endTime": "2025-07-20T01:37:02.000Z",
-      "timeRange": "19/07/2025 21:26 - 22:37",
+      "endTime": "2025-07-20T01:47:36.000Z",
+      "timeRange": "19/07/2025 21:26 - 22:47",
       "consolidated": false,
       "originalCount": 1,
       "timestamp": 1752975297280,
@@ -81,6 +81,13 @@
           "fim": "19/07/2025 22:41",
           "duracao": "51min",
           "duracaoMinutos": 50.75
+        },
+        {
+          "categoria": "Preparação",
+          "inicio": "19/07/2025 22:41",
+          "fim": "19/07/2025 22:53",
+          "duracao": "12min",
+          "duracaoMinutos": 12.2
         },
         {
           "categoria": "Refeição Motorista",
