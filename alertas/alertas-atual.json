@@ -1,8 +1,8 @@
 {
-  "timestamp": 1753105285783,
+  "timestamp": 1753105311894,
   "version": "6.0",
   "type": "operational",
-  "total": 22,
+  "total": 20,
   "alerts": [
     {
       "id": "7zu966",
@@ -924,79 +924,6 @@
         }
       ],
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 41min"
-    },
-    {
-      "id": "rukvw6",
-      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS",
-      "tipo": "Status",
-      "identificador": "Motor Desligado",
-      "ruleId": 1752971386096,
-      "ruleName": "Motor Desligado",
-      "severity": "alto",
-      "duration": "56min",
-      "durationMinutes": 55.916666666666664,
-      "startTime": "2025-07-21T05:03:17.000Z",
-      "endTime": "2025-07-21T05:59:12.000Z",
-      "timeRange": "21/07/2025 02:03 - 02:59",
-      "consolidated": false,
-      "originalCount": 1,
-      "timestamp": 1753096378659,
-      "fullDateTime": "21/07/2025 08:12",
-      "date": "21/07/2025",
-      "time": "08:12:58",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
-      "observacoes": "",
-      "acoes": "",
-      "apontamentosRelacionados": [
-        {
-          "categoria": "Abastecimento (Água)",
-          "inicio": "21/07/2025 03:37",
-          "fim": "21/07/2025 03:45",
-          "duracao": "8min",
-          "duracaoMinutos": 8.116666666666667
-        },
-        {
-          "categoria": "Aguardando Área",
-          "inicio": "21/07/2025 04:05",
-          "fim": "21/07/2025 04:37",
-          "duracao": "31min",
-          "duracaoMinutos": 31.45
-        }
-      ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min"
-    },
-    {
-      "id": "o561zw",
-      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS",
-      "tipo": "Status",
-      "identificador": "Motor Desligado",
-      "ruleId": 1752971386096,
-      "ruleName": "Motor Desligado",
-      "severity": "alto",
-      "duration": "1h 34min",
-      "durationMinutes": 93.9,
-      "startTime": "2025-07-21T03:00:00.000Z",
-      "endTime": "2025-07-21T04:33:54.000Z",
-      "timeRange": "21/07/2025 00:00 - 01:33",
-      "consolidated": false,
-      "originalCount": 1,
-      "timestamp": 1753096378658,
-      "fullDateTime": "21/07/2025 08:12",
-      "date": "21/07/2025",
-      "time": "08:12:58",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
-      "observacoes": "",
-      "acoes": "",
-      "apontamentosRelacionados": [],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 34min"
     }
   ]
 }
