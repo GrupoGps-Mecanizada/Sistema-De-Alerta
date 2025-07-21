@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753106170782,
+  "timestamp": 1753106190788,
   "version": "6.0",
   "type": "operational",
   "total": 23,
@@ -23,7 +23,7 @@
       "fullDateTime": "21/07/2025 10:46",
       "date": "21/07/2025",
       "time": "10:46:22",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -46,7 +46,9 @@
           "duracaoMinutos": 31.45
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min",
+      "investigatedAt": "2025-07-21T13:56:27.497Z",
+      "investigatedFullDateTime": "21/07/2025 10:56"
     },
     {
       "id": "o561zw",
@@ -101,7 +103,7 @@
       "motorista": "",
       "area": "",
       "supervisor": "",
-      "observacoes": "estava fazendo documentação nesse período\n",
+      "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [
         {
@@ -119,9 +121,7 @@
           "duracaoMinutos": 40.75
         }
       ],
-      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 47min",
-      "investigatedAt": "2025-07-21T13:56:09.880Z",
-      "investigatedFullDateTime": "21/07/2025 10:56"
+      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 47min"
     },
     {
       "id": "7zu966",
