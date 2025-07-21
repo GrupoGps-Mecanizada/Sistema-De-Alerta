@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753105965780,
+  "timestamp": 1753106170782,
   "version": "6.0",
   "type": "operational",
   "total": 23,
@@ -23,7 +23,7 @@
       "fullDateTime": "21/07/2025 10:46",
       "date": "21/07/2025",
       "time": "10:46:22",
-      "status": "fechado",
+      "status": "pendente",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -46,9 +46,7 @@
           "duracaoMinutos": 31.45
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min",
-      "investigatedAt": "2025-07-21T13:52:33.559Z",
-      "investigatedFullDateTime": "21/07/2025 10:52"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min"
     },
     {
       "id": "o561zw",
@@ -69,7 +67,7 @@
       "fullDateTime": "21/07/2025 10:46",
       "date": "21/07/2025",
       "time": "10:46:22",
-      "status": "fechado",
+      "status": "pendente",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -77,9 +75,7 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 34min",
-      "investigatedAt": "2025-07-21T13:52:44.511Z",
-      "investigatedFullDateTime": "21/07/2025 10:52"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 1h 34min"
     },
     {
       "id": "mtn0hc",
@@ -105,7 +101,7 @@
       "motorista": "",
       "area": "",
       "supervisor": "",
-      "observacoes": "",
+      "observacoes": "estava fazendo documentação nesse período\n",
       "acoes": "",
       "apontamentosRelacionados": [
         {
@@ -123,7 +119,9 @@
           "duracaoMinutos": 40.75
         }
       ],
-      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 47min"
+      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 47min",
+      "investigatedAt": "2025-07-21T13:56:09.880Z",
+      "investigatedFullDateTime": "21/07/2025 10:56"
     },
     {
       "id": "7zu966",
