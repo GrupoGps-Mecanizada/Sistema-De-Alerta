@@ -1,60 +1,9 @@
 {
-  "timestamp": 1753104386239,
+  "timestamp": 1753104990787,
   "version": "6.0",
   "type": "operational",
-  "total": 21,
+  "total": 20,
   "alerts": [
-    {
-      "id": "7zu966",
-      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
-      "tipo": "Status",
-      "identificador": "Motor Desligado",
-      "ruleId": 1752971386096,
-      "ruleName": "Motor Desligado",
-      "severity": "alto",
-      "duration": "56min",
-      "durationMinutes": 55.93333333333333,
-      "startTime": "2025-07-21T09:27:04.000Z",
-      "endTime": "2025-07-21T10:23:00.000Z",
-      "timeRange": "21/07/2025 06:27 - 07:23",
-      "consolidated": false,
-      "originalCount": 1,
-      "timestamp": 1753104383009,
-      "fullDateTime": "21/07/2025 10:26",
-      "date": "21/07/2025",
-      "time": "10:26:23",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
-      "observacoes": "",
-      "acoes": "",
-      "apontamentosRelacionados": [
-        {
-          "categoria": "Inicio de turno",
-          "inicio": "21/07/2025 07:26",
-          "fim": "21/07/2025 07:26",
-          "duracao": "0min",
-          "duracaoMinutos": 0.06666666666666667
-        },
-        {
-          "categoria": "Documentação",
-          "inicio": "21/07/2025 07:50",
-          "fim": "21/07/2025 08:23",
-          "duracao": "33min",
-          "duracaoMinutos": 33.11666666666667
-        },
-        {
-          "categoria": "Preparação",
-          "inicio": "21/07/2025 08:23",
-          "fim": "21/07/2025 08:52",
-          "duracao": "29min",
-          "duracaoMinutos": 28.666666666666668
-        }
-      ],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 56min"
-    },
     {
       "id": "4qdjzl",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS",
