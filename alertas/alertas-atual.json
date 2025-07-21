@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753126991246,
+  "timestamp": 1753127951234,
   "version": "6.0",
   "type": "operational",
   "total": 51,
@@ -12,11 +12,11 @@
       "ruleId": 1752971386096,
       "ruleName": "Motor Desligado",
       "severity": "alto",
-      "duration": "48min",
-      "durationMinutes": 47.55,
+      "duration": "59min",
+      "durationMinutes": 58.8,
       "startTime": "2025-07-21T18:48:57.000Z",
-      "endTime": "2025-07-21T19:36:30.000Z",
-      "timeRange": "21/07/2025 15:48 - 16:36",
+      "endTime": "2025-07-21T19:47:45.000Z",
+      "timeRange": "21/07/2025 15:48 - 16:47",
       "consolidated": false,
       "originalCount": 1,
       "timestamp": 1753126932729,
@@ -30,7 +30,15 @@
       "supervisor": "",
       "observacoes": "",
       "acoes": "",
-      "apontamentosRelacionados": [],
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Documentação",
+          "inicio": "21/07/2025 15:48",
+          "fim": "21/07/2025 16:49",
+          "duracao": "1h 1min",
+          "duracaoMinutos": 60.85
+        }
+      ],
       "message": "CAMINHÃO AUTO VÁCUO - GPS - 02 - 16 HS - com motor desligado a 48min"
     },
     {
