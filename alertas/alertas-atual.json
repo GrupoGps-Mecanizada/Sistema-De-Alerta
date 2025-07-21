@@ -1,9 +1,46 @@
 {
-  "timestamp": 1753123991239,
+  "timestamp": 1753124891238,
   "version": "6.0",
   "type": "operational",
-  "total": 47,
+  "total": 48,
   "alerts": [
+    {
+      "id": "2vuz0v",
+      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 02",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1752971386096,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "42min",
+      "durationMinutes": 42.28333333333333,
+      "startTime": "2025-07-21T18:15:23.000Z",
+      "endTime": "2025-07-21T18:57:40.000Z",
+      "timeRange": "21/07/2025 15:15 - 15:57",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753124832367,
+      "fullDateTime": "21/07/2025 16:07",
+      "date": "21/07/2025",
+      "time": "16:07:12",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Aguardando Área",
+          "inicio": "21/07/2025 12:33",
+          "fim": "21/07/2025 14:07",
+          "duracao": "1h 34min",
+          "duracaoMinutos": 94.1
+        }
+      ],
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 42min"
+    },
     {
       "id": "z0xk9j",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 06",
