@@ -1,9 +1,46 @@
 {
-  "timestamp": 1753096393248,
+  "timestamp": 1753097293240,
   "version": "6.0",
   "type": "operational",
-  "total": 9,
+  "total": 10,
   "alerts": [
+    {
+      "id": "pmo2eu",
+      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 05",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1752971386096,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "48min",
+      "durationMinutes": 47.8,
+      "startTime": "2025-07-21T10:34:58.000Z",
+      "endTime": "2025-07-21T11:22:46.000Z",
+      "timeRange": "21/07/2025 07:34 - 08:22",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753097279474,
+      "fullDateTime": "21/07/2025 08:27",
+      "date": "21/07/2025",
+      "time": "08:27:59",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Abastecimento (Água)",
+          "inicio": "21/07/2025 07:14",
+          "fim": "21/07/2025 07:34",
+          "duracao": "20min",
+          "duracaoMinutos": 19.983333333333334
+        }
+      ],
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 48min"
+    },
     {
       "id": "qbrmxp",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 01 - 16 HS",
