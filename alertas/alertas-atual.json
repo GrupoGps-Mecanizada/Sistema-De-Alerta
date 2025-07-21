@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753105586243,
+  "timestamp": 1753105955780,
   "version": "6.0",
   "type": "operational",
   "total": 23,
@@ -23,7 +23,7 @@
       "fullDateTime": "21/07/2025 10:46",
       "date": "21/07/2025",
       "time": "10:46:22",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -46,7 +46,9 @@
           "duracaoMinutos": 31.45
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min",
+      "investigatedAt": "2025-07-21T13:52:33.559Z",
+      "investigatedFullDateTime": "21/07/2025 10:52"
     },
     {
       "id": "o561zw",
