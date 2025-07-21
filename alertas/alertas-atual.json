@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753105500793,
+  "timestamp": 1753105520793,
   "version": "6.0",
   "type": "operational",
   "total": 20,
@@ -578,7 +578,7 @@
       "fullDateTime": "21/07/2025 08:27",
       "date": "21/07/2025",
       "time": "08:27:59",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -608,7 +608,9 @@
           "duracaoMinutos": 19.983333333333334
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 48min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 05 - com motor desligado a 48min",
+      "investigatedAt": "2025-07-21T13:45:16.926Z",
+      "investigatedFullDateTime": "21/07/2025 10:45"
     },
     {
       "id": "qbrmxp",
