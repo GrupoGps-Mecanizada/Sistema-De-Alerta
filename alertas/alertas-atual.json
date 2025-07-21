@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753134191239,
+  "timestamp": 1753134791230,
   "version": "6.0",
   "type": "operational",
   "total": 55,
@@ -41,11 +41,11 @@
       "ruleId": 1752971386096,
       "ruleName": "Motor Desligado",
       "severity": "alto",
-      "duration": "2h 1min",
-      "durationMinutes": 121.03333333333333,
+      "duration": "2h 7min",
+      "durationMinutes": 127.15,
       "startTime": "2025-07-21T19:33:40.000Z",
-      "endTime": "2025-07-21T21:34:42.000Z",
-      "timeRange": "21/07/2025 16:33 - 18:34",
+      "endTime": "2025-07-21T21:40:49.000Z",
+      "timeRange": "21/07/2025 16:33 - 18:40",
       "consolidated": false,
       "originalCount": 1,
       "timestamp": 1753129933339,
@@ -61,6 +61,13 @@
       "acoes": "",
       "apontamentosRelacionados": [
         {
+          "categoria": "Aguardando Área",
+          "inicio": "21/07/2025 17:20",
+          "fim": "21/07/2025 18:39",
+          "duracao": "1h 20min",
+          "duracaoMinutos": 79.7
+        },
+        {
           "categoria": "Bloqueio",
           "inicio": "21/07/2025 16:37",
           "fim": "21/07/2025 17:19",
@@ -73,13 +80,6 @@
           "fim": "21/07/2025 16:21",
           "duracao": "33min",
           "duracaoMinutos": 32.916666666666664
-        },
-        {
-          "categoria": "Abastecimento (Combustível) ",
-          "inicio": "21/07/2025 15:20",
-          "fim": "21/07/2025 15:48",
-          "duracao": "28min",
-          "duracaoMinutos": 27.85
         }
       ],
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 46min"
