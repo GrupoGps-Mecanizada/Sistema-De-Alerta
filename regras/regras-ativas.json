@@ -1,17 +1,19 @@
 {
-  "timestamp": 1752971387707,
-  "version": "6.0",
+  "timestamp": 1753118572777,
+  "version": "7.0",
   "total": 1,
   "rules": [
     {
-      "id": 1752971386096,
-      "name": "Motor Desligado",
-      "type": "status",
-      "identifier": "Motor Desligado",
+      "id": 1752152405852,
+      "name": "Equipamento Improdutivo",
+      "type": "improdutivo",
+      "identifier": "",
       "timeOperator": ">",
       "timeValue": 40,
+      "timeStart": "08:00",
+      "timeEnd": "18:00",
       "severity": "alto",
-      "message": "{equipamento} - com motor desligado a {tempo}",
+      "message": "{equipamento} com improdutividade há {tempo}",
       "active": true
     }
   ]
