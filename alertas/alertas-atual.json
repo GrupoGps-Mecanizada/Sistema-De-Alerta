@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753104191240,
+  "timestamp": 1753104386239,
   "version": "6.0",
   "type": "operational",
   "total": 21,
@@ -19,10 +19,10 @@
       "timeRange": "21/07/2025 06:27 - 07:23",
       "consolidated": false,
       "originalCount": 1,
-      "timestamp": 1753104131838,
-      "fullDateTime": "21/07/2025 10:22",
+      "timestamp": 1753104383009,
+      "fullDateTime": "21/07/2025 10:26",
       "date": "21/07/2025",
-      "time": "10:22:11",
+      "time": "10:26:23",
       "status": "pendente",
       "placa": "",
       "motorista": "",
@@ -70,10 +70,10 @@
       "timeRange": "21/07/2025 06:18 - 08:04",
       "consolidated": false,
       "originalCount": 1,
-      "timestamp": 1753104131837,
-      "fullDateTime": "21/07/2025 10:22",
+      "timestamp": 1753104383008,
+      "fullDateTime": "21/07/2025 10:26",
       "date": "21/07/2025",
-      "time": "10:22:11",
+      "time": "10:26:23",
       "status": "pendente",
       "placa": "",
       "motorista": "",
@@ -491,6 +491,13 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [
+        {
+          "categoria": "Documentação",
+          "inicio": "21/07/2025 07:48",
+          "fim": "21/07/2025 10:11",
+          "duracao": "2h 23min",
+          "duracaoMinutos": 143.38333333333333
+        },
         {
           "categoria": "Abastecimento (Água)",
           "inicio": "21/07/2025 07:37",
