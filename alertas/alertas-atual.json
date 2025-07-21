@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753120991242,
+  "timestamp": 1753121186251,
   "version": "6.0",
   "type": "operational",
   "total": 47,
@@ -37,6 +37,13 @@
           "fim": "21/07/2025 14:38",
           "duracao": "0min",
           "duracaoMinutos": 0.1
+        },
+        {
+          "categoria": "Preparação",
+          "inicio": "21/07/2025 14:39",
+          "fim": "21/07/2025 14:56",
+          "duracao": "17min",
+          "duracaoMinutos": 17.05
         },
         {
           "categoria": "Refeição Motorista",
