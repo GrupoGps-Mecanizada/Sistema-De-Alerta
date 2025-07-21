@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753106200795,
+  "timestamp": 1753106230784,
   "version": "6.0",
   "type": "operational",
   "total": 23,
@@ -100,12 +100,12 @@
       "fullDateTime": "21/07/2025 10:46",
       "date": "21/07/2025",
       "time": "10:46:22",
-      "status": "pendente",
+      "status": "concluido",
       "placa": "",
       "motorista": "",
       "area": "",
       "supervisor": "",
-      "observacoes": "",
+      "observacoes": "O equipamento estava realizando documentação",
       "acoes": "",
       "apontamentosRelacionados": [
         {
@@ -123,7 +123,9 @@
           "duracaoMinutos": 40.75
         }
       ],
-      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 47min"
+      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 47min",
+      "investigatedAt": "2025-07-21T13:57:06.528Z",
+      "investigatedFullDateTime": "21/07/2025 10:57"
     },
     {
       "id": "7zu966",
