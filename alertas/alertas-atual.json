@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753105350781,
+  "timestamp": 1753105375793,
   "version": "6.0",
   "type": "operational",
   "total": 20,
@@ -768,7 +768,7 @@
       "fullDateTime": "21/07/2025 08:12",
       "date": "21/07/2025",
       "time": "08:12:58",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -791,7 +791,9 @@
           "duracaoMinutos": 9.083333333333334
         }
       ],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 20min"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 1h 20min",
+      "investigatedAt": "2025-07-21T13:42:54.756Z",
+      "investigatedFullDateTime": "21/07/2025 10:42"
     },
     {
       "id": "illriv",
