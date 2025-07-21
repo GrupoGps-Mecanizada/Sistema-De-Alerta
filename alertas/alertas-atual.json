@@ -1,9 +1,90 @@
 {
-  "timestamp": 1753097293240,
+  "timestamp": 1753097953236,
   "version": "6.0",
   "type": "operational",
-  "total": 10,
+  "total": 12,
   "alerts": [
+    {
+      "id": "1pms7",
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1752971386096,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "45min",
+      "durationMinutes": 44.75,
+      "startTime": "2025-07-21T10:48:55.000Z",
+      "endTime": "2025-07-21T11:33:40.000Z",
+      "timeRange": "21/07/2025 07:48 - 08:33",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753097896107,
+      "fullDateTime": "21/07/2025 08:38",
+      "date": "21/07/2025",
+      "time": "08:38:16",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Documentação",
+          "inicio": "21/07/2025 07:50",
+          "fim": "21/07/2025 08:23",
+          "duracao": "33min",
+          "duracaoMinutos": 33.11666666666667
+        },
+        {
+          "categoria": "Inicio de turno",
+          "inicio": "21/07/2025 07:26",
+          "fim": "21/07/2025 07:26",
+          "duracao": "0min",
+          "duracaoMinutos": 0.06666666666666667
+        }
+      ],
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 45min"
+    },
+    {
+      "id": "6ebxor",
+      "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 03",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1752971386096,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "41min",
+      "durationMinutes": 41,
+      "startTime": "2025-07-21T10:47:13.000Z",
+      "endTime": "2025-07-21T11:28:13.000Z",
+      "timeRange": "21/07/2025 07:47 - 08:28",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753097896105,
+      "fullDateTime": "21/07/2025 08:38",
+      "date": "21/07/2025",
+      "time": "08:38:16",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Abastecimento (Água)",
+          "inicio": "21/07/2025 07:37",
+          "fim": "21/07/2025 07:47",
+          "duracao": "11min",
+          "duracaoMinutos": 10.8
+        }
+      ],
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 41min"
+    },
     {
       "id": "pmo2eu",
       "equipamento": "CAMINHÃO ALTA PRESSÃO - GPS - 05",
@@ -12,11 +93,11 @@
       "ruleId": 1752971386096,
       "ruleName": "Motor Desligado",
       "severity": "alto",
-      "duration": "48min",
-      "durationMinutes": 47.8,
+      "duration": "58min",
+      "durationMinutes": 58.28333333333333,
       "startTime": "2025-07-21T10:34:58.000Z",
-      "endTime": "2025-07-21T11:22:46.000Z",
-      "timeRange": "21/07/2025 07:34 - 08:22",
+      "endTime": "2025-07-21T11:33:15.000Z",
+      "timeRange": "21/07/2025 07:34 - 08:33",
       "consolidated": false,
       "originalCount": 1,
       "timestamp": 1753097279474,
@@ -31,6 +112,20 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [
+        {
+          "categoria": "Aguardando Área",
+          "inicio": "21/07/2025 08:33",
+          "fim": "21/07/2025 08:33",
+          "duracao": "0min",
+          "duracaoMinutos": 0.08333333333333333
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "21/07/2025 07:34",
+          "fim": "21/07/2025 08:33",
+          "duracao": "59min",
+          "duracaoMinutos": 59.36666666666667
+        },
         {
           "categoria": "Abastecimento (Água)",
           "inicio": "21/07/2025 07:14",
