@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753103591245,
+  "timestamp": 1753103891238,
   "version": "6.0",
   "type": "operational",
   "total": 19,
@@ -294,6 +294,13 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [
+        {
+          "categoria": "Documentação",
+          "inicio": "21/07/2025 08:40",
+          "fim": "21/07/2025 10:07",
+          "duracao": "1h 28min",
+          "duracaoMinutos": 87.73333333333333
+        },
         {
           "categoria": "Abastecimento (Combustível) ",
           "inicio": "21/07/2025 07:51",
