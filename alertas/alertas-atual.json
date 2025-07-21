@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753118900110,
+  "timestamp": 1753119063425,
   "version": "7.0",
   "type": "operational",
   "total": 45,
@@ -551,7 +551,7 @@
       "fullDateTime": "21/07/2025 12:31",
       "date": "21/07/2025",
       "time": "12:31:21",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -581,7 +581,8 @@
           "duracaoMinutos": 0.06666666666666667
         }
       ],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 42min"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 06 - com motor desligado a 42min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.062Z"
     },
     {
       "id": "vzqp6n",
@@ -602,7 +603,7 @@
       "fullDateTime": "21/07/2025 12:12",
       "date": "21/07/2025",
       "time": "12:12:12",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -632,7 +633,8 @@
           "duracaoMinutos": 70.38333333333334
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 48min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 48min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.062Z"
     },
     {
       "id": "qpvdwr",
@@ -653,7 +655,7 @@
       "fullDateTime": "21/07/2025 12:12",
       "date": "21/07/2025",
       "time": "12:12:12",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -676,7 +678,8 @@
           "duracaoMinutos": 143.38333333333333
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 45min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 03 - com motor desligado a 45min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "1wmq1q",
@@ -697,7 +700,7 @@
       "fullDateTime": "21/07/2025 12:01",
       "date": "21/07/2025",
       "time": "12:01:28",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -727,7 +730,8 @@
           "duracaoMinutos": 35.983333333333334
         }
       ],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 47min"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 05 - com motor desligado a 47min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "ap39zc",
@@ -748,7 +752,7 @@
       "fullDateTime": "21/07/2025 11:42",
       "date": "21/07/2025",
       "time": "11:42:11",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -778,7 +782,8 @@
           "duracaoMinutos": 46.25
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 49min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 07 - com motor desligado a 49min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "oift1e",
@@ -799,7 +804,7 @@
       "fullDateTime": "21/07/2025 11:26",
       "date": "21/07/2025",
       "time": "11:26:22",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -829,7 +834,8 @@
           "duracaoMinutos": 20.9
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 46min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 06 - com motor desligado a 46min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "8xgoyn",
@@ -850,7 +856,7 @@
       "fullDateTime": "21/07/2025 11:12",
       "date": "21/07/2025",
       "time": "11:12:11",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -873,7 +879,8 @@
           "duracaoMinutos": 31.583333333333332
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 42min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 04 - com motor desligado a 42min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "jizl4w",
@@ -894,7 +901,7 @@
       "fullDateTime": "21/07/2025 11:01",
       "date": "21/07/2025",
       "time": "11:01:21",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -917,7 +924,8 @@
           "duracaoMinutos": 72.43333333333334
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 49min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 09 - com motor desligado a 49min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "sn7pem",
@@ -938,7 +946,7 @@
       "fullDateTime": "21/07/2025 11:01",
       "date": "21/07/2025",
       "time": "11:01:21",
-      "status": "pendente",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -968,7 +976,8 @@
           "duracaoMinutos": 38.18333333333333
         }
       ],
-      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 48min"
+      "message": "CAMINHÃO ALTA PRESSÃO - GPS - 02 - com motor desligado a 48min",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "rukvw6",
@@ -989,7 +998,7 @@
       "fullDateTime": "21/07/2025 10:46",
       "date": "21/07/2025",
       "time": "10:46:22",
-      "status": "fechado",
+      "status": "verificado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -1014,7 +1023,8 @@
       ],
       "message": "CAMINHÃO ALTA PRESSÃO - GPS - 01 - 24 HS - com motor desligado a 56min",
       "investigatedAt": "2025-07-21T13:56:27.497Z",
-      "investigatedFullDateTime": "21/07/2025 10:56"
+      "investigatedFullDateTime": "21/07/2025 10:56",
+      "bulkUpdatedAt": "2025-07-21T17:30:59.063Z"
     },
     {
       "id": "o561zw",
