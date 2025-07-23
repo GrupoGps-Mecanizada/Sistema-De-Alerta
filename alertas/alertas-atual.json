@@ -1,7 +1,110 @@
 {
-  "timestamp": 1753192610258,
+  "timestamp": 1753282151198,
   "version": "6.0",
   "type": "operational",
-  "total": 0,
-  "alerts": []
+  "total": 2,
+  "alerts": [
+    {
+      "id": "rxnn29",
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 04",
+      "tipo": "Status",
+      "identificador": "Motor Ligado",
+      "ruleId": 1753281267564,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "55min",
+      "durationMinutes": 55.083333333333336,
+      "startTime": "2025-07-23T13:40:42.000Z",
+      "endTime": "2025-07-23T14:35:47.000Z",
+      "timeRange": "23/07/2025 10:40 - 11:35",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753282099855,
+      "fullDateTime": "23/07/2025 11:48",
+      "date": "23/07/2025",
+      "time": "11:48:19",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Descarregando equipamento",
+          "inicio": "23/07/2025 09:56",
+          "fim": "23/07/2025 10:52",
+          "duracao": "56min",
+          "duracaoMinutos": 55.86666666666667
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "23/07/2025 08:52",
+          "fim": "23/07/2025 09:11",
+          "duracao": "18min",
+          "duracaoMinutos": 18.366666666666667
+        },
+        {
+          "categoria": "Abastecimento (Combustível) ",
+          "inicio": "23/07/2025 08:04",
+          "fim": "23/07/2025 08:44",
+          "duracao": "40min",
+          "duracaoMinutos": 40.1
+        }
+      ],
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 55min"
+    },
+    {
+      "id": "tf4847",
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 04",
+      "tipo": "Status",
+      "identificador": "Motor Ligado",
+      "ruleId": 1753281267564,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "56min",
+      "durationMinutes": 55.53333333333333,
+      "startTime": "2025-07-23T12:12:50.000Z",
+      "endTime": "2025-07-23T13:08:22.000Z",
+      "timeRange": "23/07/2025 09:12 - 10:08",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753282099849,
+      "fullDateTime": "23/07/2025 11:48",
+      "date": "23/07/2025",
+      "time": "11:48:19",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Descarregando equipamento",
+          "inicio": "23/07/2025 09:56",
+          "fim": "23/07/2025 10:52",
+          "duracao": "56min",
+          "duracaoMinutos": 55.86666666666667
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "23/07/2025 08:52",
+          "fim": "23/07/2025 09:11",
+          "duracao": "18min",
+          "duracaoMinutos": 18.366666666666667
+        },
+        {
+          "categoria": "Abastecimento (Combustível) ",
+          "inicio": "23/07/2025 08:04",
+          "fim": "23/07/2025 08:44",
+          "duracao": "40min",
+          "duracaoMinutos": 40.1
+        }
+      ],
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 56min"
+    }
+  ]
 }
