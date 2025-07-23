@@ -1,20 +1,6 @@
 {
-  "timestamp": 1753118577776,
-  "version": "7.0",
-  "total": 1,
-  "rules": [
-    {
-      "id": 1752152405852,
-      "name": "Equipamento Improdutivo",
-      "type": "improdutivo",
-      "identifier": "",
-      "timeOperator": ">",
-      "timeValue": 40,
-      "timeStart": "08:00",
-      "timeEnd": "18:00",
-      "severity": "alto",
-      "message": "{equipamento} com improdutividade há {tempo}",
-      "active": true
-    }
-  ]
+  "timestamp": 1753281248111,
+  "version": "6.0",
+  "total": 0,
+  "rules": []
 }
