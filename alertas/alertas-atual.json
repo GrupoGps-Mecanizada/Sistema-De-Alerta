@@ -1,9 +1,60 @@
 {
-  "timestamp": 1753283288184,
-  "version": "6.0",
+  "timestamp": 1753298591192,
+  "version": "7.0",
   "type": "operational",
-  "total": 2,
+  "total": 3,
   "alerts": [
+    {
+      "id": "atkz29",
+      "equipamento": "CAMINHÃO HIPER VÁCUO - GPS - 01",
+      "tipo": "Status",
+      "identificador": "Motor Ligado",
+      "ruleId": 1753281267564,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "41min",
+      "durationMinutes": 41.03333333333333,
+      "startTime": "2025-07-23T18:33:43.000Z",
+      "endTime": "2025-07-23T19:14:45.000Z",
+      "timeRange": "23/07/2025 15:33 - 16:14",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753298533515,
+      "fullDateTime": "23/07/2025 16:22",
+      "date": "23/07/2025",
+      "time": "16:22:13",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Preparação",
+          "inicio": "23/07/2025 14:50",
+          "fim": "23/07/2025 14:57",
+          "duracao": "8min",
+          "duracaoMinutos": 7.683333333333334
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "23/07/2025 14:27",
+          "fim": "23/07/2025 14:50",
+          "duracao": "22min",
+          "duracaoMinutos": 22.166666666666668
+        },
+        {
+          "categoria": "Pequenas manutenções",
+          "inicio": "23/07/2025 07:16",
+          "fim": "23/07/2025 13:54",
+          "duracao": "6h 38min",
+          "duracaoMinutos": 397.7
+        }
+      ],
+      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 41min"
+    },
     {
       "id": "rxnn29",
       "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 04",
