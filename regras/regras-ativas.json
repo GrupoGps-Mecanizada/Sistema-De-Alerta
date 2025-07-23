@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753281268118,
+  "timestamp": 1753281278117,
   "version": "6.0",
   "total": 1,
   "rules": [
@@ -10,7 +10,7 @@
       "identifier": "Motor Ligado",
       "timeOperator": ">",
       "timeValue": 40,
-      "severity": "baixo",
+      "severity": "alto",
       "message": "{equipamento} - com motor desligado a {tempo}",
       "active": true
     }
