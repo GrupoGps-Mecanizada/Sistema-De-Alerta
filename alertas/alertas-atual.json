@@ -1,9 +1,53 @@
 {
-  "timestamp": 1753357312810,
+  "timestamp": 1753360091183,
   "version": "7.0",
   "type": "operational",
-  "total": 3,
+  "total": 4,
   "alerts": [
+    {
+      "id": "exe2t",
+      "equipamento": "CAMINHÃO AUTO VÁCUO - GPS - 04",
+      "tipo": "Status",
+      "identificador": "Motor Ligado",
+      "ruleId": 1753281267564,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "48min",
+      "durationMinutes": 48,
+      "startTime": "2025-07-24T11:28:51.000Z",
+      "endTime": "2025-07-24T12:16:51.000Z",
+      "timeRange": "24/07/2025 08:28 - 09:16",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1753360032054,
+      "fullDateTime": "24/07/2025 09:27",
+      "date": "24/07/2025",
+      "time": "09:27:12",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Documentação",
+          "inicio": "24/07/2025 08:12",
+          "fim": "24/07/2025 08:28",
+          "duracao": "16min",
+          "duracaoMinutos": 15.916666666666666
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "24/07/2025 07:52",
+          "fim": "24/07/2025 08:04",
+          "duracao": "12min",
+          "duracaoMinutos": 12.25
+        }
+      ],
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 48min"
+    },
     {
       "id": "atkz29",
       "equipamento": "CAMINHÃO HIPER VÁCUO - GPS - 01",
