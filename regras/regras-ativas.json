@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753357842808,
+  "timestamp": 1753360272814,
   "version": "7.0",
   "total": 1,
   "rules": [
@@ -7,7 +7,7 @@
       "id": 1753281267564,
       "name": "Motor Desligado",
       "type": "status",
-      "identifier": "Motor Ligado",
+      "identifier": "Motor Desligado",
       "timeOperator": ">",
       "timeValue": 40,
       "severity": "alto",
