@@ -1,5 +1,5 @@
 {
-  "timestamp": 1753298951185,
+  "timestamp": 1753357303012,
   "version": "7.0",
   "type": "operational",
   "total": 3,
@@ -23,7 +23,7 @@
       "fullDateTime": "23/07/2025 16:27",
       "date": "23/07/2025",
       "time": "16:27:15",
-      "status": "pendente",
+      "status": "concluido",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -53,7 +53,10 @@
           "duracaoMinutos": 397.7
         }
       ],
-      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 41min"
+      "message": "CAMINHÃO HIPER VÁCUO - GPS - 01 - com motor desligado a 41min",
+      "lastStatusChange": "2025-07-24T11:41:43.002Z",
+      "investigatedAt": "2025-07-24T11:41:43.002Z",
+      "investigatedFullDateTime": "24/07/2025 08:41"
     },
     {
       "id": "rxnn29",
@@ -74,7 +77,7 @@
       "fullDateTime": "23/07/2025 11:53",
       "date": "23/07/2025",
       "time": "11:53:18",
-      "status": "pendente",
+      "status": "concluido",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -104,7 +107,10 @@
           "duracaoMinutos": 40.1
         }
       ],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 55min"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 55min",
+      "lastStatusChange": "2025-07-24T11:41:43.004Z",
+      "investigatedAt": "2025-07-24T11:41:43.004Z",
+      "investigatedFullDateTime": "24/07/2025 08:41"
     },
     {
       "id": "tf4847",
@@ -125,7 +131,7 @@
       "fullDateTime": "23/07/2025 11:53",
       "date": "23/07/2025",
       "time": "11:53:18",
-      "status": "pendente",
+      "status": "concluido",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -155,7 +161,10 @@
           "duracaoMinutos": 40.1
         }
       ],
-      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 56min"
+      "message": "CAMINHÃO AUTO VÁCUO - GPS - 04 - com motor desligado a 56min",
+      "lastStatusChange": "2025-07-24T11:41:43.004Z",
+      "investigatedAt": "2025-07-24T11:41:43.004Z",
+      "investigatedFullDateTime": "24/07/2025 08:41"
     }
   ]
 }
