@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758217331235,
+  "timestamp": 1758217474227,
   "version": "7.0",
   "type": "operational",
   "total": 144,
   "alerts": [
     {
-      "id": "cx7jp6",
+      "id": "ddo248",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758217326753,
-      "fullDateTime": "18/09/2025 14:42",
+      "timestamp": 1758217414586,
+      "fullDateTime": "18/09/2025 14:43",
       "date": "18/09/2025",
-      "time": "14:42:06",
+      "time": "14:43:34",
       "status": "pendente",
       "placa": "",
       "motorista": "",
