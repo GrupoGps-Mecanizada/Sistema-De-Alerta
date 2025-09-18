@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758204692661,
+  "timestamp": 1758204712662,
   "version": "7.0",
   "type": "operational",
   "total": 78,
   "alerts": [
     {
-      "id": "clyl92",
+      "id": "cz1oad",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758204687991,
+      "timestamp": 1758204711255,
       "fullDateTime": "18/09/2025 11:11",
       "date": "18/09/2025",
-      "time": "11:11:27",
+      "time": "11:11:51",
       "status": "pendente",
       "placa": "",
       "motorista": "",
