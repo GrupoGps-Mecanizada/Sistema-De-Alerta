@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758205571228,
+  "timestamp": 1758205714229,
   "version": "7.0",
   "type": "operational",
   "total": 80,
   "alerts": [
     {
-      "id": "qs6xr0",
+      "id": "r8ngzg",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758205566512,
-      "fullDateTime": "18/09/2025 11:26",
+      "timestamp": 1758205654479,
+      "fullDateTime": "18/09/2025 11:27",
       "date": "18/09/2025",
-      "time": "11:26:06",
+      "time": "11:27:34",
       "status": "pendente",
       "placa": "",
       "motorista": "",
