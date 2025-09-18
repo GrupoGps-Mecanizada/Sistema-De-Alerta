@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758204670230,
+  "timestamp": 1758204692661,
   "version": "7.0",
   "type": "operational",
   "total": 78,
   "alerts": [
     {
-      "id": "cj67ub",
+      "id": "clyl92",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758204635386,
-      "fullDateTime": "18/09/2025 11:10",
+      "timestamp": 1758204687991,
+      "fullDateTime": "18/09/2025 11:11",
       "date": "18/09/2025",
-      "time": "11:10:35",
+      "time": "11:11:27",
       "status": "pendente",
       "placa": "",
       "motorista": "",
