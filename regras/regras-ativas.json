@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758210850727,
+  "timestamp": 1758210855726,
   "version": "8.0",
   "rules": [
     {
@@ -12,20 +12,6 @@
       "severity": "alto",
       "message": "{equipamento} - com motor desligado a {tempo}",
       "active": true
-    },
-    {
-      "id": "1758210847297",
-      "active": true,
-      "name": "Motor Desligado",
-      "type": "status",
-      "identifier": "Motor Desligado",
-      "equipmentGroup": "",
-      "timeStart": "07:00",
-      "timeEnd": "17:00",
-      "timeOperator": ">",
-      "timeValue": 45,
-      "severity": "medio",
-      "message": "{equipamento} - ocioso a {tempo}"
     }
   ]
 }
