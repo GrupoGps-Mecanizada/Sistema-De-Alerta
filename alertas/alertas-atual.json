@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758214714237,
+  "timestamp": 1758214774238,
   "version": "7.0",
   "type": "operational",
   "total": 132,
   "alerts": [
     {
-      "id": "tn76fi",
+      "id": "t8dwp9",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758214656165,
-      "fullDateTime": "18/09/2025 13:57",
+      "timestamp": 1758214714653,
+      "fullDateTime": "18/09/2025 13:58",
       "date": "18/09/2025",
-      "time": "13:57:36",
+      "time": "13:58:34",
       "status": "pendente",
       "placa": "",
       "motorista": "",
