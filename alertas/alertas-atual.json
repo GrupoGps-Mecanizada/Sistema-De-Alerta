@@ -1,9 +1,53 @@
 {
-  "timestamp": 1758194164565,
+  "timestamp": 1758195094228,
   "version": "7.0",
   "type": "operational",
-  "total": 48,
+  "total": 49,
   "alerts": [
+    {
+      "id": "ufadms",
+      "equipamento": "ALTA PRESSÃO - GPS - 08 - 24 HS",
+      "tipo": "Status",
+      "identificador": "Motor Desligado",
+      "ruleId": 1753281267564,
+      "ruleName": "Motor Desligado",
+      "severity": "alto",
+      "duration": "48min",
+      "durationMinutes": 47.85,
+      "startTime": "2025-09-18T09:21:09.000Z",
+      "endTime": "2025-09-18T10:09:00.000Z",
+      "timeRange": "18/09/2025 06:21 - 07:09",
+      "consolidated": false,
+      "originalCount": 1,
+      "timestamp": 1758195035363,
+      "fullDateTime": "18/09/2025 08:30",
+      "date": "18/09/2025",
+      "time": "08:30:35",
+      "status": "pendente",
+      "placa": "",
+      "motorista": "",
+      "area": "",
+      "supervisor": "",
+      "observacoes": "",
+      "acoes": "",
+      "apontamentosRelacionados": [
+        {
+          "categoria": "Abastecimento (Combustível) ",
+          "inicio": "18/09/2025 07:21",
+          "fim": "18/09/2025 07:54",
+          "duracao": "33min",
+          "duracaoMinutos": 33.1
+        },
+        {
+          "categoria": "Documentação",
+          "inicio": "18/09/2025 08:12",
+          "fim": "18/09/2025 08:24",
+          "duracao": "13min",
+          "duracaoMinutos": 12.566666666666666
+        }
+      ],
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 48min"
+    },
     {
       "id": "6gwq4w",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
