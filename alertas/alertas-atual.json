@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758191556546,
+  "timestamp": 1758191561547,
   "version": "7.0",
   "type": "operational",
   "total": 4,
@@ -52,7 +52,7 @@
       "fullDateTime": "18/09/2025 07:32",
       "date": "18/09/2025",
       "time": "07:32:28",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -60,7 +60,10 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 6h 1min"
+      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - com motor desligado a 6h 1min",
+      "lastStatusChange": "2025-09-18T10:32:38.519Z",
+      "investigatedAt": "2025-09-18T10:32:38.519Z",
+      "investigatedFullDateTime": "18/09/2025 07:32"
     },
     {
       "id": "uo6jiz",
@@ -81,7 +84,7 @@
       "fullDateTime": "18/09/2025 07:32",
       "date": "18/09/2025",
       "time": "07:32:28",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -89,7 +92,10 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 10 - com motor desligado a 4h 40min"
+      "message": "ALTA PRESSÃO - GPS - 10 - com motor desligado a 4h 40min",
+      "lastStatusChange": "2025-09-18T10:32:40.703Z",
+      "investigatedAt": "2025-09-18T10:32:40.703Z",
+      "investigatedFullDateTime": "18/09/2025 07:32"
     },
     {
       "id": "x43oxg",
