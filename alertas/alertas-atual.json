@@ -1,40 +1,9 @@
 {
-  "timestamp": 1758210694238,
-  "version": "7.0",
-  "type": "operational",
-  "total": 95,
+  "timestamp": 1758210750726,
+  "version": "8.0",
   "alerts": [
     {
-      "id": "hcr4jy",
-      "equipamento": "ALTA PRESSÃO - GPS - 09",
-      "tipo": "Status",
-      "identificador": "Motor Desligado",
-      "ruleId": 1753281267564,
-      "ruleName": "Motor Desligado",
-      "severity": "alto",
-      "duration": "43min",
-      "durationMinutes": 42.85,
-      "startTime": "2025-09-18T11:33:50.000Z",
-      "endTime": "2025-09-18T12:16:41.000Z",
-      "timeRange": "18/09/2025 08:33 - 09:16",
-      "consolidated": true,
-      "originalCount": 2,
-      "timestamp": 1758210637579,
-      "fullDateTime": "18/09/2025 12:50",
-      "date": "18/09/2025",
-      "time": "12:50:37",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
-      "observacoes": "",
-      "acoes": "",
-      "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 09 - com motor desligado a 43min"
-    },
-    {
-      "id": "wntlm9",
+      "id": "v5koi6",
       "equipamento": "ALTA PRESSÃO - GPS - 08 - 24 HS",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -48,10 +17,10 @@
       "timeRange": "18/09/2025 11:33 - 12:49",
       "consolidated": false,
       "originalCount": 1,
-      "timestamp": 1758210637579,
-      "fullDateTime": "18/09/2025 12:50",
+      "timestamp": 1758210746507,
+      "fullDateTime": "18/09/2025 12:52",
       "date": "18/09/2025",
-      "time": "12:50:37",
+      "time": "12:52:26",
       "status": "pendente",
       "placa": "",
       "motorista": "",
@@ -59,33 +28,11 @@
       "supervisor": "",
       "observacoes": "",
       "acoes": "",
-      "apontamentosRelacionados": [
-        {
-          "categoria": "Preparação - LM",
-          "inicio": "18/09/2025 09:57",
-          "fim": "18/09/2025 10:02",
-          "duracao": "5min",
-          "duracaoMinutos": 4.783333333333333
-        },
-        {
-          "categoria": "Documentação",
-          "inicio": "18/09/2025 09:54",
-          "fim": "18/09/2025 09:56",
-          "duracao": "2min",
-          "duracaoMinutos": 2.2333333333333334
-        },
-        {
-          "categoria": "Aguardando Área",
-          "inicio": "18/09/2025 08:33",
-          "fim": "18/09/2025 09:40",
-          "duracao": "1h 7min",
-          "duracaoMinutos": 67.13333333333334
-        }
-      ],
+      "apontamentosRelacionados": [],
       "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 1h 16min"
     },
     {
-      "id": "7f6kss",
+      "id": "f37iuz",
       "equipamento": "AUTO VÁCUO - GPS - 05",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -99,10 +46,10 @@
       "timeRange": "18/09/2025 11:26 - 12:37",
       "consolidated": false,
       "originalCount": 1,
-      "timestamp": 1758210637577,
-      "fullDateTime": "18/09/2025 12:50",
+      "timestamp": 1758210746506,
+      "fullDateTime": "18/09/2025 12:52",
       "date": "18/09/2025",
-      "time": "12:50:37",
+      "time": "12:52:26",
       "status": "pendente",
       "placa": "",
       "motorista": "",
@@ -110,22 +57,7 @@
       "supervisor": "",
       "observacoes": "",
       "acoes": "",
-      "apontamentosRelacionados": [
-        {
-          "categoria": "Aguardando Área",
-          "inicio": "18/09/2025 10:40",
-          "fim": "18/09/2025 10:57",
-          "duracao": "18min",
-          "duracaoMinutos": 17.533333333333335
-        },
-        {
-          "categoria": "Aguardando Área",
-          "inicio": "18/09/2025 09:44",
-          "fim": "18/09/2025 10:13",
-          "duracao": "29min",
-          "duracaoMinutos": 28.816666666666666
-        }
-      ],
+      "apontamentosRelacionados": [],
       "message": "AUTO VÁCUO - GPS - 05 - com motor desligado a 1h 10min"
     },
     {
@@ -747,11 +679,11 @@
       "ruleId": 1753281267564,
       "ruleName": "Motor Desligado",
       "severity": "alto",
-      "duration": "2h 38min",
-      "durationMinutes": 157.58333333333334,
+      "duration": "1h 56min",
+      "durationMinutes": 116.1,
       "startTime": "2025-09-18T12:59:08.000Z",
-      "endTime": "2025-09-18T15:36:43.000Z",
-      "timeRange": "18/09/2025 09:59 - 12:36",
+      "endTime": "2025-09-18T14:55:14.000Z",
+      "timeRange": "18/09/2025 09:59 - 11:55",
       "consolidated": false,
       "originalCount": 1,
       "timestamp": 1758203849956,
