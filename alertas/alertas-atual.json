@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758217272321,
+  "timestamp": 1758217275459,
   "version": "7.0",
   "type": "operational",
   "total": 144,
   "alerts": [
     {
-      "id": "cgofvm",
+      "id": "ciubih",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758217234735,
-      "fullDateTime": "18/09/2025 14:40",
+      "timestamp": 1758217272626,
+      "fullDateTime": "18/09/2025 14:41",
       "date": "18/09/2025",
-      "time": "14:40:34",
+      "time": "14:41:12",
       "status": "pendente",
       "placa": "",
       "motorista": "",
