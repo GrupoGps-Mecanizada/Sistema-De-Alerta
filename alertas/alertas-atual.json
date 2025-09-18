@@ -1,11 +1,11 @@
 {
-  "timestamp": 1758217774237,
+  "timestamp": 1758217834238,
   "version": "7.0",
   "type": "operational",
   "total": 145,
   "alerts": [
     {
-      "id": "essxul",
+      "id": "ew3ou1",
       "equipamento": "ALTA PRESSÃO - GPS - 09",
       "tipo": "Status",
       "identificador": "Motor Desligado",
@@ -19,10 +19,10 @@
       "timeRange": "18/09/2025 08:33 - 09:16",
       "consolidated": true,
       "originalCount": 2,
-      "timestamp": 1758217714605,
-      "fullDateTime": "18/09/2025 14:48",
+      "timestamp": 1758217774573,
+      "fullDateTime": "18/09/2025 14:49",
       "date": "18/09/2025",
-      "time": "14:48:34",
+      "time": "14:49:34",
       "status": "pendente",
       "placa": "",
       "motorista": "",
