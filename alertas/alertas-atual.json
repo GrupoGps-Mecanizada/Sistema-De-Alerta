@@ -1,8 +1,6 @@
 {
-  "timestamp": 1758317413048,
-  "version": "7.0",
-  "type": "operational",
-  "total": 67,
+  "timestamp": 1758325721277,
+  "version": "8.0",
   "alerts": [
     {
       "id": "gyxuo9",
@@ -805,11 +803,11 @@
       "fullDateTime": "19/09/2025 18:16",
       "date": "19/09/2025",
       "time": "18:16:10",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
+      "status": "em_andamento",
+      "placa": "teste",
+      "motorista": "teste",
+      "area": "teste",
+      "supervisor": "testew",
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [
@@ -835,7 +833,8 @@
           "duracaoMinutos": 9.766666666666667
         }
       ],
-      "message": "ALTA PRESSÃO - GPS - 07 - 16 HS - com motor desligado a 1h 44min"
+      "message": "ALTA PRESSÃO - GPS - 07 - 16 HS - com motor desligado a 1h 44min",
+      "investigatedAt": "2025-09-19T23:48:41.235Z"
     },
     {
       "id": "d0v074",
