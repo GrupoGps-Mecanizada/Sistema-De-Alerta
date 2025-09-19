@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758296018931,
+  "timestamp": 1758296078916,
   "version": "8.0",
   "type": "operational",
   "total": 33,
@@ -835,7 +835,7 @@
       "fullDateTime": "18/09/2025, 17:17:54",
       "date": "18/09/2025",
       "time": "17:17:54",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -843,7 +843,10 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 05 - com motor desligado a 53min"
+      "message": "AUTO VÁCUO - GPS - 05 - com motor desligado a 53min",
+      "lastStatusChange": "2025-09-19T15:34:37.676Z",
+      "investigatedAt": "2025-09-19T15:34:37.676Z",
+      "investigatedFullDateTime": "19/09/2025 12:34"
     },
     {
       "id": "q9pn4l",
