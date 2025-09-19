@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758325879861,
+  "timestamp": 1758325900520,
   "version": "8.0",
   "alerts": [
     {
@@ -30,8 +30,8 @@
       "acoes": "",
       "apontamentosRelacionados": [],
       "message": "ALTA PRESSÃO - GPS - 09 - com motor desligado a 43min",
-      "lastStatusChange": "2025-09-19T23:51:19.815Z",
-      "investigatedAt": "2025-09-19T23:51:19.815Z"
+      "lastStatusChange": "2025-09-19T23:51:40.483Z",
+      "investigatedAt": "2025-09-19T23:51:40.483Z"
     },
     {
       "id": "umki01",
