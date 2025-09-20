@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758373111238,
+  "timestamp": 1758373250395,
   "version": "8.0",
   "alerts": [
     {
@@ -50,7 +50,7 @@
       "fullDateTime": "19/09/2025 18:16",
       "date": "19/09/2025",
       "time": "18:16:10",
-      "status": "pendente",
+      "status": "em_andamento",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -58,7 +58,8 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 09 - com motor desligado a 43min"
+      "message": "ALTA PRESSÃO - GPS - 09 - com motor desligado a 43min",
+      "lastStatusChange": "2025-09-20T13:00:50.347Z"
     },
     {
       "id": "19v15b",
