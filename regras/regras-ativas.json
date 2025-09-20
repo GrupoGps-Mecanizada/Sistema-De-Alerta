@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758380086280,
+  "timestamp": 1758387779999,
   "version": "8.0",
   "rules": [
     {
@@ -12,7 +12,9 @@
       "severity": "alto",
       "message": "{equipamento} - com motor desligado a {tempo}",
       "active": true,
-      "equipmentGroups": [],
+      "equipmentGroups": [
+        "all"
+      ],
       "schedule": {
         "startTime": "07:00",
         "endTime": "17:00"
