@@ -1,6 +1,7 @@
 {
-  "timestamp": 1758392957434,
-  "version": "8.0",
+  "timestamp": 1758393222559,
+  "lastModified": "2025-09-20T18:33:42.559Z",
+  "totalAlerts": 33,
   "alerts": [
     {
       "id": "ntrjee",
