@@ -1,8 +1,7 @@
 {
-  "timestamp": 1758391200439,
-  "version": "7.0",
-  "type": "operational",
-  "total": 32,
+  "timestamp": 1758392573995,
+  "lastModified": "2025-09-20T18:22:53.996Z",
+  "totalAlerts": 31,
   "alerts": [
     {
       "id": "kwvc83",
@@ -738,35 +737,6 @@
       "acoes": "",
       "apontamentosRelacionados": [],
       "message": "AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 42min"
-    },
-    {
-      "id": "119one",
-      "equipamento": "AUTO VÁCUO - GPS - 01 - 16 HS",
-      "tipo": "Status",
-      "identificador": "Motor Desligado",
-      "ruleId": 1753281267564,
-      "ruleName": "Motor Desligado",
-      "severity": "alto",
-      "duration": "44min",
-      "durationMinutes": 43.5,
-      "startTime": "2025-09-20T03:29:46.000Z",
-      "endTime": "2025-09-20T04:13:16.000Z",
-      "timeRange": "20/09/2025 00:29:46 - 01:13:16",
-      "consolidated": false,
-      "originalCount": 1,
-      "timestamp": 1758338986000,
-      "fullDateTime": "20/09/2025, 00:29:46",
-      "date": "20/09/2025",
-      "time": "00:29:46",
-      "status": "pendente",
-      "placa": "",
-      "motorista": "",
-      "area": "",
-      "supervisor": "",
-      "observacoes": "",
-      "acoes": "",
-      "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 01 - 16 HS - com motor desligado a 44min"
     },
     {
       "id": "fnlro0",
