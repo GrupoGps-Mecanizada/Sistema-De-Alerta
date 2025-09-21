@@ -1,6 +1,6 @@
 {
-  "timestamp": 1758454837079,
-  "lastModified": "2025-09-21T11:40:37.079Z",
+  "timestamp": 1758454975314,
+  "lastModified": "2025-09-21T11:42:55.314Z",
   "totalAlerts": 36,
   "alerts": [
     {
@@ -818,12 +818,12 @@
       "motorista": "teste",
       "area": "teste",
       "supervisor": "teste",
-      "observacoes": "",
-      "acoes": "",
+      "observacoes": "teste",
+      "acoes": "teste",
       "apontamentosRelacionados": [],
       "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - com motor desligado a 47min",
       "lastStatusChange": "2025-09-20T17:31:03.172Z",
-      "investigatedAt": "2025-09-20T17:56:09.401Z"
+      "investigatedAt": "2025-09-21T11:42:55.274Z"
     },
     {
       "id": "44jto8",
