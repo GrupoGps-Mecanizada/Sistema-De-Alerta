@@ -1,5 +1,5 @@
 {
-  "timestamp": 1758387796558,
+  "timestamp": 1758455540809,
   "version": "8.0",
   "rules": [
     {
@@ -10,7 +10,7 @@
       "timeOperator": ">",
       "timeValue": 40,
       "severity": "alto",
-      "message": "{equipamento} - com motor desligado a {tempo}",
+      "message": "{equipamento} - ocioso a {tempo}",
       "active": true,
       "equipmentGroups": [
         "all"
