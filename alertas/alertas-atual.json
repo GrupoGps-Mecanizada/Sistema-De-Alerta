@@ -1,6 +1,7 @@
 {
-  "timestamp": 1758457596239,
-  "version": "8.0",
+  "timestamp": 1758458679339,
+  "lastModified": "2025-09-21T12:44:39.339Z",
+  "totalAlerts": 26,
   "alerts": [
     {
       "id": "2umcj6",
@@ -108,7 +109,7 @@
       "fullDateTime": "21/09/2025, 00:54:10",
       "date": "21/09/2025",
       "time": "00:54:10",
-      "status": "pendente",
+      "status": "em_andamento",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -116,7 +117,8 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 1h 47min"
+      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 1h 47min",
+      "lastStatusChange": "2025-09-21T12:44:37.317Z"
     },
     {
       "id": "2shvji",
