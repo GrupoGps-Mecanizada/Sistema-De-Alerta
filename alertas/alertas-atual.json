@@ -1,6 +1,6 @@
 {
-  "timestamp": 1758458679339,
-  "lastModified": "2025-09-21T12:44:39.339Z",
+  "timestamp": 1758458771365,
+  "lastModified": "2025-09-21T12:46:11.365Z",
   "totalAlerts": 26,
   "alerts": [
     {
@@ -226,7 +226,7 @@
       "fullDateTime": "20/09/2025, 04:02:51",
       "date": "20/09/2025",
       "time": "04:02:51",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -234,7 +234,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 01 - 16 HS - ocioso a 42min"
+      "message": "AUTO VÁCUO - GPS - 01 - 16 HS - ocioso a 42min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "119one",
@@ -255,7 +257,7 @@
       "fullDateTime": "20/09/2025, 00:29:46",
       "date": "20/09/2025",
       "time": "00:29:46",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -263,7 +265,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 01 - 16 HS - ocioso a 44min"
+      "message": "AUTO VÁCUO - GPS - 01 - 16 HS - ocioso a 44min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "fnlro0",
@@ -284,7 +288,7 @@
       "fullDateTime": "20/09/2025, 08:10:11",
       "date": "20/09/2025",
       "time": "08:10:11",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -292,7 +296,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 58min"
+      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 58min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "sbgm0f",
@@ -313,7 +319,7 @@
       "fullDateTime": "20/09/2025, 05:09:54",
       "date": "20/09/2025",
       "time": "05:09:54",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -321,7 +327,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 1h 3min"
+      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 1h 3min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "19expq",
@@ -342,7 +350,7 @@
       "fullDateTime": "20/09/2025, 02:03:05",
       "date": "20/09/2025",
       "time": "02:03:05",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -350,7 +358,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 1h 32min"
+      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 1h 32min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "bj5lrh",
@@ -371,7 +381,7 @@
       "fullDateTime": "20/09/2025, 00:59:52",
       "date": "20/09/2025",
       "time": "00:59:52",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -379,7 +389,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 41min"
+      "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 41min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "b3o7qt",
@@ -400,7 +412,7 @@
       "fullDateTime": "20/09/2025, 17:03:12",
       "date": "20/09/2025",
       "time": "17:03:12",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -408,7 +420,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 48min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 48min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "ntrjee",
@@ -429,7 +443,7 @@
       "fullDateTime": "20/09/2025, 14:38:19",
       "date": "20/09/2025",
       "time": "14:38:19",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -437,7 +451,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 8min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 8min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "d6ky0c",
@@ -458,7 +474,7 @@
       "fullDateTime": "20/09/2025, 10:15:45",
       "date": "20/09/2025",
       "time": "10:15:45",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -466,7 +482,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 5min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 5min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "pz5hhj",
@@ -487,7 +505,7 @@
       "fullDateTime": "20/09/2025, 09:14:26",
       "date": "20/09/2025",
       "time": "09:14:26",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -495,7 +513,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 41min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 41min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "1vmhjc",
@@ -516,7 +536,7 @@
       "fullDateTime": "20/09/2025, 07:58:35",
       "date": "20/09/2025",
       "time": "07:58:35",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -524,7 +544,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 7min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 7min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "2dfd6h",
@@ -545,7 +567,7 @@
       "fullDateTime": "20/09/2025, 06:26:36",
       "date": "20/09/2025",
       "time": "06:26:36",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -553,7 +575,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 47min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 47min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "rw38b9",
@@ -574,7 +598,7 @@
       "fullDateTime": "20/09/2025, 05:08:38",
       "date": "20/09/2025",
       "time": "05:08:38",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -582,7 +606,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 4min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 4min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "u1k0k",
@@ -603,7 +629,7 @@
       "fullDateTime": "20/09/2025, 02:03:15",
       "date": "20/09/2025",
       "time": "02:03:15",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -611,7 +637,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 32min"
+      "message": "ALTA PRESSÃO - GPS - 08 - 24 HS - ocioso a 1h 32min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "wgm6sg",
@@ -632,7 +660,7 @@
       "fullDateTime": "20/09/2025, 12:50:04",
       "date": "20/09/2025",
       "time": "12:50:04",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -640,7 +668,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 44min"
+      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 44min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "2ij1yv",
@@ -661,7 +691,7 @@
       "fullDateTime": "20/09/2025, 08:57:43",
       "date": "20/09/2025",
       "time": "08:57:43",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -669,7 +699,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 2h 20min"
+      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 2h 20min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "ohe5c6",
@@ -690,7 +722,7 @@
       "fullDateTime": "20/09/2025, 08:05:35",
       "date": "20/09/2025",
       "time": "08:05:35",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -698,7 +730,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 49min"
+      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 49min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "w7rjzu",
@@ -719,7 +753,7 @@
       "fullDateTime": "20/09/2025, 02:36:05",
       "date": "20/09/2025",
       "time": "02:36:05",
-      "status": "pendente",
+      "status": "fechado",
       "placa": "",
       "motorista": "",
       "area": "",
@@ -727,7 +761,9 @@
       "observacoes": "",
       "acoes": "",
       "apontamentosRelacionados": [],
-      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 3h 39min"
+      "message": "ALTA PRESSÃO - GPS - 01 - 24 HS - ocioso a 3h 39min",
+      "lastStatusChange": "2025-09-21T12:46:11.365Z",
+      "investigatedAt": "2025-09-21T12:46:11.365Z"
     },
     {
       "id": "cgbv3s",
