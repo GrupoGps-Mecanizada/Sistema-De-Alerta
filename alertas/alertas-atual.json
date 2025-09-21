@@ -1,6 +1,7 @@
 {
-  "timestamp": 1758455796224,
-  "version": "8.0",
+  "timestamp": 1758455890521,
+  "lastModified": "2025-09-21T11:58:10.521Z",
+  "totalAlerts": 20,
   "alerts": [
     {
       "id": "9tzzht",
