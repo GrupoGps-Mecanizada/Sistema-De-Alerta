@@ -1,7 +1,6 @@
 {
-  "timestamp": 1758545004530,
-  "lastModified": "2025-09-22T12:43:24.530Z",
-  "totalAlerts": 32,
+  "timestamp": 1758545063398,
+  "version": "8.0",
   "alerts": [
     {
       "id": "ksgcy3",
@@ -29,15 +28,7 @@
       "supervisor": "",
       "observacoes": "",
       "acoes": "",
-      "apontamentosRelacionados": [
-        {
-          "categoria": "Inicio de turno",
-          "inicio": "22/09/2025 07:52:46",
-          "fim": "22/09/2025 07:52:52",
-          "duracao": "0min",
-          "duracaoMinutos": 0.1
-        }
-      ],
+      "apontamentosRelacionados": [],
       "message": "AUTO VÁCUO - GPS - 08 - 24 HS - ocioso a 43min"
     },
     {
