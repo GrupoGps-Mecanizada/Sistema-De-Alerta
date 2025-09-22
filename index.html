@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Alertas GrupoGPS v8.0</title>
+    <title>Sistema de Alertas GrupoGPS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
@@ -158,21 +158,21 @@
             overflow: hidden;
         }
 
-        /* Buttons */
+        /* Buttons -- ATUALIZADO PASSO 2 */
         .btn {
             background: #007bff;
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
+            gap: 0.4rem;
+            font-size: 0.9rem;
             box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
         }
 
@@ -223,8 +223,8 @@
         }
 
         .btn.small {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
         }
 
         /* Form Elements */
@@ -406,19 +406,99 @@
             color: #6c757d;
             margin-top: 0.3rem;
         }
+        
+        /* Timeline Melhorada -- ATUALIZADO PASSO 1 */
+        .enhanced-timeline {
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
 
-        .no-apontamentos-badge {
-            display: inline-flex;
+        .timeline-header-enhanced {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.3rem;
-            padding: 0.3rem 0.8rem;
-            background: #ffc107;
-            color: #212529;
-            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-header-enhanced h4 {
+            color: #2c3e50;
+        }
+
+        .equipment-badge {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
             font-size: 0.8rem;
             font-weight: 600;
-            margin-top: 0.5rem;
         }
+        
+        .timeline-alert-track {
+            position: relative;
+            height: 50px;
+            background: linear-gradient(to right, #fff5f5, #ffffff);
+            border: 2px solid #ffebee;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-alert-bar {
+            position: absolute;
+            height: 100%;
+            background: #dc3545;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .timeline-alert-bar:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 10px rgba(220, 53, 69, 0.4);
+            z-index: 10;
+        }
+
+        .timeline-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+            padding-top: 5px;
+        }
+        
+        .scale-time.alert-time { font-weight: bold; color: #dc3545; }
+
+        #timelineTooltip {
+            display: none;
+            position: absolute;
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            z-index: 10001;
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: opacity 0.2s;
+        }
+        #timelineTooltip.show { display: block; }
+        .tooltip-header { font-weight: bold; border-bottom: 1px solid #5a6c7d; margin-bottom: 5px; padding-bottom: 5px; }
+        .tooltip-row { display: flex; justify-content: space-between; gap: 15px; margin-top: 3px; }
+        .tooltip-label { color: #bdc3c7; }
+        .tooltip-value { font-weight: 500; }
 
         /* Alert Cards */
         .alert-card {
@@ -429,12 +509,12 @@
             border-left: 4px solid;
             transition: all 0.3s ease;
             position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .alert-card:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transform: none; /* Remove transform em hover */
         }
 
         .alert-card.selected {
@@ -866,6 +946,98 @@
                 justify-content: flex-start;
             }
         }
+        
+        /* Timeline com duas lanes (CSS Adicionado) */
+        .timeline-track {
+            position: relative;
+            height: 40px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            overflow: visible; /* Permite que tooltips apareçam */
+        }
+
+        .timeline-item.overlap {
+            background: repeating-linear-gradient(
+                45deg,
+                #dc3545,
+                #dc3545 3px,
+                #17a2b8 3px,
+                #17a2b8 6px
+            );
+            border: 2px solid #ff6b6b;
+            animation: pulse-timeline 2s infinite;
+        }
+
+        /* Animação suave para itens com sobreposição */
+        @keyframes pulse-timeline {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(255, 0, 0, 0.3); 
+            }
+            50% { 
+                box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); 
+            }
+        }
+
+        /* CORREÇÃO 8: Otimização CSS para Mobile */
+        @media (max-width: 768px) {
+            .header-brand h1 {
+                font-size: 1.2rem;
+            }
+            
+            .nav-tab {
+                padding: 0.8rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .alert-card {
+                padding: 1rem;
+            }
+            
+            .alert-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1rem;
+                margin: 10px;
+            }
+            
+            /* Remove animações em mobile */
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            /* Simplifica tabelas em mobile */
+            table {
+                font-size: 0.75rem;
+            }
+            
+            /* Cards mais compactos */
+            .stat-card {
+                padding: 1rem;
+            }
+            
+            .stat-value {
+                font-size: 1.8rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -874,7 +1046,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="header-brand">
-                    <h1>📊 Sistema de Alertas GrupoGPS v8.0</h1>
+                    <h1>📊 Sistema de Alertas GrupoGPS</h1>
                 </div>
                 
                 <div class="header-controls">
@@ -1308,7 +1480,7 @@
 
         <!-- Footer -->
         <footer style="background: #ffffff; border-top: 2px solid #e9ecef; padding: 2rem; text-align: center; color: #6c757d; font-size: 0.9rem;">
-            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas Profissional v8.0</p>
+            <p>Desenvolvido por <strong style="color: #2c3e50;">Warlison Abreu</strong> | © 2025 GrupoGPS - Sistema de Alertas Profissional</p>
         </footer>
     </div>
 
@@ -1531,21 +1703,12 @@
     </div>
 
     <script>
-        // Sistema de Alertas v8.0 - GrupoGPS - ARQUITETURA SERVER-FIRST
-        // REVISÃO DE ARQUITETURA:
-        // 1. ✅ GitHub é a ÚNICA fonte da verdade para dados operacionais.
-        // 2. ✅ O localStorage não é mais usado para carregar alertas ou regras, prevenindo dados obsoletos.
-        // 3. ✅ Alterações (salvar/atualizar status) são enviadas IMEDIATAMENTE ao GitHub.
-        // 4. ✅ Após cada alteração, o sistema busca novamente os dados para garantir consistência total entre usuários.
-        // 5. ✅ O sistema agora requer conexão com a internet e token do GitHub para operar.
-        
         class AlertSystemV8 {
             constructor() {
-                console.log('🚀 Sistema de Alertas v8.0 - Arquitetura Server-First');
-                console.log('📋 Lógica de dados modificada para comunicação instantânea com o banco de dados (GitHub).');
+                console.log('🚀 Sistema de Alertas - Arquitetura Server-First');
+                console.log('📋 Comunicação instantânea com banco de dados ativa.');
 
                 this.telemetryData = [];
-                this.apontamentosData = [];
                 this.rules = [];
                 this.alerts = [];
                 this.processedAlertIds = new Set();
@@ -1554,6 +1717,13 @@
                 this.editingRuleId = null;
                 this.currentInvestigation = null;
                 
+                this.pendingChanges = new Map(); 
+                this.saveDebounceTimer = null;   
+                this.lastDataHash = null;        
+                this.syncQueue = [];             
+                this.isProcessingQueue = false;  
+                this.syncInterval = null;
+
                 this.equipmentGroups = {
                     alta_pressao: ['ALTA PRESSÃO', 'ALTA PRESSAO', 'HIGH PRESSURE'],
                     auto_vacuo: ['AUTO VÁCUO', 'AUTO VACUO', 'AUTO-VÁCUO', 'AUTO-VACUO'],
@@ -1572,13 +1742,100 @@
                     resetTime: '00:00'
                 };
 
-                this.APONTAMENTO_TIME_WINDOW = 120;
-                this.MAX_APONTAMENTOS_PER_ALERT = 5;
-
                 this.waitForDOM().then(() => {
                     this.initializeSystem();
                 });
             }
+
+            createDataHash(data) {
+                const str = JSON.stringify(data);
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash |= 0;
+                }
+                return hash.toString(36);
+            }
+            
+            async saveChangesWithDebounce() {
+                if (this.saveDebounceTimer) {
+                    clearTimeout(this.saveDebounceTimer);
+                }
+                
+                this.saveDebounceTimer = setTimeout(async () => {
+                    await this.processPendingChanges();
+                }, 2000);
+            }
+            
+            async processPendingChanges() {
+                if (this.pendingChanges.size === 0) return;
+                
+                this.updateSyncStatus('loading', `Salvando ${this.pendingChanges.size} alterações...`);
+                
+                try {
+                    for (const [alertId, changes] of this.pendingChanges) {
+                        const alert = this.alerts.find(a => a.id === alertId);
+                        if (alert) {
+                            Object.assign(alert, changes);
+                        }
+                    }
+                    
+                    await this.saveOperationalDataToGitHub();
+                    
+                    const changeCount = this.pendingChanges.size;
+                    this.pendingChanges.clear();
+                    
+                    this.showNotification(`${changeCount} alterações salvas com sucesso!`, 'success');
+                    this.updateSyncStatus('success', 'Todas as alterações salvas');
+                    
+                } catch (error) {
+                    this.showNotification(`Erro ao salvar: ${error.message}`, 'error');
+                    this.updateSyncStatus('error', 'Falha ao salvar');
+                }
+            }
+
+            async processQueuedSyncs() {
+                if (this.syncQueue.length === 0 || this.isProcessingQueue) return;
+                
+                this.isProcessingQueue = true;
+                
+                const uniqueSync = this.syncQueue[this.syncQueue.length - 1];
+                this.syncQueue = [];
+                
+                console.log('📋 Processando sincronização da fila...');
+                await this.syncData(uniqueSync.isInitialLoad);
+                
+                this.isProcessingQueue = false;
+            }
+            
+            async saveOperationalDataToGitHub() {
+                if (!this.config.githubEnabled || !this.config.token) {
+                    throw new Error('GitHub não configurado');
+                }
+                
+                const operationalData = {
+                    timestamp: Date.now(),
+                    lastModified: new Date().toISOString(),
+                    totalAlerts: this.alerts.length,
+                    alerts: this.alerts,
+                };
+                
+                try {
+                    await this.createOrUpdateGitHubFile(
+                        'alertas/alertas-atual.json',
+                        JSON.stringify(operationalData, null, 2),
+                        `Atualização: ${this.alerts.filter(a => a.lastStatusChange && 
+                            new Date(a.lastStatusChange).getTime() > Date.now() - 60000).length} alertas modificados`
+                    );
+                    
+                    console.log('✅ Dados salvos no GitHub com sucesso');
+                } catch (error) {
+                    console.error('❌ Erro ao salvar no GitHub:', error);
+                    throw error;
+                }
+            }
+
 
             async waitForDOM() {
                 return new Promise((resolve) => {
@@ -1592,10 +1849,10 @@
 
             async initializeSystem() {
                 try {
-                    console.log('🔄 Iniciando Sistema de Alertas v8.0 (Server-First)...');
+                    console.log('🔄 Iniciando Sistema de Alertas...');
                     this.updateSyncStatus('loading', 'Iniciando sistema...');
 
-                    this.loadConfig(); // Carrega apenas configurações, não dados
+                    this.loadConfig();
                     this.setupEventListeners();
                     this.initDates();
                     
@@ -1606,13 +1863,13 @@
                         return;
                     }
                     
-                    // A primeira sincronização é crucial
-                    await this.forceSync(true); // true para indicar que é a inicialização
+                    await this.syncData(true);
+                    this.debugCSVStructure(); // CORREÇÃO 9: Adicionada a chamada de debug
 
-                    this.startPeriodicSync();
+                    this.startOptimizedPeriodicSync();
                     
                     window.alertSystem = this;
-                    console.log('✅ Sistema v8.0 (Server-First) inicializado com sucesso.');
+                    console.log('✅ Sistema inicializado com sucesso.');
                     
                 } catch (error) {
                     console.error('❌ Erro crítico na inicialização:', error);
@@ -1620,8 +1877,17 @@
                     this.showNotification(`Erro na inicialização: ${error.message}`, 'error');
                 }
             }
+            
+            // CORREÇÃO 9: Adicionado método de debug
+            debugCSVStructure() {
+                console.log('=== DEBUG CSV STRUCTURE ===');
+                
+                if (this.telemetryData.length > 0) {
+                    console.log('Telemetria - Campos disponíveis:', Object.keys(this.telemetryData[0]));
+                    console.log('Telemetria - Primeira linha:', this.telemetryData[0]);
+                }
+            }
 
-            // MODIFICADO: Função central para buscar TODOS os dados do GitHub
             async fetchAllDataFromGitHub() {
                 if (!this.config.githubEnabled || !this.config.token) {
                     throw new Error("GitHub não está configurado.");
@@ -1629,11 +1895,9 @@
 
                 console.log('⬇️ Buscando todos os dados do GitHub...');
 
-                // Busca paralela para mais performance
-                const [alertsData, rulesData, apontamentosData, telemetryData] = await Promise.all([
+                const [alertsData, rulesData, telemetryData] = await Promise.all([
                     this.loadOperationalDataFromGitHub(),
                     this.loadRulesFromGitHub(),
-                    this.loadApontamentosData(),
                     this.loadTimelineData()
                 ]);
 
@@ -1644,67 +1908,96 @@
                 console.log('✅ Todos os dados foram baixados com sucesso.');
             }
 
-            // MODIFICADO: Função de sincronização principal
             async syncData(isInitialLoad = false) {
-                if (this.isSyncing) {
-                    console.warn('⚠️ Sincronização já em andamento. Aguardando...');
+                if (this.isSyncing && !isInitialLoad) {
+                    console.log('⚠️ Sincronização já em andamento, adicionado à fila.');
+                    this.syncQueue.push({ timestamp: Date.now(), isInitialLoad });
                     return;
                 }
                 
                 this.isSyncing = true;
-                this.updateSyncStatus('loading', 'Sincronizando com o banco de dados...');
+                this.updateSyncStatus('loading', 'Verificando atualizações...');
                 
                 try {
-                    // Passo 1: Buscar todos os dados frescos do GitHub
+                    const currentHash = this.createDataHash(this.alerts);
+                    
                     await this.fetchAllDataFromGitHub();
                     
-                    // Passo 2: Processar os dados para gerar novos alertas
-                    await this.processAlerts();
-
-                    // Passo 3: Atualizar toda a interface com os dados novos
-                    this.updateInterface();
+                    const newHash = this.createDataHash(this.alerts);
+                    
+                    if (currentHash !== newHash || isInitialLoad) {
+                        console.log('📊 Mudanças detectadas, atualizando interface...');
+                        await this.processAlerts();
+                        this.updateInterface();
+                        this.lastDataHash = newHash;
+                        
+                        if (!isInitialLoad) {
+                            this.showNotification('Dados atualizados!', 'info');
+                        }
+                    } else {
+                        console.log('✅ Dados já estão atualizados');
+                    }
                     
                     this.config.lastSync = Date.now();
-                    this.saveConfig(); // Salva apenas a configuração local
+                    this.saveConfig();
+                    this.updateSyncStatus('success', 'Sincronizado');
                     
-                    this.updateSyncStatus('success', 'Sincronizado!');
-                    if (!isInitialLoad) {
-                        this.showNotification('Dados atualizados com sucesso!', 'success');
-                    }
-
                 } catch (error) {
                     console.error('❌ Erro na sincronização:', error);
-                    this.updateSyncStatus('error', 'Falha na Sincronização');
-                    this.showNotification(`Falha ao sincronizar: ${error.message}`, 'error');
+                    this.updateSyncStatus('error', 'Erro na sincronização');
+                    
+                    if (!isInitialLoad) {
+                        this.showNotification(`Erro: ${error.message}`, 'error');
+                    }
                 } finally {
                     this.isSyncing = false;
+                    
+                    if (this.syncQueue.length > 0 && !this.isProcessingQueue) {
+                        this.processQueuedSyncs();
+                    }
                 }
             }
 
+            async manualSync() {
+                if (this.isSyncing) {
+                    console.log('⚠️ Sincronização já em andamento');
+                    return;
+                }
+                
+                await this.syncData();
+            }
+
             async forceSync(isInitialLoad = false) {
-                await this.syncData(isInitialLoad);
+                await this.manualSync();
             }
 
-            startPeriodicSync() {
-                setInterval(() => {
-                    this.syncData();
-                }, this.config.interval * 60 * 1000);
+            startOptimizedPeriodicSync() {
+                if (this.syncInterval) {
+                    clearInterval(this.syncInterval);
+                }
+                
+                this.syncInterval = setInterval(() => {
+                    const timeSinceLastSync = Date.now() - (this.config.lastSync || 0);
+                    const minSyncInterval = this.config.interval * 60 * 1000;
+                    
+                    if (!this.isSyncing && 
+                        this.pendingChanges.size === 0 && 
+                        timeSinceLastSync >= minSyncInterval) {
+                        
+                        console.log('⏰ Sincronização periódica iniciada');
+                        this.syncData();
+                    }
+                }, 30000);
             }
 
-            // MODIFICADO: Salva apenas configurações, não dados operacionais
             saveLocalData() {
                  try {
-                    // Os dados de alertas e regras NÃO SÃO MAIS SALVOS LOCALMENTE.
-                    // A única fonte da verdade é o GitHub.
-                    // localStorage.setItem('alertSystem_alerts', JSON.stringify(this.alerts)); // REMOVIDO
-                    // localStorage.setItem('alertSystem_rules', JSON.stringify(this.rules));   // REMOVIDO
                     console.log('💾 Configuração salva localmente. Dados operacionais vivem no GitHub.');
                 } catch (error) {
                     console.error('❌ Erro ao salvar dados locais:', error);
                 }
             }
 
-            // MODIFICADO: Funções de carregamento agora apenas retornam os dados
             async loadOperationalDataFromGitHub() {
                 try {
                     const url = `https://raw.githubusercontent.com/${this.config.repo}/main/alertas/alertas-atual.json?cache_bust=${Date.now()}`;
@@ -1717,7 +2010,7 @@
                     return false;
                 } catch (error) {
                     console.warn('⚠️ Não foi possível carregar alertas do GitHub:', error.message);
-                    this.alerts = []; // Limpa os alertas se a busca falhar
+                    this.alerts = [];
                     return false;
                 }
             }
@@ -1735,24 +2028,6 @@
                 } catch (error) {
                     console.warn('⚠️ Erro ao carregar regras do GitHub:', error.message);
                     this.rules = [];
-                    return false;
-                }
-            }
-
-            async loadApontamentosData() {
-                try {
-                    const url = `https://raw.githubusercontent.com/GrupoGps-Mecanizada/Banco-De-Dados/main/Apontamentos/apontamentos-atuais.csv?cache_bust=${Date.now()}`;
-                    const csvText = await this.fetchData(url, false);
-                    const parsed = Papa.parse(csvText, { header: true, dynamicTyping: true, skipEmptyLines: true });
-                    if (parsed.data) {
-                        this.apontamentosData = parsed.data;
-                        console.log(`✅ Apontamentos carregados: ${this.apontamentosData.length}`);
-                        return true;
-                    }
-                    return false;
-                } catch (error) {
-                    console.warn('⚠️ Erro ao carregar apontamentos:', error.message);
-                    this.apontamentosData = [];
                     return false;
                 }
             }
@@ -1775,34 +2050,26 @@
                 }
             }
 
-            // MODIFICADO: Ações agora salvam diretamente no GitHub e depois re-sincronizam
             async changeAlertStatus(alertId, newStatus) {
-                const alertIndex = this.alerts.findIndex(a => a.id === alertId);
-                if (alertIndex === -1) return;
-
-                // 1. Atualiza o estado em memória
-                const alert = this.alerts[alertIndex];
+                const alert = this.alerts.find(a => a.id === alertId);
+                if (!alert) return;
+                
+                const oldStatus = alert.status;
                 alert.status = newStatus;
                 alert.lastStatusChange = new Date().toISOString();
-                 if ((newStatus === 'concluido' || newStatus === 'fechado') && !alert.investigatedAt) {
+                
+                if ((newStatus === 'concluido' || newStatus === 'fechado') && !alert.investigatedAt) {
                     alert.investigatedAt = new Date().toISOString();
                 }
-
-                this.updateInterface(); // Atualiza a UI para feedback imediato
-                this.updateSyncStatus('loading', 'Salvando alteração...');
-
-                try {
-                    // 2. Envia a lista completa de alertas para o GitHub
-                    await this.saveOperationalDataToGitHub();
-                    this.showNotification(`Status do alerta salvo no banco de dados.`, 'success');
-                    
-                    // 3. Re-sincroniza para garantir consistência
-                    await this.syncData();
-                } catch (error) {
-                    this.showNotification(`Falha ao salvar status: ${error.message}`, 'error');
-                    // Opcional: reverter a mudança na UI se a gravação falhar
-                    await this.syncData(); // Re-sincroniza para obter o estado correto
-                }
+                
+                this.pendingChanges.set(alertId, {
+                    status: newStatus,
+                    lastStatusChange: alert.lastStatusChange,
+                    investigatedAt: alert.investigatedAt
+                });
+                
+                this.updateInterface();
+                await this.saveChangesWithDebounce();
             }
 
             async saveInvestigation() {
@@ -1811,7 +2078,6 @@
                 const alertIndex = this.alerts.findIndex(a => a.id === this.currentInvestigation.id);
                 if (alertIndex === -1) return;
 
-                // 1. Atualiza dados em memória
                 const alert = this.alerts[alertIndex];
                 alert.placa = document.getElementById('invPlaca')?.value || '';
                 alert.motorista = document.getElementById('invMotorista')?.value || '';
@@ -1827,15 +2093,12 @@
                 this.updateSyncStatus('loading', 'Salvando investigação...');
 
                 try {
-                    // 2. Salva no GitHub
                     await this.saveOperationalDataToGitHub();
                     this.showNotification('Investigação salva com sucesso!', 'success');
-                    
-                    // 3. Re-sincroniza
-                    await this.syncData();
+                    this.updateSyncStatus('success', 'Alteração salva');
                 } catch (error) {
                     this.showNotification(`Falha ao salvar investigação: ${error.message}`, 'error');
-                    await this.syncData();
+                    this.updateSyncStatus('error', 'Falha ao salvar');
                 }
             }
             
@@ -1878,10 +2141,9 @@
                 try {
                     await this.saveRulesToGitHub();
                     this.showNotification('Regra salva com sucesso!', 'success');
-                    await this.syncData();
+                    this.updateInterface();
                 } catch (error) {
                     this.showNotification(`Falha ao salvar regra: ${error.message}`, 'error');
-                    await this.syncData();
                 }
             }
             
@@ -1909,7 +2171,6 @@
                                     
                                     const newAlert = this.createAlert(record, rule, 'status');
                                     if (!existingIds.has(newAlert.id)) {
-                                        newAlert.apontamentosRelacionados = this.findRelatedApontamentos(newAlert);
                                         this.alerts.unshift(newAlert);
                                         existingIds.add(newAlert.id);
                                         newAlertsCount++;
@@ -1924,7 +2185,7 @@
 
                     if (newAlertsCount > 0) {
                         console.log(`✅ ${newAlertsCount} novos alertas gerados.`);
-                        await this.saveOperationalDataToGitHub(); // Salva novos alertas imediatamente
+                        await this.saveOperationalDataToGitHub();
                         this.showNotification(`${newAlertsCount} novos alertas gerados e salvos.`, 'info');
                     }
                 } catch (error) {
@@ -1949,17 +2210,24 @@
                 return false;
             }
 
+            // CORREÇÃO 4: Substituído o método `isWithinTimeSchedule`
             isWithinTimeSchedule(schedule) {
                 if (!schedule || (!schedule.startTime && !schedule.endTime)) {
                     return true;
                 }
+                
                 const now = new Date();
                 const currentMinutes = now.getHours() * 60 + now.getMinutes();
+                
                 const startMinutes = this.timeToMinutes(schedule.startTime || '00:00');
                 const endMinutes = this.timeToMinutes(schedule.endTime || '23:59');
+                
+                // Corrige lógica para períodos que cruzam meia-noite
                 if (startMinutes <= endMinutes) {
+                    // Período normal (ex: 08:00 às 18:00)
                     return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
                 } else {
+                    // Período cruza meia-noite (ex: 22:00 às 06:00)
                     return currentMinutes >= startMinutes || currentMinutes <= endMinutes;
                 }
             }
@@ -2163,8 +2431,7 @@
                     time: new Date(alertTimestamp).toLocaleTimeString('pt-BR'),
                     status: 'pendente',
                     placa: '', motorista: '', area: '', supervisor: '',
-                    observacoes: '', acoes: '',
-                    apontamentosRelacionados: []
+                    observacoes: '', acoes: ''
                 };
 
                 alert.message = rule.message
@@ -2174,49 +2441,7 @@
                 
                 return alert;
             }
-
-            findRelatedApontamentos(alert) {
-                if (!this.apontamentosData || this.apontamentosData.length === 0) return [];
-                const alertStart = this.parseDateTime(alert.startTime);
-                const alertEnd = this.parseDateTime(alert.endTime);
-                if (!alertStart || !alertEnd) return [];
-                const searchStart = new Date(alertStart.getTime() - (this.APONTAMENTO_TIME_WINDOW * 60 * 1000));
-                const searchEnd = new Date(alertEnd.getTime() + (this.APONTAMENTO_TIME_WINDOW * 60 * 1000));
-                const equipamentoNormalizado = this.normalizeEquipmentName(alert.equipamento);
-                
-                const relevantApontamentos = this.apontamentosData.filter(apontamento => {
-                    if (this.normalizeEquipmentName(apontamento.Vaga) !== equipamentoNormalizado) return false;
-                    const apontStart = this.parseDateTime(apontamento['Data Inicial']);
-                    const apontEnd = this.parseDateTime(apontamento['Data Final']);
-                    return apontStart && apontEnd && (apontStart <= searchEnd && apontEnd >= searchStart);
-                });
-                
-                relevantApontamentos.sort((a, b) => {
-                    const aStart = this.parseDateTime(a['Data Inicial']);
-                    const bStart = this.parseDateTime(b['Data Inicial']);
-                    const alertCenter = new Date((alertStart.getTime() + alertEnd.getTime()) / 2);
-                    return Math.abs(aStart.getTime() - alertCenter.getTime()) - Math.abs(bStart.getTime() - alertCenter.getTime());
-                });
-
-                return relevantApontamentos.slice(0, this.MAX_APONTAMENTOS_PER_ALERT).map(ap => {
-                    const duration = this.calculateApontamentoDuration(ap);
-                    return {
-                        categoria: ap['Categoria Demora'] || 'N/I',
-                        inicio: this.formatDateTime(ap['Data Inicial']),
-                        fim: this.formatDateTime(ap['Data Final']),
-                        duracao: this.formatDuration(duration),
-                        duracaoMinutos: duration
-                    };
-                });
-            }
-
-            calculateApontamentoDuration(apontamento) {
-                const start = this.parseDateTime(apontamento['Data Inicial']);
-                const end = this.parseDateTime(apontamento['Data Final']);
-                if (!start || !end) return 0;
-                return (end.getTime() - start.getTime()) / (1000 * 60);
-            }
-
+            
             updateInterface() {
                 try {
                     this.updateStats();
@@ -2340,20 +2565,6 @@
                 return startDate ? alerts.filter(a => a.timestamp >= startDate.getTime()) : alerts;
             }
 
-            async saveOperationalDataToGitHub() {
-                if (!this.config.githubEnabled || !this.config.token) return;
-                const operationalData = {
-                    timestamp: Date.now(),
-                    version: '8.0',
-                    alerts: this.alerts,
-                };
-                await this.createOrUpdateGitHubFile(
-                    'alertas/alertas-atual.json',
-                    JSON.stringify(operationalData, null, 2),
-                    'Atualização automática do sistema v8.0'
-                );
-            }
-
             async saveRulesToGitHub() {
                 if (!this.config.githubEnabled || !this.config.token) return;
                 const rulesData = {
@@ -2364,7 +2575,7 @@
                 await this.createOrUpdateGitHubFile(
                     'regras/regras-ativas.json',
                     JSON.stringify(rulesData, null, 2),
-                    'Atualização de regras do sistema v8.0'
+                    'Atualização de regras do sistema'
                 );
             }
 
@@ -2412,15 +2623,30 @@
                     console.error('❌ Erro ao salvar configuração:', error);
                 }
             }
-
+            
+            // ATUALIZADO PASSO 3
             transformTimelineData(csvData) {
                 return csvData.map(row => ({
-                    vacancy_name: row.VAGA || '',
+                    vacancy_name: row.VAGA || row.EQUIPAMENTO || '',
                     status: row.STATUS || '',
                     start: this.parseCSVDateTime(row.ENTRADA),
                     end: this.parseCSVDateTime(row.SAIDA),
                     total_time: this.parseCSVTimeTotal(row['TEMPO TOTAL']),
+                    placa: row.EQUIPAMENTO?.match(/[A-Z]{3}\d{4}/)?.[0] || '' // Extrai placa
                 })).filter(row => row.vacancy_name && row.status);
+            }
+
+            // ATUALIZADO PASSO 4
+            getEquipmentPlaca(equipmentName) {
+                // Busca primeiro na timeline
+                const timelineMatch = this.telemetryData.find(t => 
+                    this.normalizeEquipmentName(t.vacancy_name) === this.normalizeEquipmentName(equipmentName)
+                );
+                if (timelineMatch?.placa) return timelineMatch.placa;
+                
+                // Tenta extrair do próprio nome
+                const directMatch = equipmentName.match(/[A-Z]{3}\d{4}/);
+                return directMatch ? directMatch[0] : '';
             }
 
             parseCSVDateTime(dateTimeStr) {
@@ -2447,9 +2673,13 @@
                     ['filterEquipmentProcessed', 'filterSeverityProcessed', 'filterStatusProcessed', 'filterPeriodProcessed'].forEach(id => {
                         document.getElementById(id)?.addEventListener('change', this.debounce(() => this.updateProcessedAlertsList(), 300));
                     });
-
-                    ['invPlaca', 'invMotorista', 'invArea', 'invSupervisor'].forEach(id => {
-                        document.getElementById(id)?.addEventListener('input', () => this.updateWhatsAppPreview());
+                    
+                    ['invPlaca', 'invMotorista', 'invArea', 'invSupervisor', 'invObservacoes', 'invAcoes', 'invStatus'].forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            const eventType = element.tagName.toLowerCase() === 'select' ? 'change' : 'input';
+                            element.addEventListener(eventType, () => this.updateWhatsAppPreview());
+                        }
                     });
                 } catch (error) {
                     console.error('❌ Erro na configuração de eventos:', error);
@@ -2488,7 +2718,7 @@
                 this.showNotification('Configurações salvas', 'success');
                 this.updateSystemStatus();
                 if(this.config.githubEnabled) {
-                    this.forceSync();
+                    this.syncData();
                 }
             }
             
@@ -2536,48 +2766,119 @@
 
                 this.renderReportTable(filtered);
             }
-
+            
+            // CORREÇÃO 5: Substituído o método `renderReportTable`
             renderReportTable(data) {
                 const container = document.getElementById('reportTable');
                 if (!container) return;
+                
                 if (data.length === 0) {
                     container.innerHTML = `<div class="loading-state">Nenhum dado encontrado para o período.</div>`;
                     return;
                 }
+                
                 const table = `
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead><tr style="background: #007bff; color: white;">
-                            <th>Data/Hora</th><th>Equipamento</th><th>Status</th><th>Duração</th><th>Período</th><th>Investigação</th><th>Gravidade</th>
-                        </tr></thead>
-                        <tbody>${data.map(a => `
-                            <tr>
-                                <td>${a.fullDateTime}</td><td>${this.getDisplayName(a.equipamento)}</td><td>${a.identificador}</td><td>${a.duration}</td>
-                                <td>${a.timeRange}</td><td><span class="status-badge ${a.status}">${this.getStatusText(a.status)}</span></td>
-                                <td><span class="severity-badge ${a.severity}">${this.getSeverityText(a.severity)}</span></td>
-                            </tr>`).join('')}
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="background: #343a40; color: white;">
+                                <th style="padding: 8px; text-align: left;">Data/Hora</th>
+                                <th style="padding: 8px; text-align: left;">Equipamento</th>
+                                <th style="padding: 8px; text-align: left;">Placa</th>
+                                <th style="padding: 8px; text-align: left;">Motorista</th>
+                                <th style="padding: 8px; text-align: left;">Área</th>
+                                <th style="padding: 8px; text-align: left;">Supervisor</th>
+                                <th style="padding: 8px; text-align: left;">Status Alerta</th>
+                                <th style="padding: 8px; text-align: left;">Duração</th>
+                                <th style="padding: 8px; text-align: left;">Investigação</th>
+                                <th style="padding: 8px; text-align: left;">Observações</th>
+                                <th style="padding: 8px; text-align: left;">Ações Tomadas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.map((a, index) => `
+                                <tr style="background: ${index % 2 === 0 ? '#f8f9fa' : 'white'};">
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.fullDateTime}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${this.getDisplayName(a.equipamento)}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.placa || 'N/I'}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.motorista || 'N/I'}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.area || 'N/I'}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.supervisor || 'N/I'}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.identificador}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">${a.duration}</td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6;">
+                                        <span class="status-badge ${a.status}" style="font-size: 0.75rem;">
+                                            ${this.getStatusText(a.status)}
+                                        </span>
+                                    </td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6; max-width: 200px; word-wrap: break-word;">
+                                        ${a.observacoes || '-'}
+                                    </td>
+                                    <td style="padding: 8px; border-bottom: 1px solid #dee2e6; max-width: 200px; word-wrap: break-word;">
+                                        ${a.acoes || '-'}
+                                    </td>
+                                </tr>
+                            `).join('')}
                         </tbody>
-                    </table>`;
-                container.innerHTML = table.replace(/<td/g, '<td style="padding: 0.5rem; border-bottom: 1px solid #ddd;"').replace(/<th/g, '<th style="padding: 0.5rem; text-align: left;"');
+                    </table>
+                `;
+                
+                container.innerHTML = table;
             }
 
+            // CORREÇÃO 10: Substituído o método `exportToExcel`
             exportToExcel() {
-                const table = document.getElementById('reportTable')?.querySelector('table');
-                if (!table) {
-                    this.showNotification('Gere um relatório primeiro para exportar.', 'warning');
+                const startDate = document.getElementById('reportDateStart')?.value;
+                const endDate = document.getElementById('reportDateEnd')?.value;
+                
+                if (!startDate || !endDate) {
+                    this.showNotification('Selecione um período primeiro', 'warning');
                     return;
                 }
-                const wb = XLSX.utils.table_to_book(table, { sheet: "Relatorio" });
-                XLSX.writeFile(wb, `Relatorio_Alertas_${new Date().toISOString().split('T')[0]}.xlsx`);
-                this.showNotification('Relatório exportado para Excel!', 'success');
+                
+                const start = new Date(startDate + 'T00:00:00').getTime();
+                const end = new Date(endDate + 'T23:59:59').getTime();
+                
+                const filtered = this.alerts.filter(alert => 
+                    alert.timestamp >= start && alert.timestamp <= end
+                );
+                
+                // Prepara dados com todos os campos de investigação
+                const exportData = filtered.map(alert => ({
+                    'Data/Hora': alert.fullDateTime,
+                    'Equipamento': this.getDisplayName(alert.equipamento),
+                    'Placa': alert.placa || 'N/I',
+                    'Motorista': alert.motorista || 'N/I',
+                    'Área': alert.area || 'N/I',
+                    'Supervisor': alert.supervisor || 'N/I',
+                    'Status Alerta': alert.identificador,
+                    'Duração': alert.duration,
+                    'Status Investigação': this.getStatusText(alert.status),
+                    'Gravidade': this.getSeverityText(alert.severity),
+                    'Observações': alert.observacoes || '',
+                    'Ações Tomadas': alert.acoes || '',
+                    'Regra': alert.ruleName
+                }));
+                
+                const ws = XLSX.utils.json_to_sheet(exportData);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Relatório Completo");
+                
+                const fileName = `Relatorio_Completo_${startDate}_${endDate}.xlsx`;
+                XLSX.writeFile(wb, fileName);
+                
+                this.showNotification(`Relatório exportado: ${exportData.length} registros`, 'success');
             }
 
+            // ATUALIZADO PASSO 5
             openInvestigation(alertId) {
                 const alert = this.alerts.find(a => a.id === alertId);
                 if (!alert) return;
                 this.currentInvestigation = alert;
 
+                const placa = this.getEquipmentPlaca(alert.equipamento);
+                document.getElementById('invPlaca').value = placa || alert.placa || '';
+
                 document.getElementById('invEquipamento').value = this.getDisplayName(alert.equipamento);
-                document.getElementById('invPlaca').value = alert.placa || '';
                 document.getElementById('invMotorista').value = alert.motorista || '';
                 document.getElementById('invArea').value = alert.area || '';
                 document.getElementById('invSupervisor').value = alert.supervisor || '';
@@ -2606,25 +2907,49 @@
                 try {
                     await this.saveOperationalDataToGitHub();
                     this.showNotification('Alerta excluído com sucesso!', 'info');
-                    await this.syncData();
+                    this.updateInterface();
                 } catch (error) {
                     this.showNotification(`Falha ao excluir alerta: ${error.message}`, 'error');
-                    await this.syncData();
                 }
             }
 
+            // CORREÇÃO 2: Substituído o método `updateWhatsAppPreview`
             updateWhatsAppPreview() {
                 if (!this.currentInvestigation) return;
+                
                 const alert = this.currentInvestigation;
-                const text = `---
-🚨 ALERTA OPERACIONAL
-Regra: ${alert.ruleName}
-Status: ${alert.identificador}
-Duração: ${alert.duration}
-Período: ${alert.timeRange}
-Equipamento: ${this.getDisplayName(alert.equipamento)}
-Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
----`;
+                const placa = document.getElementById('invPlaca')?.value || 'N/I';
+                const motorista = document.getElementById('invMotorista')?.value || 'N/I';
+                const area = document.getElementById('invArea')?.value || 'N/I';
+                const supervisor = document.getElementById('invSupervisor')?.value || 'N/I';
+                const observacoes = document.getElementById('invObservacoes')?.value || '';
+                const acoes = document.getElementById('invAcoes')?.value || '';
+                const status = document.getElementById('invStatus')?.value || 'pendente';
+                
+                const text = `🚨 *ALERTA OPERACIONAL - INVESTIGAÇÃO*
+━━━━━━━━━━━━━━━━━━
+📊 *DADOS DO ALERTA*
+• Regra: ${alert.ruleName}
+• Status: ${alert.identificador}
+• Duração: ${alert.duration}
+• Período: ${alert.timeRange}
+
+🚜 *EQUIPAMENTO*
+• Nome: ${this.getDisplayName(alert.equipamento)}
+• Placa: ${placa}
+
+👷 *RESPONSÁVEIS*
+• Motorista: ${motorista}
+• Supervisor: ${supervisor}
+• Área: ${area}
+
+📋 *INVESTIGAÇÃO*
+• Status: ${this.getStatusText(status)}
+${observacoes ? `• Observações: ${observacoes}` : ''}
+${acoes ? `• Ações: ${acoes}` : ''}
+━━━━━━━━━━━━━━━━━━
+📅 ${new Date().toLocaleString('pt-BR')}`;
+                
                 document.getElementById('whatsappText').textContent = text;
             }
 
@@ -2645,10 +2970,9 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
                     try {
                         await this.saveRulesToGitHub();
                         this.showNotification(`Regra ${rule.active ? 'ativada' : 'desativada'}.`, 'success');
-                        await this.syncData();
+                        this.updateInterface();
                     } catch (error) {
                         this.showNotification(`Falha ao atualizar regra: ${error.message}`, 'error');
-                        await this.syncData();
                     }
                 }
             }
@@ -2664,10 +2988,9 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
                     try {
                         await this.saveRulesToGitHub();
                         this.showNotification('Regra excluída.', 'info');
-                        await this.syncData();
+                        this.updateInterface();
                     } catch (error) {
                         this.showNotification(`Falha ao excluir regra: ${error.message}`, 'error');
-                        await this.syncData();
                     }
                 }
             }
@@ -2706,7 +3029,7 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
             }
 
             renderAlertCard(alert, tabType) {
-                const timelineHtml = alert.apontamentosRelacionados?.length > 0 ? this.renderTimeline(alert) : `<div class="no-apontamentos-badge">⚠️ Sem apontamentos no período</div>`;
+                const timelineHtml = this.renderTimeline(alert);
                 const statusOptions = tabType === 'active' 
                     ? `<option value="pendente" ${alert.status === 'pendente' ? 'selected' : ''}>Pendente</option>
                        <option value="em_andamento" ${alert.status === 'em_andamento' ? 'selected' : ''}>Em Andamento</option>
@@ -2720,8 +3043,15 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
                         <div class="alert-header">
                             <div class="alert-title">${alert.message}</div>
                             <div class="alert-actions">
-                                <select onchange="changeAlertStatus('${alert.id}', this.value)" class="alert-status-selector">${statusOptions}</select>
-                                <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">🔍 Investigar</button>
+                                <select onchange="changeAlertStatus('${alert.id}', this.value)" class="alert-status-selector">
+                                    ${statusOptions}
+                                </select>
+                                <button class="btn small info" onclick="alertSystem.openInvestigation('${alert.id}')">
+                                    <span>🔍</span>
+                                </button>
+                                <button class="btn small danger" onclick="alertSystem.quickDeleteAlert('${alert.id}')" title="Excluir">
+                                    <span>🗑️</span>
+                                </button>
                             </div>
                         </div>
                         <div class="alert-time">${alert.fullDateTime}</div>
@@ -2737,33 +3067,62 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
                     </div>`;
             }
 
+            // CORREÇÃO 7: Adicionado método de exclusão rápida
+            async quickDeleteAlert(alertId) {
+                if (!confirm('Excluir este alerta permanentemente?')) return;
+                
+                this.alerts = this.alerts.filter(a => a.id !== alertId);
+                
+                try {
+                    await this.saveOperationalDataToGitHub();
+                    this.updateInterface();
+                    this.showNotification('Alerta excluído!', 'info');
+                } catch (error) {
+                    this.showNotification(`Erro ao excluir: ${error.message}`, 'error');
+                    await this.syncData(); // Recarrega dados em caso de erro
+                }
+            }
+            
+            // ATUALIZADO PASSO 6
             renderTimeline(alert) {
                 const alertStart = this.parseDateTime(alert.startTime);
                 const alertEnd = this.parseDateTime(alert.endTime);
                 if (!alertStart || !alertEnd) return '';
-                const searchStart = new Date(alertStart.getTime() - 30 * 60 * 1000);
-                const searchEnd = new Date(alertEnd.getTime() + 30 * 60 * 1000);
+                
+                // Janela de visualização: 1 hora antes e depois
+                const windowPadding = 60 * 60 * 1000;
+                const searchStart = new Date(alertStart.getTime() - windowPadding);
+                const searchEnd = new Date(alertEnd.getTime() + windowPadding);
                 const totalDuration = searchEnd.getTime() - searchStart.getTime();
-
-                let itemsHtml = this.createTimelineItem(alert, alertStart, alertEnd, searchStart, totalDuration, 'alert');
-                alert.apontamentosRelacionados.forEach(ap => {
-                    const apStart = this.parseDateTime(ap.inicio);
-                    const apEnd = this.parseDateTime(ap.fim);
-                    if (apStart && apEnd) {
-                        itemsHtml += this.createTimelineItem(ap, apStart, apEnd, searchStart, totalDuration, 'apontamento');
-                    }
-                });
+                
+                const alertLeft = ((alertStart.getTime() - searchStart.getTime()) / totalDuration) * 100;
+                const alertWidth = ((alertEnd.getTime() - alertStart.getTime()) / totalDuration) * 100;
                 
                 return `
-                    <div class="timeline-track">${itemsHtml}</div>
-                    <div class="timeline-time-labels">
-                        <span>${this.formatTimeShort(searchStart)}</span><span>${this.formatTimeShort(alertStart)}</span>
-                        <span>${this.formatTimeShort(alertEnd)}</span><span>${this.formatTimeShort(searchEnd)}</span>
+                    <div class="enhanced-timeline">
+                        <div class="timeline-header-enhanced">
+                            <h4>📊 Linha do Tempo</h4>
+                            <div class="timeline-equipment-info">
+                                <span class="equipment-badge">${this.getDisplayName(alert.equipamento)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-alert-track">
+                            <div class="timeline-alert-bar" 
+                                style="left: ${alertLeft}%; width: ${alertWidth}%;"
+                                title="ALERTA: ${alert.duration}">
+                                🚨 ${alert.duration}
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-scale">
+                            <span class="scale-time">${this.formatTimeShort(searchStart)}</span>
+                            <span class="scale-time alert-time">${this.formatTimeShort(alertStart)}</span>
+                            <span class="scale-time alert-time">${this.formatTimeShort(alertEnd)}</span>
+                            <span class="scale-time">${this.formatTimeShort(searchEnd)}</span>
+                        </div>
                     </div>
-                    <div class="timeline-legend">
-                        <div class="timeline-legend-item"><div class="timeline-legend-color" style="background: #dc3545;"></div>Alerta</div>
-                        <div class="timeline-legend-item"><div class="timeline-legend-color" style="background: #17a2b8;"></div>Apontamento</div>
-                    </div>`;
+                `;
             }
 
             createTimelineItem(item, startTime, endTime, referenceStart, totalDuration, type) {
@@ -2791,17 +3150,69 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
                 if (confirm('Limpar todos os alertas ativos?')) {
                     this.alerts = this.alerts.filter(a => a.status === 'concluido' || a.status === 'fechado');
                     await this.saveOperationalDataToGitHub();
-                    await this.syncData();
+                    this.updateInterface();
                 }
             }
             async clearProcessedAlerts() {
                 if (confirm('Limpar todos os alertas processados?')) {
                     this.alerts = this.alerts.filter(a => a.status === 'pendente' || a.status === 'em_andamento');
                     await this.saveOperationalDataToGitHub();
-                    await this.syncData();
+                    this.updateInterface();
                 }
             }
-            resetDailyData() { this.showNotification('Reset diário não implementado nesta arquitetura.', 'warning'); }
+            
+            // CORREÇÃO 6: Substituído o método `resetDailyData`
+            async resetDailyData() {
+                if (!confirm('⚠️ ATENÇÃO: Isso irá limpar TODOS os alertas do dia atual. Deseja continuar?')) {
+                    return;
+                }
+                
+                this.updateSyncStatus('loading', 'Executando reset diário...');
+                
+                try {
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const todayTime = today.getTime();
+                    
+                    const tomorrow = new Date(today);
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    const tomorrowTime = tomorrow.getTime();
+                    
+                    // Remove apenas alertas de hoje
+                    const alertsBeforeReset = this.alerts.length;
+                    this.alerts = this.alerts.filter(alert => {
+                        const alertTime = alert.timestamp;
+                        return alertTime < todayTime || alertTime >= tomorrowTime;
+                    });
+                    
+                    const alertsRemoved = alertsBeforeReset - this.alerts.length;
+                    
+                    // Salva no GitHub
+                    await this.saveOperationalDataToGitHub();
+                    
+                    // Cria arquivo de backup com data
+                    const backupData = {
+                        resetDate: new Date().toISOString(),
+                        alertsRemoved: alertsRemoved,
+                        backup: this.alerts
+                    };
+                    
+                    await this.createOrUpdateGitHubFile(
+                        `backups/reset_${new Date().toISOString().split('T')[0]}.json`,
+                        JSON.stringify(backupData, null, 2),
+                        `Reset diário - ${alertsRemoved} alertas removidos`
+                    );
+                    
+                    this.updateInterface();
+                    this.showNotification(`Reset diário concluído! ${alertsRemoved} alertas removidos.`, 'success');
+                    this.updateSyncStatus('success', 'Reset diário concluído');
+                    
+                } catch (error) {
+                    this.showNotification(`Erro no reset: ${error.message}`, 'error');
+                    this.updateSyncStatus('error', 'Erro no reset');
+                }
+            }
+
             disableGitHubActions() { this.showNotification('Esta função deve ser executada no repositório do GitHub.', 'info'); }
 
             updateRulesList() {
@@ -2957,7 +3368,7 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
             });
         }
 
-        function applyBulkAction(tabType) {
+        async function applyBulkAction(tabType) {
             if (!alertSystem) {
                 console.error('Sistema não inicializado');
                 return;
@@ -2976,19 +3387,50 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
             const alertIds = Array.from(checkedBoxes).map(cb => cb.dataset.alertId);
             
             if (confirm(`Alterar status de ${alertIds.length} alerta(s) para "${alertSystem.getStatusText(newStatus)}"?`)) {
-                alertIds.forEach(alertId => {
-                    const alert = alertSystem.alerts.find(a => a.id === alertId);
-                    if (alert) alert.status = newStatus;
-                });
+                const bulkBtn = document.getElementById(`bulkActionBtn${tabType.charAt(0).toUpperCase() + tabType.slice(1)}`);
+                if (bulkBtn) bulkBtn.disabled = true;
                 
-                alertSystem.updateSyncStatus('loading', 'Salvando alterações em lote...');
-                alertSystem.saveOperationalDataToGitHub().then(() => {
-                    alertSystem.showNotification(`${alertIds.length} alerta(s) atualizados.`, 'success');
-                    alertSystem.forceSync();
-                }).catch(err => {
-                    alertSystem.showNotification(`Falha ao salvar: ${err.message}`, 'error');
-                    alertSystem.forceSync();
-                });
+                alertSystem.updateSyncStatus('loading', 'Processando alterações em lote...');
+                
+                try {
+                    const timestamp = new Date().toISOString();
+                    let updateCount = 0;
+                    
+                    alertIds.forEach(alertId => {
+                        const alert = alertSystem.alerts.find(a => a.id === alertId);
+                        if (alert) {
+                            alert.status = newStatus;
+                            alert.lastStatusChange = timestamp;
+                            if ((newStatus === 'concluido' || newStatus === 'fechado') && !alert.investigatedAt) {
+                                alert.investigatedAt = timestamp;
+                            }
+                            updateCount++;
+                        }
+                    });
+                    
+                    await alertSystem.saveOperationalDataToGitHub();
+                    
+                    alertSystem.updateInterface();
+                    
+                    document.querySelectorAll(`${containerSelector} .alert-checkbox`).forEach(cb => {
+                        cb.checked = false;
+                    });
+                    
+                    bulkStatus.value = '';
+                    
+                    updateSelectedCount(tabType);
+                    
+                    alertSystem.showNotification(`${updateCount} alerta(s) atualizados com sucesso!`, 'success');
+                    alertSystem.updateSyncStatus('success', 'Alterações salvas');
+                    
+                } catch (error) {
+                    alertSystem.showNotification(`Erro ao salvar alterações: ${error.message}`, 'error');
+                    alertSystem.updateSyncStatus('error', 'Falha ao salvar');
+                    
+                    await alertSystem.syncData();
+                } finally {
+                    if (bulkBtn) bulkBtn.disabled = false;
+                }
             }
         }
 
@@ -3003,10 +3445,9 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
                 alertSystem.updateSyncStatus('loading', 'Excluindo em lote...');
                 alertSystem.saveOperationalDataToGitHub().then(() => {
                     alertSystem.showNotification(`${alertIds.length} alerta(s) excluídos.`, 'info');
-                    alertSystem.forceSync();
+                    alertSystem.updateInterface();
                 }).catch(err => {
                     alertSystem.showNotification(`Falha ao excluir: ${err.message}`, 'error');
-                    alertSystem.forceSync();
                 });
             }
         }
@@ -3048,7 +3489,7 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
         }
 
         function forceSync() {
-            if (alertSystem) alertSystem.forceSync();
+            if (alertSystem) alertSystem.manualSync();
         }
 
         function saveConfig() {
@@ -3083,6 +3524,41 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
             console.log('Função para adicionar grupo personalizado - A implementar');
         }
 
+        // ATUALIZADO PASSO 7
+        // Funções auxiliares para tooltip
+        function showTimelineTooltip(event, tipo, duracao, inicio, fim) {
+            const tooltip = document.getElementById('timelineTooltip');
+            if (!tooltip) return;
+            
+            const startDate = new Date(inicio);
+            const endDate = new Date(fim);
+            
+            tooltip.innerHTML = `
+                <div class="tooltip-header">${tipo}</div>
+                <div class="tooltip-row">
+                    <span class="tooltip-label">Duração:</span>
+                    <span class="tooltip-value">${duracao}</span>
+                </div>
+                <div class="tooltip-row">
+                    <span class="tooltip-label">Início:</span>
+                    <span class="tooltip-value">${startDate.toLocaleTimeString('pt-BR')}</span>
+                </div>
+                <div class="tooltip-row">
+                    <span class="tooltip-label">Fim:</span>
+                    <span class="tooltip-value">${endDate.toLocaleTimeString('pt-BR')}</span>
+                </div>
+            `;
+            
+            tooltip.style.left = event.pageX + 10 + 'px';
+            tooltip.style.top = event.pageY - 40 + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function hideTimelineTooltip() {
+            const tooltip = document.getElementById('timelineTooltip');
+            if (tooltip) tooltip.classList.remove('show');
+        }
+
         // System initialization
         document.addEventListener('DOMContentLoaded', () => {
             try {
@@ -3093,7 +3569,7 @@ Supervisor: ${document.getElementById('invSupervisor')?.value || 'N/I'}
             }
         });
 
-        console.log('%c🚀 Sistema de Alertas v8.0 - Arquitetura Server-First', 'color: #007bff; font-size: 16px; font-weight: bold;');
+        console.log('%c🚀 Sistema de Alertas GrupoGPS - Arquitetura Server-First', 'color: #007bff; font-size: 16px; font-weight: bold;');
     </script>
 </body>
 </html>
